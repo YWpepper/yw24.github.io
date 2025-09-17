@@ -2,14 +2,14 @@
 layout: post
 title: Gerrit代码审查使用笔记
 date: 2025-01-15
-author: zxl19
+author: pepper
 tags: [Gerrit, Note]
 comments: true
 toc: true
 pinned: false
 ---
 
-我的Gerrit代码审查使用笔记。
+Gerrit代码审查使用介绍。
 
 <!-- more -->
 
