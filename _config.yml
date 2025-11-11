@@ -27,7 +27,7 @@ baseurl:
 avatar: https://raw.githubusercontent.com/YWpepper/HomePage/main/images/isMe.png
 
 # 你的favicon（出现在浏览器tab上）图片URL，建议使用较小(64px × 64px)的图片
-favicon:  https://raw.githubusercontent.com/YWpepper/HomePage/main/images/icon.png
+favicon: https://raw.githubusercontent.com/zxl19/zxl19.github.io/master/images/icon.png
 
 
 # 菜单中的按钮
@@ -111,6 +111,11 @@ kramdown:
   syntax_highlighter_opts:
     # Use existing pygments syntax highlighting css
     css_class: 'highlight'
+  # Enable math support
+  math_engine: mathjax
+  math_engine_opts:
+    preview: true
+    preview_as_code: true
 
 # Set the Sass partials directory, as we're using @imports
 sass:
