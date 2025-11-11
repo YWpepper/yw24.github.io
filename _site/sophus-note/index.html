@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Sophus库使用笔记 – zxl19 – 一个工程师的存档点</title>
+
+      <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="我的Sophus库使用笔记。
+
+" />
+    <meta property="og:description" content="我的Sophus库使用笔记。
+
+" />
+    
+    <meta name="author" content="zxl19" />
+
+    
+    <meta property="og:title" content="Sophus库使用笔记" />
+    <meta property="twitter:title" content="Sophus库使用笔记" />
+    
+  <!-- Async font loading -->
+<script>
+  window.WebFontConfig = {
+      custom: {
+          families: ['Spoqa Han Sans:100,300,400,700'],
+          urls: ['https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css']
+      },
+      timeout: 60000
+  };
+  (function(d) {
+      var wf = d.createElement('script'), s = d.scripts[0];
+      wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js';
+      s.parentNode.insertBefore(wf, s);
+  })(document);
+</script>
+
+<!--adobe fonts-->
+<script>
+    (function(d) {
+      var config = {
+        kitId: 'vbt3gjx',
+        scriptTimeout: 3000,
+        async: true
+      },
+      h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+    })(document);
+</script> 
+
+  <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link rel="stylesheet" type="text/css" href="/style.css" />
+  <link rel="alternate" type="application/rss+xml" title="zxl19 - 一个工程师的存档点" href="/feed.xml" />
+  <link rel="shortcut icon" href="https://raw.githubusercontent.com/zxl19/zxl19.github.io/master/images/icon.png">
+  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+  <script src="https://unpkg.com/feather-icons"></script>
+  <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        inlineMath: [['$','$']]
+      }
+    });
+  </script>
+
+  <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+
+</head>
+
+  <body>
+    <div class="wrapper-sidebar">
+  <header class="sidebar clearfix">
+    <div class="site-info">
+      
+        <a href="/" class="site-avatar"><img src="https://raw.githubusercontent.com/zxl19/zxl19.github.io/master/images/avatar.jpg" /></a>
+       
+      <h1 class="site-name"><a href="/">zxl19</a></h1>
+      <p class="site-description">一个工程师的存档点</p>
+    </div>
+  </header>
+
+  <div class="navlist">
+    <nav>
+      
+      
+      <a href="/">首页</a>
+      
+      
+      
+      <a href="/about">关于</a>
+      
+      
+      
+      <a href="/archive">归档</a>
+      
+      
+      
+      <a href="/tags">标签</a>
+      
+      
+    </nav>
+  </div>
+
+  <div class="wrapper-footer-desktop">
+    <footer class="footer">
+      <!-- Refer to https://codepen.io/ruandre/pen/howFi -->
+<ul class="svg-icon">
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li><a href="https://github.com/zxl19" class="icon-13 github" title="GitHub"><svg viewBox="0 0 512 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg><!--[if lt IE 9]><em>GitHub</em><![endif]--></a></li>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</ul>
+
+
+
+<p>Copyright © 2020-2025 zxl19. All Rights Reserved.</p>
+
+    </footer>
+  </div>
+</div>
+
+    
+      <aside class="toc">
+        <ul>
+  <li><a href="#">Sophus库使用笔记</a>
+    <ul>
+      <li><a href="#sophus-hello-world">Sophus Hello World</a></li>
+      <li><a href="#cmakelists">CMakeLists</a></li>
+      <li><a href="#so3李群">SO(3)李群</a></li>
+      <li><a href="#se3李群">SE(3)李群</a></li>
+      <li><a href="#参考">参考</a></li>
+    </ul>
+  </li>
+</ul>
+      </aside>
+    
+
+    <div id="main" role="main" class="wrapper-content">
+      <div class="container">
+        <article class="posts">
+  <h1>Sophus库使用笔记</h1>
+
+  <div clsss="meta">
+    <span class="author">
+      zxl19
+    </span>
+
+    <span class="date">
+      2021-09-03
+    </span>
+
+    <ul class="tag">
+      
+      <li>
+        <a href="http://localhost:4000/tags#C++">
+          C++
+        </a>
+      </li>
+      
+      <li>
+        <a href="http://localhost:4000/tags#Sophus">
+          Sophus
+        </a>
+      </li>
+      
+      <li>
+        <a href="http://localhost:4000/tags#Note">
+          Note
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+
+  <div class="entry">
+    <p>我的Sophus库使用笔记。</p>
+
+<!-- more -->
+
+<h2 id="sophus-hello-world">Sophus Hello World</h2>
+
+<ol>
+  <li>Sophus是基于Eigen实现的李群（Lie group）和李代数（Lie algebra）<sup id="fnref:1"><a href="#fn:1" class="footnote" rel="footnote" role="doc-noteref">1</a></sup>库；</li>
+  <li>
+    <p>Sophus是纯头文件库，使用时需要包含头文件：</p>
+
+    <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="cp">#include</span> <span class="cpf">"sophus/so3.hpp"</span><span class="c1">       // SO(3)李群</span><span class="cp">
+</span> <span class="cp">#include</span> <span class="cpf">"sophus/se3.hpp"</span><span class="c1">       // SE(3)李群</span><span class="cp">
+</span></code></pre></div>    </div>
+  </li>
+  <li>Sophus官方并没有提供安装和使用教程，以下内容主要整理自《视觉SLAM十四讲》；</li>
+</ol>
+
+<h2 id="cmakelists">CMakeLists</h2>
+
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 方法一：本地安装（待测试）</span>
+<span class="nb">find_package</span><span class="p">(</span>Sophus REQUIRED QUIET<span class="p">)</span>
+<span class="c1"># 方法二：非本地安装（推荐）</span>
+<span class="nb">set</span><span class="p">(</span>SOPHUS_INCLUDE_DIRS <span class="s2">"</span><span class="si">${</span><span class="nv">PROJECT_SOURCE_DIR</span><span class="si">}</span><span class="s2">/third_party/Sophus"</span><span class="p">)</span>
+
+<span class="nb">include_directories</span><span class="p">(</span><span class="si">${</span><span class="nv">SOPHUS_INCLUDE_DIRS</span><span class="si">}</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="so3李群">SO(3)李群</h2>
+
+<p>$\mathrm{SO}\left(3\right)$李群定义：</p>
+
+\[\mathrm{SO}\left(3\right) = \left\{\left.\boldsymbol{R}\in\mathrm{GL}\left(3\right)\right|\boldsymbol{RR}^{\mathrm{T}}, \mathrm{det}\left(\boldsymbol{R}\right) = 1\right\}\]
+
+<p>$\mathfrak{so}\left(3\right)$李代数定义：</p>
+
+\[\mathfrak{so}\left(3\right) = \left\{\boldsymbol{\phi}\in\mathbb{R}^{3}, \boldsymbol{\Phi} = \boldsymbol{\phi}^{\wedge}\in\mathbb{R}^{3\times 3}\right\}\]
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix3d</span> <span class="n">R</span><span class="p">;</span>                              <span class="c1">// 要求旋转矩阵满足SO(3)李群的定义</span>
+<span class="n">Eigen</span><span class="o">::</span><span class="n">Quaterniond</span> <span class="nf">q</span><span class="p">(</span><span class="n">R</span><span class="p">);</span>                        <span class="c1">// 要求四元数的模长不能接近0</span>
+<span class="c1">// 通过旋转矩阵构造Sophus::SO3d</span>
+<span class="n">Sophus</span><span class="o">::</span><span class="n">SO3d</span> <span class="nf">SO3</span><span class="p">(</span><span class="n">R</span><span class="p">);</span>
+<span class="c1">// 通过四元数构造Sophus::SO3d</span>
+<span class="n">Sophus</span><span class="o">::</span><span class="n">SO3d</span> <span class="nf">SO3</span><span class="p">(</span><span class="n">q</span><span class="p">);</span>
+<span class="n">SO3</span><span class="p">.</span><span class="n">setQuaternion</span><span class="p">(</span><span class="n">q</span><span class="p">);</span>                           <span class="c1">// 会隐式将四元数归一化</span>
+
+<span class="n">Sophus</span><span class="o">::</span><span class="n">SO3d</span> <span class="n">SO3_inv</span> <span class="o">=</span> <span class="n">SO3</span><span class="p">.</span><span class="n">inverse</span><span class="p">();</span>           <span class="c1">// 取李群逆</span>
+<span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix3d</span> <span class="n">R</span> <span class="o">=</span> <span class="n">SO3</span><span class="p">.</span><span class="n">matrix</span><span class="p">();</span>               <span class="c1">// 取旋转矩阵</span>
+<span class="n">Eigen</span><span class="o">::</span><span class="n">Quaterniond</span> <span class="n">q</span> <span class="o">=</span> <span class="n">SO3</span><span class="p">.</span><span class="n">unit_quaternion</span><span class="p">();</span>   <span class="c1">// 取单位四元数</span>
+
+<span class="c1">// 提取围绕固定坐标轴的旋转角，单位为弧度</span>
+<span class="kt">double</span> <span class="n">euler_x</span> <span class="o">=</span> <span class="n">SO3</span><span class="p">.</span><span class="n">angleX</span><span class="p">();</span>                  <span class="c1">// 围绕x轴的旋转角</span>
+<span class="kt">double</span> <span class="n">euler_y</span> <span class="o">=</span> <span class="n">SO3</span><span class="p">.</span><span class="n">angleY</span><span class="p">();</span>                  <span class="c1">// 围绕y轴的旋转角</span>
+<span class="kt">double</span> <span class="n">euler_z</span> <span class="o">=</span> <span class="n">SO3</span><span class="p">.</span><span class="n">angleZ</span><span class="p">();</span>                  <span class="c1">// 围绕z轴的旋转角</span>
+
+<span class="c1">// 通过欧拉角构造Sophus::SO3d，旋转顺序为ZYX，单位为弧度</span>
+<span class="c1">// 内旋欧拉角，右乘</span>
+<span class="n">SO3</span> <span class="o">=</span> <span class="n">SO3d</span><span class="o">::</span><span class="n">rotZ</span><span class="p">(</span><span class="n">yaw_rad</span><span class="p">)</span> <span class="o">*</span> <span class="n">SO3d</span><span class="o">::</span><span class="n">rotY</span><span class="p">(</span><span class="n">pitch_rad</span><span class="p">)</span> <span class="o">*</span> <span class="n">SO3d</span><span class="o">::</span><span class="n">rotX</span><span class="p">(</span><span class="n">roll_rad</span><span class="p">);</span>
+<span class="c1">// 外旋欧拉角，左乘</span>
+<span class="n">SO3</span> <span class="o">=</span> <span class="n">SO3d</span><span class="o">::</span><span class="n">rotX</span><span class="p">(</span><span class="n">roll_rad</span><span class="p">)</span> <span class="o">*</span> <span class="n">SO3d</span><span class="o">::</span><span class="n">rotY</span><span class="p">(</span><span class="n">pitch_rad</span><span class="p">)</span> <span class="o">*</span> <span class="n">SO3d</span><span class="o">::</span><span class="n">rotZ</span><span class="p">(</span><span class="n">yaw_rad</span><span class="p">);</span>
+
+<span class="c1">// 使用对数映射获得李代数</span>
+<span class="n">Eigen</span><span class="o">::</span><span class="n">Vector3d</span> <span class="n">so3</span> <span class="o">=</span> <span class="n">SO3</span><span class="p">.</span><span class="n">log</span><span class="p">();</span>
+<span class="c1">// hat为向量到反对称矩阵</span>
+<span class="n">Sophus</span><span class="o">::</span><span class="n">SO3d</span><span class="o">::</span><span class="n">hat</span><span class="p">(</span><span class="n">so3</span><span class="p">)</span>
+<span class="c1">// vee为反对称矩阵到向量</span>
+<span class="n">Sophus</span><span class="o">::</span><span class="n">SO3d</span><span class="o">::</span><span class="n">vee</span><span class="p">(</span><span class="n">Sophus</span><span class="o">::</span><span class="n">SO3d</span><span class="o">::</span><span class="n">hat</span><span class="p">(</span><span class="n">so3</span><span class="p">))</span>
+
+<span class="c1">// 增量扰动模型的更新</span>
+<span class="n">Eigen</span><span class="o">::</span><span class="n">Vector3d</span> <span class="nf">update_so3</span><span class="p">(</span><span class="mf">1e-4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>         <span class="c1">// 更新量</span>
+<span class="n">Sophus</span><span class="o">::</span><span class="n">SO3d</span> <span class="n">SO3_updated</span> <span class="o">=</span> <span class="n">Sophus</span><span class="o">::</span><span class="n">SO3d</span><span class="o">::</span><span class="n">exp</span><span class="p">(</span><span class="n">update_so3</span><span class="p">)</span> <span class="o">*</span> <span class="n">SO3</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h2 id="se3李群">SE(3)李群</h2>
+
+<p>$\mathrm{SE}\left(3\right)$李群定义：</p>
+
+\[\mathrm{SE}\left(3\right) = \left\{\left.\boldsymbol{T} =
+\begin{bmatrix}
+    \boldsymbol{R} &amp; \boldsymbol{t} \\
+    \boldsymbol{0}^{\mathrm{T}} &amp; 1
+\end{bmatrix}
+\in\mathrm{GL}\left(4\right)\right|\boldsymbol{R}\in\mathrm{SO}\left(3\right), \boldsymbol{t}\in\mathbb{R}^{3}\right\}\]
+
+<p>$\mathfrak{se}\left(3\right)$李代数定义：</p>
+
+\[\mathfrak{se}\left(3\right) = \left\{\left.\boldsymbol{\xi} =
+\begin{bmatrix}
+    \boldsymbol{\rho} \\
+    \boldsymbol{\phi}
+\end{bmatrix}\in\mathbb{R}^{6}\right|\boldsymbol{\rho}\in\mathbb{R}^{3}, \boldsymbol{\phi}\in\mathfrak{so}\left(3\right), \boldsymbol{\xi}^{\wedge} =
+\begin{bmatrix}
+    \boldsymbol{\phi}^{\wedge} &amp; \boldsymbol{\rho} \\
+    \boldsymbol{0}^{\mathrm{T}} &amp; 0
+\end{bmatrix}\in\mathbb{R}^{4\times 4}\right\}\]
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix3d</span> <span class="n">R</span><span class="p">;</span>                              <span class="c1">// 要求旋转矩阵满足SO(3)李群的定义</span>
+<span class="n">Eigen</span><span class="o">::</span><span class="n">Quaterniond</span> <span class="nf">q</span><span class="p">(</span><span class="n">R</span><span class="p">);</span>                        <span class="c1">// 要求四元数的模长不能接近0</span>
+<span class="n">Eigen</span><span class="o">::</span><span class="n">Vector3d</span> <span class="nf">t</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="c1">// 通过旋转矩阵和平移向量构造Sophus::SE3d</span>
+<span class="n">Sophus</span><span class="o">::</span><span class="n">SE3d</span> <span class="nf">SE3</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">t</span><span class="p">);</span>
+<span class="n">SE3</span><span class="p">.</span><span class="n">setRotationMatrix</span><span class="p">(</span><span class="n">R</span><span class="p">);</span>                       <span class="c1">// 先将旋转矩阵转为四元数，本质上是调用this-&gt;so3().setQuaternion()</span>
+<span class="n">SE3</span><span class="p">.</span><span class="n">translation</span><span class="p">()</span> <span class="o">=</span> <span class="n">t</span><span class="p">;</span>
+<span class="c1">// 通过四元数和平移向量构造Sophus::SE3d</span>
+<span class="n">Sophus</span><span class="o">::</span><span class="n">SE3d</span> <span class="nf">SE3</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">t</span><span class="p">);</span>
+<span class="n">SE3</span><span class="p">.</span><span class="n">setQuaternion</span><span class="p">(</span><span class="n">q</span><span class="p">);</span>                           <span class="c1">// 本质上是调用this-&gt;so3().setQuaternion()</span>
+<span class="n">SE3</span><span class="p">.</span><span class="n">translation</span><span class="p">()</span> <span class="o">=</span> <span class="n">t</span><span class="p">;</span>
+
+<span class="n">Sophus</span><span class="o">::</span><span class="n">SE3d</span> <span class="n">SE3_inv</span> <span class="o">=</span> <span class="n">SE3</span><span class="p">.</span><span class="n">inverse</span><span class="p">();</span>           <span class="c1">// 取李群逆</span>
+<span class="n">Sophus</span><span class="o">::</span><span class="n">SO3d</span> <span class="n">SO3</span> <span class="o">=</span> <span class="n">SE3</span><span class="p">.</span><span class="n">so3</span><span class="p">();</span>                   <span class="c1">// 取SO(3)李群</span>
+<span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix4d</span> <span class="n">T</span> <span class="o">=</span> <span class="n">SE3</span><span class="p">.</span><span class="n">matrix</span><span class="p">();</span>               <span class="c1">// 取变换矩阵</span>
+<span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix3d</span> <span class="n">R</span> <span class="o">=</span> <span class="n">SE3</span><span class="p">.</span><span class="n">so3</span><span class="p">().</span><span class="n">matrix</span><span class="p">();</span>         <span class="c1">// 取旋转矩阵</span>
+<span class="n">Eigen</span><span class="o">::</span><span class="n">Quaterniond</span> <span class="n">q</span> <span class="o">=</span> <span class="n">SE3</span><span class="p">.</span><span class="n">unit_quaternion</span><span class="p">();</span>   <span class="c1">// 取单位四元数，本质上是调用this-&gt;so3().unit_quaternion()</span>
+<span class="n">Eigen</span><span class="o">::</span><span class="n">Vector3d</span> <span class="n">t</span> <span class="o">=</span> <span class="n">SE3</span><span class="p">.</span><span class="n">translation</span><span class="p">();</span>          <span class="c1">// 取平移向量</span>
+
+<span class="c1">// 提取围绕固定坐标轴的旋转角，单位为弧度</span>
+<span class="c1">// 符合外旋欧拉角的定义，常用于组合导航设备</span>
+<span class="kt">double</span> <span class="n">euler_x</span> <span class="o">=</span> <span class="n">SE3</span><span class="p">.</span><span class="n">angleX</span><span class="p">();</span>                  <span class="c1">// 围绕x轴的旋转角，本质上是调用this-&gt;so3().angleX()</span>
+<span class="kt">double</span> <span class="n">euler_y</span> <span class="o">=</span> <span class="n">SE3</span><span class="p">.</span><span class="n">angleY</span><span class="p">();</span>                  <span class="c1">// 围绕y轴的旋转角，本质上是调用this-&gt;so3().angleY()</span>
+<span class="kt">double</span> <span class="n">euler_z</span> <span class="o">=</span> <span class="n">SE3</span><span class="p">.</span><span class="n">angleZ</span><span class="p">();</span>                  <span class="c1">// 围绕z轴的旋转角，本质上是调用this-&gt;so3().angleZ()</span>
+
+<span class="c1">// 通过欧拉角构造Sophus::SE3d的旋转部分，旋转顺序为ZYX，单位为弧度</span>
+<span class="c1">// so3()成员函数定义了返回引用和返回常引用两个版本，在调用时可以作为等号左值和等号右值使用</span>
+<span class="c1">// 内旋欧拉角，右乘</span>
+<span class="n">SE3</span><span class="p">.</span><span class="n">so3</span><span class="p">()</span> <span class="o">=</span> <span class="n">SO3d</span><span class="o">::</span><span class="n">rotZ</span><span class="p">(</span><span class="n">yaw_rad</span><span class="p">)</span> <span class="o">*</span> <span class="n">SO3d</span><span class="o">::</span><span class="n">rotY</span><span class="p">(</span><span class="n">pitch_rad</span><span class="p">)</span> <span class="o">*</span> <span class="n">SO3d</span><span class="o">::</span><span class="n">rotX</span><span class="p">(</span><span class="n">roll_rad</span><span class="p">);</span>
+<span class="c1">// 外旋欧拉角，左乘</span>
+<span class="n">SE3</span><span class="p">.</span><span class="n">so3</span><span class="p">()</span> <span class="o">=</span> <span class="n">SO3d</span><span class="o">::</span><span class="n">rotX</span><span class="p">(</span><span class="n">roll_rad</span><span class="p">)</span> <span class="o">*</span> <span class="n">SO3d</span><span class="o">::</span><span class="n">rotY</span><span class="p">(</span><span class="n">pitch_rad</span><span class="p">)</span> <span class="o">*</span> <span class="n">SO3d</span><span class="o">::</span><span class="n">rotZ</span><span class="p">(</span><span class="n">yaw_rad</span><span class="p">);</span>
+
+<span class="c1">// 通过欧拉角构造只包含旋转部分的Sophus::SE3d，旋转顺序为ZYX，单位为弧度</span>
+<span class="c1">// 内旋欧拉角，右乘</span>
+<span class="n">SE3</span> <span class="o">=</span> <span class="n">SE3d</span><span class="o">::</span><span class="n">rotZ</span><span class="p">(</span><span class="n">yaw_rad</span><span class="p">)</span> <span class="o">*</span> <span class="n">SE3d</span><span class="o">::</span><span class="n">rotY</span><span class="p">(</span><span class="n">pitch_rad</span><span class="p">)</span> <span class="o">*</span> <span class="n">SE3d</span><span class="o">::</span><span class="n">rotX</span><span class="p">(</span><span class="n">roll_rad</span><span class="p">);</span>
+<span class="c1">// 外旋欧拉角，左乘</span>
+<span class="n">SE3</span> <span class="o">=</span> <span class="n">SE3d</span><span class="o">::</span><span class="n">rotX</span><span class="p">(</span><span class="n">roll_rad</span><span class="p">)</span> <span class="o">*</span> <span class="n">SE3d</span><span class="o">::</span><span class="n">rotY</span><span class="p">(</span><span class="n">pitch_rad</span><span class="p">)</span> <span class="o">*</span> <span class="n">SE3d</span><span class="o">::</span><span class="n">rotZ</span><span class="p">(</span><span class="n">yaw_rad</span><span class="p">);</span>
+
+<span class="c1">// 通过平移向量构造只包含平移部分的Sophus::SE3d，平移顺序不限</span>
+<span class="c1">// translation()成员函数定义了返回引用和返回常引用两个版本，在调用时可以作为等号左值和等号右值使用</span>
+<span class="n">SE3</span><span class="p">.</span><span class="n">translation</span><span class="p">()</span> <span class="o">=</span> <span class="n">t</span><span class="p">;</span>
+<span class="n">SE3</span><span class="p">.</span><span class="n">trans</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">);</span>
+<span class="n">SE3</span> <span class="o">=</span> <span class="n">SE3d</span><span class="o">::</span><span class="n">transX</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="n">SE3d</span><span class="o">::</span><span class="n">transY</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">*</span> <span class="n">SE3d</span><span class="o">::</span><span class="n">transZ</span><span class="p">(</span><span class="n">z</span><span class="p">);</span>
+
+<span class="c1">// 李代数se(3)是一个六维向量，方便起见先typedef一下</span>
+<span class="k">typedef</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="o">&gt;</span> <span class="n">Vector6d</span><span class="p">;</span>
+<span class="c1">// 使用对数映射获得李代数，在Sophus中，se(3)的平移在前，旋转在后</span>
+<span class="n">Vector6d</span> <span class="n">se3</span> <span class="o">=</span> <span class="n">SE3_Rt</span><span class="p">.</span><span class="n">log</span><span class="p">();</span>
+<span class="c1">// hat为向量到反对称矩阵</span>
+<span class="n">Sophus</span><span class="o">::</span><span class="n">SE3d</span><span class="o">::</span><span class="n">hat</span><span class="p">(</span><span class="n">se3</span><span class="p">)</span>
+<span class="c1">// vee为反对称矩阵到向量</span>
+<span class="n">Sophus</span><span class="o">::</span><span class="n">SE3d</span><span class="o">::</span><span class="n">vee</span><span class="p">(</span><span class="n">Sophus</span><span class="o">::</span><span class="n">SE3d</span><span class="o">::</span><span class="n">hat</span><span class="p">(</span><span class="n">se3</span><span class="p">))</span>
+
+<span class="c1">// 增量扰动模型的更新</span>
+<span class="n">Vector6d</span> <span class="n">update_se3</span><span class="p">;</span>                            <span class="c1">// 更新量</span>
+<span class="n">update_se3</span><span class="p">.</span><span class="n">setZero</span><span class="p">();</span>
+<span class="n">update_se3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">=</span> <span class="mf">1e-4</span><span class="p">;</span>
+<span class="n">Sophus</span><span class="o">::</span><span class="n">SE3d</span> <span class="n">SE3_updated</span> <span class="o">=</span> <span class="n">Sophus</span><span class="o">::</span><span class="n">SE3d</span><span class="o">::</span><span class="n">exp</span><span class="p">(</span><span class="n">update_se3</span><span class="p">)</span> <span class="o">*</span> <span class="n">SE3_Rt</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h2 id="参考">参考</h2>
+
+<ol>
+  <li><a href="https://github.com/strasdat/Sophus">strasdat/Sophus</a></li>
+  <li><a href="https://www.britannica.com/biography/Sophus-Lie">Sophus Lie-Britannica</a></li>
+  <li><a href="https://mathshistory.st-andrews.ac.uk/Biographies/Lie/">Sophus Lie-MacTutor</a></li>
+  <li><a href="https://blog.csdn.net/weixin_38213410/article/details/98114423">CMakeLists添加Sophus库-CSDN博客</a></li>
+  <li><a href="https://blog.csdn.net/u011092188/article/details/77833022">Sophus库的安装和使用教程-CSDN博客</a></li>
+  <li><a href="https://github.com/gaoxiang12/slambook">gaoxiang12/slambook</a></li>
+  <li><a href="https://github.com/gaoxiang12/slambook2">gaoxiang12/slambook2</a></li>
+</ol>
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1">
+      <p>以这一概念的提出者，挪威数学家Sophus Lie的名字命名。 <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div>
+
+  
+  
+<script src="https://utteranc.es/client.js"
+        repo="YWpepper/YWpepper.github.io"
+        issue-term="title"
+        label="comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
+
+  
+</article>
+
+<div class="pagination">
+  
+    <span class="prev" >
+      <a href="http://localhost:4000/eigen-note/">
+        ← 上一篇
+      </a>
+    </span>
+  
+  
+    <span class="next" >
+      <a href="http://localhost:4000/windows-setup/">
+        下一篇 →
+      </a>
+    </span>
+  
+</div>
+      </div>
+    </div>
+
+    
+
+  </body>
+
+  
+  <script>
+    document.getElementById("main").classList.add("withtoc");
+  </script>
+  
+
+  <div class="wrapper-footer-mobile">
+    <footer class="footer">
+      <!-- Refer to https://codepen.io/ruandre/pen/howFi -->
+<ul class="svg-icon">
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li><a href="https://github.com/zxl19" class="icon-13 github" title="GitHub"><svg viewBox="0 0 512 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg><!--[if lt IE 9]><em>GitHub</em><![endif]--></a></li>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</ul>
+
+
+
+<p>Copyright © 2020-2025 zxl19. All Rights Reserved.</p>
+
+    </footer>
+
+
+</html>

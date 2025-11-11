@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>不定期更新的论文写作注意事项 – zxl19 – 一个工程师的存档点</title>
+
+      <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="这里是不定期更新的论文写作注意事项。
+
+" />
+    <meta property="og:description" content="这里是不定期更新的论文写作注意事项。
+
+" />
+    
+    <meta name="author" content="zxl19" />
+
+    
+    <meta property="og:title" content="不定期更新的论文写作注意事项" />
+    <meta property="twitter:title" content="不定期更新的论文写作注意事项" />
+    
+  <!-- Async font loading -->
+<script>
+  window.WebFontConfig = {
+      custom: {
+          families: ['Spoqa Han Sans:100,300,400,700'],
+          urls: ['https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css']
+      },
+      timeout: 60000
+  };
+  (function(d) {
+      var wf = d.createElement('script'), s = d.scripts[0];
+      wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js';
+      s.parentNode.insertBefore(wf, s);
+  })(document);
+</script>
+
+<!--adobe fonts-->
+<script>
+    (function(d) {
+      var config = {
+        kitId: 'vbt3gjx',
+        scriptTimeout: 3000,
+        async: true
+      },
+      h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+    })(document);
+</script> 
+
+  <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link rel="stylesheet" type="text/css" href="/style.css" />
+  <link rel="alternate" type="application/rss+xml" title="zxl19 - 一个工程师的存档点" href="/feed.xml" />
+  <link rel="shortcut icon" href="https://raw.githubusercontent.com/zxl19/zxl19.github.io/master/images/icon.png">
+  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+  <script src="https://unpkg.com/feather-icons"></script>
+  <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        inlineMath: [['$','$']]
+      }
+    });
+  </script>
+
+  <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+
+</head>
+
+  <body>
+    <div class="wrapper-sidebar">
+  <header class="sidebar clearfix">
+    <div class="site-info">
+      
+        <a href="/" class="site-avatar"><img src="https://raw.githubusercontent.com/zxl19/zxl19.github.io/master/images/avatar.jpg" /></a>
+       
+      <h1 class="site-name"><a href="/">zxl19</a></h1>
+      <p class="site-description">一个工程师的存档点</p>
+    </div>
+  </header>
+
+  <div class="navlist">
+    <nav>
+      
+      
+      <a href="/">首页</a>
+      
+      
+      
+      <a href="/about">关于</a>
+      
+      
+      
+      <a href="/archive">归档</a>
+      
+      
+      
+      <a href="/tags">标签</a>
+      
+      
+    </nav>
+  </div>
+
+  <div class="wrapper-footer-desktop">
+    <footer class="footer">
+      <!-- Refer to https://codepen.io/ruandre/pen/howFi -->
+<ul class="svg-icon">
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li><a href="https://github.com/zxl19" class="icon-13 github" title="GitHub"><svg viewBox="0 0 512 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg><!--[if lt IE 9]><em>GitHub</em><![endif]--></a></li>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</ul>
+
+
+
+<p>Copyright © 2020-2025 zxl19. All Rights Reserved.</p>
+
+    </footer>
+  </div>
+</div>
+
+    
+      <aside class="toc">
+        <ul>
+  <li><a href="#">不定期更新的论文写作注意事项</a>
+    <ul>
+      <li><a href="#文章格式">文章格式</a></li>
+      <li><a href="#图片">图片</a>
+        <ul>
+          <li><a href="#整体原则">整体原则</a></li>
+          <li><a href="#曲线图">曲线图</a></li>
+          <li><a href="#流程图和示意图">流程图和示意图</a></li>
+        </ul>
+      </li>
+      <li><a href="#表格">表格</a></li>
+      <li><a href="#语言">语言</a></li>
+      <li><a href="#审稿人意见回复">审稿人意见回复</a></li>
+      <li><a href="#作者信息">作者信息</a></li>
+      <li><a href="#资料">资料</a>
+        <ul>
+          <li><a href="#期刊目录">期刊目录</a></li>
+        </ul>
+      </li>
+      <li><a href="#写作规范">写作规范</a>
+        <ul>
+          <li><a href="#英文写作">英文写作</a></li>
+          <li><a href="#海报模板">海报模板</a></li>
+        </ul>
+      </li>
+      <li><a href="#参考">参考</a></li>
+    </ul>
+  </li>
+</ul>
+      </aside>
+    
+
+    <div id="main" role="main" class="wrapper-content">
+      <div class="container">
+        <article class="posts">
+  <h1>不定期更新的论文写作注意事项</h1>
+
+  <div clsss="meta">
+    <span class="author">
+      zxl19
+    </span>
+
+    <span class="date">
+      2020-10-16
+    </span>
+
+    <ul class="tag">
+      
+      <li>
+        <a href="http://localhost:4000/tags#Academic">
+          Academic
+        </a>
+      </li>
+      
+      <li>
+        <a href="http://localhost:4000/tags#Paper">
+          Paper
+        </a>
+      </li>
+      
+      <li>
+        <a href="http://localhost:4000/tags#Note">
+          Note
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+
+  <div class="entry">
+    <p>这里是不定期更新的论文写作注意事项。</p>
+
+<!-- more -->
+
+<h2 id="文章格式">文章格式</h2>
+
+<ol>
+  <li>使用官方提供的模板；</li>
+  <li>
+    <p>采用总-分结构，先综述本文的方法，然后介绍方法的各个部分，对于文章创新点对应的部分要着重介绍，最后通过实验说明：</p>
+
+    <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Abstract
+ Introduction
+ Related Works
+ Methodology
+ Experiments
+ Conclusions
+ References
+</code></pre></div>    </div>
+
+    <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Abstract
+ Introduction
+ Method Part1
+ Method Part2
+ Method Part3
+ Experiments
+ Summary/Conclusions
+ Reference
+ Contact Information
+ Acknowledgements
+</code></pre></div>    </div>
+  </li>
+  <li>在使用Word时，文字采用两端对齐更加美观；</li>
+  <li>在使用Word时，公式和编号右对齐，在中间用<code class="language-plaintext highlighter-rouge">Tab</code>键隔开；</li>
+  <li>
+    <p>英文专有名词要在首次出现时说明中文全称、英文全称和英文缩写，后文才能使用英文缩写：</p>
+
+    <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 即时定位与地图构建（Simultaneous Localization And Mapping，SLAM）
+</code></pre></div>    </div>
+  </li>
+  <li>需要强调的数字使用阿拉伯数字，其余数字使用汉语数字；</li>
+</ol>
+
+<h2 id="图片">图片</h2>
+
+<h3 id="整体原则">整体原则</h3>
+
+<ol>
+  <li>在设置图片样式时，优先使用代码设置，易于调整和复现；</li>
+  <li>图片中中文使用宋体，英文和数字使用Times New Roman；</li>
+  <li>图片分辨率大于800像素；</li>
+  <li>在使用Word时，图片建议使用<code class="language-plaintext highlighter-rouge">.tiff</code>格式，更加清晰；</li>
+  <li>在使用$\LaTeX$时，图片格式建议首先使用<code class="language-plaintext highlighter-rouge">.pdf</code>格式，其次使用<code class="language-plaintext highlighter-rouge">.png</code>或<code class="language-plaintext highlighter-rouge">.jpg</code>格式，<code class="language-plaintext highlighter-rouge">.eps</code>格式已较少使用；</li>
+  <li>指代图片时应使用图片编号，例如：“如图1所示”；</li>
+  <li>在转换PDF时，使用<code class="language-plaintext highlighter-rouge">打印-&gt;打印机属性-&gt;印刷质量</code>提高图片的清晰度；</li>
+</ol>
+
+<h3 id="曲线图">曲线图</h3>
+
+<ol>
+  <li>
+    <p>不同曲线之间线型和颜色都应存在区别，以保证论文在黑白打印下能够分辨不同曲线，如果实在无法区分，可在图名后添加如下说明：</p>
+
+    <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code> (For colored figures, please refer to the online edition.)
+</code></pre></div>    </div>
+  </li>
+  <li>图片添加坐标轴名称、单位，不必在图中添加图名，可以在图名位置处添加简单说明；</li>
+  <li>
+    <p>MATLAB中设置图片大小示例：</p>
+
+    <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">set</span><span class="p">(</span><span class="nb">gcf</span><span class="p">,</span> <span class="s1">'Unit'</span><span class="p">,</span> <span class="s1">'Centimeters'</span><span class="p">,</span> <span class="s1">'Position'</span><span class="p">,</span> <span class="p">[</span><span class="mi">10</span> <span class="mi">5</span> <span class="mi">15</span> <span class="mi">10</span><span class="p">])</span> <span class="c1">% 单个图像</span>
+ <span class="nb">set</span><span class="p">(</span><span class="nb">gcf</span><span class="p">,</span> <span class="s1">'Unit'</span><span class="p">,</span> <span class="s1">'Centimeters'</span><span class="p">,</span> <span class="s1">'Position'</span><span class="p">,</span> <span class="p">[</span><span class="mi">10</span> <span class="mi">5</span> <span class="mi">20</span> <span class="mi">15</span><span class="p">])</span> <span class="c1">% 三个子图</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>MATLAB中设置坐标轴字体示例：</p>
+
+    <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">set</span><span class="p">(</span><span class="nb">gca</span><span class="p">,</span> <span class="s1">'FontName'</span><span class="p">,</span> <span class="s1">'Times New Roman'</span><span class="p">)</span> <span class="c1">% 子图中需要分别设置</span>
+ <span class="nb">xlabel</span><span class="p">(</span><span class="s1">'\fontname{宋体}时间\fontname{Times New Roman} / s'</span><span class="p">)</span>
+ <span class="nb">ylabel</span><span class="p">(</span><span class="s1">'\fontname{Times New Roman}x / m'</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </li>
+  <li>图片中的文字大小应保证与正文中的文字大小接近，建议使用固定字号18磅，搭配图片宽度15cm，$LaTeX$中<code class="language-plaintext highlighter-rouge">0.6\linewidth</code>；</li>
+  <li>若不要求坐标轴比例相等可以放大坐标区充满图窗；</li>
+  <li>
+    <p>MATLAB中反转坐标轴方向示例：</p>
+
+    <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">set</span><span class="p">(</span><span class="nb">gca</span><span class="p">,</span> <span class="s1">'XDir'</span><span class="p">,</span> <span class="s1">'reverse'</span><span class="p">)</span>
+ <span class="nb">set</span><span class="p">(</span><span class="nb">gca</span><span class="p">,</span> <span class="s1">'YDir'</span><span class="p">,</span> <span class="s1">'reverse'</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>MATLAB中设置坐标轴刻度示例：</p>
+
+    <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">set</span><span class="p">(</span><span class="nb">gca</span><span class="p">,</span> <span class="s1">'XTick'</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span> <span class="p">:</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="nb">pi</span> <span class="p">:</span> <span class="mi">2</span> <span class="o">*</span> <span class="nb">pi</span><span class="p">])</span>
+ <span class="nb">set</span><span class="p">(</span><span class="nb">gca</span><span class="p">,</span> <span class="s1">'XTickLabel'</span><span class="p">,</span> <span class="p">{</span><span class="s1">'0'</span><span class="p">,</span> <span class="s1">'0.5\pi'</span><span class="p">,</span> <span class="s1">'\pi'</span><span class="p">,</span> <span class="s1">'1.5\pi'</span><span class="p">,</span> <span class="s1">'2\pi'</span><span class="p">})</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>MATLAB中颜色图设置示例：</p>
+
+    <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">colormap</span> <span class="n">default</span>    <span class="c1">% 默认颜色图设置，parula</span>
+ <span class="nb">colormap</span> <span class="nb">jet</span>        <span class="c1">% 由蓝到红，较为美观</span>
+ <span class="nb">colormap</span><span class="p">(</span><span class="nb">jet</span><span class="p">)</span>       <span class="c1">% 作用相同</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>MATLAB中颜色栏设置示例：</p>
+
+    <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">c</span> <span class="o">=</span> <span class="nb">colorbar</span><span class="p">;</span>
+<span class="n">c</span><span class="o">.</span><span class="n">Label</span><span class="o">.</span><span class="n">String</span> <span class="o">=</span> <span class="s1">'标注文字'</span><span class="p">;</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h3 id="流程图和示意图">流程图和示意图</h3>
+
+<ol>
+  <li>流程图或简单插图使用<code class="language-plaintext highlighter-rouge">draw.io</code>绘制，通过网页版导出为<code class="language-plaintext highlighter-rouge">.pdf</code>；</li>
+  <li>复杂插图使用PPT绘制，组合后另存为图片，优先选择<code class="language-plaintext highlighter-rouge">.png</code>格式，如果插图中部分元素显示存在黑色边框可以选择<code class="language-plaintext highlighter-rouge">.jpg</code>格式；</li>
+</ol>
+
+<h2 id="表格">表格</h2>
+
+<ol>
+  <li>文章中提出的方法应做说明，效果好的方法应加粗显示；</li>
+  <li>Word中使用<code class="language-plaintext highlighter-rouge">分布列</code>保证列宽相同；</li>
+</ol>
+
+<h2 id="语言">语言</h2>
+
+<ol>
+  <li>原则上少用被动语态，在主语未知、定语从句中或其他不可避免的情况下再使用；</li>
+</ol>
+
+<h2 id="审稿人意见回复">审稿人意见回复</h2>
+
+<ol>
+  <li>参考<a href="https://www.zhihu.com/question/370758333">这个知乎问题</a>进行回复；</li>
+  <li>参考<a href="https://www.bilibili.com/video/BV1ix411o7qq">这个B站视频</a>进行对线:dog:；</li>
+</ol>
+
+<h2 id="作者信息">作者信息</h2>
+
+<ol>
+  <li>用<code class="language-plaintext highlighter-rouge">*</code>上标表示通信作者（Corresponding author/Correspondence）；</li>
+  <li>
+    <p>作者邮箱信息字体：</p>
+
+    <div class="language-latex highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="k">\usepackage</span><span class="p">{</span>courier<span class="p">}</span>
+ <span class="c">% 打字机字体/等宽字体</span>
+ <span class="k">\texttt</span><span class="p">{</span>john<span class="p">_</span>doe@xxx.xxx<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>通信作者邮箱加超链接；</li>
+</ol>
+
+<h2 id="资料">资料</h2>
+
+<h3 id="期刊目录">期刊目录</h3>
+
+<ol>
+  <li><a href="https://www.ccf.org.cn/c/2019-04-25/663625.shtml">中国计算机学会推荐国际学术会议和期刊目录</a></li>
+  <li><a href="http://m.sae-china.org/a4040.html">汽车工程领域高质量科技期刊分级目录</a></li>
+</ol>
+
+<h2 id="写作规范">写作规范</h2>
+
+<ol>
+  <li><a href="https://github.com/sparanoid/chinese-copywriting-guidelines">sparanoid/chinese-copywriting-guidelines</a></li>
+  <li><a href="https://github.com/ruanyf/document-style-guide">ruanyf/document-style-guide</a></li>
+  <li><a href="https://github.com/MLNLP-World/Paper-Writing-Tips">MLNLP-World/Paper-Writing-Tips</a></li>
+  <li><a href="https://github.com/guanyingc/latex_paper_writing_tips">guanyingc/latex_paper_writing_tips</a></li>
+  <li><a href="https://github.com/secdr/research-method">secdr/research-method</a></li>
+  <li><a href="https://github.com/Haixing-Hu/typesetting-standard">Haixing-Hu/typesetting-standard</a></li>
+  <li><a href="https://github.com/writing-resources/awesome-scientific-writing">writing-resources/awesome-scientific-writing</a></li>
+  <li><a href="https://github.com/wangdongdut/PaperWriting">wangdongdut/PaperWriting</a></li>
+  <li><a href="https://github.com/selfteaching/markdown-writing-with-mixed-cn-en">selfteaching/markdown-writing-with-mixed-cn-en</a></li>
+  <li><a href="https://github.com/cooelf/PaperWritingTips">cooelf/PaperWritingTips</a></li>
+  <li><a href="https://github.com/taopanpan/CasitLab">taopanpan/CasitLab</a></li>
+  <li>《如何写好学术论文》</li>
+  <li>《学术“咸鱼”自救指南》</li>
+</ol>
+
+<h3 id="英文写作">英文写作</h3>
+
+<ol>
+  <li><a href="https://github.com/RobbyDeng/MCM2019">正确写作美国大学生数学建模竞赛论文</a></li>
+  <li><a href="https://hkupress.hku.hk/pro/con/1612.pdf">English Exposed</a></li>
+  <li><a href="https://www.phrasebank.manchester.ac.uk/">Academic Phrasebank</a></li>
+  <li><a href="https://www.chrisyttang.org/assets/misc/The%20Most%20Common%20Habits%20from%20more%20than%20200%20English%20Papers%20written.pdf">The Most Common Habits from more than 200 English Papers written by Graduate Chinese Engineering Students</a></li>
+  <li><a href="https://webusers.imj-prg.fr/~jan.nekovar/co/en/en.pdf">Mathematical English (a brief summary)</a></li>
+  <li>Science Research Writing（中译名：英语科技写作）</li>
+</ol>
+
+<h3 id="海报模板">海报模板</h3>
+
+<ol>
+  <li><a href="https://github.com/zhoubolei/poster_template">zhoubolei/poster_template</a></li>
+  <li><a href="https://github.com/rafaelbailo/betterposter-latex-template">rafaelbailo/betterposter-latex-template</a></li>
+  <li><a href="https://github.com/HolgerGerhardt/TeXTemplates">HolgerGerhardt/TeXTemplates</a></li>
+</ol>
+
+<h2 id="参考">参考</h2>
+
+<ol>
+  <li><a href="https://zhuanlan.zhihu.com/p/82772502">Matlab自动导出论文插图-阿昆的科研日常的文章-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/65116358">MATLAB如何导出精美的论文插图？-易夕的文章-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/148709763">MATLAB绘图：输入LaTeX公式-易夕的文章-知乎</a></li>
+  <li><a href="https://blog.csdn.net/weixin_44891861/article/details/117032147">MATLAB画图字体-CSDN博客</a></li>
+  <li><a href="https://blog.csdn.net/yuejisuo1948/article/details/80801506">MATLAB坐标轴位置和方向设置-CSDN博客</a></li>
+  <li><a href="https://jingyan.baidu.com/article/c1a3101e044849de646deb43.html">MATLAB坐标轴刻度设置-百度经验</a></li>
+  <li><a href="https://blog.csdn.net/yq_forever/article/details/86594602">MATLAB坐标轴刻度设置-CSDN博客</a></li>
+  <li><a href="https://www.zhihu.com/question/370758333">审稿意见怎么回复？需要注意什么？-知乎</a></li>
+  <li><a href="https://www.zhihu.com/question/46825717">英文论文写作有哪些需要注意的细节？-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/346911007">我来分享下自己总结的审稿意见回复的模板吧-方差的文章-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/512095069">美国老姐看完200+中国学生SCI论文，怒写超详细“中国人英文论文写作指南”，还被推上了B站热门…-量子位的文章-知乎</a></li>
+  <li><a href="https://www.zhihu.com/question/52818597/answer/2053270796">数学公式、符号怎么用英语念出来？-半个冯博士的回答-知乎</a></li>
+  <li><a href="https://www.zhihu.com/question/485142113/answer/3248748340">有哪本书，你恨不得把它全部内容都背诵下来？-罗西南多的回答-知乎</a></li>
+</ol>
+
+  </div>
+
+  
+  
+<script src="https://utteranc.es/client.js"
+        repo="YWpepper/YWpepper.github.io"
+        issue-term="title"
+        label="comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
+
+  
+</article>
+
+<div class="pagination">
+  
+    <span class="prev" >
+      <a href="http://localhost:4000/matlab-installation/">
+        ← 上一篇
+      </a>
+    </span>
+  
+  
+    <span class="next" >
+      <a href="http://localhost:4000/vscode-cpp/">
+        下一篇 →
+      </a>
+    </span>
+  
+</div>
+      </div>
+    </div>
+
+    
+
+  </body>
+
+  
+  <script>
+    document.getElementById("main").classList.add("withtoc");
+  </script>
+  
+
+  <div class="wrapper-footer-mobile">
+    <footer class="footer">
+      <!-- Refer to https://codepen.io/ruandre/pen/howFi -->
+<ul class="svg-icon">
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li><a href="https://github.com/zxl19" class="icon-13 github" title="GitHub"><svg viewBox="0 0 512 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg><!--[if lt IE 9]><em>GitHub</em><![endif]--></a></li>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</ul>
+
+
+
+<p>Copyright © 2020-2025 zxl19. All Rights Reserved.</p>
+
+    </footer>
+
+
+</html>

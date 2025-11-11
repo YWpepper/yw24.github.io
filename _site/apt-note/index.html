@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Ubuntu系统中软件包管理器apt学习笔记 – zxl19 – 一个工程师的存档点</title>
+
+      <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="我的Ubuntu系统中软件包管理器apt学习笔记。
+
+" />
+    <meta property="og:description" content="我的Ubuntu系统中软件包管理器apt学习笔记。
+
+" />
+    
+    <meta name="author" content="zxl19" />
+
+    
+    <meta property="og:title" content="Ubuntu系统中软件包管理器apt学习笔记" />
+    <meta property="twitter:title" content="Ubuntu系统中软件包管理器apt学习笔记" />
+    
+  <!-- Async font loading -->
+<script>
+  window.WebFontConfig = {
+      custom: {
+          families: ['Spoqa Han Sans:100,300,400,700'],
+          urls: ['https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css']
+      },
+      timeout: 60000
+  };
+  (function(d) {
+      var wf = d.createElement('script'), s = d.scripts[0];
+      wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js';
+      s.parentNode.insertBefore(wf, s);
+  })(document);
+</script>
+
+<!--adobe fonts-->
+<script>
+    (function(d) {
+      var config = {
+        kitId: 'vbt3gjx',
+        scriptTimeout: 3000,
+        async: true
+      },
+      h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+    })(document);
+</script> 
+
+  <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link rel="stylesheet" type="text/css" href="/style.css" />
+  <link rel="alternate" type="application/rss+xml" title="zxl19 - 一个工程师的存档点" href="/feed.xml" />
+  <link rel="shortcut icon" href="https://raw.githubusercontent.com/zxl19/zxl19.github.io/master/images/icon.png">
+  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+  <script src="https://unpkg.com/feather-icons"></script>
+  <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        inlineMath: [['$','$']]
+      }
+    });
+  </script>
+
+  <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+
+</head>
+
+  <body>
+    <div class="wrapper-sidebar">
+  <header class="sidebar clearfix">
+    <div class="site-info">
+      
+        <a href="/" class="site-avatar"><img src="https://raw.githubusercontent.com/zxl19/zxl19.github.io/master/images/avatar.jpg" /></a>
+       
+      <h1 class="site-name"><a href="/">zxl19</a></h1>
+      <p class="site-description">一个工程师的存档点</p>
+    </div>
+  </header>
+
+  <div class="navlist">
+    <nav>
+      
+      
+      <a href="/">首页</a>
+      
+      
+      
+      <a href="/about">关于</a>
+      
+      
+      
+      <a href="/archive">归档</a>
+      
+      
+      
+      <a href="/tags">标签</a>
+      
+      
+    </nav>
+  </div>
+
+  <div class="wrapper-footer-desktop">
+    <footer class="footer">
+      <!-- Refer to https://codepen.io/ruandre/pen/howFi -->
+<ul class="svg-icon">
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li><a href="https://github.com/zxl19" class="icon-13 github" title="GitHub"><svg viewBox="0 0 512 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg><!--[if lt IE 9]><em>GitHub</em><![endif]--></a></li>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</ul>
+
+
+
+<p>Copyright © 2020-2025 zxl19. All Rights Reserved.</p>
+
+    </footer>
+  </div>
+</div>
+
+    
+      <aside class="toc">
+        <ul>
+  <li><a href="#">Ubuntu系统中软件包管理器apt学习笔记</a>
+    <ul>
+      <li><a href="#apt-hello-world">apt Hello World</a>
+        <ul>
+          <li><a href="#apt语法">apt语法</a></li>
+        </ul>
+      </li>
+      <li><a href="#apt常用命令">apt常用命令</a></li>
+      <li><a href="#参考">参考</a></li>
+    </ul>
+  </li>
+</ul>
+      </aside>
+    
+
+    <div id="main" role="main" class="wrapper-content">
+      <div class="container">
+        <article class="posts">
+  <h1>Ubuntu系统中软件包管理器apt学习笔记</h1>
+
+  <div clsss="meta">
+    <span class="author">
+      zxl19
+    </span>
+
+    <span class="date">
+      2021-10-11
+    </span>
+
+    <ul class="tag">
+      
+      <li>
+        <a href="http://localhost:4000/tags#Ubuntu">
+          Ubuntu
+        </a>
+      </li>
+      
+      <li>
+        <a href="http://localhost:4000/tags#Note">
+          Note
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+
+  <div class="entry">
+    <p>我的Ubuntu系统中软件包管理器apt学习笔记。</p>
+
+<!-- more -->
+
+<h2 id="apt-hello-world">apt Hello World</h2>
+
+<ol>
+  <li>apt（Advanced Packaging Tool）是一个在Debian和Ubuntu中的Shell前端<strong>软件包管理器</strong>；</li>
+  <li><code class="language-plaintext highlighter-rouge">apt</code>命令提供了查找、安装、升级、删除某一个、一组甚至全部软件包的命令；</li>
+  <li><code class="language-plaintext highlighter-rouge">apt</code>命令执行需要<strong>超级管理员权限</strong>(root)；</li>
+  <li><code class="language-plaintext highlighter-rouge">apt</code>命令合并了<code class="language-plaintext highlighter-rouge">apt-get</code>、<code class="language-plaintext highlighter-rouge">apt-cache</code>和<code class="language-plaintext highlighter-rouge">apt-config</code>命令的常用功能；</li>
+</ol>
+
+<h3 id="apt语法">apt语法</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apt <span class="o">[</span>options] <span class="o">[</span><span class="nb">command</span><span class="o">]</span> <span class="o">[</span>package ...]
+</code></pre></div></div>
+
+<ol>
+  <li>
+    <p><strong>options</strong>：可选选项；</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="text-align: left">选项</th>
+          <th style="text-align: left">含义</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="text-align: left"><code class="language-plaintext highlighter-rouge">-h</code></td>
+          <td style="text-align: left">帮助</td>
+        </tr>
+        <tr>
+          <td style="text-align: left"><code class="language-plaintext highlighter-rouge">-y</code></td>
+          <td style="text-align: left">安装过程提示选择全部为”yes”</td>
+        </tr>
+        <tr>
+          <td style="text-align: left"><code class="language-plaintext highlighter-rouge">-q</code></td>
+          <td style="text-align: left">不显示安装的过程</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li><strong>commands</strong>：要进行的操作；</li>
+  <li><strong>package</strong>：安装的包名；</li>
+</ol>
+
+<h2 id="apt常用命令">apt常用命令</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">功能</th>
+      <th style="text-align: left">命令</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">列出所有可更新的软件清单</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">sudo apt update</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">升级软件包</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">sudo apt upgrade</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">列出可更新的软件包及版本信息</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">apt list --upgradeable</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">升级软件包，升级前先删除需要更新软件包</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">sudo apt full-upgrade</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">安装指定的软件</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">sudo apt install &lt;package_name&gt;</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">安装多个软件包</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">sudo apt install &lt;package_1&gt; &lt;package_2&gt; &lt;package_3&gt;</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">更新指定的软件</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">sudo apt update &lt;package_name&gt;</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">显示软件包具体信息,例如：版本号，安装大小，依赖关系等等</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">sudo apt show &lt;package_name&gt;</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">删除软件包（保留配置文件）</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">sudo apt remove &lt;package_name&gt;</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">清理不再使用的依赖和库文件</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">sudo apt autoremove</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">移除软件包及配置文件</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">sudo apt purge &lt;package_name&gt;</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">查找软件包命令</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">sudo apt search &lt;keyword&gt;</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">列出所有已安装的包</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">apt list --installed</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">列出所有已安装的包的版本信息</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">apt list --all-versions</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">从下载的软件包中清理缓存</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">sudo apt clean</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">从下载的软件包中清理缓存（只删除不能被再次下载的软件包）</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">sudo apt autoclean</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="参考">参考</h2>
+
+<ol>
+  <li><a href="https://www.runoob.com/linux/linux-comm-apt.html">Linux apt命令-菜鸟教程</a></li>
+  <li><a href="https://phoenixnap.com/kb/apt-vs-apt-get">apt/apt-get区别-phoenixNAP</a></li>
+  <li><a href="https://www.jianshu.com/p/c58de6f018fa">apt/apt-get区别-简书</a></li>
+  <li><a href="https://www.runoob.com/w3cnote/linux-common-command.html">Linux常用命令集合-菜鸟教程</a></li>
+  <li><a href="https://www.jianshu.com/p/acb74889bd39">clean/autoclean/remove/autoremove区别-简书</a></li>
+</ol>
+
+  </div>
+
+  
+  
+<script src="https://utteranc.es/client.js"
+        repo="YWpepper/YWpepper.github.io"
+        issue-term="title"
+        label="comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
+
+  
+</article>
+
+<div class="pagination">
+  
+    <span class="prev" >
+      <a href="http://localhost:4000/cpp-color-output/">
+        ← 上一篇
+      </a>
+    </span>
+  
+  
+    <span class="next" >
+      <a href="http://localhost:4000/terminal-tool/">
+        下一篇 →
+      </a>
+    </span>
+  
+</div>
+      </div>
+    </div>
+
+    
+
+  </body>
+
+  
+  <script>
+    document.getElementById("main").classList.add("withtoc");
+  </script>
+  
+
+  <div class="wrapper-footer-mobile">
+    <footer class="footer">
+      <!-- Refer to https://codepen.io/ruandre/pen/howFi -->
+<ul class="svg-icon">
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li><a href="https://github.com/zxl19" class="icon-13 github" title="GitHub"><svg viewBox="0 0 512 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg><!--[if lt IE 9]><em>GitHub</em><![endif]--></a></li>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</ul>
+
+
+
+<p>Copyright © 2020-2025 zxl19. All Rights Reserved.</p>
+
+    </footer>
+
+
+</html>

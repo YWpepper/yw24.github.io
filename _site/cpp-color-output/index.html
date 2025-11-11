@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>C++设置输出颜色 – zxl19 – 一个工程师的存档点</title>
+
+      <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="C++设置输出颜色的方法，包括文字和底纹颜色。
+
+" />
+    <meta property="og:description" content="C++设置输出颜色的方法，包括文字和底纹颜色。
+
+" />
+    
+    <meta name="author" content="zxl19" />
+
+    
+    <meta property="og:title" content="C++设置输出颜色" />
+    <meta property="twitter:title" content="C++设置输出颜色" />
+    
+  <!-- Async font loading -->
+<script>
+  window.WebFontConfig = {
+      custom: {
+          families: ['Spoqa Han Sans:100,300,400,700'],
+          urls: ['https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css']
+      },
+      timeout: 60000
+  };
+  (function(d) {
+      var wf = d.createElement('script'), s = d.scripts[0];
+      wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js';
+      s.parentNode.insertBefore(wf, s);
+  })(document);
+</script>
+
+<!--adobe fonts-->
+<script>
+    (function(d) {
+      var config = {
+        kitId: 'vbt3gjx',
+        scriptTimeout: 3000,
+        async: true
+      },
+      h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+    })(document);
+</script> 
+
+  <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link rel="stylesheet" type="text/css" href="/style.css" />
+  <link rel="alternate" type="application/rss+xml" title="zxl19 - 一个工程师的存档点" href="/feed.xml" />
+  <link rel="shortcut icon" href="https://raw.githubusercontent.com/zxl19/zxl19.github.io/master/images/icon.png">
+  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+  <script src="https://unpkg.com/feather-icons"></script>
+  <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        inlineMath: [['$','$']]
+      }
+    });
+  </script>
+
+  <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+
+</head>
+
+  <body>
+    <div class="wrapper-sidebar">
+  <header class="sidebar clearfix">
+    <div class="site-info">
+      
+        <a href="/" class="site-avatar"><img src="https://raw.githubusercontent.com/zxl19/zxl19.github.io/master/images/avatar.jpg" /></a>
+       
+      <h1 class="site-name"><a href="/">zxl19</a></h1>
+      <p class="site-description">一个工程师的存档点</p>
+    </div>
+  </header>
+
+  <div class="navlist">
+    <nav>
+      
+      
+      <a href="/">首页</a>
+      
+      
+      
+      <a href="/about">关于</a>
+      
+      
+      
+      <a href="/archive">归档</a>
+      
+      
+      
+      <a href="/tags">标签</a>
+      
+      
+    </nav>
+  </div>
+
+  <div class="wrapper-footer-desktop">
+    <footer class="footer">
+      <!-- Refer to https://codepen.io/ruandre/pen/howFi -->
+<ul class="svg-icon">
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li><a href="https://github.com/zxl19" class="icon-13 github" title="GitHub"><svg viewBox="0 0 512 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg><!--[if lt IE 9]><em>GitHub</em><![endif]--></a></li>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</ul>
+
+
+
+<p>Copyright © 2020-2025 zxl19. All Rights Reserved.</p>
+
+    </footer>
+  </div>
+</div>
+
+    
+      <aside class="toc">
+        <ul>
+  <li><a href="#">C++设置输出颜色</a>
+    <ul>
+      <li><a href="#使用ansi转义序列">使用ANSI转义序列</a>
+        <ul>
+          <li><a href="#复杂实现">复杂实现</a>
+            <ul>
+              <li><a href="#使用方法">使用方法</a></li>
+            </ul>
+          </li>
+          <li><a href="#简单实现">简单实现</a>
+            <ul>
+              <li><a href="#使用方法-1">使用方法</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><a href="#使用fmt库">使用fmt库</a></li>
+      <li><a href="#参考">参考</a></li>
+    </ul>
+  </li>
+</ul>
+      </aside>
+    
+
+    <div id="main" role="main" class="wrapper-content">
+      <div class="container">
+        <article class="posts">
+  <h1>C++设置输出颜色</h1>
+
+  <div clsss="meta">
+    <span class="author">
+      zxl19
+    </span>
+
+    <span class="date">
+      2021-10-09
+    </span>
+
+    <ul class="tag">
+      
+      <li>
+        <a href="http://localhost:4000/tags#C++">
+          C++
+        </a>
+      </li>
+      
+      <li>
+        <a href="http://localhost:4000/tags#Note">
+          Note
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+
+  <div class="entry">
+    <p>C++设置输出颜色的方法，包括文字和底纹颜色。</p>
+
+<!-- more -->
+
+<h2 id="使用ansi转义序列">使用ANSI转义序列</h2>
+
+<h3 id="复杂实现">复杂实现</h3>
+
+<p>使用带参数宏定义了字体和底纹样式：</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//</span>
+<span class="c1">// colors.hpp</span>
+<span class="c1">//</span>
+<span class="c1">// Posted by Gon1332 May 15 2015 on StackOverflow</span>
+<span class="c1">// https://stackoverflow.com/questions/2616906/how-do-i-output-coloured-text-to-a-linux-terminal#2616912</span>
+<span class="c1">//</span>
+<span class="c1">// Description: An easy header file to make colored text output to terminal second nature.</span>
+<span class="c1">// Modified by Shades Aug. 14 2018</span>
+
+<span class="c1">// PLEASE carefully read comments before using this tool, this will save you a lot of bugs that are going to be just about impossible to find.</span>
+<span class="cp">#ifndef COLORS_HPP
+#define COLORS_HPP
+</span>
+<span class="cm">/* FOREGROUND */</span>
+<span class="c1">// These codes set the actual text to the specified color</span>
+<span class="cp">#define RESETTEXT "\x1B[0m"  // Set all colors back to normal.
+#define FOREBLK   "\x1B[30m" // Black
+#define FORERED   "\x1B[31m" // Red
+#define FOREGRN   "\x1B[32m" // Green
+#define FOREYEL   "\x1B[33m" // Yellow
+#define FOREBLU   "\x1B[34m" // Blue
+#define FOREMAG   "\x1B[35m" // Magenta
+#define FORECYN   "\x1B[36m" // Cyan
+#define FOREWHT   "\x1B[37m" // White
+</span>
+<span class="cm">/* BACKGROUND */</span>
+<span class="c1">// These codes set the background color behind the text.</span>
+<span class="cp">#define BACKBLK   "\x1B[40m" // Black
+#define BACKRED   "\x1B[41m" // Red
+#define BACKGRN   "\x1B[42m" // Green
+#define BACKYEL   "\x1B[43m" // Yellow
+#define BACKBLU   "\x1B[44m" // Blue
+#define BACKMAG   "\x1B[45m" // Magenta
+#define BACKCYN   "\x1B[46m" // Cyan
+#define BACKWHT   "\x1B[47m" // White
+</span>
+<span class="c1">// These will set the text color and then set it back to normal afterwards.</span>
+<span class="cp">#define BLK(x) FOREBLK x RESETTEXT
+#define RED(x) FORERED x RESETTEXT
+#define GRN(x) FOREGRN x RESETTEXT
+#define YEL(x) FOREYEL x RESETTEXT
+#define BLU(x) FOREBLU x RESETTEXT
+#define MAG(x) FOREMAG x RESETTEXT
+#define CYN(x) FORECYN x RESETTEXT
+#define WHT(x) FOREWHT x RESETTEXT
+</span>
+<span class="c1">// Example usage: cout &lt;&lt; BLU("This text's color is now blue!") &lt;&lt; endl;</span>
+
+<span class="c1">// These will set the text's background color then reset it back.</span>
+<span class="cp">#define BackBLK(x) BACKBLK x RESETTEXT
+#define BackRED(x) BACKRED x RESETTEXT
+#define BackGRN(x) BACKGRN x RESETTEXT
+#define BackYEL(x) BACKYEL x RESETTEXT
+#define BackBLU(x) BACKBLU x RESETTEXT
+#define BackMAG(x) BACKMAG x RESETTEXT
+#define BackCYN(x) BACKCYN x RESETTEXT
+#define BackWHT(x) BACKWHT x RESETTEXT
+</span>
+<span class="c1">// Example usage: cout &lt;&lt; BACKRED(FOREBLU("I am blue text on a red background!")) &lt;&lt; endl;</span>
+
+<span class="c1">// These functions will set the background to the specified color indefinitely.</span>
+<span class="c1">// NOTE: These do NOT call RESETTEXT afterwards. Thus, they will set the background color indefinitely until the user executes cout &lt;&lt; RESETTEXT</span>
+<span class="c1">// OR if a function is used that calles RESETTEXT i.e. cout &lt;&lt; RED("Hello World!") will reset the background color since it calls RESETTEXT.</span>
+<span class="c1">// To set text COLOR indefinitely, see SetFore functions below.</span>
+<span class="cp">#define SetBackBLK BACKBLK
+#define SetBackRED BACKRED
+#define SetBackGRN BACKGRN
+#define SetBackYEL BACKYEL
+#define SetBackBLU BACKBLU
+#define SetBackMAG BACKMAG
+#define SetBackCYN BACKCYN
+#define SetBackWHT BACKWHT
+</span>
+<span class="c1">// Example usage: cout &lt;&lt; SetBackRED &lt;&lt; "This text's background and all text after it will be red until RESETTEXT is called in some way" &lt;&lt; endl;</span>
+
+<span class="c1">// These functions will set the text color until RESETTEXT is called. (See above comments)</span>
+<span class="cp">#define SetForeBLK FOREBLK
+#define SetForeRED FORERED
+#define SetForeGRN FOREGRN
+#define SetForeYEL FOREYEL
+#define SetForeBLU FOREBLU
+#define SetForeMAG FOREMAG
+#define SetForeCYN FORECYN
+#define SetForeWHT FOREWHT
+</span>
+<span class="c1">// Example usage: cout &lt;&lt; SetForeRED &lt;&lt; "This text and all text after it will be red until RESETTEXT is called in some way" &lt;&lt; endl;</span>
+
+<span class="cp">#define BOLD(x)   "\x1B[1m" x RESETTEXT // Embolden text then reset it.
+#define BRIGHT(x) "\x1B[1m" x RESETTEXT // Brighten text then reset it. (Same as bold but is available for program clarity)
+#define UNDL(x)   "\x1B[4m" x RESETTEXT // Underline text then reset it.
+</span>
+<span class="c1">// Example usage: cout &lt;&lt; BOLD(BLU("I am bold blue text!")) &lt;&lt; endl;</span>
+
+<span class="c1">// These functions will embolden or underline text indefinitely until RESETTEXT is called in some way.</span>
+
+<span class="cp">#define SetBOLD   "\x1B[1m" // Embolden text indefinitely.
+#define SetBRIGHT "\x1B[1m" // Brighten text indefinitely. (Same as bold but is available for program clarity)
+#define SetUNDL   "\x1B[4m" // Underline text indefinitely.
+</span>
+<span class="c1">// Example usage: cout &lt;&lt; setBOLD &lt;&lt; "I and all text after me will be BOLD/Bright until RESETTEXT is called in some way!" &lt;&lt; endl;</span>
+
+<span class="cp">#endif </span><span class="cm">/* COLORS_HPP */</span><span class="cp">
+</span></code></pre></div></div>
+
+<h4 id="使用方法">使用方法</h4>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 使用后自动恢复默认样式，可嵌套使用</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">BLU</span><span class="p">(</span><span class="s">"This text's color is now blue!"</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">BACKRED</span><span class="p">(</span><span class="n">FOREBLU</span><span class="p">(</span><span class="s">"I am blue text on a red background!"</span><span class="p">))</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">BOLD</span><span class="p">(</span><span class="n">BLU</span><span class="p">(</span><span class="s">"I am bold blue text!"</span><span class="p">))</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="c1">// 使用后保持当前样式设置</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">SetBackRED</span> <span class="o">&lt;&lt;</span> <span class="s">"This text's background and all text after it will be red until RESETTEXT is called in some way"</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">SetForeRED</span> <span class="o">&lt;&lt;</span> <span class="s">"This text and all text after it will be red until RESETTEXT is called in some way"</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">SetBOLD</span> <span class="o">&lt;&lt;</span> <span class="s">"I and all text after me will be BOLD/Bright until RESETTEXT is called in some way!"</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="简单实现">简单实现</h3>
+
+<p>使用带参数宏定义了字体样式：</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#ifndef COLORS_HPP
+#define COLORS_HPP
+</span>
+<span class="c1">//the following are UBUNTU/LINUX, and MacOS ONLY terminal color codes.</span>
+<span class="cp">#define RESET       "\033[0m"
+#define BLACK       "\033[30m"          </span><span class="cm">/* Black */</span><span class="cp">
+#define RED         "\033[31m"          </span><span class="cm">/* Red */</span><span class="cp">
+#define GREEN       "\033[32m"          </span><span class="cm">/* Green */</span><span class="cp">
+#define YELLOW      "\033[33m"          </span><span class="cm">/* Yellow */</span><span class="cp">
+#define BLUE        "\033[34m"          </span><span class="cm">/* Blue */</span><span class="cp">
+#define MAGENTA     "\033[35m"          </span><span class="cm">/* Magenta */</span><span class="cp">
+#define CYAN        "\033[36m"          </span><span class="cm">/* Cyan */</span><span class="cp">
+#define WHITE       "\033[37m"          </span><span class="cm">/* White */</span><span class="cp">
+#define BOLDBLACK   "\033[1m\033[30m"   </span><span class="cm">/* Bold Black */</span><span class="cp">
+#define BOLDRED     "\033[1m\033[31m"   </span><span class="cm">/* Bold Red */</span><span class="cp">
+#define BOLDGREEN   "\033[1m\033[32m"   </span><span class="cm">/* Bold Green */</span><span class="cp">
+#define BOLDYELLOW  "\033[1m\033[33m"   </span><span class="cm">/* Bold Yellow */</span><span class="cp">
+#define BOLDBLUE    "\033[1m\033[34m"   </span><span class="cm">/* Bold Blue */</span><span class="cp">
+#define BOLDMAGENTA "\033[1m\033[35m"   </span><span class="cm">/* Bold Magenta */</span><span class="cp">
+#define BOLDCYAN    "\033[1m\033[36m"   </span><span class="cm">/* Bold Cyan */</span><span class="cp">
+#define BOLDWHITE   "\033[1m\033[37m"   </span><span class="cm">/* Bold White */</span><span class="cp">
+</span>
+<span class="cp">#endif </span><span class="cm">/* COLORS_HPP */</span><span class="cp">
+</span></code></pre></div></div>
+
+<h4 id="使用方法-1">使用方法</h4>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 使用后保持当前样式设置，使用RESET恢复默认样式</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">RED</span> <span class="o">&lt;&lt;</span> <span class="s">"Hello World"</span> <span class="o">&lt;&lt;</span> <span class="n">RESET</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h2 id="使用fmt库">使用fmt库</h2>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;fmt/color.h&gt;</span><span class="cp">
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">print</span><span class="p">(</span><span class="n">fg</span><span class="p">(</span><span class="n">fmt</span><span class="o">::</span><span class="n">color</span><span class="o">::</span><span class="n">crimson</span><span class="p">)</span> <span class="o">|</span> <span class="n">fmt</span><span class="o">::</span><span class="n">emphasis</span><span class="o">::</span><span class="n">bold</span><span class="p">,</span> <span class="s">"Hello, {}!</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="s">"world"</span><span class="p">);</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">print</span><span class="p">(</span><span class="n">fg</span><span class="p">(</span><span class="n">fmt</span><span class="o">::</span><span class="n">color</span><span class="o">::</span><span class="n">floral_white</span><span class="p">)</span> <span class="o">|</span> <span class="n">bg</span><span class="p">(</span><span class="n">fmt</span><span class="o">::</span><span class="n">color</span><span class="o">::</span><span class="n">slate_gray</span><span class="p">)</span> <span class="o">|</span> <span class="n">fmt</span><span class="o">::</span><span class="n">emphasis</span><span class="o">::</span><span class="n">underline</span><span class="p">,</span> <span class="s">"Hello, {}!</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="s">"мир"</span><span class="p">);</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">print</span><span class="p">(</span><span class="n">fg</span><span class="p">(</span><span class="n">fmt</span><span class="o">::</span><span class="n">color</span><span class="o">::</span><span class="n">steel_blue</span><span class="p">)</span> <span class="o">|</span> <span class="n">fmt</span><span class="o">::</span><span class="n">emphasis</span><span class="o">::</span><span class="n">italic</span><span class="p">,</span> <span class="s">"Hello, {}!</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="s">"世界"</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="参考">参考</h2>
+
+<ol>
+  <li><a href="https://stackoverflow.com/questions/2616906/how-do-i-output-coloured-text-to-a-linux-terminal">文字和底纹颜色1-Stack Overflow</a></li>
+  <li><a href="https://stackoverflow.com/questions/9158150/colored-output-in-c/9158263">文字和底纹颜色2-Stack Overflow</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/ANSI_escape_code">ANSI escape code-Wikipedia</a></li>
+  <li><a href="https://github.com/fmtlib/fmt">fmtlib/fmt</a></li>
+  <li><a href="https://github.com/wakanapo/TextColoring">wakanapo/TextColoring</a></li>
+</ol>
+
+  </div>
+
+  
+  
+<script src="https://utteranc.es/client.js"
+        repo="YWpepper/YWpepper.github.io"
+        issue-term="title"
+        label="comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
+
+  
+</article>
+
+<div class="pagination">
+  
+    <span class="prev" >
+      <a href="http://localhost:4000/film-camera/">
+        ← 上一篇
+      </a>
+    </span>
+  
+  
+    <span class="next" >
+      <a href="http://localhost:4000/apt-note/">
+        下一篇 →
+      </a>
+    </span>
+  
+</div>
+      </div>
+    </div>
+
+    
+
+  </body>
+
+  
+  <script>
+    document.getElementById("main").classList.add("withtoc");
+  </script>
+  
+
+  <div class="wrapper-footer-mobile">
+    <footer class="footer">
+      <!-- Refer to https://codepen.io/ruandre/pen/howFi -->
+<ul class="svg-icon">
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li><a href="https://github.com/zxl19" class="icon-13 github" title="GitHub"><svg viewBox="0 0 512 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg><!--[if lt IE 9]><em>GitHub</em><![endif]--></a></li>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</ul>
+
+
+
+<p>Copyright © 2020-2025 zxl19. All Rights Reserved.</p>
+
+    </footer>
+
+
+</html>

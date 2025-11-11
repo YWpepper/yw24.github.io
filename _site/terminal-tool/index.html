@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>高质量Ubuntu系统命令行工具存档 – zxl19 – 一个工程师的存档点</title>
+
+      <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="一些实用的Ubuntu系统命令行工具存档。
+
+" />
+    <meta property="og:description" content="一些实用的Ubuntu系统命令行工具存档。
+
+" />
+    
+    <meta name="author" content="zxl19" />
+
+    
+    <meta property="og:title" content="高质量Ubuntu系统命令行工具存档" />
+    <meta property="twitter:title" content="高质量Ubuntu系统命令行工具存档" />
+    
+  <!-- Async font loading -->
+<script>
+  window.WebFontConfig = {
+      custom: {
+          families: ['Spoqa Han Sans:100,300,400,700'],
+          urls: ['https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css']
+      },
+      timeout: 60000
+  };
+  (function(d) {
+      var wf = d.createElement('script'), s = d.scripts[0];
+      wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js';
+      s.parentNode.insertBefore(wf, s);
+  })(document);
+</script>
+
+<!--adobe fonts-->
+<script>
+    (function(d) {
+      var config = {
+        kitId: 'vbt3gjx',
+        scriptTimeout: 3000,
+        async: true
+      },
+      h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+    })(document);
+</script> 
+
+  <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link rel="stylesheet" type="text/css" href="/style.css" />
+  <link rel="alternate" type="application/rss+xml" title="zxl19 - 一个工程师的存档点" href="/feed.xml" />
+  <link rel="shortcut icon" href="https://raw.githubusercontent.com/zxl19/zxl19.github.io/master/images/icon.png">
+  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+  <script src="https://unpkg.com/feather-icons"></script>
+  <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        inlineMath: [['$','$']]
+      }
+    });
+  </script>
+
+  <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+
+</head>
+
+  <body>
+    <div class="wrapper-sidebar">
+  <header class="sidebar clearfix">
+    <div class="site-info">
+      
+        <a href="/" class="site-avatar"><img src="https://raw.githubusercontent.com/zxl19/zxl19.github.io/master/images/avatar.jpg" /></a>
+       
+      <h1 class="site-name"><a href="/">zxl19</a></h1>
+      <p class="site-description">一个工程师的存档点</p>
+    </div>
+  </header>
+
+  <div class="navlist">
+    <nav>
+      
+      
+      <a href="/">首页</a>
+      
+      
+      
+      <a href="/about">关于</a>
+      
+      
+      
+      <a href="/archive">归档</a>
+      
+      
+      
+      <a href="/tags">标签</a>
+      
+      
+    </nav>
+  </div>
+
+  <div class="wrapper-footer-desktop">
+    <footer class="footer">
+      <!-- Refer to https://codepen.io/ruandre/pen/howFi -->
+<ul class="svg-icon">
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li><a href="https://github.com/zxl19" class="icon-13 github" title="GitHub"><svg viewBox="0 0 512 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg><!--[if lt IE 9]><em>GitHub</em><![endif]--></a></li>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</ul>
+
+
+
+<p>Copyright © 2020-2025 zxl19. All Rights Reserved.</p>
+
+    </footer>
+  </div>
+</div>
+
+    
+      <aside class="toc">
+        <ul>
+  <li><a href="#">高质量Ubuntu系统命令行工具存档</a>
+    <ul>
+      <li><a href="#命令行教程">命令行教程</a></li>
+      <li><a href="#函数式编程">函数式编程</a></li>
+      <li><a href="#时钟">时钟</a></li>
+      <li><a href="#性能监控">性能监控</a>
+        <ul>
+          <li><a href="#cpu">CPU</a></li>
+          <li><a href="#gpu">GPU</a></li>
+        </ul>
+      </li>
+      <li><a href="#文件操作">文件操作</a>
+        <ul>
+          <li><a href="#文件查找">文件查找</a></li>
+          <li><a href="#文件查看">文件查看</a></li>
+          <li><a href="#文件压缩">文件压缩</a></li>
+          <li><a href="#文件删除">文件删除</a></li>
+          <li><a href="#格式转换">格式转换</a></li>
+        </ul>
+      </li>
+      <li><a href="#命令查询">命令查询</a></li>
+      <li><a href="#命令纠错">命令纠错</a></li>
+      <li><a href="#文本编辑">文本编辑</a></li>
+      <li><a href="#终端">终端</a></li>
+      <li><a href="#代码质量">代码质量</a>
+        <ul>
+          <li><a href="#行数统计">行数统计</a></li>
+          <li><a href="#格式化工具">格式化工具</a>
+            <ul>
+              <li><a href="#ccmake">C++（CMake）</a></li>
+              <li><a href="#python">Python</a></li>
+            </ul>
+          </li>
+          <li><a href="#静态分析工具">静态分析工具</a>
+            <ul>
+              <li><a href="#ccmake-1">C++（CMake）</a></li>
+              <li><a href="#python-1">Python</a></li>
+              <li><a href="#shell">shell</a></li>
+            </ul>
+          </li>
+          <li><a href="#调试优化工具">调试优化工具</a></li>
+          <li><a href="#调试界面美化">调试界面美化</a></li>
+        </ul>
+      </li>
+      <li><a href="#下载">下载</a></li>
+      <li><a href="#代理">代理</a></li>
+      <li><a href="#信息收集">信息收集</a></li>
+      <li><a href="#彩蛋和游戏">彩蛋和游戏</a></li>
+      <li><a href="#参考">参考</a></li>
+    </ul>
+  </li>
+</ul>
+      </aside>
+    
+
+    <div id="main" role="main" class="wrapper-content">
+      <div class="container">
+        <article class="posts">
+  <h1>高质量Ubuntu系统命令行工具存档</h1>
+
+  <div clsss="meta">
+    <span class="author">
+      zxl19
+    </span>
+
+    <span class="date">
+      2021-10-11
+    </span>
+
+    <ul class="tag">
+      
+      <li>
+        <a href="http://localhost:4000/tags#Ubuntu">
+          Ubuntu
+        </a>
+      </li>
+      
+      <li>
+        <a href="http://localhost:4000/tags#Archive">
+          Archive
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+
+  <div class="entry">
+    <p>一些实用的Ubuntu系统命令行工具存档。</p>
+
+<!-- more -->
+
+<h2 id="命令行教程">命令行教程</h2>
+
+<ol>
+  <li><a href="https://github.com/jlevy/the-art-of-command-line">jlevy/the-art-of-command-line</a></li>
+  <li><a href="https://github.com/jaywcjlove/linux-command">jaywcjlove/linux-command</a></li>
+  <li><a href="https://github.com/onceupon/Bash-Oneliner">onceupon/Bash-Oneliner</a></li>
+  <li><a href="https://github.com/wangdoc/bash-tutorial">wangdoc/bash-tutorial</a></li>
+  <li><a href="https://github.com/dunwu/linux-tutorial">dunwu/linux-tutorial</a></li>
+  <li><a href="https://github.com/techarkit/shell-scripting-tutorial">techarkit/shell-scripting-tutorial</a></li>
+  <li><a href="https://github.com/jaywcjlove/shell-tutorial">jaywcjlove/shell-tutorial</a></li>
+  <li><a href="https://github.com/ArchLinuxStudio/ShellTutorial">ArchLinuxStudio/ShellTutorial</a></li>
+  <li><a href="https://github.com/spencertipping/shell-tutorial">spencertipping/shell-tutorial</a></li>
+</ol>
+
+<h2 id="函数式编程">函数式编程</h2>
+
+<ol>
+  <li><a href="https://github.com/sharkdp/shell-functools">sharkdp/shell-functools</a></li>
+</ol>
+
+<h2 id="时钟">时钟</h2>
+
+<ol>
+  <li>date</li>
+  <li>calendar</li>
+  <li>sleep</li>
+  <li>time</li>
+  <li><a href="https://github.com/poetaman/arttime">poetaman/arttime</a></li>
+  <li><a href="https://github.com/octobanana/peaclock">octobanana/peaclock</a></li>
+  <li><a href="https://github.com/coolcode/tomato-clock">coolcode/tomato-clock</a></li>
+  <li><a href="https://github.com/lucassabreu/clockify-cli">lucassabreu/clockify-cli</a></li>
+</ol>
+
+<h2 id="性能监控">性能监控</h2>
+
+<h3 id="cpu">CPU</h3>
+
+<ol>
+  <li>top</li>
+  <li><a href="https://github.com/htop-dev/htop">htop</a></li>
+  <li><a href="http://nmon.sourceforge.net/pmwiki.php">nmon</a></li>
+  <li><a href="https://github.com/nicolargo/glances">glances</a></li>
+</ol>
+
+<h3 id="gpu">GPU</h3>
+
+<ol>
+  <li>nvidia-smi</li>
+  <li><a href="https://github.com/wookayin/gpustat">gpustat</a></li>
+  <li><a href="https://github.com/Syllo/nvtop">nvtop</a></li>
+  <li><a href="https://github.com/XuehaiPan/nvitop">nvitop</a></li>
+</ol>
+
+<h2 id="文件操作">文件操作</h2>
+
+<h3 id="文件查找">文件查找</h3>
+
+<ol>
+  <li>find</li>
+  <li>grep</li>
+  <li>tree</li>
+  <li><a href="https://github.com/junegunn/fzf">fzf</a></li>
+  <li><a href="https://github.com/lotabout/skim">sk</a></li>
+  <li><a href="https://github.com/Genivia/ugrep">ug</a></li>
+</ol>
+
+<h3 id="文件查看">文件查看</h3>
+
+<ol>
+  <li>cat</li>
+  <li>head</li>
+  <li>tail</li>
+  <li><a href="https://github.com/tstack/lnav">lnav</a></li>
+  <li><a href="https://github.com/bensadeh/tailspin">tailspin</a></li>
+  <li><a href="https://github.com/hpjansson/chafa">hpjansson/chafa</a></li>
+  <li><a href="https://github.com/hzeller/timg">timg</a></li>
+  <li><a href="https://github.com/octobanana/fltrdr">fltrdr</a></li>
+  <li><a href="https://github.com/ArthurSonzogni/json-tui">json-tui</a></li>
+</ol>
+
+<h3 id="文件压缩">文件压缩</h3>
+
+<ol>
+  <li>tar</li>
+  <li>zip</li>
+  <li>unzip</li>
+  <li><a href="https://www.7-zip.org/links.html">7z</a></li>
+</ol>
+
+<h3 id="文件删除">文件删除</h3>
+
+<ol>
+  <li>rm</li>
+  <li><a href="https://github.com/andreafrancia/trash-cli">trash-cli</a></li>
+</ol>
+
+<h3 id="格式转换">格式转换</h3>
+
+<ol>
+  <li><a href="https://github.com/jgm/pandoc">pandoc</a></li>
+</ol>
+
+<h2 id="命令查询">命令查询</h2>
+
+<ol>
+  <li>man</li>
+  <li><a href="https://github.com/tldr-pages/tldr">tldr</a></li>
+  <li><a href="https://github.com/aitjcize/cppman">cppman</a></li>
+  <li><a href="https://github.com/p-ranav/fccf">fccf</a></li>
+</ol>
+
+<h2 id="命令纠错">命令纠错</h2>
+
+<ol>
+  <li><a href="https://github.com/nvbn/thefuck">thefuck</a></li>
+  <li><a href="https://github.com/binpash/try">try</a></li>
+</ol>
+
+<h2 id="文本编辑">文本编辑</h2>
+
+<ol>
+  <li>vim</li>
+  <li><a href="https://github.com/neovim/neovim">neovim</a></li>
+  <li><a href="https://github.com/SpaceVim/SpaceVim">SpaceVim</a></li>
+</ol>
+
+<h2 id="终端">终端</h2>
+
+<ol>
+  <li><a href="https://zsh.sourceforge.io">Zsh</a></li>
+  <li><a href="https://github.com/ohmyzsh/ohmyzsh">Oh My Zsh</a></li>
+  <li><a href="https://github.com/tmux/tmux">tmux</a></li>
+  <li><a href="https://github.com/GitSquared/edex-ui">GitSquared/edex-ui</a></li>
+  <li><a href="https://github.com/kovidgoyal/kitty">kitty</a></li>
+  <li><a href="https://github.com/gnome-terminator/terminator">terminator</a></li>
+</ol>
+
+<h2 id="代码质量">代码质量</h2>
+
+<h3 id="行数统计">行数统计</h3>
+
+<ol>
+  <li><a href="https://github.com/AlDanial/cloc">cloc</a></li>
+</ol>
+
+<h3 id="格式化工具">格式化工具</h3>
+
+<h4 id="ccmake">C++（CMake）</h4>
+
+<ol>
+  <li><a href="https://clang.llvm.org/docs/ClangFormat.html">clang-format</a></li>
+  <li><a href="https://pypi.org/project/cmakelang/">cmakelang</a></li>
+</ol>
+
+<h4 id="python">Python</h4>
+
+<ol>
+  <li><a href="https://github.com/psf/black">black</a></li>
+  <li><a href="https://github.com/google/yapf">yapf</a></li>
+  <li><a href="https://github.com/PyCQA/pycodestyle">pycodestyle</a></li>
+  <li><a href="https://github.com/hhatto/autopep8">autopep8</a></li>
+  <li><a href="https://github.com/coala/coala">coala</a></li>
+  <li><a href="https://github.com/PyCQA/flake8">flake8</a></li>
+</ol>
+
+<h3 id="静态分析工具">静态分析工具</h3>
+
+<h4 id="ccmake-1">C++（CMake）</h4>
+
+<ol>
+  <li><a href="https://github.com/cpplint/cpplint">cpplint</a></li>
+  <li><a href="https://github.com/Ericsson/codechecker">CodeChecker</a></li>
+  <li><a href="https://clang-analyzer.llvm.org/scan-build.html">scan-build</a></li>
+  <li><a href="https://clang.llvm.org/extra/clang-tidy">clang-tidy</a></li>
+  <li><a href="https://cppcheck.sourceforge.io/">cppcheck</a></li>
+  <li><a href="https://pvs-studio.com">PVS-Studio</a></li>
+</ol>
+
+<h4 id="python-1">Python</h4>
+
+<ol>
+  <li><a href="https://github.com/charliermarsh/ruff">ruff</a></li>
+  <li><a href="https://github.com/python/mypy">mypy</a></li>
+  <li><a href="https://github.com/PyCQA/pylint">pylint</a></li>
+  <li><a href="https://github.com/klen/pylama">pylama</a></li>
+</ol>
+
+<h4 id="shell">shell</h4>
+
+<ol>
+  <li><a href="https://github.com/koalaman/shellcheck">shellcheck</a></li>
+  <li><a href="https://github.com/mvdan/sh">shfmt</a></li>
+</ol>
+
+<h3 id="调试优化工具">调试优化工具</h3>
+
+<ol>
+  <li><a href="https://sourceware.org/gdb/">gdb</a></li>
+  <li><a href="https://valgrind.org">valgrind</a></li>
+  <li><a href="https://github.com/brendangregg/FlameGraph">flamegraph.pl</a></li>
+  <li><a href="https://github.com/google/sanitizers">google/sanitizers</a></li>
+  <li><a href="https://github.com/KDAB/hotspot">KDAB/hotspot</a></li>
+  <li><a href="https://github.com/KDE/heaptrack">KDE/heaptrack</a></li>
+  <li><a href="https://github.com/xiw/stack">xiw/stack</a></li>
+</ol>
+
+<h3 id="调试界面美化">调试界面美化</h3>
+
+<ol>
+  <li><a href="https://github.com/cyrus-and/gdb-dashboard">cyrus-and/gdb-dashboard</a></li>
+  <li><a href="https://github.com/pwndbg/pwndbg">pwndbg/pwndbg</a></li>
+  <li><a href="https://github.com/snare/voltron">snare/voltron</a></li>
+  <li><a href="https://github.com/bombela/backward-cpp">bombela/backward-cpp</a></li>
+  <li><a href="https://github.com/cgdb/cgdb">cgdb/cgdb</a></li>
+</ol>
+
+<h2 id="下载">下载</h2>
+
+<ol>
+  <li><a href="https://github.com/ytdl-org/youtube-dl">youtube-dl</a></li>
+  <li><a href="https://github.com/soimort/you-get">you-get</a></li>
+  <li><a href="https://github.com/iawia002/lux">lux</a></li>
+  <li><a href="https://github.com/pytube/pytube">pytube</a></li>
+  <li><a href="https://github.com/axel-download-accelerator/axel">axel</a></li>
+  <li><a href="https://github.com/vinifmor/bauh">bauh</a></li>
+</ol>
+
+<h2 id="代理">代理</h2>
+
+<ol>
+  <li><a href="https://github.com/rofl0r/proxychains-ng">proxychains4</a></li>
+</ol>
+
+<h2 id="信息收集">信息收集</h2>
+
+<ol>
+  <li><a href="https://github.com/sherlock-project/sherlock">sherlock</a></li>
+</ol>
+
+<h2 id="彩蛋和游戏">彩蛋和游戏</h2>
+
+<ol>
+  <li><a href="https://github.com/TommyZihao/Zihao-Blog">40个超有趣的Linux命令行彩蛋和游戏.md</a></li>
+  <li><a href="https://github.com/svenstaro/genact">svenstaro/genact</a></li>
+  <li><a href="https://github.com/dustinkirkland/hollywood">dustinkirkland/hollywood</a></li>
+  <li><a href="https://github.com/phyver/GameShell">phyver/GameShell</a></li>
+  <li><a href="https://github.com/piuccio/cowsay">piuccio/cowsay</a></li>
+  <li><a href="https://github.com/erkin/ponysay">erkin/ponysay</a></li>
+  <li><a href="https://github.com/st3w/neo">st3w/neo</a></li>
+</ol>
+
+<h2 id="参考">参考</h2>
+
+<ol>
+  <li><a href="https://www.zhihu.com/question/41115077/answer/602854935">哪些命令行工具让你相见恨晚？-程序员客栈的回答-知乎</a></li>
+  <li><a href="https://www.zhihu.com/question/41115077/answer/2617916255">哪些命令行工具让你相见恨晚？-HelloGitHub的回答-知乎</a></li>
+  <li><a href="https://www.zhihu.com/question/41115077/answer/624385012">哪些命令行工具让你相见恨晚？-Jackpop的回答-知乎</a></li>
+  <li><a href="https://www.zhihu.com/question/59227720/answer/163594782">有哪些命令行的软件堪称神器？-int32bit的回答-知乎</a></li>
+  <li><a href="https://www.zhihu.com/question/59227720/answer/286665684">有哪些命令行的软件堪称神器？-韦易笑的回答-知乎</a></li>
+  <li><a href="https://www.zhihu.com/question/23357089/answer/1992218543">C/C++编程有哪些值得推荐的工具？-程序喵大人的回答-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/590821534">九张图一览Linux性能工具全景图-michaelli的文章-知乎</a></li>
+  <li><a href="https://www.zhihu.com/question/43621151/answer/85045768298">C和C++中有哪些容易被坑的undefined behaviour？-南山烟雨珠江潮的回答-知乎</a></li>
+  <li><a href="https://www.zhihu.com/question/43621151/answer/96187093">C和C++中有哪些容易被坑的undefined behaviour？-MingX01的回答-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/577533593">【工具篇】如何优雅地监控显卡(GPU)使用情况？-聚丙烯酰胺的文章-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/614024375">nvitop: 史上最强GPU性能实时监测工具-AGI之心的文章-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/65791205">如何在Ubuntu和其他Linux发行版上使用7Zip-Linux中国的文章-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/44948578">Trash-Cli：Linux上的命令行回收站工具-Linux中国的文章-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/87694586">一句f**k代码自动纠错，美女程序员教你建一个狂拽酷炫的终端-量子位的文章-知乎</a></li>
+  <li><a href="https://www.zhihu.com/question/21418449/answer/300879747">为什么说zsh是shell中的极品？-韦易笑的回答-知乎</a></li>
+  <li><a href="https://www.jianshu.com/p/b8a80dd59414">Oh My Zsh-简书</a></li>
+  <li><a href="https://www.cnblogs.com/lcgbk/p/13255836.html">Oh My Zsh-博客园</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/418458450">五彩斑斓的Black——Python代码格式化工具-muzing的文章-知乎</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Static_program_analysis">Static program analysis-Wikipedia</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Lint_(software)">Lint (software)-Wikipedia</a></li>
+  <li><a href="https://clang-analyzer.llvm.org">Clang Static Analyzer</a></li>
+  <li><a href="https://clang-analyzer.llvm.org/codechecker.html">CodeChecker: running the analyzer from the command line</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/435918702">神仙GDB调试工具gdb-dashboard-电子的文章-知乎</a></li>
+  <li><a href="https://www.zhihu.com/question/65306462/answer/94492305604">大佬们都是怎么用gdb的？或者用吗？-yaoyaohu的回答-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/377550825">Ubuntu下实现命令行走代理/终端走代理的方法-lyh458的文章-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/51904179">40个超有趣的Linux命令行彩蛋和游戏-张子豪的文章-知乎</a></li>
+</ol>
+
+  </div>
+
+  
+  
+<script src="https://utteranc.es/client.js"
+        repo="YWpepper/YWpepper.github.io"
+        issue-term="title"
+        label="comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
+
+  
+</article>
+
+<div class="pagination">
+  
+    <span class="prev" >
+      <a href="http://localhost:4000/apt-note/">
+        ← 上一篇
+      </a>
+    </span>
+  
+  
+    <span class="next" >
+      <a href="http://localhost:4000/terminal-setup/">
+        下一篇 →
+      </a>
+    </span>
+  
+</div>
+      </div>
+    </div>
+
+    
+
+  </body>
+
+  
+  <script>
+    document.getElementById("main").classList.add("withtoc");
+  </script>
+  
+
+  <div class="wrapper-footer-mobile">
+    <footer class="footer">
+      <!-- Refer to https://codepen.io/ruandre/pen/howFi -->
+<ul class="svg-icon">
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li><a href="https://github.com/zxl19" class="icon-13 github" title="GitHub"><svg viewBox="0 0 512 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg><!--[if lt IE 9]><em>GitHub</em><![endif]--></a></li>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</ul>
+
+
+
+<p>Copyright © 2020-2025 zxl19. All Rights Reserved.</p>
+
+    </footer>
+
+
+</html>

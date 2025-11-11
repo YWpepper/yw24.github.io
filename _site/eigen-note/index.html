@@ -1,0 +1,1652 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Eigen库使用笔记 – zxl19 – 一个工程师的存档点</title>
+
+      <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="我的Eigen库使用笔记。
+
+" />
+    <meta property="og:description" content="我的Eigen库使用笔记。
+
+" />
+    
+    <meta name="author" content="zxl19" />
+
+    
+    <meta property="og:title" content="Eigen库使用笔记" />
+    <meta property="twitter:title" content="Eigen库使用笔记" />
+    
+  <!-- Async font loading -->
+<script>
+  window.WebFontConfig = {
+      custom: {
+          families: ['Spoqa Han Sans:100,300,400,700'],
+          urls: ['https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css']
+      },
+      timeout: 60000
+  };
+  (function(d) {
+      var wf = d.createElement('script'), s = d.scripts[0];
+      wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js';
+      s.parentNode.insertBefore(wf, s);
+  })(document);
+</script>
+
+<!--adobe fonts-->
+<script>
+    (function(d) {
+      var config = {
+        kitId: 'vbt3gjx',
+        scriptTimeout: 3000,
+        async: true
+      },
+      h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+    })(document);
+</script> 
+
+  <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link rel="stylesheet" type="text/css" href="/style.css" />
+  <link rel="alternate" type="application/rss+xml" title="zxl19 - 一个工程师的存档点" href="/feed.xml" />
+  <link rel="shortcut icon" href="https://raw.githubusercontent.com/zxl19/zxl19.github.io/master/images/icon.png">
+  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+  <script src="https://unpkg.com/feather-icons"></script>
+  <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        inlineMath: [['$','$']]
+      }
+    });
+  </script>
+
+  <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+
+</head>
+
+  <body>
+    <div class="wrapper-sidebar">
+  <header class="sidebar clearfix">
+    <div class="site-info">
+      
+        <a href="/" class="site-avatar"><img src="https://raw.githubusercontent.com/zxl19/zxl19.github.io/master/images/avatar.jpg" /></a>
+       
+      <h1 class="site-name"><a href="/">zxl19</a></h1>
+      <p class="site-description">一个工程师的存档点</p>
+    </div>
+  </header>
+
+  <div class="navlist">
+    <nav>
+      
+      
+      <a href="/">首页</a>
+      
+      
+      
+      <a href="/about">关于</a>
+      
+      
+      
+      <a href="/archive">归档</a>
+      
+      
+      
+      <a href="/tags">标签</a>
+      
+      
+    </nav>
+  </div>
+
+  <div class="wrapper-footer-desktop">
+    <footer class="footer">
+      <!-- Refer to https://codepen.io/ruandre/pen/howFi -->
+<ul class="svg-icon">
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li><a href="https://github.com/zxl19" class="icon-13 github" title="GitHub"><svg viewBox="0 0 512 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg><!--[if lt IE 9]><em>GitHub</em><![endif]--></a></li>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</ul>
+
+
+
+<p>Copyright © 2020-2025 zxl19. All Rights Reserved.</p>
+
+    </footer>
+  </div>
+</div>
+
+    
+      <aside class="toc">
+        <ul>
+  <li><a href="#">Eigen库使用笔记</a>
+    <ul>
+      <li><a href="#eigen-hello-world">Eigen Hello World</a></li>
+      <li><a href="#matrix类"><code class="language-plaintext highlighter-rouge">Matrix</code>类</a>
+        <ul>
+          <li><a href="#矩阵初始化">矩阵初始化</a>
+            <ul>
+              <li><a href="#初始化为特殊矩阵">初始化为特殊矩阵</a></li>
+              <li><a href="#逐元素初始化">逐元素初始化</a></li>
+              <li><a href="#从内存中映射">从内存中映射</a></li>
+            </ul>
+          </li>
+          <li><a href="#矩阵操作">矩阵操作</a>
+            <ul>
+              <li><a href="#计算大小">计算大小</a></li>
+              <li><a href="#转置">转置</a></li>
+              <li><a href="#求和">求和</a></li>
+              <li><a href="#取模">取模</a></li>
+              <li><a href="#范数">范数</a></li>
+              <li><a href="#类型转换">类型转换</a></li>
+              <li><a href="#改变大小">改变大小</a></li>
+              <li><a href="#获取运行时信息">获取运行时信息</a></li>
+              <li><a href="#分块">分块</a></li>
+            </ul>
+          </li>
+          <li><a href="#矩阵运算">矩阵运算</a>
+            <ul>
+              <li><a href="#方阵相关">方阵相关</a></li>
+              <li><a href="#点乘和叉乘">点乘和叉乘</a></li>
+              <li><a href="#逐元素运算">逐元素运算</a></li>
+              <li><a href="#求解axb形式线性方程组">求解Ax=b形式线性方程组</a>
+                <ul>
+                  <li><a href="#有解析解">有解析解</a></li>
+                  <li><a href="#无解析解">无解析解</a></li>
+                </ul>
+              </li>
+              <li><a href="#特征值计算">特征值计算</a></li>
+              <li><a href="#奇异值分解">奇异值分解</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><a href="#array类"><code class="language-plaintext highlighter-rouge">Array</code>类</a>
+        <ul>
+          <li><a href="#逐元素运算-1">逐元素运算</a></li>
+        </ul>
+      </li>
+      <li><a href="#位姿表示">位姿表示</a>
+        <ul>
+          <li><a href="#位姿初始化">位姿初始化</a>
+            <ul>
+              <li><a href="#旋转向量">旋转向量</a></li>
+              <li><a href="#欧拉角">欧拉角</a></li>
+              <li><a href="#四元数">四元数</a></li>
+              <li><a href="#欧氏变换">欧氏变换</a></li>
+            </ul>
+          </li>
+          <li><a href="#位姿相关运算">位姿相关运算</a>
+            <ul>
+              <li><a href="#旋转矩阵归一化">旋转矩阵归一化</a></li>
+              <li><a href="#位姿插值">位姿插值</a></li>
+              <li><a href="#位姿夹角">位姿夹角</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><a href="#常见问题">常见问题</a>
+        <ul>
+          <li><a href="#c中的template和typename关键字">C++中的<code class="language-plaintext highlighter-rouge">template</code>和<code class="language-plaintext highlighter-rouge">typename</code>关键字</a></li>
+          <li><a href="#eigen中的混淆问题">Eigen中的混淆问题</a></li>
+          <li><a href="#eigen中的内存对齐问题">Eigen中的内存对齐问题</a>
+            <ul>
+              <li><a href="#内存对齐与向量化运算">内存对齐与向量化运算</a></li>
+              <li><a href="#固定大小可向量化的eigen对象">固定大小可向量化的Eigen对象</a></li>
+              <li><a href="#包含eigen对象的类和结构体">包含Eigen对象的类和结构体</a></li>
+              <li><a href="#包含eigen对象的stl容器">包含Eigen对象的STL容器</a></li>
+              <li><a href="#将eigen对象作为函数参数传递">将Eigen对象作为函数参数传递</a></li>
+              <li><a href="#创建指向eigen对象的智能指针">创建指向Eigen对象的智能指针</a></li>
+            </ul>
+          </li>
+          <li><a href="#c11中的auto关键字">C++11中的<code class="language-plaintext highlighter-rouge">auto</code>关键字</a></li>
+          <li><a href="#eigen中的惰性求值问题">Eigen中的惰性求值问题</a></li>
+        </ul>
+      </li>
+      <li><a href="#资料">资料</a>
+        <ul>
+          <li><a href="#网站">网站</a></li>
+          <li><a href="#github">GitHub</a></li>
+        </ul>
+      </li>
+      <li><a href="#参考">参考</a></li>
+    </ul>
+  </li>
+</ul>
+      </aside>
+    
+
+    <div id="main" role="main" class="wrapper-content">
+      <div class="container">
+        <article class="posts">
+  <h1>Eigen库使用笔记</h1>
+
+  <div clsss="meta">
+    <span class="author">
+      zxl19
+    </span>
+
+    <span class="date">
+      2021-08-23
+    </span>
+
+    <ul class="tag">
+      
+      <li>
+        <a href="http://localhost:4000/tags#C++">
+          C++
+        </a>
+      </li>
+      
+      <li>
+        <a href="http://localhost:4000/tags#Eigen">
+          Eigen
+        </a>
+      </li>
+      
+      <li>
+        <a href="http://localhost:4000/tags#Note">
+          Note
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+
+  <div class="entry">
+    <p>我的Eigen库使用笔记。</p>
+
+<!-- more -->
+
+<h2 id="eigen-hello-world">Eigen Hello World</h2>
+
+<ol>
+  <li>
+    <p>Eigen是纯头文件库，定义的类、函数、常量等均在<code class="language-plaintext highlighter-rouge">Eigen</code>命名空间中，为了使表示形式简便，本文默认使用<code class="language-plaintext highlighter-rouge">Eigen</code>命名空间：</p>
+
+    <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="k">using</span> <span class="k">namespace</span> <span class="n">Eigen</span><span class="p">;</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Eigen稠密矩阵和数组模块功能可以查询<a href="https://eigen.tuxfamily.org/dox/group__QuickRefPage.html">[QuickRef] Dense matrix and array manipulations</a>；</li>
+  <li>Eigen稀疏线性代数模块功能可以查询<a href="https://eigen.tuxfamily.org/dox/group__SparseQuickRefPage.html">[QuickRef] Sparse linear algebra</a>；</li>
+  <li><code class="language-plaintext highlighter-rouge">#include &lt;Eigen/Eigen&gt;</code>（全部模块功能）=<code class="language-plaintext highlighter-rouge">#include &lt;Eigen/Dense&gt;</code>（绝大部分模块功能）+<code class="language-plaintext highlighter-rouge">#include &lt;Eigen/Sparse&gt;</code>（稀疏矩阵模块功能）；</li>
+  <li><code class="language-plaintext highlighter-rouge">#include &lt;Eigen/Core&gt;</code>为核心模块，包含<code class="language-plaintext highlighter-rouge">Matrix</code>类和<code class="language-plaintext highlighter-rouge">Array</code>类的定义、基础的线性代数操作等；</li>
+  <li><code class="language-plaintext highlighter-rouge">#include &lt;Eigen/Geometry&gt;</code>为几何模块，包含SLAM相关的位姿表示、四元数、旋转向量等；</li>
+  <li>对于MATLAB用户，可以参考<a href="https://eigen.tuxfamily.org/dox/AsciiQuickReference.txt">Eigen short ASCII reference</a>快速入门，<a href="https://github.com/zxl19/Eigen-Cheatsheet">zxl19/Eigen-Cheatsheet</a>将其整理成Markdown和PDF文档；</li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Matrix</code>模板类定义了矩阵和向量，用于进行线性代数运算，<code class="language-plaintext highlighter-rouge">Array</code>模板类定义了数组，用于进行类似MATLAB的逐元素操作，以<code class="language-plaintext highlighter-rouge">Matrix</code>模板类的原型声明为例对于模板参数进行说明：</p>
+
+    <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="n">Matrix</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">Scalar</span><span class="p">,</span>                                 <span class="c1">// [必需] 数据类型</span>
+        <span class="kt">int</span> <span class="n">RowsAtCompileTime</span><span class="p">,</span>                           <span class="c1">// [必需] 编译时确定的行数，如果不确定可以使用Dynamic指定动态大小</span>
+        <span class="kt">int</span> <span class="n">ColsAtCompileTime</span><span class="p">,</span>                           <span class="c1">// [必需] 编译时确定的列数，如果不确定可以使用Dynamic指定动态大小</span>
+        <span class="kt">int</span> <span class="n">Options</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>                                 <span class="c1">// [可选] 位字段，可以使用RowMajor指定逐行保存，或者使用ColMajor指定逐列保存，默认逐列保存</span>
+        <span class="kt">int</span> <span class="n">MaxRowsAtCompileTime</span> <span class="o">=</span> <span class="n">RowsAtCompileTime</span><span class="p">,</span>    <span class="c1">// [可选] 编译时确定的最大行数，用于避免动态内存分配</span>
+        <span class="kt">int</span> <span class="n">MaxColsAtCompileTime</span> <span class="o">=</span> <span class="n">ColsAtCompileTime</span><span class="o">&gt;</span>    <span class="c1">// [可选] 编译时确定的最大列数，用于避免动态内存分配</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Eigen使用<code class="language-plaintext highlighter-rouge">typedef</code>关键字重命名了常用大小的矩阵和数组，后缀<code class="language-plaintext highlighter-rouge">f</code>代表<code class="language-plaintext highlighter-rouge">float</code>、<code class="language-plaintext highlighter-rouge">d</code>代表<code class="language-plaintext highlighter-rouge">double</code>、<code class="language-plaintext highlighter-rouge">i</code>代表<code class="language-plaintext highlighter-rouge">int</code>，不同数据类型的矩阵在运算中禁止混用，需要显式类型转换，在使用中应尽可能少用动态大小的矩阵和数组，以提高运行速度：</p>
+
+    <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c1">// Matrix类</span>
+ <span class="n">Matrix</span><span class="o">&lt;</span><span class="kt">float</span><span class="p">,</span> <span class="n">Dynamic</span><span class="p">,</span> <span class="n">Dynamic</span><span class="o">&gt;</span>     <span class="o">&lt;=&gt;</span>     <span class="n">MatrixXf</span>
+ <span class="n">Matrix</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span> <span class="n">Dynamic</span><span class="p">,</span> <span class="mi">1</span><span class="o">&gt;</span>          <span class="o">&lt;=&gt;</span>     <span class="n">VectorXd</span>
+ <span class="n">Matrix</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">Dynamic</span><span class="o">&gt;</span>             <span class="o">&lt;=&gt;</span>     <span class="n">RowVectorXi</span>
+ <span class="n">Matrix</span><span class="o">&lt;</span><span class="kt">float</span><span class="p">,</span> <span class="mi">3</span> <span class="p">,</span> <span class="mi">3</span><span class="o">&gt;</span>                <span class="o">&lt;=&gt;</span>     <span class="n">Matrix3f</span>
+ <span class="n">Matrix</span><span class="o">&lt;</span><span class="kt">float</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="o">&gt;</span>                 <span class="o">&lt;=&gt;</span>     <span class="n">Vector4f</span>
+ <span class="c1">// Array类</span>
+ <span class="n">Array</span><span class="o">&lt;</span><span class="kt">float</span><span class="p">,</span> <span class="n">Dynamic</span><span class="p">,</span> <span class="n">Dynamic</span><span class="o">&gt;</span>      <span class="o">&lt;=&gt;</span>     <span class="n">ArrayXXf</span>
+ <span class="n">Array</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span> <span class="n">Dynamic</span><span class="p">,</span> <span class="mi">1</span><span class="o">&gt;</span>           <span class="o">&lt;=&gt;</span>     <span class="n">ArrayXd</span>
+ <span class="n">Array</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">Dynamic</span><span class="o">&gt;</span>              <span class="o">&lt;=&gt;</span>     <span class="n">RowArrayXi</span>
+ <span class="n">Array</span><span class="o">&lt;</span><span class="kt">float</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="o">&gt;</span>                  <span class="o">&lt;=&gt;</span>     <span class="n">Array33f</span>
+ <span class="n">Array</span><span class="o">&lt;</span><span class="kt">float</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="o">&gt;</span>                  <span class="o">&lt;=&gt;</span>     <span class="n">Array4f</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Matrix</code>类和<code class="language-plaintext highlighter-rouge">Array</code>类之间运算和类型转换的规则：</p>
+
+    <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Array44f</span> <span class="n">a1</span><span class="p">,</span> <span class="n">a2</span><span class="p">;</span>
+<span class="n">Matrix4f</span> <span class="n">m1</span><span class="p">,</span> <span class="n">m2</span><span class="p">;</span>
+<span class="n">m1</span> <span class="o">=</span> <span class="n">a1</span> <span class="o">*</span> <span class="n">a2</span><span class="p">;</span>                       <span class="c1">// 逐元素相乘，运算结果从Array类到Matrix类隐式类型转换</span>
+<span class="n">a1</span> <span class="o">=</span> <span class="n">m1</span> <span class="o">*</span> <span class="n">m2</span><span class="p">;</span>                       <span class="c1">// 矩阵相乘，运算结果从Matrix类到Array类隐式类型转换</span>
+<span class="n">a2</span> <span class="o">=</span> <span class="n">a1</span> <span class="o">+</span> <span class="n">m1</span><span class="p">.</span><span class="n">array</span><span class="p">();</span>               <span class="c1">// Array类和Matrix类的对象在运算中禁止混用，需要显式类型转换</span>
+<span class="n">m2</span> <span class="o">=</span> <span class="n">a1</span><span class="p">.</span><span class="n">matrix</span><span class="p">()</span> <span class="o">+</span> <span class="n">m1</span><span class="p">;</span>              <span class="c1">// Array类和Matrix类的对象在运算中禁止混用，需要显式类型转换</span>
+<span class="n">ArrayWrapper</span><span class="o">&lt;</span><span class="n">Matrix4f</span><span class="o">&gt;</span> <span class="n">m1a</span><span class="p">(</span><span class="n">m1</span><span class="p">);</span>     <span class="c1">// m1a相当于m1.array()，二者参数相同</span>
+<span class="n">MatrixWrapper</span><span class="o">&lt;</span><span class="n">Array44f</span><span class="o">&gt;</span> <span class="n">a1m</span><span class="p">(</span><span class="n">a1</span><span class="p">);</span>    <span class="c1">// a1m相当于a1.matrix()，二者参数相同</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Matrix</code>类和<code class="language-plaintext highlighter-rouge">Array</code>类的初始化方式，建议在定义后对变量进行初始化；</p>
+
+    <ul>
+      <li>
+        <p>固定大小——大小确定，可不加行列数：</p>
+
+        <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">typedef</span> <span class="p">{</span><span class="n">Matrix3f</span> <span class="o">|</span> <span class="n">Array33f</span><span class="p">}</span> <span class="n">FixedXD</span><span class="p">;</span>
+  <span class="n">FixedXD</span> <span class="n">x</span><span class="p">;</span>
+  <span class="c1">// 创建对应类的对象（作为等号右值）</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="n">FixedXD</span><span class="o">::</span><span class="n">Identity</span><span class="p">();</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="n">FixedXD</span><span class="o">::</span><span class="n">Zero</span><span class="p">();</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="n">FixedXD</span><span class="o">::</span><span class="n">Ones</span><span class="p">();</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="n">FixedXD</span><span class="o">::</span><span class="n">Constant</span><span class="p">(</span><span class="n">value</span><span class="p">);</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="n">FixedXD</span><span class="o">::</span><span class="n">Random</span><span class="p">();</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="n">FixedXD</span><span class="o">::</span><span class="n">LinSpaced</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">);</span>
+  <span class="c1">// 调用对应成员函数</span>
+  <span class="n">x</span><span class="p">.</span><span class="n">setIdentity</span><span class="p">();</span>
+  <span class="n">x</span><span class="p">.</span><span class="n">setZero</span><span class="p">();</span>
+  <span class="n">x</span><span class="p">.</span><span class="n">setOnes</span><span class="p">();</span>
+  <span class="n">x</span><span class="p">.</span><span class="n">setConstant</span><span class="p">(</span><span class="n">value</span><span class="p">);</span>
+  <span class="n">x</span><span class="p">.</span><span class="n">setRandom</span><span class="p">();</span>
+  <span class="n">x</span><span class="p">.</span><span class="n">setLinSpaced</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">);</span>
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>二维动态大小：</p>
+
+        <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">typedef</span> <span class="p">{</span><span class="n">MatrixXf</span> <span class="o">|</span> <span class="n">ArrayXXf</span><span class="p">}</span> <span class="n">Dynamic2D</span><span class="p">;</span>
+  <span class="n">Dynamic2D</span> <span class="n">x</span><span class="p">;</span>
+  <span class="c1">// 创建对应类的对象（作为等号右值）</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="n">Dynamic2D</span><span class="o">::</span><span class="n">Identity</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">);</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="n">Dynamic2D</span><span class="o">::</span><span class="n">Zero</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">);</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="n">Dynamic2D</span><span class="o">::</span><span class="n">Ones</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">);</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="n">Dynamic2D</span><span class="o">::</span><span class="n">Constant</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">,</span> <span class="n">value</span><span class="p">);</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="n">Dynamic2D</span><span class="o">::</span><span class="n">Random</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">);</span>
+  <span class="c1">// 调用对应成员函数</span>
+  <span class="n">x</span><span class="p">.</span><span class="n">setIdentity</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">);</span>
+  <span class="n">x</span><span class="p">.</span><span class="n">setZero</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">);</span>
+  <span class="n">x</span><span class="p">.</span><span class="n">setOnes</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">);</span>
+  <span class="n">x</span><span class="p">.</span><span class="n">setConstant</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">,</span> <span class="n">value</span><span class="p">);</span>
+  <span class="n">x</span><span class="p">.</span><span class="n">setRandom</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">);</span>
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>一维动态大小：</p>
+
+        <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">typedef</span> <span class="p">{</span><span class="n">VectorXf</span> <span class="o">|</span> <span class="n">ArrayXf</span><span class="p">}</span> <span class="n">Dynamic1D</span><span class="p">;</span>
+  <span class="n">Dynamic1D</span> <span class="n">x</span><span class="p">;</span>
+  <span class="c1">// 创建对应类的对象（作为等号右值）</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="n">Dynamic1D</span><span class="o">::</span><span class="n">Zero</span><span class="p">(</span><span class="n">size</span><span class="p">);</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="n">Dynamic1D</span><span class="o">::</span><span class="n">Ones</span><span class="p">(</span><span class="n">size</span><span class="p">);</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="n">Dynamic1D</span><span class="o">::</span><span class="n">Constant</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">value</span><span class="p">);</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="n">Dynamic1D</span><span class="o">::</span><span class="n">Random</span><span class="p">(</span><span class="n">size</span><span class="p">);</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="n">Dynamic1D</span><span class="o">::</span><span class="n">LinSpaced</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">);</span>
+  <span class="c1">// 调用对应成员函数</span>
+  <span class="n">x</span><span class="p">.</span><span class="n">setZero</span><span class="p">(</span><span class="n">size</span><span class="p">);</span>
+  <span class="n">x</span><span class="p">.</span><span class="n">setOnes</span><span class="p">(</span><span class="n">size</span><span class="p">);</span>
+  <span class="n">x</span><span class="p">.</span><span class="n">setConstant</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">value</span><span class="p">);</span>
+  <span class="n">x</span><span class="p">.</span><span class="n">setRandom</span><span class="p">(</span><span class="n">size</span><span class="p">);</span>
+  <span class="n">x</span><span class="p">.</span><span class="n">setLinSpaced</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">);</span>
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="matrix类"><code class="language-plaintext highlighter-rouge">Matrix</code>类</h2>
+
+<h3 id="矩阵初始化">矩阵初始化</h3>
+
+<h4 id="初始化为特殊矩阵">初始化为特殊矩阵</h4>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 基向量</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">Vector3f</span><span class="o">::</span><span class="n">UnitX</span><span class="p">();</span> <span class="c1">// 1 0 0</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">Vector3f</span><span class="o">::</span><span class="n">UnitY</span><span class="p">();</span> <span class="c1">// 0 1 0</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">Vector3f</span><span class="o">::</span><span class="n">UnitZ</span><span class="p">();</span> <span class="c1">// 0 0 1</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">Vector4f</span><span class="o">::</span><span class="n">Unit</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="n">x</span><span class="p">.</span><span class="n">setUnit</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">VectorXf</span><span class="o">::</span><span class="n">Unit</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+<span class="n">x</span><span class="p">.</span><span class="n">setUnit</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h4 id="逐元素初始化">逐元素初始化</h4>
+
+<p>可以使用<code class="language-plaintext highlighter-rouge">&lt;&lt;</code>运算符逐行对于元素进行初始化，也可以使用下标对于特定元素进行初始化：</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 二维固定大小</span>
+<span class="n">Matrix2d</span> <span class="n">A</span><span class="p">;</span>
+<span class="n">A</span> <span class="o">&lt;&lt;</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span>
+     <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">;</span>
+<span class="n">A</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span>
+<span class="n">A</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
+<span class="n">A</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
+<span class="n">A</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span>
+<span class="c1">// 二维动态大小</span>
+<span class="kt">int</span> <span class="n">rows</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">cols</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+<span class="n">MatrixXf</span> <span class="nf">m</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">);</span>
+<span class="c1">// .finished()成员函数返回初始化后的临时变量</span>
+<span class="n">m</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">Matrix3f</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">).</span><span class="n">finished</span><span class="p">(),</span>
+     <span class="n">MatrixXf</span><span class="o">::</span><span class="n">Zero</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">cols</span> <span class="o">-</span> <span class="mi">3</span><span class="p">),</span>
+     <span class="n">MatrixXf</span><span class="o">::</span><span class="n">Zero</span><span class="p">(</span><span class="n">rows</span> <span class="o">-</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+     <span class="n">MatrixXf</span><span class="o">::</span><span class="n">Identity</span><span class="p">(</span><span class="n">rows</span> <span class="o">-</span> <span class="mi">3</span><span class="p">,</span> <span class="n">cols</span> <span class="o">-</span> <span class="mi">3</span><span class="p">);</span>
+<span class="c1">// 一维固定大小</span>
+<span class="n">Vector4d</span> <span class="nf">b</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+<span class="n">b</span> <span class="o">&lt;&lt;</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">;</span>
+<span class="n">b</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="n">b</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="n">b</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="n">b</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+<span class="c1">// 仅适用于向量</span>
+<span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="n">b</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="n">b</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+<span class="c1">// 仅适用于向量的前四个元素</span>
+<span class="n">b</span><span class="p">.</span><span class="n">x</span><span class="p">()</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="n">b</span><span class="p">.</span><span class="n">y</span><span class="p">()</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="n">b</span><span class="p">.</span><span class="n">z</span><span class="p">()</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="n">b</span><span class="p">.</span><span class="n">w</span><span class="p">()</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h4 id="从内存中映射">从内存中映射</h4>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">float</span> <span class="n">array</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+<span class="c1">// 映射，array内容随着矩阵内容变化</span>
+<span class="n">Vector3f</span><span class="o">::</span><span class="n">Map</span><span class="p">(</span><span class="n">array</span><span class="p">).</span><span class="n">fill</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="kt">int</span> <span class="n">data</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">};</span>
+<span class="c1">// 初始化，data内容被复制到矩阵中</span>
+<span class="n">Matrix2i</span> <span class="n">mat2x2</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+<span class="c1">// 映射，data内容随着矩阵内容变化</span>
+<span class="n">Matrix2i</span><span class="o">::</span><span class="n">Map</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">mat2x2</span><span class="p">;</span>
+<span class="n">MatrixXi</span><span class="o">::</span><span class="n">Map</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+=</span> <span class="n">mat2x2</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="矩阵操作">矩阵操作</h3>
+
+<h4 id="计算大小">计算大小</h4>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 向量长度</span>
+<span class="n">x</span><span class="p">.</span><span class="n">size</span><span class="p">()</span>
+<span class="c1">// 矩阵行数、列数</span>
+<span class="n">C</span><span class="p">.</span><span class="n">rows</span><span class="p">()</span>
+<span class="n">C</span><span class="p">.</span><span class="n">cols</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h4 id="转置">转置</h4>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 以矩阵为例，向量同理</span>
+<span class="c1">// 转置</span>
+<span class="n">C</span><span class="p">.</span><span class="n">transpose</span><span class="p">()</span>
+<span class="n">C</span><span class="p">.</span><span class="n">transposeInPlace</span><span class="p">()</span>    <span class="c1">// in-place version</span>
+<span class="c1">// 共轭转置</span>
+<span class="n">C</span><span class="p">.</span><span class="n">adjoint</span><span class="p">()</span>
+<span class="n">C</span><span class="p">.</span><span class="n">adjointInPlace</span><span class="p">()</span>      <span class="c1">// in-place version</span>
+</code></pre></div></div>
+
+<p>在使用矩阵的转置给自身赋值时需要避免混淆问题，混淆问题的产生原因和应对方法将在后文中详述：</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 错误，存在混淆问题</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">C</span><span class="p">.</span><span class="n">transpose</span><span class="p">();</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">C</span><span class="p">.</span><span class="n">adjoint</span><span class="p">();</span>
+<span class="c1">// 正确，避免混淆问题</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">C</span><span class="p">.</span><span class="n">transposeInPlace</span><span class="p">();</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">C</span><span class="p">.</span><span class="n">adjointInPlace</span><span class="p">();</span>
+</code></pre></div></div>
+
+<h4 id="求和">求和</h4>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 以矩阵为例，向量同理</span>
+<span class="n">C</span><span class="p">.</span><span class="n">sum</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h4 id="取模">取模</h4>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span><span class="p">.</span><span class="n">norm</span><span class="p">()</span>            <span class="c1">// 取模</span>
+<span class="n">x</span><span class="p">.</span><span class="n">squaredNorm</span><span class="p">()</span>     <span class="c1">// 模的平方</span>
+</code></pre></div></div>
+
+<h4 id="范数">范数</h4>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 以矩阵为例，向量同理</span>
+<span class="n">C</span><span class="p">.</span><span class="n">lpNorm</span><span class="o">&lt;</span><span class="mi">1</span><span class="o">&gt;</span><span class="p">()</span>           <span class="c1">// 1-范数</span>
+<span class="n">C</span><span class="p">.</span><span class="n">lpNorm</span><span class="o">&lt;</span><span class="mi">2</span><span class="o">&gt;</span><span class="p">()</span>           <span class="c1">// 2-范数</span>
+<span class="n">C</span><span class="p">.</span><span class="n">lpNorm</span><span class="o">&lt;</span><span class="n">Infinity</span><span class="o">&gt;</span><span class="p">()</span>    <span class="c1">// 无穷范数</span>
+</code></pre></div></div>
+
+<h4 id="类型转换">类型转换</h4>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 以矩阵为例，向量同理</span>
+<span class="n">C</span><span class="p">.</span><span class="n">cast</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">()</span>        <span class="c1">// 转为double类型</span>
+<span class="n">C</span><span class="p">.</span><span class="n">cast</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">()</span>         <span class="c1">// 转为float类型</span>
+<span class="n">C</span><span class="p">.</span><span class="n">cast</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">()</span>           <span class="c1">// 转为int类型</span>
+<span class="n">C</span><span class="p">.</span><span class="n">real</span><span class="p">()</span>                <span class="c1">// 逐元素取实部</span>
+<span class="n">C</span><span class="p">.</span><span class="n">imag</span><span class="p">()</span>                <span class="c1">// 逐元素取虚部</span>
+<span class="n">C</span><span class="p">.</span><span class="n">conjugate</span><span class="p">()</span>           <span class="c1">// 逐元素取共轭</span>
+</code></pre></div></div>
+
+<h4 id="改变大小">改变大小</h4>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 大小改变后删除原有数据，大小不变时无操作</span>
+<span class="c1">// 向量</span>
+<span class="n">vector</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">size</span><span class="p">);</span>
+<span class="c1">// 矩阵</span>
+<span class="n">matrix</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">nb_rows</span><span class="p">,</span> <span class="n">nb_cols</span><span class="p">);</span>
+<span class="n">matrix</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">NoChange</span><span class="p">,</span> <span class="n">nb_cols</span><span class="p">);</span>
+<span class="n">matrix</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">nb_rows</span><span class="p">,</span> <span class="n">NoChange</span><span class="p">);</span>
+<span class="c1">// 大小改变后保留原有数据</span>
+<span class="c1">// 向量</span>
+<span class="n">vector</span><span class="p">.</span><span class="n">resizeLike</span><span class="p">(</span><span class="n">other_vector</span><span class="p">);</span>
+<span class="n">vector</span><span class="p">.</span><span class="n">conservativeResize</span><span class="p">(</span><span class="n">size</span><span class="p">);</span>
+<span class="c1">// 矩阵</span>
+<span class="n">matrix</span><span class="p">.</span><span class="n">resizeLike</span><span class="p">(</span><span class="n">other_matrix</span><span class="p">);</span>
+<span class="n">matrix</span><span class="p">.</span><span class="n">conservativeResize</span><span class="p">(</span><span class="n">nb_rows</span><span class="p">,</span> <span class="n">nb_cols</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h4 id="获取运行时信息">获取运行时信息</h4>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 返回指向第一个元素的指针</span>
+<span class="c1">// 向量</span>
+<span class="n">x</span><span class="p">.</span><span class="n">data</span><span class="p">()</span>
+<span class="c1">// 矩阵</span>
+<span class="n">C</span><span class="p">.</span><span class="n">data</span><span class="p">()</span>
+<span class="c1">// 返回内部步长（inner stride），即相邻元素之间的内存地址增量</span>
+<span class="c1">// 向量</span>
+<span class="n">x</span><span class="p">.</span><span class="n">innerStride</span><span class="p">()</span>
+<span class="c1">// 矩阵</span>
+<span class="n">C</span><span class="p">.</span><span class="n">innerStride</span><span class="p">()</span>
+<span class="c1">// 返回外部步长（outer stride），即相邻行或列之间的内存地址增量，取决于矩阵是逐行保存还是逐列保存</span>
+<span class="c1">// 矩阵</span>
+<span class="n">C</span><span class="p">.</span><span class="n">outerStride</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h4 id="分块">分块</h4>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 向量</span>
+<span class="c1">// Eigen                           // MATLAB</span>
+<span class="n">x</span><span class="p">.</span><span class="n">head</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>                          <span class="c1">// x(1:n)</span>
+<span class="n">x</span><span class="p">.</span><span class="n">head</span><span class="o">&lt;</span><span class="n">n</span><span class="o">&gt;</span><span class="p">()</span>                        <span class="c1">// x(1:n)</span>
+<span class="n">x</span><span class="p">.</span><span class="n">tail</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>                          <span class="c1">// x(end - n + 1: end)</span>
+<span class="n">x</span><span class="p">.</span><span class="n">tail</span><span class="o">&lt;</span><span class="n">n</span><span class="o">&gt;</span><span class="p">()</span>                        <span class="c1">// x(end - n + 1: end)</span>
+<span class="n">x</span><span class="p">.</span><span class="n">segment</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>                    <span class="c1">// x(i+1 : i+n)</span>
+<span class="n">x</span><span class="p">.</span><span class="n">segment</span><span class="o">&lt;</span><span class="n">n</span><span class="o">&gt;</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>                    <span class="c1">// x(i+1 : i+n)</span>
+<span class="c1">// 矩阵</span>
+<span class="c1">// Eigen                           // MATLAB</span>
+<span class="n">P</span><span class="p">.</span><span class="n">block</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">)</span>          <span class="c1">// P(i+1 : i+rows, j+1 : j+cols)</span>
+<span class="n">P</span><span class="p">.</span><span class="n">block</span><span class="o">&lt;</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="o">&gt;</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>          <span class="c1">// P(i+1 : i+rows, j+1 : j+cols)</span>
+<span class="n">P</span><span class="p">.</span><span class="n">row</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>                           <span class="c1">// P(i+1, :)</span>
+<span class="n">P</span><span class="p">.</span><span class="n">col</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>                           <span class="c1">// P(:, j+1)</span>
+<span class="n">P</span><span class="p">.</span><span class="n">leftCols</span><span class="o">&lt;</span><span class="n">cols</span><span class="o">&gt;</span><span class="p">()</span>                 <span class="c1">// P(:, 1:cols)</span>
+<span class="n">P</span><span class="p">.</span><span class="n">leftCols</span><span class="p">(</span><span class="n">cols</span><span class="p">)</span>                   <span class="c1">// P(:, 1:cols)</span>
+<span class="n">P</span><span class="p">.</span><span class="n">middleCols</span><span class="o">&lt;</span><span class="n">cols</span><span class="o">&gt;</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>              <span class="c1">// P(:, j+1:j+cols)</span>
+<span class="n">P</span><span class="p">.</span><span class="n">middleCols</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">cols</span><span class="p">)</span>              <span class="c1">// P(:, j+1:j+cols)</span>
+<span class="n">P</span><span class="p">.</span><span class="n">rightCols</span><span class="o">&lt;</span><span class="n">cols</span><span class="o">&gt;</span><span class="p">()</span>                <span class="c1">// P(:, end-cols+1:end)</span>
+<span class="n">P</span><span class="p">.</span><span class="n">rightCols</span><span class="p">(</span><span class="n">cols</span><span class="p">)</span>                  <span class="c1">// P(:, end-cols+1:end)</span>
+<span class="n">P</span><span class="p">.</span><span class="n">topRows</span><span class="o">&lt;</span><span class="n">rows</span><span class="o">&gt;</span><span class="p">()</span>                  <span class="c1">// P(1:rows, :)</span>
+<span class="n">P</span><span class="p">.</span><span class="n">topRows</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span>                    <span class="c1">// P(1:rows, :)</span>
+<span class="n">P</span><span class="p">.</span><span class="n">middleRows</span><span class="o">&lt;</span><span class="n">rows</span><span class="o">&gt;</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>              <span class="c1">// P(i+1:i+rows, :)</span>
+<span class="n">P</span><span class="p">.</span><span class="n">middleRows</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">rows</span><span class="p">)</span>              <span class="c1">// P(i+1:i+rows, :)</span>
+<span class="n">P</span><span class="p">.</span><span class="n">bottomRows</span><span class="o">&lt;</span><span class="n">rows</span><span class="o">&gt;</span><span class="p">()</span>               <span class="c1">// P(end-rows+1:end, :)</span>
+<span class="n">P</span><span class="p">.</span><span class="n">bottomRows</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span>                 <span class="c1">// P(end-rows+1:end, :)</span>
+<span class="n">P</span><span class="p">.</span><span class="n">topLeftCorner</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">)</span>        <span class="c1">// P(1:rows, 1:cols)</span>
+<span class="n">P</span><span class="p">.</span><span class="n">topRightCorner</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">)</span>       <span class="c1">// P(1:rows, end-cols+1:end)</span>
+<span class="n">P</span><span class="p">.</span><span class="n">bottomLeftCorner</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">)</span>     <span class="c1">// P(end-rows+1:end, 1:cols)</span>
+<span class="n">P</span><span class="p">.</span><span class="n">bottomRightCorner</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">)</span>    <span class="c1">// P(end-rows+1:end, end-cols+1:end)</span>
+<span class="n">P</span><span class="p">.</span><span class="n">topLeftCorner</span><span class="o">&lt;</span><span class="n">rows</span><span class="p">,</span><span class="n">cols</span><span class="o">&gt;</span><span class="p">()</span>       <span class="c1">// P(1:rows, 1:cols)</span>
+<span class="n">P</span><span class="p">.</span><span class="n">topRightCorner</span><span class="o">&lt;</span><span class="n">rows</span><span class="p">,</span><span class="n">cols</span><span class="o">&gt;</span><span class="p">()</span>      <span class="c1">// P(1:rows, end-cols+1:end)</span>
+<span class="n">P</span><span class="p">.</span><span class="n">bottomLeftCorner</span><span class="o">&lt;</span><span class="n">rows</span><span class="p">,</span><span class="n">cols</span><span class="o">&gt;</span><span class="p">()</span>    <span class="c1">// P(end-rows+1:end, 1:cols)</span>
+<span class="n">P</span><span class="p">.</span><span class="n">bottomRightCorner</span><span class="o">&lt;</span><span class="n">rows</span><span class="p">,</span><span class="n">cols</span><span class="o">&gt;</span><span class="p">()</span>   <span class="c1">// P(end-rows+1:end, end-cols+1:end)</span>
+</code></pre></div></div>
+
+<h3 id="矩阵运算">矩阵运算</h3>
+
+<h4 id="方阵相关">方阵相关</h4>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">C</span><span class="p">.</span><span class="n">trace</span><span class="p">()</span>           <span class="c1">// 迹</span>
+<span class="n">C</span><span class="p">.</span><span class="n">inverse</span><span class="p">()</span>         <span class="c1">// 逆</span>
+<span class="n">C</span><span class="p">.</span><span class="n">determinant</span><span class="p">()</span>     <span class="c1">// 行列式</span>
+</code></pre></div></div>
+
+<h4 id="点乘和叉乘">点乘和叉乘</h4>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 点乘</span>
+<span class="n">x</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="n">x</span><span class="p">.</span><span class="n">transpose</span><span class="p">()</span> <span class="o">*</span> <span class="n">y</span>
+<span class="c1">// 叉乘</span>
+<span class="n">x</span><span class="p">.</span><span class="n">cross</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h4 id="逐元素运算">逐元素运算</h4>
+
+<ol>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Matrix</code>类可以通过调用对应成员函数实现逐元素运算，此时返回值类型为<code class="language-plaintext highlighter-rouge">Matrix</code>类：</p>
+
+    <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="n">mat1</span><span class="p">.</span><span class="n">cwiseMin</span><span class="p">(</span><span class="n">mat2</span><span class="p">)</span>                 <span class="n">mat1</span><span class="p">.</span><span class="n">cwiseMin</span><span class="p">(</span><span class="n">scalar</span><span class="p">)</span>
+ <span class="n">mat1</span><span class="p">.</span><span class="n">cwiseMax</span><span class="p">(</span><span class="n">mat2</span><span class="p">)</span>                 <span class="n">mat1</span><span class="p">.</span><span class="n">cwiseMax</span><span class="p">(</span><span class="n">scalar</span><span class="p">)</span>
+ <span class="n">mat1</span><span class="p">.</span><span class="n">cwiseAbs2</span><span class="p">()</span>
+ <span class="n">mat1</span><span class="p">.</span><span class="n">cwiseAbs</span><span class="p">()</span>
+ <span class="n">mat1</span><span class="p">.</span><span class="n">cwiseSqrt</span><span class="p">()</span>
+ <span class="n">mat1</span><span class="p">.</span><span class="n">cwiseInverse</span><span class="p">()</span>
+ <span class="n">mat1</span><span class="p">.</span><span class="n">cwiseProduct</span><span class="p">(</span><span class="n">mat2</span><span class="p">)</span>
+ <span class="n">mat1</span><span class="p">.</span><span class="n">cwiseQuotient</span><span class="p">(</span><span class="n">mat2</span><span class="p">)</span>
+ <span class="n">mat1</span><span class="p">.</span><span class="n">cwiseEqual</span><span class="p">(</span><span class="n">mat2</span><span class="p">)</span>               <span class="n">mat1</span><span class="p">.</span><span class="n">cwiseEqual</span><span class="p">(</span><span class="n">scalar</span><span class="p">)</span>
+ <span class="n">mat1</span><span class="p">.</span><span class="n">cwiseNotEqual</span><span class="p">(</span><span class="n">mat2</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>也可以将<code class="language-plaintext highlighter-rouge">Matrix</code>类转换为<code class="language-plaintext highlighter-rouge">Array</code>类后调用对应成员函数实现逐元素运算，此时返回值类型为<code class="language-plaintext highlighter-rouge">Array</code>类：</p>
+
+    <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="n">mat1</span><span class="p">.</span><span class="n">array</span><span class="p">().</span><span class="n">min</span><span class="p">(</span><span class="n">mat2</span><span class="p">.</span><span class="n">array</span><span class="p">())</span>      <span class="n">mat1</span><span class="p">.</span><span class="n">array</span><span class="p">().</span><span class="n">min</span><span class="p">(</span><span class="n">scalar</span><span class="p">)</span>
+ <span class="n">mat1</span><span class="p">.</span><span class="n">array</span><span class="p">().</span><span class="n">max</span><span class="p">(</span><span class="n">mat2</span><span class="p">.</span><span class="n">array</span><span class="p">())</span>      <span class="n">mat1</span><span class="p">.</span><span class="n">array</span><span class="p">().</span><span class="n">max</span><span class="p">(</span><span class="n">scalar</span><span class="p">)</span>
+ <span class="n">mat1</span><span class="p">.</span><span class="n">array</span><span class="p">().</span><span class="n">abs2</span><span class="p">()</span>
+ <span class="n">mat1</span><span class="p">.</span><span class="n">array</span><span class="p">().</span><span class="n">abs</span><span class="p">()</span>
+ <span class="n">mat1</span><span class="p">.</span><span class="n">array</span><span class="p">().</span><span class="n">sqrt</span><span class="p">()</span>
+ <span class="n">mat1</span><span class="p">.</span><span class="n">array</span><span class="p">().</span><span class="n">inverse</span><span class="p">()</span>
+ <span class="n">mat1</span><span class="p">.</span><span class="n">array</span><span class="p">()</span> <span class="o">*</span> <span class="n">mat2</span><span class="p">.</span><span class="n">array</span><span class="p">()</span>
+ <span class="n">mat1</span><span class="p">.</span><span class="n">array</span><span class="p">()</span> <span class="o">/</span> <span class="n">mat2</span><span class="p">.</span><span class="n">array</span><span class="p">()</span>
+ <span class="n">mat1</span><span class="p">.</span><span class="n">array</span><span class="p">()</span> <span class="o">==</span> <span class="n">mat2</span><span class="p">.</span><span class="n">array</span><span class="p">()</span>        <span class="n">mat1</span><span class="p">.</span><span class="n">array</span><span class="p">()</span> <span class="o">==</span> <span class="n">scalar</span>
+ <span class="n">mat1</span><span class="p">.</span><span class="n">array</span><span class="p">()</span> <span class="o">!=</span> <span class="n">mat2</span><span class="p">.</span><span class="n">array</span><span class="p">()</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h4 id="求解axb形式线性方程组">求解Ax=b形式线性方程组</h4>
+
+<p>Eigen提供的全部稠密矩阵分解方法及其特性和数值稳定性可以参考<a href="https://eigen.tuxfamily.org/dox/group__TopicLinearAlgebraDecompositions.html">Catalogue of dense decompositions</a>。</p>
+
+<h5 id="有解析解">有解析解</h5>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span> <span class="o">=</span> <span class="n">A</span><span class="p">.</span><span class="n">inverse</span><span class="p">()</span> <span class="o">*</span> <span class="n">b</span><span class="p">;</span>                    <span class="c1">// 直接求逆，速度最慢</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">A</span><span class="p">.</span><span class="n">partialPivLu</span><span class="p">().</span><span class="n">solve</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>          <span class="c1">// 部分主元LU分解，要求可逆阵</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">A</span><span class="p">.</span><span class="n">colPivHouseholderQr</span><span class="p">().</span><span class="n">solve</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>   <span class="c1">// 列主元QR分解</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">A</span><span class="p">.</span><span class="n">llt</span><span class="p">().</span><span class="n">solve</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>                   <span class="c1">// Cholesky分解，要求正定阵</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">A</span><span class="p">.</span><span class="n">ldlt</span><span class="p">().</span><span class="n">solve</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>                  <span class="c1">// LDLT分解，要求正定阵或非负定阵</span>
+</code></pre></div></div>
+
+<ol>
+  <li>Eigen提供的全部求解方法及其对于矩阵要求、求解速度、求解精度的对比可以参考<a href="https://eigen.tuxfamily.org/dox/group__TutorialLinearAlgebra.html">Linear algebra and decompositions</a>；</li>
+  <li>Eigen提供的全部求解方法及其在不同大小矩阵下求解速度的定量对比可以参考<a href="https://eigen.tuxfamily.org/dox/group__DenseDecompositionBenchmark.html">Benchmark of dense decompositions</a>；</li>
+</ol>
+
+<h5 id="无解析解">无解析解</h5>
+
+<p>求解最小二乘问题：</p>
+
+<ol>
+  <li>Eigen提供的三种求解方法可以参考<a href="http://www.eigen.tuxfamily.org/dox/group__LeastSquares.html">Solving linear least squares systems</a>；</li>
+  <li>
+    <p>三种求解方法及其求解速度和求解精度的对比：</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="text-align: left">求解方法</th>
+          <th style="text-align: left">求解速度</th>
+          <th style="text-align: left">求解精度</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="text-align: left">SVD分解</td>
+          <td style="text-align: left">低</td>
+          <td style="text-align: left">高</td>
+        </tr>
+        <tr>
+          <td style="text-align: left">列主元QR分解</td>
+          <td style="text-align: left">中</td>
+          <td style="text-align: left">中</td>
+        </tr>
+        <tr>
+          <td style="text-align: left">求解正规方程</td>
+          <td style="text-align: left">高</td>
+          <td style="text-align: left">低</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ol>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span> <span class="o">=</span> <span class="n">A</span><span class="p">.</span><span class="n">bdcSvd</span><span class="p">(</span><span class="n">ComputeThinU</span> <span class="o">|</span> <span class="n">ComputeThinV</span><span class="p">).</span><span class="n">solve</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>         <span class="c1">// SVD分解</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">A</span><span class="p">.</span><span class="n">colPivHouseholderQr</span><span class="p">().</span><span class="n">solve</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>                       <span class="c1">// 列主元QR分解</span>
+<span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">A</span><span class="p">.</span><span class="n">transpose</span><span class="p">()</span> <span class="o">*</span> <span class="n">A</span><span class="p">).</span><span class="n">ldlt</span><span class="p">().</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">.</span><span class="n">transpose</span><span class="p">()</span> <span class="o">*</span> <span class="n">b</span><span class="p">);</span>    <span class="c1">// 求解正规方程</span>
+<span class="n">relative_error</span> <span class="o">=</span> <span class="p">(</span><span class="n">A</span> <span class="o">*</span> <span class="n">x</span> <span class="o">-</span> <span class="n">b</span><span class="p">).</span><span class="n">norm</span><span class="p">()</span> <span class="o">/</span> <span class="n">b</span><span class="p">.</span><span class="n">norm</span><span class="p">();</span>             <span class="c1">// L2范数相对误差</span>
+</code></pre></div></div>
+
+<h4 id="特征值计算">特征值计算</h4>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Matrix3f</span> <span class="n">A</span><span class="p">;</span>
+<span class="c1">// 初始化方式1</span>
+<span class="n">EigenSolver</span><span class="o">&lt;</span><span class="n">Matrix3f</span><span class="o">&gt;</span> <span class="n">eigen_solver</span><span class="p">(</span><span class="n">A</span><span class="p">);</span>
+<span class="c1">// 初始化方式2，可用于计算多个矩阵的特征值</span>
+<span class="n">EigenSolver</span><span class="o">&lt;</span><span class="n">Matrix3f</span><span class="o">&gt;</span> <span class="n">eigen_solver</span><span class="p">;</span>
+<span class="n">eigen_solver</span><span class="p">.</span><span class="n">compute</span><span class="p">(</span><span class="n">A</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">eigen_solver</span><span class="p">.</span><span class="n">info</span><span class="p">()</span> <span class="o">==</span> <span class="n">Success</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 计算成功</span>
+    <span class="n">Vector3f</span> <span class="n">eigen_value</span> <span class="o">=</span> <span class="n">eigen_solver</span><span class="p">.</span><span class="n">eigenvalues</span><span class="p">();</span>      <span class="c1">// 特征值</span>
+    <span class="n">Matrix3f</span> <span class="n">eigen_vector</span> <span class="o">=</span> <span class="n">eigen_solver</span><span class="p">.</span><span class="n">eigenvectors</span><span class="p">();</span>    <span class="c1">// 特征向量</span>
+<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">eigen_solver</span><span class="p">.</span><span class="n">info</span><span class="p">()</span> <span class="o">==</span> <span class="n">NoConvergence</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 计算失败</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Computation Failed!"</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">// 实对称矩阵可以保证对角化成功，初始化方式和查看计算结果方式与上面相同</span>
+<span class="n">SelfAdjointEigenSolver</span><span class="o">&lt;</span><span class="n">Matrix3f</span><span class="o">&gt;</span> <span class="n">eigen_solver</span><span class="p">(</span><span class="n">A</span><span class="p">.</span><span class="n">transpose</span><span class="p">()</span> <span class="o">*</span> <span class="n">A</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h4 id="奇异值分解">奇异值分解</h4>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 方阵</span>
+<span class="n">Matrix3f</span> <span class="n">A</span><span class="p">;</span>
+<span class="c1">// A = USV*</span>
+<span class="c1">// 参数ComputeFullU和ComputeFullV分别表示计算方阵U和方阵V</span>
+<span class="c1">// 此时奇异值矩阵S为方阵</span>
+<span class="n">JacobiSVD</span><span class="o">&lt;</span><span class="n">Matrix3f</span><span class="o">&gt;</span> <span class="n">svd</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">ComputeFullU</span> <span class="o">|</span> <span class="n">ComputeFullV</span><span class="p">);</span>
+<span class="n">Matrix3f</span> <span class="n">U</span> <span class="o">=</span> <span class="n">svd</span><span class="p">.</span><span class="n">matrixU</span><span class="p">();</span>
+<span class="n">Matrix3f</span> <span class="n">V</span> <span class="o">=</span> <span class="n">svd</span><span class="p">.</span><span class="n">matrixV</span><span class="p">();</span>
+<span class="n">Vector3f</span> <span class="n">sv</span> <span class="o">=</span> <span class="n">svd</span><span class="p">.</span><span class="n">singularValues</span><span class="p">();</span>
+<span class="c1">// 非方阵</span>
+<span class="n">MatrixXf</span> <span class="n">A</span><span class="p">;</span>
+<span class="c1">// A = USV*</span>
+<span class="c1">// 参数ComputeFullU和ComputeFullV分别表示计算方阵U和方阵V</span>
+<span class="c1">// 此时奇异值矩阵S为非方阵</span>
+<span class="n">JacobiSVD</span><span class="o">&lt;</span><span class="n">MatrixXf</span><span class="o">&gt;</span> <span class="n">svd</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">ComputeFullU</span> <span class="o">|</span> <span class="n">ComputeFullV</span><span class="p">);</span>
+<span class="c1">// 参数ComputeThinU和ComputeThinV分别表示计算非方阵U和非方阵V</span>
+<span class="c1">// 此时奇异值矩阵S为方阵</span>
+<span class="n">JacobiSVD</span><span class="o">&lt;</span><span class="n">MatrixXf</span><span class="o">&gt;</span> <span class="n">svd</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">ComputeThinU</span> <span class="o">|</span> <span class="n">ComputeThinV</span><span class="p">);</span>
+<span class="n">MatrixXf</span> <span class="n">U</span> <span class="o">=</span> <span class="n">svd</span><span class="p">.</span><span class="n">matrixU</span><span class="p">();</span>
+<span class="n">MatrixXf</span> <span class="n">V</span> <span class="o">=</span> <span class="n">svd</span><span class="p">.</span><span class="n">matrixV</span><span class="p">();</span>
+<span class="n">VectorXf</span> <span class="n">sv</span> <span class="o">=</span> <span class="n">svd</span><span class="p">.</span><span class="n">singularValues</span><span class="p">();</span>
+</code></pre></div></div>
+
+<h2 id="array类"><code class="language-plaintext highlighter-rouge">Array</code>类</h2>
+
+<h3 id="逐元素运算-1">逐元素运算</h3>
+
+<p>包括算术运算符、比较运算符、常用数学函数等：</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">array1</span><span class="p">.</span><span class="n">abs2</span><span class="p">()</span>
+<span class="n">array1</span><span class="p">.</span><span class="n">abs</span><span class="p">()</span>                  <span class="n">abs</span><span class="p">(</span><span class="n">array1</span><span class="p">)</span>
+<span class="n">array1</span><span class="p">.</span><span class="n">sqrt</span><span class="p">()</span>                 <span class="n">sqrt</span><span class="p">(</span><span class="n">array1</span><span class="p">)</span>
+<span class="n">array1</span><span class="p">.</span><span class="n">log</span><span class="p">()</span>                  <span class="n">log</span><span class="p">(</span><span class="n">array1</span><span class="p">)</span>
+<span class="n">array1</span><span class="p">.</span><span class="n">log10</span><span class="p">()</span>                <span class="n">log10</span><span class="p">(</span><span class="n">array1</span><span class="p">)</span>
+<span class="n">array1</span><span class="p">.</span><span class="n">exp</span><span class="p">()</span>                  <span class="n">exp</span><span class="p">(</span><span class="n">array1</span><span class="p">)</span>
+<span class="n">array1</span><span class="p">.</span><span class="n">pow</span><span class="p">(</span><span class="n">array2</span><span class="p">)</span>            <span class="n">pow</span><span class="p">(</span><span class="n">array1</span><span class="p">,</span><span class="n">array2</span><span class="p">)</span>
+<span class="n">array1</span><span class="p">.</span><span class="n">pow</span><span class="p">(</span><span class="n">scalar</span><span class="p">)</span>            <span class="n">pow</span><span class="p">(</span><span class="n">array1</span><span class="p">,</span><span class="n">scalar</span><span class="p">)</span>
+                              <span class="n">pow</span><span class="p">(</span><span class="n">scalar</span><span class="p">,</span><span class="n">array2</span><span class="p">)</span>
+<span class="n">array1</span><span class="p">.</span><span class="n">square</span><span class="p">()</span>
+<span class="n">array1</span><span class="p">.</span><span class="n">cube</span><span class="p">()</span>
+<span class="n">array1</span><span class="p">.</span><span class="n">inverse</span><span class="p">()</span>
+
+<span class="n">array1</span><span class="p">.</span><span class="n">sin</span><span class="p">()</span>                  <span class="n">sin</span><span class="p">(</span><span class="n">array1</span><span class="p">)</span>
+<span class="n">array1</span><span class="p">.</span><span class="n">cos</span><span class="p">()</span>                  <span class="n">cos</span><span class="p">(</span><span class="n">array1</span><span class="p">)</span>
+<span class="n">array1</span><span class="p">.</span><span class="n">tan</span><span class="p">()</span>                  <span class="n">tan</span><span class="p">(</span><span class="n">array1</span><span class="p">)</span>
+<span class="n">array1</span><span class="p">.</span><span class="n">asin</span><span class="p">()</span>                 <span class="n">asin</span><span class="p">(</span><span class="n">array1</span><span class="p">)</span>
+<span class="n">array1</span><span class="p">.</span><span class="n">acos</span><span class="p">()</span>                 <span class="n">acos</span><span class="p">(</span><span class="n">array1</span><span class="p">)</span>
+<span class="n">array1</span><span class="p">.</span><span class="n">atan</span><span class="p">()</span>                 <span class="n">atan</span><span class="p">(</span><span class="n">array1</span><span class="p">)</span>
+<span class="n">array1</span><span class="p">.</span><span class="n">sinh</span><span class="p">()</span>                 <span class="n">sinh</span><span class="p">(</span><span class="n">array1</span><span class="p">)</span>
+<span class="n">array1</span><span class="p">.</span><span class="n">cosh</span><span class="p">()</span>                 <span class="n">cosh</span><span class="p">(</span><span class="n">array1</span><span class="p">)</span>
+<span class="n">array1</span><span class="p">.</span><span class="n">tanh</span><span class="p">()</span>                 <span class="n">tanh</span><span class="p">(</span><span class="n">array1</span><span class="p">)</span>
+<span class="n">array1</span><span class="p">.</span><span class="n">arg</span><span class="p">()</span>                  <span class="n">arg</span><span class="p">(</span><span class="n">array1</span><span class="p">)</span>
+
+<span class="n">array1</span><span class="p">.</span><span class="n">floor</span><span class="p">()</span>                <span class="n">floor</span><span class="p">(</span><span class="n">array1</span><span class="p">)</span>
+<span class="n">array1</span><span class="p">.</span><span class="n">ceil</span><span class="p">()</span>                 <span class="n">ceil</span><span class="p">(</span><span class="n">array1</span><span class="p">)</span>
+<span class="n">array1</span><span class="p">.</span><span class="n">round</span><span class="p">()</span>                <span class="n">round</span><span class="p">(</span><span class="n">aray1</span><span class="p">)</span>
+
+<span class="n">array1</span><span class="p">.</span><span class="n">isFinite</span><span class="p">()</span>             <span class="n">isfinite</span><span class="p">(</span><span class="n">array1</span><span class="p">)</span>
+<span class="n">array1</span><span class="p">.</span><span class="n">isInf</span><span class="p">()</span>                <span class="n">isinf</span><span class="p">(</span><span class="n">array1</span><span class="p">)</span>
+<span class="n">array1</span><span class="p">.</span><span class="n">isNaN</span><span class="p">()</span>                <span class="n">isnan</span><span class="p">(</span><span class="n">array1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="位姿表示">位姿表示</h2>
+
+<p>旋转向量、四元数表示的位姿可以直接当做旋转矩阵参与运算，因为重载了乘法运算符。</p>
+
+<p>不同表示方式的位姿在赋值时需要进行显式类型转换。</p>
+
+<h3 id="位姿初始化">位姿初始化</h3>
+
+<h4 id="旋转向量">旋转向量</h4>
+
+<p>旋转向量并不是为了储存旋转，而是为了更加方便地创建其他类型的旋转。</p>
+
+<p>旋转轴必须是单位向量，推荐使用基向量。</p>
+
+<p>示例：</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 3D旋转矩阵直接使用Matrix3d或Matrix3f</span>
+<span class="n">Matrix3d</span> <span class="n">rotation_matrix</span> <span class="o">=</span> <span class="n">Matrix3d</span><span class="o">::</span><span class="n">Identity</span><span class="p">();</span>
+<span class="c1">// 旋转向量使用AngleAxis，其底层不直接是Matrix类，但运算可以当作矩阵（因为重载了运算符）</span>
+<span class="n">AngleAxisd</span> <span class="nf">rotation_vector</span><span class="p">(</span><span class="n">M_PI</span> <span class="o">/</span> <span class="mi">4</span><span class="p">,</span> <span class="n">Vector3d</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">));</span>    <span class="c1">// 沿Z轴旋转45度</span>
+<span class="n">rotation_matrix</span> <span class="o">=</span> <span class="n">rotation_vector</span><span class="p">.</span><span class="n">matrix</span><span class="p">();</span>                 <span class="c1">// 旋转向量转旋转矩阵</span>
+<span class="n">rotation_matrix</span> <span class="o">=</span> <span class="n">rotation_vector</span><span class="p">.</span><span class="n">toRotationMatrix</span><span class="p">();</span>       <span class="c1">// 旋转向量转旋转矩阵</span>
+<span class="c1">// 用AngleAxis进行坐标变换</span>
+<span class="n">Vector3d</span> <span class="nf">v</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="n">Vector3d</span> <span class="n">v_rotated</span> <span class="o">=</span> <span class="n">rotation_vector</span> <span class="o">*</span> <span class="n">v</span><span class="p">;</span>
+<span class="c1">// 相当于用旋转矩阵进行坐标变换</span>
+<span class="n">Vector3d</span> <span class="n">v_rotated</span> <span class="o">=</span> <span class="n">rotation_matrix</span> <span class="o">*</span> <span class="n">v</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h4 id="欧拉角">欧拉角</h4>
+
+<p>在使用欧拉角表示旋转时，存在内旋（intrinsic rotation）和外旋（extrinsic rotation）的区别：</p>
+
+<ol>
+  <li>内旋也被称为旋转轴（rotated axis），此时每个欧拉角表示相对于上一次旋转后的坐标轴的旋转，在按照旋转顺序相乘时需要右乘，Eigen中采用了这样的表示方式；</li>
+  <li>外旋也被称为固定轴（fixed axis），此时每个欧拉角表示相对于固定坐标轴的旋转，在按照旋转顺序相乘时需要左乘，组合导航领域中采用了这样的表示方式；</li>
+  <li>每种特定顺序的外旋等价于相反顺序的内旋；</li>
+</ol>
+
+<p>示例：</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 旋转矩阵转欧拉角，单位为弧度</span>
+<span class="c1">// 输入参数为指定的旋转顺序，0、1、2分别代表x轴、y轴、z轴</span>
+<span class="c1">// 输出参数为指定旋转顺序的欧拉角，范围分别为[0, pi]、[-pi, pi]、[-pi, pi]</span>
+<span class="n">Vector3d</span> <span class="n">euler_angles</span> <span class="o">=</span> <span class="n">rotation_matrix</span><span class="p">.</span><span class="n">eulerAngles</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>   <span class="c1">// 旋转顺序为ZYX，即yaw-pitch-roll</span>
+<span class="c1">// 下标顺序对应指定旋转顺序中的欧拉角顺序</span>
+<span class="kt">double</span> <span class="n">yaw_rad</span> <span class="o">=</span> <span class="n">euler_angle</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+<span class="kt">double</span> <span class="n">pitch_rad</span> <span class="o">=</span> <span class="n">euler_angle</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+<span class="kt">double</span> <span class="n">roll_rad</span> <span class="o">=</span> <span class="n">euler_angle</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+<span class="c1">// 欧拉角转旋转矩阵，借助旋转向量，单位为弧度</span>
+<span class="n">AngleAxisd</span> <span class="nf">yaw_vector</span><span class="p">(</span><span class="n">yaw_rad</span><span class="p">,</span> <span class="n">Vector3d</span><span class="o">::</span><span class="n">UnitZ</span><span class="p">());</span>
+<span class="n">AngleAxisd</span> <span class="nf">pitch_vector</span><span class="p">(</span><span class="n">pitch_rad</span><span class="p">,</span> <span class="n">Vector3d</span><span class="o">::</span><span class="n">UnitY</span><span class="p">());</span>
+<span class="n">AngleAxisd</span> <span class="nf">roll_vector</span><span class="p">(</span><span class="n">roll_rad</span><span class="p">,</span> <span class="n">Vector3d</span><span class="o">::</span><span class="n">UnitX</span><span class="p">());</span>
+<span class="c1">// 内旋在按照旋转顺序相乘时需要右乘</span>
+<span class="n">Matrix3d</span> <span class="n">rotation_matrix</span> <span class="o">=</span> <span class="p">(</span><span class="n">yaw_vector</span> <span class="o">*</span> <span class="n">pitch_vector</span> <span class="o">*</span> <span class="n">roll_vector</span><span class="p">).</span><span class="n">toRotationMatrix</span><span class="p">();</span>
+</code></pre></div></div>
+
+<h4 id="四元数">四元数</h4>
+
+<p>必须使用单位四元数表示旋转。</p>
+
+<p>示例：</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 直接初始化，注意参数顺序为(w，x，y，z)</span>
+<span class="n">Quaterniond</span> <span class="n">q</span> <span class="o">=</span> <span class="n">Quaterniond</span><span class="p">(</span><span class="n">q_w</span><span class="p">,</span> <span class="n">q_x</span><span class="p">,</span> <span class="n">q_y</span><span class="p">,</span> <span class="n">q_z</span><span class="p">);</span>
+<span class="c1">// 可以把AngleAxis赋值给四元数，反之亦然</span>
+<span class="n">Quaterniond</span> <span class="n">q</span> <span class="o">=</span> <span class="n">Quaterniond</span><span class="p">(</span><span class="n">rotation_vector</span><span class="p">);</span>
+<span class="c1">// 可以把旋转矩阵赋值给四元数</span>
+<span class="n">Quaterniond</span> <span class="n">q</span> <span class="o">=</span> <span class="n">Quaterniond</span><span class="p">(</span><span class="n">rotation_matrix</span><span class="p">);</span>
+<span class="c1">// 向量v1和向量v2之间的旋转，将向量v1旋转到与向量v2同向，对于两个向量的模长没有要求</span>
+<span class="n">Quaterniond</span> <span class="n">q</span> <span class="o">=</span> <span class="n">Quaterniond</span><span class="o">::</span><span class="n">FromTwoVectors</span><span class="p">(</span><span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">);</span>
+<span class="c1">// 访问四元数中各元素</span>
+<span class="n">q</span><span class="p">.</span><span class="n">x</span><span class="p">()</span>
+<span class="n">q</span><span class="p">.</span><span class="n">y</span><span class="p">()</span>
+<span class="n">q</span><span class="p">.</span><span class="n">z</span><span class="p">()</span>
+<span class="n">q</span><span class="p">.</span><span class="n">w</span><span class="p">()</span>
+<span class="n">q</span><span class="p">.</span><span class="n">coeffs</span><span class="p">()</span>              <span class="c1">// 注意coeffs的顺序是(x, y, z, w)，w为实部，前三者为虚部，这也是Eigen中四元数的存储顺序</span>
+<span class="n">q</span><span class="p">.</span><span class="n">normalize</span><span class="p">()</span>           <span class="c1">// 归一化四元数，直接对原四元数操作，无返回值，不能作为等号右值</span>
+<span class="n">q</span><span class="p">.</span><span class="n">normalized</span><span class="p">()</span>          <span class="c1">// 归一化四元数，原四元数不变，返回拷贝构造值，可以作为等号右值</span>
+<span class="n">q</span><span class="p">.</span><span class="n">matrix</span><span class="p">()</span>              <span class="c1">// 四元数转旋转矩阵</span>
+<span class="n">q</span><span class="p">.</span><span class="n">toRotationMatrix</span><span class="p">()</span>    <span class="c1">// 四元数转旋转矩阵</span>
+<span class="c1">// 取共轭和取逆仅在单位四元数情况下是等价的，相当于对旋转取逆</span>
+<span class="n">q</span><span class="p">.</span><span class="n">conjugate</span><span class="p">()</span>           <span class="c1">// 取共轭，q * q^{*} = \|q\|^{2}</span>
+<span class="n">q</span><span class="p">.</span><span class="n">inverse</span><span class="p">()</span>             <span class="c1">// 取逆，q * q^{-1} = 1</span>
+<span class="c1">// 使用四元数旋转一个向量，使用重载的乘法即可</span>
+<span class="n">v_rotated</span> <span class="o">=</span> <span class="n">q</span> <span class="o">*</span> <span class="n">v</span><span class="p">;</span>      <span class="c1">// 注意数学上是qvq^{-1}</span>
+</code></pre></div></div>
+
+<h4 id="欧氏变换">欧氏变换</h4>
+
+<p>示例：</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 欧氏变换矩阵使用Isometry</span>
+<span class="n">Isometry3d</span> <span class="n">T</span> <span class="o">=</span> <span class="n">Isometry3d</span><span class="o">::</span><span class="n">Identity</span><span class="p">();</span>  <span class="c1">// 虽然称为3d，实质上是4*4的矩阵</span>
+<span class="n">T</span><span class="p">.</span><span class="n">rotate</span><span class="p">(</span><span class="n">rotation_vector</span><span class="p">);</span>              <span class="c1">// 按照rotation_vector进行旋转</span>
+<span class="n">T</span><span class="p">.</span><span class="n">pretranslate</span><span class="p">(</span><span class="n">Vector3d</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>       <span class="c1">// 把平移向量设成(1, 2, 3)</span>
+<span class="n">T</span><span class="p">.</span><span class="n">matrix</span><span class="p">()</span>                              <span class="c1">// 欧氏变换矩阵</span>
+<span class="c1">// 用欧氏变换矩阵进行坐标变换</span>
+<span class="n">Vector3d</span> <span class="n">v_transformed</span> <span class="o">=</span> <span class="n">T</span> <span class="o">*</span> <span class="n">v</span><span class="p">;</span>         <span class="c1">// 相当于R * v + t</span>
+</code></pre></div></div>
+
+<h3 id="位姿相关运算">位姿相关运算</h3>
+
+<h4 id="旋转矩阵归一化">旋转矩阵归一化</h4>
+
+<ol>
+  <li>
+    <p>四元数法：</p>
+
+    <p>通过将旋转矩阵转换为四元数，将四元数归一化后再转回旋转矩阵。</p>
+
+    <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="n">Matrix3f</span> <span class="n">R</span><span class="p">;</span>
+ <span class="n">Quaternionf</span> <span class="nf">q</span><span class="p">(</span><span class="n">R</span><span class="p">);</span>
+ <span class="n">R</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">normalized</span><span class="p">().</span><span class="n">toRotationMatrix</span><span class="p">();</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>SVD分解法：</p>
+
+    <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="n">Matrix3f</span> <span class="n">R</span><span class="p">;</span>
+ <span class="n">JacobiSVD</span><span class="o">&lt;</span><span class="n">MatrixXf</span><span class="o">&gt;</span> <span class="n">svd</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">ComputeFullU</span> <span class="o">|</span> <span class="n">ComputeFullV</span><span class="p">);</span>
+ <span class="n">R</span> <span class="o">=</span> <span class="n">svd</span><span class="p">.</span><span class="n">matrixU</span><span class="p">()</span> <span class="o">*</span> <span class="n">svd</span><span class="p">.</span><span class="n">matrixV</span><span class="p">().</span><span class="n">transpose</span><span class="p">();</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>流形投影法：</p>
+
+    <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="n">Matrix3f</span> <span class="n">R</span><span class="p">;</span>
+ <span class="n">Matrix3f</span> <span class="n">H</span> <span class="o">=</span> <span class="n">R</span> <span class="o">*</span> <span class="n">R</span><span class="p">.</span><span class="n">transpose</span><span class="p">();</span>
+ <span class="n">Matrix3f</span> <span class="n">L</span> <span class="o">=</span> <span class="n">H</span><span class="p">.</span><span class="n">llt</span><span class="p">().</span><span class="n">matrixL</span><span class="p">();</span>
+ <span class="n">R</span> <span class="o">=</span> <span class="n">L</span><span class="p">.</span><span class="n">inverse</span><span class="p">()</span> <span class="o">*</span> <span class="n">R</span><span class="p">;</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h4 id="位姿插值">位姿插值</h4>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">,</span> <span class="n">t</span><span class="p">;</span>
+<span class="n">Quaterniond</span> <span class="n">quat1</span><span class="p">,</span> <span class="n">quat2</span><span class="p">,</span> <span class="n">quat</span><span class="p">;</span>
+<span class="n">Vector3d</span> <span class="n">trans1</span><span class="p">,</span> <span class="n">trans2</span><span class="p">,</span> <span class="n">trans</span><span class="p">;</span>
+<span class="n">assert</span><span class="p">(</span><span class="n">t1</span> <span class="o">&lt;=</span> <span class="n">t</span> <span class="o">&amp;&amp;</span> <span class="n">t</span> <span class="o">&lt;=</span> <span class="n">t2</span><span class="p">);</span>
+<span class="c1">// 当t1和t2过于接近时，选择与当前时刻最近的位姿作为插值结果即可</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">t2</span> <span class="o">-</span> <span class="n">t1</span> <span class="o">&lt;=</span> <span class="n">std</span><span class="o">::</span><span class="n">numeric_limits</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;::</span><span class="n">epsilon</span><span class="p">())</span> <span class="p">{</span>
+  <span class="n">quat</span> <span class="o">=</span> <span class="p">((</span><span class="n">t1</span> <span class="o">+</span> <span class="n">t2</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span> <span class="o">?</span> <span class="n">quat1</span> <span class="o">:</span> <span class="n">quat2</span><span class="p">;</span>
+  <span class="n">trans</span> <span class="o">=</span> <span class="p">((</span><span class="n">t1</span> <span class="o">+</span> <span class="n">t2</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span> <span class="o">?</span> <span class="n">trans1</span> <span class="o">:</span> <span class="n">trans2</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">// 这里可以看出当t1和t2过于接近时会引起数值误差</span>
+<span class="kt">double</span> <span class="n">ratio</span> <span class="o">=</span> <span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="n">t1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">t2</span> <span class="o">-</span> <span class="n">t1</span><span class="p">);</span>
+<span class="c1">// 旋转部分位姿使用球面线性插值（Spherical Linear Interpolation，SLERP）</span>
+<span class="n">Quaterniond</span> <span class="n">quat</span> <span class="o">=</span> <span class="n">quat1</span><span class="p">.</span><span class="n">slerp</span><span class="p">(</span><span class="n">ratio</span><span class="p">,</span> <span class="n">quat2</span><span class="p">);</span>
+<span class="c1">// 平移部分位姿使用线性插值</span>
+<span class="n">Vector3d</span> <span class="n">trans</span> <span class="o">=</span> <span class="n">trans1</span> <span class="o">+</span> <span class="n">ratio</span> <span class="o">*</span> <span class="p">(</span><span class="n">trans2</span> <span class="o">-</span> <span class="n">trans1</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h4 id="位姿夹角">位姿夹角</h4>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Quaterniond</span> <span class="n">quat1</span><span class="p">,</span> <span class="n">quat2</span><span class="p">;</span>
+<span class="c1">// 单位为弧度，范围为[0, pi]</span>
+<span class="kt">double</span> <span class="n">angle</span> <span class="o">=</span> <span class="n">quat1</span><span class="p">.</span><span class="n">angularDistance</span><span class="p">(</span><span class="n">quat2</span><span class="p">);</span>
+<span class="n">Matrix3d</span> <span class="n">R1</span><span class="p">,</span> <span class="n">R2</span><span class="p">;</span>
+<span class="kt">double</span> <span class="n">cos_val</span> <span class="o">=</span> <span class="p">((</span><span class="n">R1</span> <span class="o">*</span> <span class="n">R2</span><span class="p">.</span><span class="n">transpose</span><span class="p">()).</span><span class="n">trace</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+<span class="c1">// 截断，防止数值误差导致范围溢出</span>
+<span class="c1">// cos_val = std::clamp(cos_val, -1.0, 1.0);    // C++17</span>
+<span class="n">cos_val</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">max</span><span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">min</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">cos_val</span><span class="p">));</span>
+<span class="c1">// 单位为弧度，范围为[0, pi]</span>
+<span class="kt">double</span> <span class="n">angle</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">acos</span><span class="p">(</span><span class="n">cos_val</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h2 id="常见问题">常见问题</h2>
+
+<h3 id="c中的template和typename关键字">C++中的<code class="language-plaintext highlighter-rouge">template</code>和<code class="language-plaintext highlighter-rouge">typename</code>关键字</h3>
+
+<ol>
+  <li>
+    <p>从C++的角度，<code class="language-plaintext highlighter-rouge">template</code>和<code class="language-plaintext highlighter-rouge">typename</code>关键字有两种用途：</p>
+
+    <ul>
+      <li>
+        <p>定义模板：</p>
+
+        <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="p">&gt;</span>   <span class="c1">// 此处使用typename或class均可</span>
+  <span class="kt">bool</span> <span class="nf">isPositive</span><span class="p">(</span><span class="n">T</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="p">}</span>
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>显式指定表达式为模板名（<code class="language-plaintext highlighter-rouge">template</code>）或类型名（<code class="language-plaintext highlighter-rouge">typename</code>），否则编译器在进行语法检查时会将模板名当做成员变量，将模板参数分隔符<code class="language-plaintext highlighter-rouge">&lt;</code>当做小于号处理，导致编译失败；</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">MatrixBase</code>类中的<code class="language-plaintext highlighter-rouge">block()</code>、<code class="language-plaintext highlighter-rouge">cast()</code>、<code class="language-plaintext highlighter-rouge">corner()</code>、<code class="language-plaintext highlighter-rouge">end()</code>、<code class="language-plaintext highlighter-rouge">lpNorm()</code>、<code class="language-plaintext highlighter-rouge">part()</code>、<code class="language-plaintext highlighter-rouge">segment()</code>、<code class="language-plaintext highlighter-rouge">start()</code>成员函数都是模板函数，在模板中使用这些成员函数时，需要使用<code class="language-plaintext highlighter-rouge">template</code>关键字显式指定：</p>
+
+    <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="p">&gt;</span>
+ <span class="kt">void</span> <span class="nf">transform</span><span class="p">(</span><span class="n">Matrix</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="o">&gt;</span> <span class="o">&amp;</span> <span class="n">m</span><span class="p">,</span> <span class="k">const</span> <span class="n">Matrix</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="o">&gt;</span> <span class="n">trans</span><span class="p">,</span> <span class="k">const</span> <span class="n">Quaternion</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">qrot</span><span class="p">)</span> <span class="p">{</span>
+   <span class="c1">// 方法一</span>
+   <span class="n">m</span><span class="p">.</span><span class="k">template</span> <span class="n">block</span><span class="o">&lt;</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">&gt;(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">=</span> <span class="n">qrot</span><span class="p">.</span><span class="n">toRotationMatrix</span><span class="p">().</span><span class="n">transpose</span><span class="p">();</span>
+   <span class="n">m</span><span class="p">.</span><span class="k">template</span> <span class="n">block</span><span class="o">&lt;</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">&gt;(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">=</span> <span class="o">-</span><span class="n">m</span><span class="p">.</span><span class="k">template</span> <span class="n">block</span><span class="o">&lt;</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">&gt;(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="n">trans</span><span class="p">;</span>
+   <span class="c1">// 方法二</span>
+   <span class="n">m</span><span class="p">.</span><span class="k">template</span> <span class="n">corner</span><span class="o">&lt;</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">&gt;(</span><span class="n">TopLeft</span><span class="p">)</span> <span class="o">=</span> <span class="n">qrot</span><span class="p">.</span><span class="n">toRotationMatrix</span><span class="p">().</span><span class="n">transpose</span><span class="p">();</span>
+   <span class="n">m</span><span class="p">.</span><span class="n">col</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">=</span> <span class="o">-</span><span class="n">m</span><span class="p">.</span><span class="k">template</span> <span class="n">corner</span><span class="o">&lt;</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">&gt;(</span><span class="n">TopLeft</span><span class="p">)</span> <span class="o">*</span> <span class="n">trans</span><span class="p">;</span> <span class="c1">// col()、row()成员函数不是模板函数</span>
+ <span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>使用时的注意事项如下：</p>
+
+    <ul>
+      <li>从属名（dependent name）指的是直接或间接依赖模板参数的变量名；</li>
+      <li>
+        <p>当代码中存在<code class="language-plaintext highlighter-rouge">xxx.yyy</code>或<code class="language-plaintext highlighter-rouge">xxx-&gt;yyy</code>形式，且<code class="language-plaintext highlighter-rouge">xxx</code>为从属名，<code class="language-plaintext highlighter-rouge">yyy</code>为模板名时，应在模板名前使用<code class="language-plaintext highlighter-rouge">template</code>关键字显式指定：</p>
+
+        <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c1">// 错误</span>
+  <span class="n">xxx</span><span class="p">.</span><span class="n">yyy</span><span class="p">;</span>
+  <span class="n">xxx</span><span class="o">-&gt;</span><span class="n">yyy</span><span class="p">;</span>
+  <span class="c1">// 正确</span>
+  <span class="n">xxx</span><span class="p">.</span><span class="k">template</span> <span class="n">yyy</span><span class="p">;</span>
+  <span class="n">xxx</span><span class="o">-&gt;</span><span class="k">template</span> <span class="n">yyy</span><span class="p">;</span>
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>当代码中存在<code class="language-plaintext highlighter-rouge">xxx::yyy</code>形式，且<code class="language-plaintext highlighter-rouge">xxx</code>为从属名，<code class="language-plaintext highlighter-rouge">yyy</code>为类型名时，应在表达式整体前使用<code class="language-plaintext highlighter-rouge">typename</code>关键字显式指定：</p>
+
+        <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c1">// 错误</span>
+  <span class="n">xxx</span><span class="o">::</span><span class="n">yyy</span><span class="p">;</span>
+  <span class="c1">// 正确</span>
+  <span class="k">typename</span> <span class="n">xxx</span><span class="o">::</span><span class="n">yyy</span><span class="p">;</span>
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="eigen中的混淆问题">Eigen中的混淆问题</h3>
+
+<ol>
+  <li>
+    <p>混淆问题（aliasing）指的是在赋值表达式中<code class="language-plaintext highlighter-rouge">Matrix</code>类或<code class="language-plaintext highlighter-rouge">Array</code>类的同一个对象同时出现在赋值运算符两侧的情况，部分情况下影响计算结果的正确性：</p>
+
+    <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="n">MatrixXi</span> <span class="nf">mat</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+ <span class="n">mat</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span>
+        <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">;</span>
+ <span class="c1">// 不影响计算结果的正确性</span>
+ <span class="n">mat</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">mat</span><span class="p">;</span>
+ <span class="c1">// 影响计算结果的正确性</span>
+ <span class="n">mat</span> <span class="o">=</span> <span class="n">mat</span><span class="p">.</span><span class="n">transpose</span><span class="p">();</span>
+ <span class="n">mat</span><span class="p">.</span><span class="n">bottomRightCorner</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">=</span> <span class="n">mat</span><span class="p">.</span><span class="n">topLeftCorner</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+ <span class="n">vec</span> <span class="o">=</span> <span class="n">vec</span><span class="p">.</span><span class="n">head</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Eigen默认使用运行时断言（run-time assertion）检测混淆问题，运行时断言可以通过在编译时定义<code class="language-plaintext highlighter-rouge">EIGEN_NO_DEBUG</code>宏进行关闭；</li>
+  <li>
+    <p>可以通过以下两种方法解决混淆问题：</p>
+
+    <ul>
+      <li>
+        <p>使用<code class="language-plaintext highlighter-rouge">eval()</code>成员函数将等号右值保存为临时变量，在赋值时进行拷贝构造：</p>
+
+        <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">mat</span> <span class="o">=</span> <span class="n">mat</span><span class="p">.</span><span class="n">transpose</span><span class="p">().</span><span class="n">eval</span><span class="p">();</span>
+  <span class="n">mat</span><span class="p">.</span><span class="n">bottomRightCorner</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">=</span> <span class="n">mat</span><span class="p">.</span><span class="n">topLeftCorner</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">).</span><span class="n">eval</span><span class="p">();</span>
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>使用为应对混淆问题特殊定义的成员函数：</p>
+
+        <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c1">// 相比于使用eval()成员函数速度更快</span>
+  <span class="n">mat</span> <span class="o">=</span> <span class="n">mat</span><span class="p">.</span><span class="n">transposeInPlace</span><span class="p">();</span>
+  <span class="n">mat</span> <span class="o">=</span> <span class="n">mat</span><span class="p">.</span><span class="n">adjointInPlace</span><span class="p">();</span>
+  <span class="n">mat</span> <span class="o">=</span> <span class="n">mat</span><span class="p">.</span><span class="n">reverseInPlace</span><span class="p">();</span>
+  <span class="c1">// 对于缩小大小引起的混淆问题，使用conservativeResize()成员函数</span>
+  <span class="n">vec</span><span class="p">.</span><span class="n">conservativeResize</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="eigen中的内存对齐问题">Eigen中的内存对齐问题</h3>
+
+<h4 id="内存对齐与向量化运算">内存对齐与向量化运算</h4>
+
+<ol>
+  <li>内存对齐是向量化运算（vectorization）的前提；</li>
+  <li>向量化运算指的是使用单指令多数据流（Single Instruction Multiple Data，SIMD）指令集，实现一条指令对多个操作数的运算，进而实现运算加速；</li>
+  <li>常用的SIMD指令集包括SSE（Streaming SIMD Extensions）、AVX（ Advanced Vector Extensions）等，其中SSE的操作数要求16字节对齐，AVX的操作数要求32字节对齐；</li>
+</ol>
+
+<h4 id="固定大小可向量化的eigen对象">固定大小可向量化的Eigen对象</h4>
+
+<ol>
+  <li>
+    <p>Eigen将编译时大小固定，并且大小是16字节的整数倍的对象称为固定大小可向量化的（fixed-size vectorizable），主要包括：</p>
+
+    <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="n">Vector2d</span>
+ <span class="n">Vector4d</span>
+ <span class="n">Vector4f</span>
+ <span class="n">Matrix2d</span>
+ <span class="n">Matrix2f</span>
+ <span class="n">Matrix4d</span>
+ <span class="n">Matrix4f</span>
+ <span class="n">Affine3d</span>
+ <span class="n">Affine3f</span>
+ <span class="n">Quaterniond</span>
+ <span class="n">Quaternionf</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>目前向量化运算支持128位数据包（例如SSE、AltiVec）、256位数据包（例如AVX）、512位数据包（例如AVX512），分别对应16字节、32字节、64字节，对于这些大小的数据包读写效率最高，因此对于固定大小可向量化的Eigen对象进行内存对齐有利于提高运算效率；</p>
+  </li>
+</ol>
+
+<h4 id="包含eigen对象的类和结构体">包含Eigen对象的类和结构体</h4>
+
+<ol>
+  <li>
+    <p>对于包含固定大小可向量化的Eigen对象的类和结构体，如果需要使用<code class="language-plaintext highlighter-rouge">new</code>运算符进行动态内存分配，则需要将宏<code class="language-plaintext highlighter-rouge">EIGEN_MAKE_ALIGNED_OPERATOR_NEW</code>声明为类和结构体的公有成员，这样在动态内存分配时会自动进行内存对齐：</p>
+
+    <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="k">class</span> <span class="nc">Foo</span> <span class="p">{</span>
+  <span class="nl">private:</span>
+   <span class="n">Vector4d</span> <span class="n">v</span><span class="p">;</span>
+
+  <span class="nl">public:</span>
+   <span class="n">EIGEN_MAKE_ALIGNED_OPERATOR_NEW</span>
+ <span class="p">};</span>
+
+ <span class="n">Foo</span><span class="o">*</span> <span class="n">foo</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Foo</span><span class="p">;</span>
+</code></pre></div>    </div>
+
+    <ul>
+      <li>如果使用C++17标准进行编译则不需要上述操作，因为C++17标准有对于超出默认对齐尺寸（over-aligned）数据的动态内存分配机制；</li>
+      <li>在C++17标准下，宏<code class="language-plaintext highlighter-rouge">EIGEN_MAKE_ALIGNED_OPERATOR_NEW</code>定义为空；</li>
+      <li>尽量将类和结构体中的Eigen对象声明一起放在类和结构体的开头，这并不是Eigen内存对齐的强制要求，但是可以节省内存对齐的空间；</li>
+      <li>动态大小的Eigen对象自动进行动态内存分配，自动进行内存对齐，不需要上述操作；</li>
+    </ul>
+  </li>
+  <li>
+    <p>如果需要根据模板参数进行条件判断是否使用内存对齐，则需要使用宏<code class="language-plaintext highlighter-rouge">EIGEN_MAKE_ALIGNED_OPERATOR_NEW_IF</code>进行判断：</p>
+
+    <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="k">template</span><span class="o">&lt;</span><span class="kt">int</span> <span class="n">n</span><span class="p">&gt;</span>
+ <span class="k">class</span> <span class="nc">Foo</span> <span class="p">{</span>
+   <span class="k">typedef</span> <span class="n">Matrix</span><span class="o">&lt;</span><span class="kt">float</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="mi">1</span><span class="o">&gt;</span> <span class="n">Vector</span><span class="p">;</span>
+   <span class="k">enum</span> <span class="p">{</span> <span class="n">NeedsToAlign</span> <span class="o">=</span> <span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">Vector</span><span class="p">)</span> <span class="o">%</span> <span class="mi">16</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">};</span>
+   <span class="n">Vector</span> <span class="n">v</span><span class="p">;</span>
+  <span class="nl">public:</span>
+   <span class="n">EIGEN_MAKE_ALIGNED_OPERATOR_NEW_IF</span><span class="p">(</span><span class="n">NeedsToAlign</span><span class="p">)</span>
+ <span class="p">};</span>
+
+ <span class="n">Foo</span><span class="o">&lt;</span><span class="mi">4</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">foo4</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Foo</span><span class="o">&lt;</span><span class="mi">4</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// foo4 is guaranteed to be 128bit-aligned</span>
+ <span class="n">Foo</span><span class="o">&lt;</span><span class="mi">3</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">foo3</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Foo</span><span class="o">&lt;</span><span class="mi">3</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// foo3 has only the system default alignment guarantee</span>
+</code></pre></div>    </div>
+
+    <ul>
+      <li>在参数<code class="language-plaintext highlighter-rouge">NeedsToAlign</code>为真时，自动添加宏<code class="language-plaintext highlighter-rouge">EIGEN_MAKE_ALIGNED_OPERATOR_NEW</code>进行内存对齐；</li>
+      <li>如果使用C++17标准进行编译则不需要上述操作，因为C++17标准有对于超出默认对齐尺寸数据的动态内存分配机制；</li>
+      <li>在C++17标准下，宏<code class="language-plaintext highlighter-rouge">EIGEN_MAKE_ALIGNED_OPERATOR_NEW_IF</code>定义为空；</li>
+    </ul>
+  </li>
+  <li>
+    <p>如果不想在多处声明宏<code class="language-plaintext highlighter-rouge">EIGEN_MAKE_ALIGNED_OPERATOR_NEW</code>，可以通过以下两种方法：</p>
+
+    <ul>
+      <li>
+        <p>使用<code class="language-plaintext highlighter-rouge">DontAlign</code>关闭内存对齐，但是这会带来加载和存储上的额外耗时，具体影响程度主要取决于硬件：</p>
+
+        <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">class</span> <span class="nc">Foo</span> <span class="p">{</span>
+   <span class="nl">private:</span>
+    <span class="n">Matrix</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">DontAlign</span><span class="o">&gt;</span> <span class="n">v</span><span class="p">;</span>
+  <span class="p">}</span>
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>将固定大小可向量化的Eigen对象指针声明为类和结构体的私有成员，在创建类和结构体的对象时动态分配内存，优点是类和结构体不受到内存对齐的影响，缺点是需要额外的堆（heap）分配：</p>
+
+        <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">struct</span> <span class="nc">Foo_d</span> <span class="p">{</span>
+    <span class="n">EIGEN_MAKE_ALIGNED_OPERATOR_NEW</span>
+    <span class="n">Vector4d</span> <span class="n">v</span><span class="p">;</span>
+  <span class="p">};</span>
+
+  <span class="k">struct</span> <span class="nc">Foo</span> <span class="p">{</span>
+    <span class="n">Foo</span><span class="p">()</span> <span class="p">{</span> <span class="n">init_d</span><span class="p">();</span> <span class="p">}</span>
+    <span class="o">~</span><span class="n">Foo</span><span class="p">()</span> <span class="p">{</span> <span class="k">delete</span> <span class="n">d</span><span class="p">;</span> <span class="p">}</span>
+    <span class="kt">void</span> <span class="n">bar</span><span class="p">()</span> <span class="p">{</span>
+      <span class="c1">// use d-&gt;v instead of v</span>
+    <span class="p">}</span>
+   <span class="nl">private:</span>
+    <span class="kt">void</span> <span class="n">init_d</span><span class="p">()</span> <span class="p">{</span> <span class="n">d</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Foo_d</span><span class="p">;</span> <span class="p">}</span>
+    <span class="n">Foo_d</span><span class="o">*</span> <span class="n">d</span><span class="p">;</span>
+  <span class="p">};</span>
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>如果需要声明指定数据结构内存对齐，则需要使用宏<code class="language-plaintext highlighter-rouge">EIGEN_ALIGN_TO_BOUNDARY</code>：</p>
+
+    <ul>
+      <li>
+        <p>Eigen对于常用的8字节、16字节、32字节、64字节内存对齐定义了别名：</p>
+
+        <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c1">// Shortcuts to EIGEN_ALIGN_TO_BOUNDARY</span>
+  <span class="cp">#define EIGEN_ALIGN8  EIGEN_ALIGN_TO_BOUNDARY(8)
+</span>  <span class="cp">#define EIGEN_ALIGN16 EIGEN_ALIGN_TO_BOUNDARY(16)
+</span>  <span class="cp">#define EIGEN_ALIGN32 EIGEN_ALIGN_TO_BOUNDARY(32)
+</span>  <span class="cp">#define EIGEN_ALIGN64 EIGEN_ALIGN_TO_BOUNDARY(64)
+</span></code></pre></div>        </div>
+      </li>
+      <li>
+        <p>宏<code class="language-plaintext highlighter-rouge">EIGEN_ALIGN_TO_BOUNDARY</code>仅用于声明需要内存对齐，无法保证在动态内存分配中内存对齐，需要结合宏<code class="language-plaintext highlighter-rouge">EIGEN_MAKE_ALIGNED_OPERATOR_NEW</code>使用：</p>
+
+        <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">struct</span> <span class="nc">EIGEN_ALIGN16</span> <span class="n">Point</span> <span class="p">{</span>
+    <span class="n">PCL_ADD_POINT4D</span><span class="p">;</span>
+    <span class="kt">float</span> <span class="n">intensity</span><span class="p">;</span>
+    <span class="kt">float</span> <span class="n">time</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="kt">uint16_t</span> <span class="n">ring</span><span class="p">;</span>
+    <span class="n">EIGEN_MAKE_ALIGNED_OPERATOR_NEW</span>
+  <span class="p">}</span> <span class="cm">/*EIGEN_ALIGN16*/</span><span class="p">;</span> <span class="c1">// 放在这里也可</span>
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<h4 id="包含eigen对象的stl容器">包含Eigen对象的STL容器</h4>
+
+<ol>
+  <li>
+    <p>对于包含固定大小可向量化的Eigen对象的STL容器，需要使用Eigen定义的超出默认对齐尺寸的堆内存管理器（over-aligned allocator）<code class="language-plaintext highlighter-rouge">aligned_allocator</code>进行内存对齐：</p>
+
+    <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">Vector4d</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">less</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">aligned_allocator</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="k">const</span> <span class="kt">int</span><span class="p">,</span> <span class="n">Vector4d</span><span class="o">&gt;</span> <span class="o">&gt;</span> <span class="o">&gt;</span>
+</code></pre></div>    </div>
+
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">std::less</code>是<code class="language-plaintext highlighter-rouge">std::map</code>默认的排序函数，但是在这里为了指定堆内存管理器类型需要在其之前指定；</li>
+      <li>如果使用C++17标准进行编译则不需要上述操作，因为C++17标准有对于超出默认对齐尺寸数据的动态内存分配机制；</li>
+    </ul>
+  </li>
+  <li>
+    <p>如果需要使用<code class="language-plaintext highlighter-rouge">std::vector</code>，除了需要使用Eigen定义的堆内存管理器<code class="language-plaintext highlighter-rouge">aligned_allocator</code>，还需要包含头文件<code class="language-plaintext highlighter-rouge">#include &lt;Eigen/StdVector&gt;</code>进行内存对齐：</p>
+
+    <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="cp">#include</span> <span class="cpf">&lt;Eigen/StdVector&gt;</span><span class="cp">
+</span>
+ <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Vector4f</span><span class="p">,</span> <span class="n">aligned_allocator</span><span class="o">&lt;</span><span class="n">Vector4f</span><span class="o">&gt;</span> <span class="o">&gt;</span>
+</code></pre></div>    </div>
+
+    <ul>
+      <li>C++11之前的标准在调用<code class="language-plaintext highlighter-rouge">std::vector</code>的<code class="language-plaintext highlighter-rouge">resize()</code>成员函数时会调用元素的默认构造函数，造成元素的值传递，会破坏内存对齐；</li>
+      <li>如果使用C++11以后的标准进行编译则不需要上述操作，因为C++11标准修复了之前标准中<code class="language-plaintext highlighter-rouge">std::vector</code>存在的问题；</li>
+    </ul>
+  </li>
+  <li>
+    <p>如果需要根据模板参数进行条件判断<code class="language-plaintext highlighter-rouge">std::vector</code>是否使用内存对齐，则需要使用宏<code class="language-plaintext highlighter-rouge">EIGEN_DEFINE_STL_VECTOR_SPECIALIZATION</code>进行判断：</p>
+
+    <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="cp">#include</span><span class="cpf">&lt;Eigen/StdVector&gt;</span><span class="cp">
+</span>
+ <span class="n">EIGEN_DEFINE_STL_VECTOR_SPECIALIZATION</span><span class="p">(</span><span class="n">Matrix2d</span><span class="p">)</span>
+ <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Vector2d</span><span class="o">&gt;</span>
+</code></pre></div>    </div>
+
+    <ul>
+      <li>如果使用C++11以后的标准进行编译则不需要上述操作，因为C++11标准修复了之前标准中<code class="language-plaintext highlighter-rouge">std::vector</code>存在的问题；</li>
+      <li>优点是不需要在多处指定Eigen定义的堆内存管理器<code class="language-plaintext highlighter-rouge">aligned_allocator</code>，缺点是需要在每次声明<code class="language-plaintext highlighter-rouge">std::vector</code>前声明宏<code class="language-plaintext highlighter-rouge">EIGEN_DEFINE_STL_VECTOR_SPECIALIZATION</code>，否则会使用默认堆内存管理器<code class="language-plaintext highlighter-rouge">std::allocator</code>造成程序崩溃；</li>
+    </ul>
+  </li>
+  <li>
+    <p>如果需要使用<code class="language-plaintext highlighter-rouge">emplace()</code>或<code class="language-plaintext highlighter-rouge">emplace_back()</code>函数向STL容器中添加Eigen对象，不能传入初始化列表，存在内存对齐问题：</p>
+
+    <ul>
+      <li>
+        <p>在构造时调用了<code class="language-plaintext highlighter-rouge">std::allocator_traits</code>的<code class="language-plaintext highlighter-rouge">construct()</code>成员函数，原型声明如下：</p>
+
+        <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">,</span> <span class="k">class</span><span class="o">...</span> <span class="nc">Args</span><span class="p">&gt;</span>
+  <span class="k">static</span> <span class="kt">void</span> <span class="nf">construct</span><span class="p">(</span><span class="n">allocator_type</span> <span class="n">alloc</span><span class="p">,</span> <span class="n">T</span><span class="o">*</span> <span class="n">p</span><span class="p">,</span> <span class="n">Args</span><span class="o">&amp;&amp;</span><span class="p">...</span> <span class="n">args</span><span class="p">);</span>
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>实现：</p>
+
+        <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c1">// 优先调用堆内存管理器的construct()成员函数</span>
+  <span class="n">alloc</span><span class="p">.</span><span class="n">construct</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">forward</span><span class="o">&lt;</span><span class="n">Args</span><span class="o">&gt;</span><span class="p">(</span><span class="n">args</span><span class="p">)...);</span>
+  <span class="c1">// 如果堆内存管理器未定义construct()成员函数，则使用默认的new运算符</span>
+  <span class="c1">// Eigen定义的堆内存管理器就是这种情况</span>
+  <span class="o">::</span><span class="k">new</span><span class="p">(</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">void</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">p</span><span class="p">))</span> <span class="n">T</span><span class="p">(</span><span class="n">forward</span><span class="o">&lt;</span><span class="n">Args</span><span class="o">&gt;</span><span class="p">(</span><span class="n">args</span><span class="p">)...);</span>
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<h4 id="将eigen对象作为函数参数传递">将Eigen对象作为函数参数传递</h4>
+
+<ol>
+  <li>从C++的角度，不建议使用值传递，因为会调用拷贝构造函数，对于大对象较为耗时，建议使用引用传递，如果不需要修改函数参数，建议使用常引用传递；</li>
+  <li>
+    <p>从Eigen的角度，在将固定大小可向量化的Eigen对象作为函数参数传递时，不能使用值传递，应当使用引用传递，如果不需要修改函数参数，建议使用常引用传递；</p>
+
+    <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kt">void</span> <span class="nf">my_function</span><span class="p">(</span><span class="n">Vector2d</span> <span class="n">v</span><span class="p">);</span>        <span class="c1">// 错误</span>
+ <span class="kt">void</span> <span class="nf">my_function</span><span class="p">(</span><span class="k">const</span> <span class="n">Vector2d</span><span class="o">&amp;</span> <span class="n">v</span><span class="p">);</span> <span class="c1">// 正确</span>
+</code></pre></div>    </div>
+
+    <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="k">struct</span> <span class="nc">Foo</span> <span class="p">{</span>
+   <span class="n">Vector2d</span> <span class="n">v</span><span class="p">;</span>
+ <span class="p">};</span>
+
+ <span class="kt">void</span> <span class="n">my_function</span><span class="p">(</span><span class="n">Foo</span> <span class="n">v</span><span class="p">);</span>                    <span class="c1">// 错误</span>
+ <span class="kt">void</span> <span class="n">my_function</span><span class="p">(</span><span class="k">const</span> <span class="n">Foo</span><span class="o">&amp;</span> <span class="n">v</span><span class="p">);</span>             <span class="c1">// 正确</span>
+</code></pre></div>    </div>
+
+    <ul>
+      <li>原因是在值传递的过程中不考虑Eigen对象的内存对齐修饰符（alignment modifier）；</li>
+      <li>Eigen对象作为函数返回值不受影响；</li>
+    </ul>
+  </li>
+</ol>
+
+<h4 id="创建指向eigen对象的智能指针">创建指向Eigen对象的智能指针</h4>
+
+<ol>
+  <li>在创建指向Eigen对象的智能指针时，不能使用<code class="language-plaintext highlighter-rouge">std::make_shared()</code>，因为其使用的是默认的<code class="language-plaintext highlighter-rouge">new</code>运算符，忽略了重载后的<code class="language-plaintext highlighter-rouge">new</code>运算符，存在内存对齐问题；</li>
+  <li>
+    <p>可以通过以下两种方法创建指向Eigen对象的智能指针：</p>
+
+    <ul>
+      <li>
+        <p>使用重载后的<code class="language-plaintext highlighter-rouge">new</code>运算符，显式调用智能指针构造函数：</p>
+
+        <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span> <span class="n">spA</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span><span class="p">(</span><span class="k">new</span> <span class="nf">A</span><span class="p">(</span><span class="n">args</span><span class="p">));</span>
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>使用Eigen定义的堆内存管理器<code class="language-plaintext highlighter-rouge">aligned_allocator</code>以及<code class="language-plaintext highlighter-rouge">std::allocate_shared()</code>：</p>
+
+        <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span> <span class="n">spA</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">allocate_shared</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span><span class="p">(</span><span class="n">aligned_allocator</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span><span class="p">(),</span> <span class="n">args</span><span class="p">);</span>
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="c11中的auto关键字">C++11中的<code class="language-plaintext highlighter-rouge">auto</code>关键字</h3>
+
+<p>不建议在Eigen表达式中使用<code class="language-plaintext highlighter-rouge">auto</code>关键字，特别是不要使用<code class="language-plaintext highlighter-rouge">auto</code>关键字代替<code class="language-plaintext highlighter-rouge">Matrix</code>类，部分情况下存在未定义行为：</p>
+
+<ol>
+  <li>
+    <p>可能导致表达式被重复计算；</p>
+
+    <p>示例：</p>
+
+    <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="n">MatrixXd</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">;</span>
+ <span class="k">auto</span> <span class="n">C</span> <span class="o">=</span> <span class="n">A</span> <span class="o">*</span> <span class="n">B</span><span class="p">;</span>         <span class="c1">// 返回抽象表达式，表示矩阵乘积并保存到A和B的引用</span>
+ <span class="k">for</span> <span class="p">(...)</span> <span class="p">{</span>
+   <span class="n">w</span> <span class="o">=</span> <span class="n">C</span> <span class="o">*</span> <span class="n">v</span><span class="p">;</span>            <span class="c1">// 每次循环都会重复计算A * B</span>
+ <span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>可能导致表达式的值发生变化；</p>
+
+    <p>示例：</p>
+
+    <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="n">MatrixXd</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">;</span>
+ <span class="k">auto</span> <span class="n">C</span> <span class="o">=</span> <span class="n">A</span> <span class="o">*</span> <span class="n">B</span><span class="p">;</span>         <span class="c1">// 返回抽象表达式，表示矩阵乘积并保存对A和B的引用</span>
+ <span class="n">MatrixXd</span> <span class="n">R1</span> <span class="o">=</span> <span class="n">C</span><span class="p">;</span>
+ <span class="c1">// do something with A</span>
+ <span class="n">MatrixXd</span> <span class="n">R2</span> <span class="o">=</span> <span class="n">C</span><span class="p">;</span>        <span class="c1">// A的值发生了变化，导致表达式的值发生了变化，R1≠R2</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>可能导致程序崩溃；</p>
+
+    <ul>
+      <li>
+        <p>示例一：</p>
+
+        <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c1">// eval()成员函数返回表达式的计算结果，是一个临时对象</span>
+  <span class="c1">// transpose()成员函数返回对这个临时对象的引用</span>
+  <span class="c1">// 执行后表达式C是一个对已被析构的临时对象的引用</span>
+  <span class="k">auto</span> <span class="n">C</span> <span class="o">=</span> <span class="p">((</span><span class="n">A</span> <span class="o">+</span> <span class="n">B</span><span class="p">).</span><span class="n">eval</span><span class="p">()).</span><span class="n">transpose</span><span class="p">();</span>
+  <span class="c1">// 再使用表达式C会导致程度崩溃</span>
+  <span class="c1">// do something with C</span>
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>示例二：</p>
+
+        <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">VectorXd</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">;</span>
+  <span class="c1">// normalized()成员函数会隐式调用eval()成员函数</span>
+  <span class="k">auto</span> <span class="n">C</span> <span class="o">=</span> <span class="n">u</span> <span class="o">+</span> <span class="p">(</span><span class="n">A</span> <span class="o">*</span> <span class="n">v</span><span class="p">).</span><span class="n">normalized</span><span class="p">();</span>
+  <span class="c1">// do something with C</span>
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+  <li>上述问题产生的根本原因是Eigen使用了惰性求值策略，将在后文中详述；</li>
+  <li>解决方案是对于表达式整体调用<code class="language-plaintext highlighter-rouge">eval()</code>成员函数，返回确定类型的表达式的值；</li>
+</ol>
+
+<h3 id="eigen中的惰性求值问题">Eigen中的惰性求值问题</h3>
+
+<ol>
+  <li>惰性求值（lazy evaluation）指的是在需要使用表达式的值的时候再计算表达式的值，是一种求值策略，与之相对的是及早求值（eager evaluation）；</li>
+  <li>基于表达式模板（expression-template-based）的库可以使用惰性求值策略，从而避免将子表达式求值为临时变量，在大多数情况下可以极大提高运行速度；</li>
+  <li>Eigen中的所有表达式都是惰性求值的，对于表达式整体的求值仅发生在将表达式赋值给变量时，在此之前仅构建抽象表达式树（abstract expression tree），其目的是尽可能避免临时变量在计算和拷贝过程中重复遍历内存空间；</li>
+  <li>
+    <p>Eigen具有智能编译时（compile-time）机制，会将部分子表达式提前求值为临时变量：</p>
+
+    <ul>
+      <li>
+        <p>主要是考虑到以下两种原因：</p>
+
+        <ul>
+          <li>纯惰性求值在部分情况下影响计算性能；</li>
+          <li>纯惰性求值在部分情况下影响计算结果的正确性；</li>
+        </ul>
+      </li>
+      <li>
+        <p>具体包括以下三种情况：</p>
+
+        <ul>
+          <li>
+            <p>具有赋值表达式<code class="language-plaintext highlighter-rouge">a = b</code>的形式，其中表达式<code class="language-plaintext highlighter-rouge">b</code>具有赋值前求值标志（evaluate-before-assigning flag），例如矩阵乘法：</p>
+
+            <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c1">// 此时惰性求值影响计算结果的正确性</span>
+  <span class="n">mat</span> <span class="o">=</span> <span class="n">mat</span> <span class="o">*</span> <span class="n">mat</span><span class="p">;</span>                    <span class="c1">// (mat * mat)被求值为临时变量</span>
+  <span class="c1">// 此时惰性求值不影响计算结果的正确性</span>
+  <span class="c1">// noalias()成员函数可以屏蔽赋值前求值标志，强制惰性求值</span>
+  <span class="n">mat1</span><span class="p">.</span><span class="n">noalias</span><span class="p">()</span> <span class="o">=</span> <span class="n">mat2</span> <span class="o">*</span> <span class="n">mat2</span><span class="p">;</span>
+</code></pre></div>            </div>
+          </li>
+          <li>
+            <p>具有嵌套表达式<code class="language-plaintext highlighter-rouge">a + b</code>的形式，其中表达式<code class="language-plaintext highlighter-rouge">b</code>具有嵌套前求值标志（evaluate-before-nesting flag），例如矩阵乘法：</p>
+
+            <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">mat1</span> <span class="o">=</span> <span class="n">mat2</span> <span class="o">*</span> <span class="n">mat3</span> <span class="o">+</span> <span class="n">mat4</span> <span class="o">*</span> <span class="n">mat5</span><span class="p">;</span>   <span class="c1">// (mat2 * mat3)、(mat4 * mat5)被求值为临时变量</span>
+</code></pre></div>            </div>
+          </li>
+          <li>
+            <p>成本模型显示将子表达式求值为临时变量后操作的总成本降低，例如计算成本较高并且被多次重复使用的中间结果：</p>
+
+            <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">mat1</span> <span class="o">=</span> <span class="n">mat2</span> <span class="o">*</span> <span class="p">(</span><span class="n">mat3</span> <span class="o">+</span> <span class="n">mat4</span><span class="p">);</span>        <span class="c1">// (mat3 + mat4)被求值为临时变量</span>
+</code></pre></div>            </div>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Eigen提供了成员函数用于手动覆盖默认行为：</p>
+
+    <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c1">// 用于等号右值，立即计算表达式的值</span>
+ <span class="c1">// 对于非表达式的Matrix类对象返回常引用，避免无用拷贝</span>
+ <span class="c1">// 应慎重与C++11的auto关键字一起使用</span>
+ <span class="n">eval</span><span class="p">()</span>      <span class="c1">// force immediate evaluation</span>
+ <span class="c1">// 用于等号左值，保持抽象表达式树，不计算表达式的值</span>
+ <span class="c1">// 屏蔽赋值前求值标志，目前仅有矩阵乘法具有该标志，因此仅对矩阵乘法有效</span>
+ <span class="c1">// 当Matrix类或Array类的同一个对象同时出现在赋值运算符两侧时不能使用，必须立即求值</span>
+ <span class="n">noalias</span><span class="p">()</span>   <span class="c1">// force lazy evaluation</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h2 id="资料">资料</h2>
+
+<h3 id="网站">网站</h3>
+
+<ol>
+  <li><a href="https://eigen.tuxfamily.org/dox/">Eigen: Main Page</a></li>
+  <li><a href="https://eigen.tuxfamily.org/dox/group__QuickRefPage.html">[QuickRef] Dense matrix and array manipulations</a></li>
+  <li><a href="https://eigen.tuxfamily.org/dox/group__SparseQuickRefPage.html">[QuickRef] Sparse linear algebra</a></li>
+  <li><a href="https://eigen.tuxfamily.org/dox/AsciiQuickReference.txt">Eigen short ASCII reference</a></li>
+  <li><a href="http://wiki.ros.org/eigen/Cookbook">eigen/Cookbook-ROS Wiki</a></li>
+</ol>
+
+<h3 id="github">GitHub</h3>
+
+<ol>
+  <li><a href="https://github.com/gaoxiang12/slambook">gaoxiang12/slambook</a></li>
+  <li><a href="https://github.com/gaoxiang12/slambook2">gaoxiang12/slambook2</a></li>
+  <li><a href="https://github.com/qixianyu-buaa/EigenChineseDocument">qixianyu-buaa/EigenChineseDocument</a></li>
+  <li><a href="https://github.com/zxl19/Eigen-Cheatsheet">zxl19/Eigen-Cheatsheet</a></li>
+</ol>
+
+<h2 id="参考">参考</h2>
+
+<ol>
+  <li><a href="https://blog.csdn.net/SKANK911/article/details/89259272">Eigen官网教程(1) Matrix相关-CSDN博客</a></li>
+  <li><a href="https://blog.csdn.net/SKANK911/article/details/89279521">Eigen官网教程(2) Array类和元素级操作-CSDN博客</a></li>
+  <li><a href="https://blog.csdn.net/SKANK911/article/details/89279545">Eigen官网教程(3) 块操作-CSDN博客</a></li>
+  <li><a href="https://blog.csdn.net/SKANK911/article/details/89279656">Eigen官网教程(4) 高级初始化-CSDN博客</a></li>
+  <li><a href="https://blog.csdn.net/SKANK911/article/details/89279675">Eigen官网教程(5) 规约、范数等-CSDN博客</a></li>
+  <li><a href="https://blog.csdn.net/SKANK911/article/details/89279693">Eigen官网教程(6) Map类-CSDN博客</a></li>
+  <li><a href="https://blog.csdn.net/SKANK911/article/details/89279754">Eigen官网教程(7) Geometry几何模块的实践-CSDN博客</a></li>
+  <li><a href="https://blog.csdn.net/QLeelq/article/details/111599195">Eigen：基础入门到使用-CSDN博客</a></li>
+  <li><a href="https://blog.csdn.net/QLeelq/article/details/111660907">Eigen：进阶使用-CSDN博客</a></li>
+  <li><a href="https://eigen.tuxfamily.org/dox/group__TopicLinearAlgebraDecompositions.html">Catalogue of dense decompositions</a></li>
+  <li><a href="https://eigen.tuxfamily.org/dox/group__TutorialLinearAlgebra.html">Linear algebra and decompositions</a></li>
+  <li><a href="https://eigen.tuxfamily.org/dox/group__DenseDecompositionBenchmark.html">Benchmark of dense decompositions</a></li>
+  <li><a href="http://www.eigen.tuxfamily.org/dox/group__LeastSquares.html">Solving linear least squares systems</a></li>
+  <li><a href="https://blog.csdn.net/zhouliyang1990/article/details/21952485">LU分解、LDLT分解和Cholesky分解-CSDN博客</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/29846048">奇异值分解（SVD）-漫漫成长的文章-知乎</a></li>
+  <li><a href="https://blog.csdn.net/jiang_he_hu_hai/article/details/78363642">SVD分解-CSDN博客</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/85108850">欧拉角细节/旋转顺序/内旋外旋-能儿的文章-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/144032401">欧拉角和旋转矩阵之间的转换-江南古镇的文章-知乎</a></li>
+  <li><a href="https://math.stackexchange.com/questions/1137745/proof-of-the-extrinsic-to-intrinsic-rotation-transform">内旋外旋证明-Stack Exchange</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/45404840">三维旋转：欧拉角、四元数、旋转矩阵、轴角之间的转换-鸡哥的文章-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/619182782">三维旋转的不同表示方式和相互转换-xiaotaw的文章-知乎</a></li>
+  <li><a href="https://stackoverflow.com/questions/48019329/difference-between-norm-normalize-and-normalized-in-eigen">四元数归一化1-Stack Overflow</a></li>
+  <li><a href="https://blog.csdn.net/m0_56348460/article/details/117386857">四元数归一化2-CSDN博客</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/538653027">四元数的球面线性插值（slerp）-一条放浪不羁的爬虫的文章-知乎</a></li>
+  <li><a href="https://www.zhihu.com/question/22910238/answer/1096183240">机械臂如何实现笛卡尔空间中姿态的插值？-fly qq的回答-知乎</a></li>
+  <li><a href="https://www.zhihu.com/question/22910238/answer/1098345012">机械臂如何实现笛卡尔空间中姿态的插值？-桂凯的回答-知乎</a></li>
+  <li><a href="https://stackoverflow.com/questions/21761909/eigen-convert-matrix3d-rotation-to-quaternion">旋转矩阵归一化1-Stack Overflow</a></li>
+  <li><a href="https://stackoverflow.com/questions/43896041/eigen-matrix-to-quaternion-and-back-have-different-result">旋转矩阵归一化2-Stack Overflow</a></li>
+  <li><a href="https://eigen.tuxfamily.org/dox/TopicPitfalls.html">Common pitfalls</a></li>
+  <li><a href="https://eigen.tuxfamily.org/dox/TopicTemplateKeyword.html">The template and typename keywords in C++</a></li>
+  <li><a href="http://www.eigen.tuxfamily.org/dox/group__TopicAliasing.html">Aliasing</a></li>
+  <li><a href="https://eigen.tuxfamily.org/dox/group__DenseMatrixManipulation__Alignement.html">Alignement issues</a></li>
+  <li><a href="https://blog.csdn.net/weixin_38251332/article/details/120308863">向量化运算-CSDN博客</a></li>
+  <li><a href="https://blog.csdn.net/shyjhyp11/article/details/123208279">Eigen内存对齐1-CSDN博客</a></li>
+  <li><a href="https://blog.csdn.net/shyjhyp11/article/details/123204444">Eigen内存对齐2-CSDN博客</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/93824687">从Eigen向量化谈内存对齐-王金戈的文章-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/349413376">Eigen内存对齐-卷儿的文章-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/618716343">一文带你了解Eigen内存对齐-王方浩的文章-知乎</a></li>
+  <li><a href="https://www.zhihu.com/question/38315455/answer/2963625338">Eigen库在使用的过程出现warning：在堆上分配的对象可能不是对齐16，什么原因呢？-王方浩的回答-知乎</a></li>
+  <li><a href="https://blog.csdn.net/aishuirenjia/article/details/102979457">C++深入解析new关键字，::new、operator new函数，placement new表达式-CSDN博客</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/297911301">Eigen与std::make_shared，std::unique_ptr搭配使用的采坑记录-minxuan的文章-知乎</a></li>
+  <li><a href="http://www.eigen.tuxfamily.org/dox/TopicLazyEvaluation.html">Lazy Evaluation and Aliasing</a></li>
+  <li><a href="https://blog.csdn.net/JNingWei/article/details/80047122">eager evaluation (及早求值) &amp; lazy evaluation (惰性求值)-CSDN博客</a></li>
+  <li><a href="https://blog.csdn.net/weixin_30550081/article/details/95276173">noalias()-CSDN博客</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/32226967">Eigen常见的坑-管清文的文章-知乎</a></li>
+</ol>
+
+  </div>
+
+  
+  
+<script src="https://utteranc.es/client.js"
+        repo="YWpepper/YWpepper.github.io"
+        issue-term="title"
+        label="comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
+
+  
+</article>
+
+<div class="pagination">
+  
+    <span class="prev" >
+      <a href="http://localhost:4000/id-photo/">
+        ← 上一篇
+      </a>
+    </span>
+  
+  
+    <span class="next" >
+      <a href="http://localhost:4000/sophus-note/">
+        下一篇 →
+      </a>
+    </span>
+  
+</div>
+      </div>
+    </div>
+
+    
+
+  </body>
+
+  
+  <script>
+    document.getElementById("main").classList.add("withtoc");
+  </script>
+  
+
+  <div class="wrapper-footer-mobile">
+    <footer class="footer">
+      <!-- Refer to https://codepen.io/ruandre/pen/howFi -->
+<ul class="svg-icon">
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li><a href="https://github.com/zxl19" class="icon-13 github" title="GitHub"><svg viewBox="0 0 512 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg><!--[if lt IE 9]><em>GitHub</em><![endif]--></a></li>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</ul>
+
+
+
+<p>Copyright © 2020-2025 zxl19. All Rights Reserved.</p>
+
+    </footer>
+
+
+</html>

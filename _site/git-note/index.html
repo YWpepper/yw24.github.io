@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Git学习笔记 – zxl19 – 一个工程师的存档点</title>
+
+      <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="我的Git学习笔记。
+
+" />
+    <meta property="og:description" content="我的Git学习笔记。
+
+" />
+    
+    <meta name="author" content="zxl19" />
+
+    
+    <meta property="og:title" content="Git学习笔记" />
+    <meta property="twitter:title" content="Git学习笔记" />
+    
+  <!-- Async font loading -->
+<script>
+  window.WebFontConfig = {
+      custom: {
+          families: ['Spoqa Han Sans:100,300,400,700'],
+          urls: ['https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css']
+      },
+      timeout: 60000
+  };
+  (function(d) {
+      var wf = d.createElement('script'), s = d.scripts[0];
+      wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js';
+      s.parentNode.insertBefore(wf, s);
+  })(document);
+</script>
+
+<!--adobe fonts-->
+<script>
+    (function(d) {
+      var config = {
+        kitId: 'vbt3gjx',
+        scriptTimeout: 3000,
+        async: true
+      },
+      h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+    })(document);
+</script> 
+
+  <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link rel="stylesheet" type="text/css" href="/style.css" />
+  <link rel="alternate" type="application/rss+xml" title="zxl19 - 一个工程师的存档点" href="/feed.xml" />
+  <link rel="shortcut icon" href="https://raw.githubusercontent.com/zxl19/zxl19.github.io/master/images/icon.png">
+  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+  <script src="https://unpkg.com/feather-icons"></script>
+  <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        inlineMath: [['$','$']]
+      }
+    });
+  </script>
+
+  <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+
+</head>
+
+  <body>
+    <div class="wrapper-sidebar">
+  <header class="sidebar clearfix">
+    <div class="site-info">
+      
+        <a href="/" class="site-avatar"><img src="https://raw.githubusercontent.com/zxl19/zxl19.github.io/master/images/avatar.jpg" /></a>
+       
+      <h1 class="site-name"><a href="/">zxl19</a></h1>
+      <p class="site-description">一个工程师的存档点</p>
+    </div>
+  </header>
+
+  <div class="navlist">
+    <nav>
+      
+      
+      <a href="/">首页</a>
+      
+      
+      
+      <a href="/about">关于</a>
+      
+      
+      
+      <a href="/archive">归档</a>
+      
+      
+      
+      <a href="/tags">标签</a>
+      
+      
+    </nav>
+  </div>
+
+  <div class="wrapper-footer-desktop">
+    <footer class="footer">
+      <!-- Refer to https://codepen.io/ruandre/pen/howFi -->
+<ul class="svg-icon">
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li><a href="https://github.com/zxl19" class="icon-13 github" title="GitHub"><svg viewBox="0 0 512 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg><!--[if lt IE 9]><em>GitHub</em><![endif]--></a></li>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</ul>
+
+
+
+<p>Copyright © 2020-2025 zxl19. All Rights Reserved.</p>
+
+    </footer>
+  </div>
+</div>
+
+    
+      <aside class="toc">
+        <ul>
+  <li><a href="#">Git学习笔记</a>
+    <ul>
+      <li><a href="#基本概念">基本概念</a></li>
+      <li><a href="#常用命令">常用命令</a></li>
+      <li><a href="#工作流程">工作流程</a></li>
+      <li><a href="#使用技巧">使用技巧</a>
+        <ul>
+          <li><a href="#gitignore文件"><code class="language-plaintext highlighter-rouge">.gitignore</code>文件</a></li>
+          <li><a href="#gitkeep文件"><code class="language-plaintext highlighter-rouge">.gitkeep</code>文件</a></li>
+          <li><a href="#gitmodules文件"><code class="language-plaintext highlighter-rouge">.gitmodules</code>文件</a></li>
+          <li><a href="#gitattributes文件"><code class="language-plaintext highlighter-rouge">.gitattributes</code>文件</a></li>
+        </ul>
+      </li>
+      <li><a href="#教程包括git和github">教程（包括Git和GitHub）</a>
+        <ul>
+          <li><a href="#网站">网站</a></li>
+          <li><a href="#github">GitHub</a></li>
+        </ul>
+      </li>
+      <li><a href="#客户端">客户端</a>
+        <ul>
+          <li><a href="#终端客户端">终端客户端</a></li>
+          <li><a href="#图形化客户端">图形化客户端</a></li>
+        </ul>
+      </li>
+      <li><a href="#大文件支持">大文件支持</a></li>
+      <li><a href="#参考">参考</a></li>
+    </ul>
+  </li>
+</ul>
+      </aside>
+    
+
+    <div id="main" role="main" class="wrapper-content">
+      <div class="container">
+        <article class="posts">
+  <h1>Git学习笔记</h1>
+
+  <div clsss="meta">
+    <span class="author">
+      zxl19
+    </span>
+
+    <span class="date">
+      2021-08-14
+    </span>
+
+    <ul class="tag">
+      
+      <li>
+        <a href="http://localhost:4000/tags#Git">
+          Git
+        </a>
+      </li>
+      
+      <li>
+        <a href="http://localhost:4000/tags#Note">
+          Note
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+
+  <div class="entry">
+    <p>我的Git学习笔记。</p>
+
+<!-- more -->
+
+<h2 id="基本概念">基本概念</h2>
+
+<ol>
+  <li><strong>工作目录/工作区</strong>：持有实际文件；</li>
+  <li><strong>暂存区（Index）</strong>：缓存区域，临时保存改动；</li>
+  <li><strong>HEAD</strong>：指向最后一次提交的结果；</li>
+</ol>
+
+<h2 id="常用命令">常用命令</h2>
+
+<ol>
+  <li>
+    <p>创建新仓库：</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c"># 在仓库文件夹中</span>
+ git init
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>检出仓库：</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c"># 创建一个本地仓库的克隆版本</span>
+ git clone /path/to/repository
+ <span class="c"># 创建远程服务器上仓库的克隆版本</span>
+ git clone username@host:/path/to/repository
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>添加和提交：</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c"># 添加单个文件到暂存区</span>
+ git add &lt;filename&gt;
+ <span class="c"># 添加所有文件到暂存区</span>
+ git add <span class="k">*</span>
+ <span class="c"># 提交改动到HEAD</span>
+ git commit <span class="nt">-m</span> <span class="s2">"代码提交信息"</span>
+</code></pre></div>    </div>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c"># 修改上次的提交内容和提交信息</span>
+ git commit <span class="nt">--amend</span>
+ <span class="c"># 修改上次的提交内容，不修改提交信息</span>
+ git commit <span class="nt">--amend</span> <span class="nt">--no-edit</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>推送改动：</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c"># 提交改动到远程服务器上仓库的master分支</span>
+ <span class="c"># 远程服务器的默认名为origin</span>
+ git push origin master
+</code></pre></div>    </div>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c"># 强制推送，会覆盖远程分支，需要谨慎使用！</span>
+ git push <span class="nt">-f</span>
+ <span class="c"># 防止覆盖远程分支中的新增提交，建议使用</span>
+ git push <span class="nt">--force-with-lease</span>
+</code></pre></div>    </div>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c"># 显示远程服务器的名称和URL地址</span>
+ git remote <span class="nt">-v</span>
+ <span class="c"># 添加远程服务器</span>
+ git remote add &lt;name&gt; &lt;url&gt;
+ <span class="c"># 删除远程服务器</span>
+ git remote remove &lt;name&gt;
+ <span class="c"># 修改远程服务器的名称</span>
+ git remote rename &lt;old&gt; &lt;new&gt;
+ <span class="c"># 修改远程服务器的URL地址</span>
+ git remote set-url &lt;name&gt; &lt;new url&gt;
+ <span class="c"># 显示远程服务器的详细信息</span>
+ git remote show &lt;name&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>分支：将特性开发绝缘，默认主分支为<code class="language-plaintext highlighter-rouge">master</code>，<strong>自2020年10月1日起，GitHub将新仓库的默认主分支改为<code class="language-plaintext highlighter-rouge">main</code>：</strong></p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c"># 新建分支并切换</span>
+ <span class="c"># 相当于git branch + git checkout</span>
+ git checkout <span class="nt">-b</span> &lt;branch&gt;
+ <span class="c"># 切换回主分支</span>
+ git checkout master
+ <span class="c"># 删除本地分支</span>
+ git branch <span class="nt">-d</span> &lt;branch&gt;
+ <span class="c"># 删除远程分支</span>
+ git push origin <span class="nt">-d</span> &lt;branch&gt;
+ <span class="c"># 推送分支到远程仓库，使其对他人可见</span>
+ git push origin &lt;branch&gt;
+</code></pre></div>    </div>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c"># 在本地暂存当前分支工作目录和暂存区中所有未提交的修改</span>
+ <span class="c"># 默认不包括未跟踪的文件和被忽略的文件</span>
+ git stash <span class="o">[</span><span class="nt">-u</span><span class="o">]</span> <span class="o">[</span><span class="nt">-a</span><span class="o">]</span>
+ <span class="c"># 暂存并添加信息</span>
+ git stash save <span class="s2">"代码暂存信息"</span>
+ <span class="c"># 查看暂存的修改</span>
+ <span class="c"># stash@{0}为最新暂存的内容</span>
+ git stash list
+ <span class="c"># 下面的命令如果不使用stash@{i}指定，默认对于stash@{0}操作，缓存栈先进后出</span>
+ <span class="c"># 应用暂存的修改，但是不删除缓存栈中的对应内容</span>
+ git stash apply <span class="o">[</span>stash@<span class="o">{</span>i<span class="o">}]</span>
+ <span class="c"># 删除暂存的修改</span>
+ git stash drop <span class="o">[</span>stash@<span class="o">{</span>i<span class="o">}]</span>
+ <span class="c"># 恢复暂存的修改，并删除缓存栈中的对应内容</span>
+ <span class="c"># 相当于git stash apply + git stash drop</span>
+ <span class="c"># 注意当前分支是否与暂存时的分支一致，通过git reset --hard撤回</span>
+ git stash pop <span class="o">[</span>stash@<span class="o">{</span>i<span class="o">}]</span>
+ <span class="c"># 删除所有暂存的修改</span>
+ git stash clear
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>更新与合并：</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c"># 更新本地仓库至最新改动</span>
+ <span class="c"># 相当于git fetch + git merge</span>
+ git pull
+ <span class="c"># 合并其他分支到当前分支</span>
+ git merge &lt;branch&gt;
+ <span class="c"># 终止当前合并过程并恢复合并前的状态</span>
+ git merge <span class="nt">--abort</span>
+ <span class="c"># 合并冲突后手动添加文件到暂存区</span>
+ git add &lt;filename&gt;
+ <span class="c"># 预览差异</span>
+ git diff &lt;source_branch&gt; &lt;target_branch&gt;
+</code></pre></div>    </div>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c"># 挑选若干个提交进行合并</span>
+ <span class="c"># 单个提交</span>
+ git cherry-pick &lt;<span class="nb">id</span><span class="o">&gt;</span>
+ <span class="c"># 多个提交</span>
+ git cherry-pick &lt;id1&gt; &lt;id2&gt;
+ <span class="c"># 提交区间</span>
+ git cherry-pick &lt;id1&gt;..&lt;id2&gt;
+ <span class="c"># 合并冲突的处理方式</span>
+ <span class="c"># --continue：手动解决冲突后继续合并</span>
+ <span class="c"># --abort：放弃合并，恢复原始状态</span>
+ <span class="c"># --quit：放弃合并，保持现有状态</span>
+</code></pre></div>    </div>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c"># 以指定分支为基础，将当前分支的提交合并，并将提交记录变成线性的</span>
+ <span class="c"># 难以追踪修改历史，需要谨慎使用！</span>
+ <span class="c"># 建议在master分支合并feature分支时使用git merge，在feature分支合并master分支时使用git rebase</span>
+ git rebase &lt;branch&gt;
+ <span class="c"># 合并冲突的处理方式</span>
+ <span class="c"># --continue：手动解决冲突后继续合并</span>
+ <span class="c"># --abort：放弃合并，恢复原始状态</span>
+ <span class="c"># --quit：放弃合并，保持现有状态</span>
+ <span class="c"># 以指定提交为基础，交互式合并之后的提交，支持选择合并方式</span>
+ git rebase <span class="nt">-i</span> &lt;<span class="nb">id</span><span class="o">&gt;</span>
+ <span class="c"># 选择合并方式</span>
+ <span class="c"># p, pick = use commit</span>
+ <span class="c"># r, reword = use commit, but edit the commit message</span>
+ <span class="c"># e, edit = use commit, but stop for amending</span>
+ <span class="c"># s, squash = use commit, but meld into previous commit</span>
+ <span class="c"># f, fixup = like "squash", but discard this commit's log message</span>
+ <span class="c"># x, exec = run command (the rest of the line) using shell</span>
+ <span class="c"># d, drop = remove commit</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>标签：</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c"># 创建标签</span>
+ git tag 1.0.0 <span class="o">[</span>ID前十位]
+ <span class="c"># 获取提交ID</span>
+ git log
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>替换本地改动：</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c"># 使用HEAD中的最新内容替换掉工作目录中的文件</span>
+ <span class="c"># 已添加到暂存区的改动以及新文件都不会受到影响</span>
+ git checkout <span class="nt">--</span> &lt;filename&gt;
+ <span class="c"># 丢弃本地的所有改动与提交</span>
+ <span class="c"># 到服务器上获取最新的版本历史并将本地主分支指向它</span>
+ git fetch origin
+ git reset <span class="nt">--hard</span> origin/master
+</code></pre></div>    </div>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c"># 回退到某次提交，删除这次提交后的全部提交记录</span>
+ git reset &lt;<span class="nb">id</span><span class="o">&gt;</span>
+ <span class="c"># --soft：回退修改的内容在暂存区</span>
+ <span class="c"># --mixed：回退修改的内容在工作区（默认）</span>
+ <span class="c"># --hard：回退修改的内容被删除</span>
+ <span class="c"># 撤回某次提交的修改，增加新的提交记录</span>
+ git revert &lt;<span class="nb">id</span><span class="o">&gt;</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>实用小贴士：</p>
+
+    <ul>
+      <li>
+        <p>内建的图形化git：</p>
+
+        <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  gitk
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>彩色的git输出：</p>
+
+        <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  git config color.ui <span class="nb">true</span>
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>显示历史记录时，每个提交的信息只显示一行：</p>
+
+        <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  git config format.pretty oneline
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>交互式添加文件到暂存区：</p>
+
+        <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  git add <span class="nt">-i</span>
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="工作流程">工作流程</h2>
+
+<ol>
+  <li>
+    <p>克隆远程仓库到本地：</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> git clone username@host:/path/to/repository
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>如果没有远程仓库主分支的修改权限，则需要在个人分支中进行修改；</p>
+
+    <ul>
+      <li>
+        <p>如果远程仓库中不存在个人分支，则需要在本地仓库中新建个人分支：</p>
+
+        <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c"># 基于远程仓库的主分支在本地仓库中新建个人分支，并自动关联远程仓库的主分支</span>
+  git checkout <span class="nt">-b</span> &lt;branch&gt; origin/master
+  <span class="c"># 基于本地仓库的当前分支新建个人分支，不会关联远程仓库的分支</span>
+  git checkout <span class="nt">-b</span> &lt;branch&gt;
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>如果远程仓库中存在个人分支，则需要在本地仓库中切换到个人分支：</p>
+
+        <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c"># 查看本地仓库和远程仓库的全部分支</span>
+  git branch <span class="nt">-a</span>
+  <span class="c"># 查看远程仓库的全部分支</span>
+  git branch <span class="nt">-r</span>
+  <span class="c"># 切换到个人分支，自动关联远程仓库的分支</span>
+  git checkout &lt;branch&gt;
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>本地修改，提交：</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> git add <span class="k">*</span>
+ git commit <span class="nt">-m</span> <span class="s2">"代码提交信息"</span>
+</code></pre></div>    </div>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c"># 查看工作区状态</span>
+ git status
+ <span class="c"># 查看完整修改信息</span>
+ git show
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>拉取远程仓库更新到本地：</p>
+
+    <ul>
+      <li>
+        <p>指定远程仓库的分支：</p>
+
+        <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  git pull origin &lt;branch&gt;
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>使用与本地仓库的当前分支关联的远程仓库的分支：</p>
+
+        <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  git pull
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>设置与本地仓库的当前分支关联的远程仓库的分支：</p>
+
+        <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">git</span> <span class="n">branch</span> <span class="o">--</span><span class="n">set</span><span class="o">-</span><span class="n">upstream</span><span class="o">-</span><span class="n">to</span><span class="o">=</span><span class="n">origin</span><span class="o">/&lt;</span><span class="n">branch</span><span class="o">&gt;</span>
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+  <li>在本地仓库合并远程仓库更新并测试；</li>
+  <li>
+    <p>推送本地仓库修改到远程仓库：</p>
+
+    <ul>
+      <li>
+        <p>指定远程仓库的分支，如果远程仓库中不存在指定的分支会自动创建：</p>
+
+        <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c"># 远程仓库的分支名与本地仓库的分支名不同</span>
+  git push origin &lt;local_branch&gt;:&lt;remote_branch&gt;
+  <span class="c"># 远程仓库的分支名与本地仓库的分支名相同</span>
+  git push origin &lt;branch&gt;
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>使用与本地仓库的当前分支关联的远程仓库的分支：</p>
+
+        <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  git push
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>设置与本地仓库的当前分支关联的远程仓库的分支并推送：</p>
+
+        <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  git push <span class="nt">--set-upstream</span> origin &lt;branch&gt;
+  git push <span class="nt">-u</span> origin &lt;branch&gt;
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="使用技巧">使用技巧</h2>
+
+<h3 id="gitignore文件"><code class="language-plaintext highlighter-rouge">.gitignore</code>文件</h3>
+
+<p>用于说明哪些文件或文件夹不需要被添加到版本管理中，在工程根目录下创建。</p>
+
+<ol>
+  <li>GitHub官方提供了模板：<a href="https://github.com/github/gitignore">github/gitignore</a>，可以根据实际情况选择使用；</li>
+  <li>
+    <p>如果相关文件或文件夹已被添加到版本管理中，则<code class="language-plaintext highlighter-rouge">.gitignore</code>文件无效，需要先从暂存区中删除：</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c"># 删除单个文件</span>
+ git <span class="nb">rm</span> <span class="nt">--cached</span> &lt;filename&gt;
+ <span class="c"># 删除所有文件</span>
+ git <span class="nb">rm</span> <span class="nt">-r</span> <span class="nt">--cached</span> <span class="nb">.</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>如果相关文件或文件夹被<code class="language-plaintext highlighter-rouge">.gitignore</code>文件忽略：</p>
+
+    <ul>
+      <li>
+        <p>可以强制添加：</p>
+
+        <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  git add <span class="nt">-f</span> &lt;filename&gt;
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>可以查看被忽略的原因：</p>
+
+        <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  git check-ignore <span class="nt">-v</span> &lt;filename&gt;
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="gitkeep文件"><code class="language-plaintext highlighter-rouge">.gitkeep</code>文件</h3>
+
+<p>用于添加空文件夹到版本管理中，在需要添加的空文件夹中创建。</p>
+
+<p>如果需要添加的空文件夹已经被添加到<code class="language-plaintext highlighter-rouge">.gitignore</code>文件中，则需要强制添加<code class="language-plaintext highlighter-rouge">.gitkeep</code>文件到暂存区：</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git add <span class="nt">-f</span> ./log/.gitkeep
+</code></pre></div></div>
+
+<h3 id="gitmodules文件"><code class="language-plaintext highlighter-rouge">.gitmodules</code>文件</h3>
+
+<p>用于记录仓库子模块的信息。</p>
+
+<ol>
+  <li>
+    <p>添加子模块，注意使用相对路径，可以指定子模块的分支，会自动生成<code class="language-plaintext highlighter-rouge">.gitmodules</code>文件：</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> git submodule add <span class="nt">-b</span> &lt;submodule branch&gt; &lt;submodule url&gt; &lt;relative path to submodule&gt;
+</code></pre></div>    </div>
+
+    <p><code class="language-plaintext highlighter-rouge">.gitmodules</code>文件示例：</p>
+
+    <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code> [submodule "&lt;relative path to submodule&gt;"]
+     path = &lt;relative path to submodule&gt;
+     url = &lt;submodule url&gt;
+     branch = &lt;submodule branch&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>在克隆远程仓库时添加<code class="language-plaintext highlighter-rouge">--recursive</code>循环克隆子模块：</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> git clone username@host:/path/to/repository <span class="nt">--recursive</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>如果远程仓库已克隆完成，则需要单独克隆子模块：</p>
+
+    <ul>
+      <li>
+        <p>方法一：</p>
+
+        <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c"># 初始化本地配置文件,向.git/config文件中写入子模块信息</span>
+  <span class="c"># 可以修改.git/config文件中的子模块URL地址</span>
+  git submodule init
+  <span class="c"># 按照.git/config文件中的子模块信息检出子模块</span>
+  git submodule update
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>方法二：</p>
+
+        <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c"># 初始化本地配置文件并检出子模块</span>
+  git submodule update <span class="nt">--init</span>
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>如果远程仓库添加了多个子模块，可以使用<code class="language-plaintext highlighter-rouge">git submodule foreach</code>命令对于每个子模块进行相同操作：</p>
+
+    <ul>
+      <li>
+        <p>循环克隆每个子模块内部嵌套的子模块：</p>
+
+        <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  git submodule update <span class="nt">--init</span>
+  git submodule foreach git submodule update <span class="nt">--init</span>
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>循环拉取每个子模块远程仓库的更新（子模块的HEAD指向的是添加时的版本）：</p>
+
+        <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  git submodule foreach git pull origin master
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+  <li>在提交修改时，先提交子模块的修改，再提交当前仓库的修改；</li>
+  <li>
+    <p>如果子模块存在合并冲突，则需要手动添加子模块：</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> git add &lt;relative path to submodule&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>删除子模块：</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> git submodule deinit &lt;relative path to submodule&gt;
+ git <span class="nb">rm</span> &lt;relative path to submodule&gt;
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h3 id="gitattributes文件"><code class="language-plaintext highlighter-rouge">.gitattributes</code>文件</h3>
+
+<p>用于定义文件属性，在工程根目录下创建。</p>
+
+<ol>
+  <li>GitHub社区提供了模板：<a href="https://github.com/gitattributes/gitattributes">gitattributes/gitattributes</a>，可以根据实际情况选择使用；</li>
+  <li>
+    <p>主要用于处理不同操作系统中行尾（End Of Line，EOL）控制字符定义不一致的问题：</p>
+
+    <ul>
+      <li>回车（Carriage Return，CR）表示将光标移动到当前行的开头，转义序列为<code class="language-plaintext highlighter-rouge">\r</code>；</li>
+      <li>换行（Line Feed，LF）表示将光标垂直移动到下一行，转义序列为<code class="language-plaintext highlighter-rouge">\n</code>；</li>
+      <li>Windows系统使用CRLF；</li>
+      <li>Linux和MacOS系统使用LF；</li>
+      <li>
+        <p>示例：</p>
+
+        <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  # 所有文件自动检测是否为文本文件，如果是文本文件且未在版本管理中行尾使用CRLF，行尾自动转换为LF
+  *           text=auto
+  # 所有.txt文件作为文本文件处理
+  *.txt       text
+  # 所有.vcproj文件作为文本文件处理，行尾自动转换为CRLF
+  *.vcproj    text eol=crlf
+  # 所有.sh文件作为文本文件处理，行尾自动转换为LF
+  *.sh        text eol=lf
+  # 所有.jpg文件不作为文本文件处理
+  *.jpg       -text
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="教程包括git和github">教程（包括Git和GitHub）</h2>
+
+<h3 id="网站">网站</h3>
+
+<ol>
+  <li><a href="https://git-scm.com/doc">Git-Documentation</a></li>
+  <li><a href="https://git-scm.com/book/en/v2">Git-Book</a></li>
+  <li><a href="https://www.runoob.com/git/git-tutorial.html">Git教程-菜鸟教程</a></li>
+  <li><a href="https://www.runoob.com/manual/git-guide/">git-简明指南</a></li>
+  <li><a href="https://rogerdudler.github.io/git-guide/">git-the simple guide</a></li>
+  <li><a href="https://www.runoob.com/w3cnote/git-five-minutes-tutorial.html">Git五分钟教程</a></li>
+  <li><a href="http://marklodato.github.io/visual-git-guide/index-en.html">A Visual Git Reference</a></li>
+</ol>
+
+<h3 id="github">GitHub</h3>
+
+<ol>
+  <li><a href="https://github.com/tiimgreen/github-cheat-sheet">tiimgreen/github-cheat-sheet</a></li>
+  <li><a href="https://github.com/git-tips/tips">git-tips/tips</a></li>
+  <li><a href="https://github.com/geeeeeeeeek/git-recipes">geeeeeeeeek/git-recipes</a></li>
+  <li><a href="https://github.com/arslanbilal/git-cheat-sheet">arslanbilal/git-cheat-sheet</a></li>
+  <li><a href="https://github.com/progit/progit2">progit/progit2</a></li>
+  <li><a href="https://github.com/agis/git-style-guide">agis/git-style-guide</a></li>
+  <li><a href="https://github.com/rogerdudler/git-guide">rogerdudler/git-guide</a></li>
+  <li><a href="https://github.com/dictcp/awesome-git">dictcp/awesome-git</a></li>
+  <li><a href="https://github.com/AntBranch/awesome-github">AntBranch/awesome-github</a></li>
+  <li><a href="https://github.com/MarkLodato/visual-git-guide">MarkLodato/visual-git-guide</a></li>
+</ol>
+
+<h2 id="客户端">客户端</h2>
+
+<h3 id="终端客户端">终端客户端</h3>
+
+<ol>
+  <li><a href="https://github.com/jesseduffield/lazygit">jesseduffield/lazygit</a></li>
+  <li><a href="https://github.com/Extrawurst/gitui">Extrawurst/gitui</a></li>
+  <li><a href="https://github.com/jonas/tig">jonas/tig</a></li>
+  <li><a href="https://github.com/ArthurSonzogni/git-tui">ArthurSonzogni/git-tui</a></li>
+</ol>
+
+<h3 id="图形化客户端">图形化客户端</h3>
+
+<ol>
+  <li><a href="https://git-scm.com/docs/gitk">gitk</a></li>
+  <li><a href="https://desktop.github.com">GitHub Desktop</a></li>
+  <li><a href="https://www.gitkraken.com">GitKraken</a></li>
+  <li><a href="https://www.sourcetreeapp.com">Sourcetree</a></li>
+  <li><a href="https://github.com/gitextensions/gitextensions">gitextensions/gitextensions</a></li>
+  <li><a href="https://github.com/git-cola/git-cola">git-cola/git-cola</a></li>
+  <li><a href="https://github.com/soramimi/Guitar">soramimi/Guitar</a></li>
+</ol>
+
+<h2 id="大文件支持">大文件支持</h2>
+
+<ol>
+  <li><a href="https://github.com/iterative/dvc">iterative/dvc</a></li>
+  <li><a href="https://github.com/git-lfs/git-lfs">git-lfs/git-lfs</a></li>
+</ol>
+
+<h2 id="参考">参考</h2>
+
+<ol>
+  <li><a href="https://zhuanlan.zhihu.com/p/100243017">git commit –amend修改git提交记录用法详解-玉藻前的文章-知乎</a></li>
+  <li><a href="https://blog.walterlv.com/post/safe-push-using-force-with-lease.html">Git更安全的强制推送，–force-with-lease</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/257179306">10月1日之后，你新建的GitHub库默认分支不叫「master」了-机器之心的文章-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/344100614">熟练掌握git-stash用法-linux技术栈的文章-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/117553180">Git(六)：git stash命令-Aaron Zhu的文章-知乎</a></li>
+  <li><a href="https://blog.csdn.net/qq_38737586/article/details/119637154">GIT丨git stash pop后有冲突时，如何撤销-CSDN博客</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/355413226">git教程–git cherry-pick命令-赵andrew的文章-知乎</a></li>
+  <li><a href="https://juejin.cn/post/6969101234338791432">git rebase，看这一篇就够了-掘金</a></li>
+  <li><a href="https://www.zhihu.com/question/36509119/answer/1990894567">在开发过程中使用git rebase还是git merge，优缺点分别是什么？-一个小号的回答-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/29682134">为什么你应该停止使用Git rebase命令-KenChoi的文章-知乎</a></li>
+  <li><a href="https://geek-docs.com/git/git-questions/71_git_git_remove_in_between_commit.html">Git删除中间提交-极客教程</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/412482122">Git命令reset和revert的区别-Meng小羽的文章-知乎</a></li>
+  <li><a href="https://blog.csdn.net/qq_41800366/article/details/114943539">git reset和revert的区别-CSDN博客</a></li>
+  <li><a href="https://blog.csdn.net/yxlshk/article/details/79944535">Git恢复之前版本的两种方法reset、revert（图文详解）-CSDN博客</a></li>
+  <li><a href="https://blog.csdn.net/weixin_43883776/article/details/85062087">git merge –abort的一种使用情况-CSDN博客</a></li>
+  <li><a href="https://juejin.cn/post/6844903713803337741">git创建本地与远程分支的同步与合并-掘金</a></li>
+  <li><a href="https://blog.csdn.net/goxingman/article/details/114519663">git本地新建分支和远程同步-CSDN博客</a></li>
+  <li><a href="https://blog.csdn.net/mandagod/article/details/115633164">git删除远程分支-CSDN博客</a></li>
+  <li><a href="https://blog.csdn.net/weixin_40633131/article/details/78242210">git查看与对比历史提交记录-CSDN博客</a></li>
+  <li><a href="https://blog.csdn.net/ThinkWon/article/details/101447866">Git忽略文件.gitignore详解-CSDN博客</a></li>
+  <li><a href="https://www.jianshu.com/p/699ed86028c2">.gitignore-简书</a></li>
+  <li><a href="https://blog.csdn.net/dong_beijing/article/details/79860967">git的ignore文件在c++下的编写-CSDN博客</a></li>
+  <li><a href="https://blog.csdn.net/qq_37164975/article/details/106131919">什么是.gitkeep？-CSDN博客</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/87053283">Git中submodule的使用-孤单彼岸的文章-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/100214931">Git子仓库深入浅出-那我懂你意思了的文章-知乎</a></li>
+  <li><a href="https://phoenixnap.com/kb/git-submodule-init">How to Use git submodule init-PhoneixNAP</a></li>
+  <li><a href="https://blog.csdn.net/whuzhang16/article/details/120182063">git子仓库(submodule)操作-CSDN博客</a></li>
+  <li><a href="https://stackoverflow.com/questions/24777973/adding-git-submodules-automatically-gitmodules">克隆子模块-Stack Overflow</a></li>
+  <li><a href="https://blog.csdn.net/weboof/article/details/108517187">submodule指定对应分支-CSDN博客</a></li>
+  <li><a href="https://www.cnblogs.com/love-zf/p/13192734.html">Git clone –recursive-博客园</a></li>
+  <li><a href="https://www.cnblogs.com/mrlonely2018/p/15719250.html">解决子模块的合并冲突-博客园</a></li>
+  <li><a href="https://stackoverflow.com/questions/1260748/how-do-i-remove-a-submodule">删除子模块-Stack Overflow</a></li>
+  <li><a href="https://blog.csdn.net/qq_35425070/article/details/106883833">.gitattributes作用详细讲解（git大佬必会技能)-CSDN博客</a></li>
+  <li><a href="https://geek-docs.com/git/git-questions/1514_git_what_is_the_purpose_of_textauto_in_gitattributes_file.html">什么是.gitattributes文件中的text=auto的目的-极客教程</a></li>
+  <li><a href="https://juejin.cn/post/7084885453920272398">.gitattributes正确使用姿势-掘金</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/108266134">什么是.gitattributes？-LinuxSuRen的文章-知乎</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Newline">Newline-Wikipedia</a></li>
+  <li><a href="https://stackoverflow.com/questions/12747722/what-is-the-difference-between-a-line-feed-and-a-carriage-return">What is the difference between a “line feed” and a “carriage return”?-Stack Overflow</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/380574688">CRLF和LF的差异-不知味之味的文章-知乎</a></li>
+  <li><a href="https://www.zhihu.com/question/476547117/answer/2034024723">转义字符和控制字符有什么区别？-邱昊宇的回答-知乎</a></li>
+  <li><a href="https://www.zhihu.com/question/585086862/answer/2938556614">如何学习Git?-韦易笑的回答-知乎</a></li>
+  <li><a href="https://git-scm.com/downloads/guis">Git-GUI Clients</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/272507232">12个优秀GUI Git客户端，程序员必备！-民工哥的文章-知乎</a></li>
+  <li><a href="https://juejin.cn/post/7143527263240192031">推荐几款好用的Git图形化客户端-掘金</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/146683392">详解Git大文件存储（Git LFS）-腾讯技术工程的文章-知乎</a></li>
+</ol>
+
+  </div>
+
+  
+  
+<script src="https://utteranc.es/client.js"
+        repo="YWpepper/YWpepper.github.io"
+        issue-term="title"
+        label="comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
+
+  
+</article>
+
+<div class="pagination">
+  
+    <span class="prev" >
+      <a href="http://localhost:4000/docker-note/">
+        ← 上一篇
+      </a>
+    </span>
+  
+  
+    <span class="next" >
+      <a href="http://localhost:4000/id-photo/">
+        下一篇 →
+      </a>
+    </span>
+  
+</div>
+      </div>
+    </div>
+
+    
+
+  </body>
+
+  
+  <script>
+    document.getElementById("main").classList.add("withtoc");
+  </script>
+  
+
+  <div class="wrapper-footer-mobile">
+    <footer class="footer">
+      <!-- Refer to https://codepen.io/ruandre/pen/howFi -->
+<ul class="svg-icon">
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li><a href="https://github.com/zxl19" class="icon-13 github" title="GitHub"><svg viewBox="0 0 512 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg><!--[if lt IE 9]><em>GitHub</em><![endif]--></a></li>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</ul>
+
+
+
+<p>Copyright © 2020-2025 zxl19. All Rights Reserved.</p>
+
+    </footer>
+
+
+</html>

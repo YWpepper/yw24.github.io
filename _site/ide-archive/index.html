@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>集成开发环境存档 – zxl19 – 一个工程师的存档点</title>
+
+      <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="一些集成开发环境存档。
+
+" />
+    <meta property="og:description" content="一些集成开发环境存档。
+
+" />
+    
+    <meta name="author" content="zxl19" />
+
+    
+    <meta property="og:title" content="集成开发环境存档" />
+    <meta property="twitter:title" content="集成开发环境存档" />
+    
+  <!-- Async font loading -->
+<script>
+  window.WebFontConfig = {
+      custom: {
+          families: ['Spoqa Han Sans:100,300,400,700'],
+          urls: ['https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css']
+      },
+      timeout: 60000
+  };
+  (function(d) {
+      var wf = d.createElement('script'), s = d.scripts[0];
+      wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js';
+      s.parentNode.insertBefore(wf, s);
+  })(document);
+</script>
+
+<!--adobe fonts-->
+<script>
+    (function(d) {
+      var config = {
+        kitId: 'vbt3gjx',
+        scriptTimeout: 3000,
+        async: true
+      },
+      h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+    })(document);
+</script> 
+
+  <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link rel="stylesheet" type="text/css" href="/style.css" />
+  <link rel="alternate" type="application/rss+xml" title="zxl19 - 一个工程师的存档点" href="/feed.xml" />
+  <link rel="shortcut icon" href="https://raw.githubusercontent.com/zxl19/zxl19.github.io/master/images/icon.png">
+  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+  <script src="https://unpkg.com/feather-icons"></script>
+  <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        inlineMath: [['$','$']]
+      }
+    });
+  </script>
+
+  <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+
+</head>
+
+  <body>
+    <div class="wrapper-sidebar">
+  <header class="sidebar clearfix">
+    <div class="site-info">
+      
+        <a href="/" class="site-avatar"><img src="https://raw.githubusercontent.com/zxl19/zxl19.github.io/master/images/avatar.jpg" /></a>
+       
+      <h1 class="site-name"><a href="/">zxl19</a></h1>
+      <p class="site-description">一个工程师的存档点</p>
+    </div>
+  </header>
+
+  <div class="navlist">
+    <nav>
+      
+      
+      <a href="/">首页</a>
+      
+      
+      
+      <a href="/about">关于</a>
+      
+      
+      
+      <a href="/archive">归档</a>
+      
+      
+      
+      <a href="/tags">标签</a>
+      
+      
+    </nav>
+  </div>
+
+  <div class="wrapper-footer-desktop">
+    <footer class="footer">
+      <!-- Refer to https://codepen.io/ruandre/pen/howFi -->
+<ul class="svg-icon">
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li><a href="https://github.com/zxl19" class="icon-13 github" title="GitHub"><svg viewBox="0 0 512 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg><!--[if lt IE 9]><em>GitHub</em><![endif]--></a></li>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</ul>
+
+
+
+<p>Copyright © 2020-2025 zxl19. All Rights Reserved.</p>
+
+    </footer>
+  </div>
+</div>
+
+    
+      <aside class="toc">
+        <ul>
+  <li><a href="#">集成开发环境存档</a>
+    <ul>
+      <li><a href="#ide-hello-world">IDE Hello World</a></li>
+      <li><a href="#编辑器">编辑器</a>
+        <ul>
+          <li><a href="#通用">通用</a></li>
+          <li><a href="#高速">高速</a></li>
+          <li><a href="#十六进制">十六进制</a></li>
+          <li><a href="#大模型">大模型</a></li>
+        </ul>
+      </li>
+      <li><a href="#cc">C/C++</a></li>
+      <li><a href="#python">Python</a></li>
+      <li><a href="#在线">在线</a></li>
+      <li><a href="#参考">参考</a></li>
+    </ul>
+  </li>
+</ul>
+      </aside>
+    
+
+    <div id="main" role="main" class="wrapper-content">
+      <div class="container">
+        <article class="posts">
+  <h1>集成开发环境存档</h1>
+
+  <div clsss="meta">
+    <span class="author">
+      zxl19
+    </span>
+
+    <span class="date">
+      2024-02-22
+    </span>
+
+    <ul class="tag">
+      
+      <li>
+        <a href="http://localhost:4000/tags#IDE">
+          IDE
+        </a>
+      </li>
+      
+      <li>
+        <a href="http://localhost:4000/tags#Archive">
+          Archive
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+
+  <div class="entry">
+    <p>一些集成开发环境存档。</p>
+
+<!-- more -->
+
+<h2 id="ide-hello-world">IDE Hello World</h2>
+
+<p>集成开发环境（Integrated Development Environment，IDE）是一种提供全面软件开发工具的应用程序。通常至少由源代码编辑器、自动化构建工具、调试器组成。</p>
+
+<h2 id="编辑器">编辑器</h2>
+
+<h3 id="通用">通用</h3>
+
+<ol>
+  <li><a href="https://code.visualstudio.com">Visual Studio Code</a></li>
+  <li><a href="https://www.sublimetext.com">Sublime Text</a></li>
+  <li><a href="https://zed.dev">Zed</a></li>
+  <li><a href="https://www.vim.org">Vim</a></li>
+  <li><a href="https://github.com/cxasm/notepad--">Notepad–</a></li>
+  <li><a href="https://rizonesoft.com/downloads/notepad3/">Notepad3</a></li>
+  <li><a href="https://www.geany.org">Geany</a></li>
+</ol>
+
+<h3 id="高速">高速</h3>
+
+<ol>
+  <li><a href="https://www.emeditor.com">EmEditor</a></li>
+  <li><a href="https://www.ultraedit.com">UltraEdit</a></li>
+  <li><a href="https://glogg.bonnefon.org">glogg</a></li>
+  <li><a href="https://klogg.filimonov.dev">klogg</a></li>
+</ol>
+
+<h3 id="十六进制">十六进制</h3>
+
+<ol>
+  <li><a href="https://imhex.werwolv.net">ImHex</a></li>
+  <li><a href="https://hexfiend.com">Hex Fiend</a></li>
+  <li><a href="https://github.com/solemnwarning/rehex">REHex</a></li>
+</ol>
+
+<h3 id="大模型">大模型</h3>
+
+<ol>
+  <li><a href="https://www.cursor.com">Cursor</a></li>
+  <li><a href="https://codeium.com/windsurf">Windsurf</a></li>
+  <li><a href="https://www.trae.ai">Trae</a></li>
+  <li><a href="https://voideditor.com">Void</a></li>
+  <li><a href="https://melty.sh">Melty</a></li>
+</ol>
+
+<h2 id="cc">C/C++</h2>
+
+<ol>
+  <li><a href="https://www.jetbrains.com/clion/">CLion</a></li>
+  <li><a href="https://kdevelop.org">KDevelop</a></li>
+  <li><a href="https://www.codeblocks.org">Code::Blocks</a></li>
+  <li><a href="https://sourceforge.net/projects/orwelldevcpp/">Dev-C++</a></li>
+</ol>
+
+<h2 id="python">Python</h2>
+
+<ol>
+  <li><a href="https://www.jetbrains.com/pycharm/">PyCharm</a></li>
+  <li><a href="https://thonny.org">Thonny</a></li>
+  <li><a href="https://codewith.mu">Mu</a></li>
+</ol>
+
+<h2 id="在线">在线</h2>
+
+<ol>
+  <li><a href="https://jupyter.org">Jupyter</a></li>
+  <li><a href="https://cocalc.com">CoCalc</a></li>
+</ol>
+
+<h2 id="参考">参考</h2>
+
+<ol>
+  <li><a href="https://en.wikipedia.org/wiki/Integrated_development_environment">Integrated development environment-Wikipedia</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/420214688">什么是IDE（集成开发环境）？-情感专家的文章-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/21434126">10个常用的代码文本编辑器/IDE-路人甲的文章-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/29498175">这些优秀的主流代码编辑器，你用过多少款？-小开的文章-知乎</a></li>
+  <li><a href="https://github.com/microsoft/vscode">microsoft/vscode</a></li>
+  <li><a href="https://github.com/SublimeText">Sublime Text Packages</a></li>
+  <li><a href="https://github.com/SublimeCodeIntel/SublimeCodeIntel">SublimeCodeIntel/SublimeCodeIntel</a></li>
+  <li><a href="https://github.com/zed-industries/zed">zed-industries/zed</a></li>
+  <li><a href="https://github.com/vim/vim">vim/vim</a></li>
+  <li><a href="https://github.com/cxasm/notepad--">cxasm/notepad–</a></li>
+  <li><a href="https://github.com/rizonesoft/Notepad3">rizonesoft/Notepad3</a></li>
+  <li><a href="https://github.com/geany/geany">geany/geany</a></li>
+  <li><a href="https://github.com/geany/geany-plugins">geany/geany-plugins</a></li>
+  <li><a href="https://github.com/geany/geany-themes">geany/geany-themes</a></li>
+  <li><a href="https://github.com/codebrainz/geany-themes">codebrainz/geany-themes</a></li>
+  <li><a href="https://www.zhihu.com/question/19993841/answer/2298081912">什么文本编辑器能打开11MB的文本不卡？-韦易笑的回答-知乎</a></li>
+  <li><a href="https://www.zhihu.com/question/19993841/answer/2313306540">什么文本编辑器能打开11MB的文本不卡？-快乐的老鼠宝宝的回答-知乎</a></li>
+  <li><a href="https://github.com/nickbnf/glogg">nickbnf/glogg</a></li>
+  <li><a href="https://github.com/variar/klogg">variar/klogg</a></li>
+  <li><a href="https://github.com/WerWolv/ImHex">WerWolv/ImHex</a></li>
+  <li><a href="https://github.com/HexFiend/HexFiend">HexFiend/HexFiend</a></li>
+  <li><a href="https://github.com/solemnwarning/rehex">solemnwarning/rehex</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/16071956055">Cursor：全面详解开箱即用的AI工具（附科学使用方式）-冷眸的文章-知乎</a></li>
+  <li><a href="https://github.com/voideditor/void">voideditor/void</a></li>
+  <li><a href="https://github.com/meltylabs/melty">meltylabs/melty</a></li>
+  <li><a href="https://github.com/Embarcadero/Dev-Cpp">Embarcadero/Dev-Cpp</a></li>
+  <li><a href="https://github.com/thonny/thonny">thonny/thonny</a></li>
+  <li><a href="https://github.com/mu-editor/mu">mu-editor/mu</a></li>
+</ol>
+
+  </div>
+
+  
+  
+<script src="https://utteranc.es/client.js"
+        repo="YWpepper/YWpepper.github.io"
+        issue-term="title"
+        label="comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
+
+  
+</article>
+
+<div class="pagination">
+  
+    <span class="prev" >
+      <a href="http://localhost:4000/spring-festival-gala/">
+        ← 上一篇
+      </a>
+    </span>
+  
+  
+    <span class="next" >
+      <a href="http://localhost:4000/cpp-constants/">
+        下一篇 →
+      </a>
+    </span>
+  
+</div>
+      </div>
+    </div>
+
+    
+
+  </body>
+
+  
+  <script>
+    document.getElementById("main").classList.add("withtoc");
+  </script>
+  
+
+  <div class="wrapper-footer-mobile">
+    <footer class="footer">
+      <!-- Refer to https://codepen.io/ruandre/pen/howFi -->
+<ul class="svg-icon">
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li><a href="https://github.com/zxl19" class="icon-13 github" title="GitHub"><svg viewBox="0 0 512 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg><!--[if lt IE 9]><em>GitHub</em><![endif]--></a></li>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</ul>
+
+
+
+<p>Copyright © 2020-2025 zxl19. All Rights Reserved.</p>
+
+    </footer>
+
+
+</html>

@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>高质量C++库存档 – zxl19 – 一个工程师的存档点</title>
+
+      <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="一些实用或者看起来很有意思的C++库存档。
+
+" />
+    <meta property="og:description" content="一些实用或者看起来很有意思的C++库存档。
+
+" />
+    
+    <meta name="author" content="zxl19" />
+
+    
+    <meta property="og:title" content="高质量C++库存档" />
+    <meta property="twitter:title" content="高质量C++库存档" />
+    
+  <!-- Async font loading -->
+<script>
+  window.WebFontConfig = {
+      custom: {
+          families: ['Spoqa Han Sans:100,300,400,700'],
+          urls: ['https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css']
+      },
+      timeout: 60000
+  };
+  (function(d) {
+      var wf = d.createElement('script'), s = d.scripts[0];
+      wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js';
+      s.parentNode.insertBefore(wf, s);
+  })(document);
+</script>
+
+<!--adobe fonts-->
+<script>
+    (function(d) {
+      var config = {
+        kitId: 'vbt3gjx',
+        scriptTimeout: 3000,
+        async: true
+      },
+      h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+    })(document);
+</script> 
+
+  <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link rel="stylesheet" type="text/css" href="/style.css" />
+  <link rel="alternate" type="application/rss+xml" title="zxl19 - 一个工程师的存档点" href="/feed.xml" />
+  <link rel="shortcut icon" href="https://raw.githubusercontent.com/zxl19/zxl19.github.io/master/images/icon.png">
+  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+  <script src="https://unpkg.com/feather-icons"></script>
+  <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        inlineMath: [['$','$']]
+      }
+    });
+  </script>
+
+  <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+
+</head>
+
+  <body>
+    <div class="wrapper-sidebar">
+  <header class="sidebar clearfix">
+    <div class="site-info">
+      
+        <a href="/" class="site-avatar"><img src="https://raw.githubusercontent.com/zxl19/zxl19.github.io/master/images/avatar.jpg" /></a>
+       
+      <h1 class="site-name"><a href="/">zxl19</a></h1>
+      <p class="site-description">一个工程师的存档点</p>
+    </div>
+  </header>
+
+  <div class="navlist">
+    <nav>
+      
+      
+      <a href="/">首页</a>
+      
+      
+      
+      <a href="/about">关于</a>
+      
+      
+      
+      <a href="/archive">归档</a>
+      
+      
+      
+      <a href="/tags">标签</a>
+      
+      
+    </nav>
+  </div>
+
+  <div class="wrapper-footer-desktop">
+    <footer class="footer">
+      <!-- Refer to https://codepen.io/ruandre/pen/howFi -->
+<ul class="svg-icon">
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li><a href="https://github.com/zxl19" class="icon-13 github" title="GitHub"><svg viewBox="0 0 512 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg><!--[if lt IE 9]><em>GitHub</em><![endif]--></a></li>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</ul>
+
+
+
+<p>Copyright © 2020-2025 zxl19. All Rights Reserved.</p>
+
+    </footer>
+  </div>
+</div>
+
+    
+      <aside class="toc">
+        <ul>
+  <li><a href="#">高质量C++库存档</a>
+    <ul>
+      <li><a href="#库管理">库管理</a></li>
+      <li><a href="#构建工具">构建工具</a></li>
+      <li><a href="#开发框架">开发框架</a></li>
+      <li><a href="#文件">文件</a>
+        <ul>
+          <li><a href="#文件系统">文件系统</a></li>
+          <li><a href="#文件压缩">文件压缩</a></li>
+        </ul>
+      </li>
+      <li><a href="#命令行输出">命令行输出</a>
+        <ul>
+          <li><a href="#输出样式">输出样式</a></li>
+          <li><a href="#进度条">进度条</a></li>
+          <li><a href="#表格">表格</a></li>
+        </ul>
+      </li>
+      <li><a href="#日期时间">日期时间</a></li>
+      <li><a href="#基础库">基础库</a></li>
+      <li><a href="#参数读取">参数读取</a>
+        <ul>
+          <li><a href="#命令行参数">命令行参数</a></li>
+          <li><a href="#配置文件参数">配置文件参数</a>
+            <ul>
+              <li><a href="#json文件"><code class="language-plaintext highlighter-rouge">.json</code>文件</a></li>
+              <li><a href="#yaml文件"><code class="language-plaintext highlighter-rouge">.yaml</code>文件</a></li>
+              <li><a href="#csv文件"><code class="language-plaintext highlighter-rouge">.csv</code>文件</a></li>
+              <li><a href="#toml文件"><code class="language-plaintext highlighter-rouge">.toml</code>文件</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><a href="#调试分析">调试分析</a>
+        <ul>
+          <li><a href="#单元测试">单元测试</a></li>
+          <li><a href="#日志输出">日志输出</a></li>
+          <li><a href="#性能分析">性能分析</a></li>
+        </ul>
+      </li>
+      <li><a href="#数据可视化">数据可视化</a></li>
+      <li><a href="#机器学习深度学习">机器学习&amp;深度学习</a></li>
+      <li><a href="#数学计算">数学计算</a>
+        <ul>
+          <li><a href="#线性代数">线性代数</a></li>
+          <li><a href="#李群和李代数">李群和李代数</a></li>
+          <li><a href="#数值运算">数值运算</a></li>
+          <li><a href="#随机采样一致">随机采样一致</a></li>
+          <li><a href="#浮点数转字符串">浮点数转字符串</a></li>
+          <li><a href="#几何">几何</a>
+            <ul>
+              <li><a href="#几何运算">几何运算</a></li>
+              <li><a href="#三角剖分">三角剖分</a></li>
+              <li><a href="#网格处理">网格处理</a></li>
+            </ul>
+          </li>
+          <li><a href="#张量运算">张量运算</a></li>
+          <li><a href="#图论">图论</a></li>
+        </ul>
+      </li>
+      <li><a href="#信号处理">信号处理</a>
+        <ul>
+          <li><a href="#数字信号">数字信号</a></li>
+          <li><a href="#音频信号">音频信号</a></li>
+        </ul>
+      </li>
+      <li><a href="#加密">加密</a></li>
+      <li><a href="#序列化">序列化</a></li>
+      <li><a href="#多态">多态</a></li>
+      <li><a href="#有限状态机">有限状态机</a></li>
+      <li><a href="#可视化界面">可视化界面</a>
+        <ul>
+          <li><a href="#图形化界面gui">图形化界面（GUI）</a></li>
+          <li><a href="#文本界面tui">文本界面（TUI）</a></li>
+        </ul>
+      </li>
+      <li><a href="#通信">通信</a>
+        <ul>
+          <li><a href="#通信框架">通信框架</a></li>
+          <li><a href="#网络库">网络库</a></li>
+        </ul>
+      </li>
+      <li><a href="#数据结构">数据结构</a></li>
+      <li><a href="#python绑定">Python绑定</a></li>
+      <li><a href="#反射">反射</a></li>
+      <li><a href="#模板元编程">模板元编程</a></li>
+      <li><a href="#并发">并发</a></li>
+      <li><a href="#惰性求值">惰性求值</a></li>
+      <li><a href="#有限元">有限元</a></li>
+      <li><a href="#物理场仿真">物理场仿真</a></li>
+      <li><a href="#git包括github">Git（包括GitHub）</a></li>
+      <li><a href="#参考">参考</a></li>
+    </ul>
+  </li>
+</ul>
+      </aside>
+    
+
+    <div id="main" role="main" class="wrapper-content">
+      <div class="container">
+        <article class="posts">
+  <h1>高质量C++库存档</h1>
+
+  <div clsss="meta">
+    <span class="author">
+      zxl19
+    </span>
+
+    <span class="date">
+      2021-06-01
+    </span>
+
+    <ul class="tag">
+      
+      <li>
+        <a href="http://localhost:4000/tags#C++">
+          C++
+        </a>
+      </li>
+      
+      <li>
+        <a href="http://localhost:4000/tags#Archive">
+          Archive
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+
+  <div class="entry">
+    <p>一些实用或者看起来很有意思的C++库存档。</p>
+
+<!-- more -->
+
+<h2 id="库管理">库管理</h2>
+
+<ol>
+  <li><a href="https://github.com/microsoft/vcpkg">microsoft/vcpkg</a></li>
+  <li><a href="https://github.com/conan-io/conan">conan-io/conan</a></li>
+  <li><a href="https://github.com/mamba-org/mamba">mamba-org/mamba</a></li>
+  <li><a href="https://github.com/conda/conda">conda/conda</a></li>
+</ol>
+
+<h2 id="构建工具">构建工具</h2>
+
+<ol>
+  <li><a href="https://github.com/Kitware/CMake">Kitware/CMake</a></li>
+  <li><a href="https://github.com/xmake-io/xmake">xmake-io/xmake</a></li>
+  <li><a href="https://github.com/zdzhaoyong/PICMake">zdzhaoyong/PICMake</a></li>
+</ol>
+
+<h2 id="开发框架">开发框架</h2>
+
+<ol>
+  <li><a href="https://github.com/cpp-main/cpp-tbox">cpp-main/cpp-tbox</a></li>
+  <li><a href="https://github.com/libsigcplusplus/libsigcplusplus">libsigcplusplus/libsigcplusplus</a></li>
+</ol>
+
+<h2 id="文件">文件</h2>
+
+<h3 id="文件系统">文件系统</h3>
+
+<ol>
+  <li><a href="https://github.com/gulrak/filesystem">gulrak/filesystem</a></li>
+</ol>
+
+<h3 id="文件压缩">文件压缩</h3>
+
+<ol>
+  <li><a href="https://github.com/facebook/zstd">facebook/zstd</a></li>
+  <li><a href="https://github.com/lz4/lz4">lz4/lz4</a></li>
+  <li><a href="https://github.com/google/draco">google/draco</a></li>
+  <li><a href="https://github.com/google/snappy">google/snappy</a></li>
+  <li><a href="https://github.com/madler/zlib">madler/zlib</a></li>
+  <li><a href="https://github.com/google/zopfli">google/zopfli</a></li>
+  <li><a href="https://github.com/nih-at/libzip">nih-at/libzip</a></li>
+  <li><a href="https://github.com/r-lyeh-archived/bundle">r-lyeh-archived/bundle</a></li>
+  <li><a href="https://github.com/rikyoz/bit7z">rikyoz/bit7z</a></li>
+  <li><a href="https://github.com/sebastiandev/zipper">sebastiandev/zipper</a></li>
+  <li><a href="https://github.com/ctabin/libzippp">ctabin/libzippp</a></li>
+</ol>
+
+<h2 id="命令行输出">命令行输出</h2>
+
+<h3 id="输出样式">输出样式</h3>
+
+<ol>
+  <li><a href="https://github.com/fmtlib/fmt">fmtlib/fmt</a></li>
+  <li><a href="https://github.com/JustWhit3/osmanip">JustWhit3/osmanip</a></li>
+  <li><a href="https://github.com/srilakshmikanthanp/libansi">srilakshmikanthanp/libansi</a></li>
+</ol>
+
+<h3 id="进度条">进度条</h3>
+
+<ol>
+  <li><a href="https://github.com/p-ranav/indicators">p-ranav/indicators</a></li>
+  <li><a href="https://github.com/doches/progressbar">doches/progressbar</a></li>
+  <li><a href="https://github.com/tqdm/tqdm.cpp">tqdm/tqdm.cpp</a></li>
+  <li><a href="https://github.com/aminnj/cpptqdm">aminnj/cpptqdm</a></li>
+  <li><a href="https://github.com/gipert/progressbar">gipert/progressbar</a></li>
+</ol>
+
+<h3 id="表格">表格</h3>
+
+<ol>
+  <li><a href="https://github.com/p-ranav/tabulate">p-ranav/tabulate</a></li>
+  <li><a href="https://github.com/haarcuba/cpp-text-table">haarcuba/cpp-text-table</a></li>
+  <li><a href="https://github.com/DenisSamilton/CppConsoleTable">DenisSamilton/CppConsoleTable</a></li>
+</ol>
+
+<h2 id="日期时间">日期时间</h2>
+
+<ol>
+  <li><a href="https://github.com/HowardHinnant/date">HowardHinnant/date</a></li>
+  <li><a href="https://github.com/nachovizzo/ScopeTimer">nachovizzo/ScopeTimer</a></li>
+</ol>
+
+<h2 id="基础库">基础库</h2>
+
+<ol>
+  <li><a href="https://github.com/facebook/folly">facebook/folly</a></li>
+  <li><a href="https://github.com/nothings/stb">nothings/stb</a></li>
+  <li><a href="https://github.com/nothings/single_file_libs">nothings/single_file_libs</a></li>
+  <li><a href="https://github.com/boostorg/boost">boostorg/boost</a></li>
+  <li><a href="https://github.com/attractivechaos/klib">attractivechaos/klib</a></li>
+  <li><a href="https://github.com/idealvin/coost">idealvin/coost</a></li>
+  <li><a href="https://github.com/matrixcascade/PainterEngine">matrixcascade/PainterEngine</a></li>
+  <li><a href="https://github.com/Water-Melon/Melon">Water-Melon/Melon</a></li>
+  <li><a href="https://github.com/electronicarts/EAStdC">electronicarts/EAStdC</a></li>
+  <li><a href="https://github.com/adah1972/nvwa">adah1972/nvwa</a></li>
+  <li><a href="https://github.com/MariadeAnton/MiLi">MariadeAnton/MiLi</a></li>
+</ol>
+
+<h2 id="参数读取">参数读取</h2>
+
+<h3 id="命令行参数">命令行参数</h3>
+
+<ol>
+  <li><a href="https://github.com/jarro2783/cxxopts">jarro2783/cxxopts</a></li>
+  <li><a href="https://github.com/gflags/gflags">gflags/gflags</a></li>
+  <li><a href="https://github.com/CLIUtils/CLI11">CLIUtils/CLI11</a></li>
+  <li><a href="https://github.com/p-ranav/argparse">p-ranav/argparse</a></li>
+  <li><a href="https://github.com/tanakh/cmdline">tanakh/cmdline</a></li>
+  <li><a href="https://github.com/Taywee/args">Taywee/args</a></li>
+  <li><a href="https://github.com/adishavit/argh">adishavit/argh</a></li>
+  <li><a href="https://github.com/p-ranav/structopt">p-ranav/structopt</a></li>
+  <li><a href="https://github.com/cparse/cparse">cparse/cparse</a></li>
+</ol>
+
+<h3 id="配置文件参数">配置文件参数</h3>
+
+<h4 id="json文件"><code class="language-plaintext highlighter-rouge">.json</code>文件</h4>
+
+<ol>
+  <li><a href="https://github.com/nlohmann/json">nlohmann/json</a></li>
+  <li><a href="https://github.com/Tencent/rapidjson">Tencent/rapidjson</a></li>
+  <li><a href="https://github.com/open-source-parsers/jsoncpp">open-source-parsers/jsoncpp</a></li>
+  <li><a href="https://github.com/dropbox/json11">dropbox/json11</a></li>
+  <li><a href="https://github.com/kazuho/picojson">kazuho/picojson</a></li>
+  <li><a href="https://github.com/Nomango/configor">Nomango/configor</a></li>
+  <li><a href="https://github.com/boostorg/json">boostorg/json</a></li>
+  <li><a href="https://github.com/taocpp/config">taocpp/config</a></li>
+</ol>
+
+<h4 id="yaml文件"><code class="language-plaintext highlighter-rouge">.yaml</code>文件</h4>
+
+<ol>
+  <li><a href="https://github.com/jbeder/yaml-cpp">jbeder/yaml-cpp</a></li>
+  <li><a href="https://github.com/yaml/libyaml">yaml/libyaml</a></li>
+</ol>
+
+<h4 id="csv文件"><code class="language-plaintext highlighter-rouge">.csv</code>文件</h4>
+
+<ol>
+  <li><a href="https://github.com/vincentlaucsb/csv-parser">vincentlaucsb/csv-parser</a></li>
+  <li><a href="https://github.com/d99kris/rapidcsv">d99kris/rapidcsv</a></li>
+  <li><a href="https://github.com/p-ranav/csv2">p-ranav/csv2</a></li>
+</ol>
+
+<h4 id="toml文件"><code class="language-plaintext highlighter-rouge">.toml</code>文件</h4>
+
+<ol>
+  <li><a href="https://github.com/marzer/tomlplusplus">marzer/tomlplusplus</a></li>
+  <li><a href="https://github.com/ToruNiina/toml11">ToruNiina/toml11</a></li>
+  <li><a href="https://github.com/cktan/tomlc99">cktan/tomlc99</a></li>
+  <li><a href="https://github.com/cktan/tomlcpp">cktan/tomlcpp</a></li>
+</ol>
+
+<h2 id="调试分析">调试分析</h2>
+
+<h3 id="单元测试">单元测试</h3>
+
+<ol>
+  <li><a href="https://github.com/google/googletest">google/googletest</a></li>
+  <li><a href="https://github.com/catchorg/Catch2">catchorg/Catch2</a></li>
+  <li><a href="https://github.com/onqtam/doctest">onqtam/doctest</a></li>
+  <li><a href="https://github.com/mpusz/units">mpusz/units</a></li>
+  <li><a href="https://github.com/rollbear/trompeloeil">rollbear/trompeloeil</a></li>
+  <li><a href="https://github.com/unittest-cpp/unittest-cpp">unittest-cpp/unittest-cpp</a></li>
+</ol>
+
+<h3 id="日志输出">日志输出</h3>
+
+<ol>
+  <li><a href="https://github.com/gabime/spdlog">gabime/spdlog</a></li>
+  <li><a href="https://github.com/google/glog">google/glog</a></li>
+  <li><a href="https://github.com/PlatformLab/NanoLog">PlatformLab/NanoLog</a></li>
+  <li><a href="https://github.com/odygrd/quill">odygrd/quill</a></li>
+  <li><a href="https://github.com/PickNikRobotics/data_tamer">PickNikRobotics/data_tamer</a></li>
+</ol>
+
+<h3 id="性能分析">性能分析</h3>
+
+<ol>
+  <li><a href="https://github.com/google/benchmark">google/benchmark</a></li>
+  <li><a href="https://github.com/google/orbit">google/orbit</a></li>
+  <li><a href="https://github.com/jonasmr/microprofile">jonasmr/microprofile</a></li>
+  <li><a href="https://github.com/chronoxor/CppBenchmark">chronoxor/CppBenchmark</a></li>
+  <li><a href="https://github.com/p-ranav/criterion">p-ranav/criterion</a></li>
+  <li><a href="https://github.com/Compaile/ctrack">Compaile/ctrack</a></li>
+  <li><a href="https://github.com/cameron314/microbench">cameron314/microbench</a></li>
+</ol>
+
+<h2 id="数据可视化">数据可视化</h2>
+
+<ol>
+  <li><a href="https://github.com/google/skia">google/skia</a></li>
+  <li><a href="https://github.com/lava/matplotlib-cpp">lava/matplotlib-cpp</a></li>
+  <li><a href="https://github.com/alandefreitas/matplotplusplus">alandefreitas/matplotplusplus</a></li>
+  <li><a href="https://github.com/sciplot/sciplot">sciplot/sciplot</a></li>
+  <li><a href="https://github.com/dstahlke/gnuplot-iostream">dstahlke/gnuplot-iostream</a></li>
+  <li><a href="https://github.com/madplotlib/madplotlib">madplotlib/madplotlib</a></li>
+  <li><a href="https://github.com/Profactor/cv-plot">Profactor/cv-plot</a></li>
+  <li><a href="https://github.com/leovandriel/cvplot">leovandriel/cvplot</a></li>
+  <li><a href="https://github.com/fbbdev/plot">fbbdev/plot</a></li>
+</ol>
+
+<h2 id="机器学习深度学习">机器学习&amp;深度学习</h2>
+
+<ol>
+  <li><a href="https://github.com/tesseract-ocr/tesseract">tesseract-ocr/tesseract</a></li>
+  <li><a href="https://github.com/BVLC/caffe">BVLC/caffe</a></li>
+  <li><a href="https://github.com/pjreddie/darknet">pjreddie/darknet</a></li>
+  <li><a href="https://github.com/AlexeyAB/darknet">AlexeyAB/darknet</a></li>
+  <li><a href="https://github.com/davisking/dlib">davisking/dlib</a></li>
+  <li><a href="https://github.com/ggerganov/ggml">ggerganov/ggml</a></li>
+  <li><a href="https://github.com/tiny-dnn/tiny-dnn">tiny-dnn/tiny-dnn</a></li>
+  <li><a href="https://github.com/flashlight/flashlight">flashlight/flashlight</a></li>
+  <li><a href="https://github.com/mlpack/mlpack">mlpack/mlpack</a></li>
+  <li><a href="https://github.com/plaidml/plaidml">plaidml/plaidml</a></li>
+  <li><a href="https://github.com/cjlin1/libsvm">cjlin1/libsvm</a></li>
+  <li><a href="https://github.com/NVlabs/tiny-cuda-nn">NVlabs/tiny-cuda-nn</a></li>
+  <li><a href="https://github.com/yixuan/MiniDNN">yixuan/MiniDNN</a></li>
+  <li><a href="https://github.com/arrayfire/arrayfire-ml">arrayfire/arrayfire-ml</a></li>
+  <li><a href="https://github.com/rockcarry/ffcnn">rockcarry/ffcnn</a></li>
+  <li><a href="https://github.com/10-zin/cpp-micrograd">10-zin/cpp-micrograd</a></li>
+</ol>
+
+<h2 id="数学计算">数学计算</h2>
+
+<h3 id="线性代数">线性代数</h3>
+
+<ol>
+  <li><a href="http://eigen.tuxfamily.org">Eigen</a></li>
+  <li><a href="http://arma.sourceforge.net">Armadillo</a></li>
+  <li><a href="https://bitbucket.org/blaze-lib/blaze/src/master/">Blaze</a></li>
+  <li><a href="https://github.com/dpilger26/NumCpp">dpilger26/NumCpp</a></li>
+  <li><a href="https://github.com/yixuan/spectra">yixuan/spectra</a></li>
+  <li><a href="https://github.com/tpoisonooo/how-to-optimize-gemm">tpoisonooo/how-to-optimize-gemm</a></li>
+  <li><a href="https://github.com/attractivechaos/matmul">attractivechaos/matmul</a></li>
+  <li><a href="https://github.com/hosseinmoein/Tiger">hosseinmoein/Tiger</a></li>
+</ol>
+
+<h3 id="李群和李代数">李群和李代数</h3>
+
+<ol>
+  <li><a href="https://github.com/strasdat/Sophus">strasdat/Sophus</a></li>
+  <li><a href="https://github.com/artivis/manif">artivis/manif</a></li>
+</ol>
+
+<h3 id="数值运算">数值运算</h3>
+
+<ol>
+  <li><a href="http://ceres-solver.org">Ceres Solver</a></li>
+  <li><a href="https://github.com/casadi/casadi">casadi/casadi</a></li>
+  <li><a href="https://github.com/autodiff/autodiff">autodiff/autodiff</a></li>
+  <li><a href="https://github.com/stan-dev/math">stan-dev/math</a></li>
+  <li><a href="https://github.com/johnmcfarlane/cnl">johnmcfarlane/cnl</a></li>
+  <li><a href="https://github.com/boostorg/math">boostorg/math</a></li>
+  <li><a href="https://github.com/auto-differentiation/XAD">auto-differentiation/XAD</a></li>
+</ol>
+
+<h3 id="随机采样一致">随机采样一致</h3>
+
+<ol>
+  <li><a href="https://github.com/tsattler/RansacLib">tsattler/RansacLib</a></li>
+  <li><a href="https://github.com/drsrinathsridhar/GRANSAC">drsrinathsridhar/GRANSAC</a></li>
+  <li><a href="https://github.com/mint-lab/rtl">mint-lab/rtl</a></li>
+  <li><a href="https://github.com/TotoroJason/RANSAC">TotoroJason/RANSAC</a></li>
+  <li><a href="https://github.com/libing64/RansacLine">libing64/RansacLine</a></li>
+  <li><a href="https://github.com/ddorobot/ransac">ddorobot/ransac</a></li>
+</ol>
+
+<h3 id="浮点数转字符串">浮点数转字符串</h3>
+
+<ol>
+  <li><a href="https://github.com/ulfjack/ryu">ulfjack/ryu</a></li>
+  <li><a href="https://github.com/jk-jeon/dragonbox">jk-jeon/dragonbox</a></li>
+  <li><a href="https://github.com/jk-jeon/Grisu-Exact">jk-jeon/Grisu-Exact</a></li>
+</ol>
+
+<h3 id="几何">几何</h3>
+
+<h4 id="几何运算">几何运算</h4>
+
+<ol>
+  <li><a href="https://github.com/davideberly/GeometricTools">davideberly/GeometricTools</a></li>
+  <li><a href="https://github.com/boostorg/geometry">boostorg/geometry</a></li>
+  <li><a href="https://github.com/sikang/DecompUtil">sikang/DecompUtil</a></li>
+</ol>
+
+<h4 id="三角剖分">三角剖分</h4>
+
+<ol>
+  <li><a href="https://github.com/artem-ogre/CDT">artem-ogre/CDT</a></li>
+  <li><a href="https://github.com/ivanfratric/polypartition">ivanfratric/polypartition</a></li>
+  <li><a href="https://github.com/delfrrr/delaunator-cpp">delfrrr/delaunator-cpp</a></li>
+  <li><a href="https://github.com/bl4ckb0ne/delaunay-triangulation">bl4ckb0ne/delaunay-triangulation</a></li>
+  <li><a href="https://github.com/jhasse/poly2tri">jhasse/poly2tri</a></li>
+</ol>
+
+<h4 id="网格处理">网格处理</h4>
+
+<ol>
+  <li><a href="https://github.com/mlivesu/cinolib">mlivesu/cinolib</a></li>
+  <li><a href="https://github.com/MeshInspector/MeshLib">MeshInspector/MeshLib</a></li>
+</ol>
+
+<h3 id="张量运算">张量运算</h3>
+
+<ol>
+  <li><a href="https://github.com/zdevito/ATen">zdevito/ATen</a></li>
+  <li><a href="https://github.com/romeric/Fastor">romeric/Fastor</a></li>
+  <li><a href="https://github.com/Tencent/deepx_core">Tencent/deepx_core</a></li>
+  <li><a href="https://github.com/blitzpp/blitz">blitzpp/blitz</a></li>
+  <li><a href="https://github.com/STEllAR-GROUP/blaze_tensor">STEllAR-GROUP/blaze_tensor</a></li>
+</ol>
+
+<h3 id="图论">图论</h3>
+
+<ol>
+  <li><a href="https://github.com/igraph/igraph">igraph/igraph</a></li>
+  <li><a href="https://github.com/ZigRazor/CXXGraph">ZigRazor/CXXGraph</a></li>
+  <li><a href="https://github.com/boostorg/graph">boostorg/graph</a></li>
+</ol>
+
+<h2 id="信号处理">信号处理</h2>
+
+<h3 id="数字信号">数字信号</h3>
+
+<ol>
+  <li><a href="https://github.com/vinniefalco/DSPFilters">vinniefalco/DSPFilters</a></li>
+  <li><a href="https://github.com/kfrlib/kfr">kfrlib/kfr</a></li>
+  <li><a href="https://github.com/cycfi/q">cycfi/q</a></li>
+  <li><a href="https://github.com/electro-smith/DaisySP">electro-smith/DaisySP</a></li>
+  <li><a href="https://github.com/berndporr/iir1">berndporr/iir1</a></li>
+  <li><a href="https://github.com/ruohoruotsi/Butterworth-Filter-Design">ruohoruotsi/Butterworth-Filter-Design</a></li>
+  <li><a href="https://github.com/adis300/filter-c">adis300/filter-c</a></li>
+</ol>
+
+<h3 id="音频信号">音频信号</h3>
+
+<ol>
+  <li><a href="https://github.com/MTG/essentia">MTG/essentia</a></li>
+  <li><a href="https://github.com/micknoise/Maximilian">micknoise/Maximilian</a></li>
+  <li><a href="https://github.com/ddiakopoulos/MoogLadders">ddiakopoulos/MoogLadders</a></li>
+</ol>
+
+<h2 id="加密">加密</h2>
+
+<ol>
+  <li><a href="https://github.com/google/tink">google/tink</a></li>
+  <li><a href="https://github.com/okdshin/PicoSHA2">okdshin/PicoSHA2</a></li>
+</ol>
+
+<h2 id="序列化">序列化</h2>
+
+<ol>
+  <li><a href="https://github.com/protocolbuffers/protobuf">protocolbuffers/protobuf</a></li>
+  <li><a href="https://github.com/google/flatbuffers">google/flatbuffers</a></li>
+  <li><a href="https://github.com/capnproto/capnproto">capnproto/capnproto</a></li>
+  <li><a href="https://github.com/USCiLab/cereal">USCiLab/cereal</a></li>
+  <li><a href="https://github.com/felixguendling/cista">felixguendling/cista</a></li>
+  <li><a href="https://github.com/qicosmos/iguana">qicosmos/iguana</a></li>
+  <li><a href="https://github.com/p-ranav/alpaca">p-ranav/alpaca</a></li>
+</ol>
+
+<h2 id="多态">多态</h2>
+
+<ol>
+  <li><a href="https://github.com/microsoft/proxy">microsoft/proxy</a></li>
+  <li><a href="https://github.com/kelbon/AnyAny">kelbon/AnyAny</a></li>
+</ol>
+
+<h2 id="有限状态机">有限状态机</h2>
+
+<ol>
+  <li><a href="https://github.com/BehaviorTree/BehaviorTree.CPP">BehaviorTree/BehaviorTree.CPP</a></li>
+  <li><a href="https://github.com/boost-ext/sml">boost-ext/sml</a></li>
+  <li><a href="https://github.com/digint/tinyfsm">digint/tinyfsm</a></li>
+  <li><a href="https://github.com/qlibs/sml">qlibs/sml</a></li>
+  <li><a href="https://github.com/CodeSports/State-Machine-Using-Boost-Statechart">CodeSports/State-Machine-Using-Boost-Statechart</a></li>
+</ol>
+
+<h2 id="可视化界面">可视化界面</h2>
+
+<h3 id="图形化界面gui">图形化界面（GUI）</h3>
+
+<ol>
+  <li><a href="https://github.com/ocornut/imgui">ocornut/imgui</a></li>
+  <li><a href="https://github.com/idea4good/GuiLite">idea4good/GuiLite</a></li>
+  <li><a href="https://github.com/stevenlovegrove/Pangolin">stevenlovegrove/Pangolin</a></li>
+  <li><a href="https://github.com/mitsuba-renderer/nanogui">mitsuba-renderer/nanogui</a></li>
+  <li><a href="https://github.com/koide3/iridescence">koide3/iridescence</a></li>
+</ol>
+
+<h3 id="文本界面tui">文本界面（TUI）</h3>
+
+<ol>
+  <li><a href="https://github.com/ArthurSonzogni/FTXUI">ArthurSonzogni/FTXUI</a></li>
+  <li><a href="https://github.com/ggerganov/imtui">ggerganov/imtui</a></li>
+  <li><a href="https://github.com/magiblot/tvision">magiblot/tvision</a></li>
+  <li><a href="https://github.com/gansm/finalcut">gansm/finalcut</a></li>
+  <li><a href="https://github.com/a-n-t-h-o-n-y/TermOx">a-n-t-h-o-n-y/TermOx</a></li>
+  <li><a href="https://github.com/magiblot/turbo">magiblot/turbo</a></li>
+</ol>
+
+<h2 id="通信">通信</h2>
+
+<h3 id="通信框架">通信框架</h3>
+
+<ol>
+  <li><a href="https://github.com/zeromq/libzmq">zeromq/libzmq</a></li>
+  <li><a href="https://github.com/zeromq/cppzmq">zeromq/cppzmq</a></li>
+  <li><a href="https://github.com/nanomsg/nanomsg">nanomsg/nanomsg</a></li>
+  <li><a href="https://github.com/nanomsg/nng">nanomsg/nng</a></li>
+  <li><a href="https://github.com/mutouyun/cpp-ipc">mutouyun/cpp-ipc</a></li>
+  <li><a href="https://github.com/eclipse-iceoryx/iceoryx">eclipse-iceoryx/iceoryx</a></li>
+</ol>
+
+<h3 id="网络库">网络库</h3>
+
+<ol>
+  <li><a href="https://github.com/libuv/libuv">libuv/libuv</a></li>
+  <li><a href="https://github.com/sogou/workflow">sogou/workflow</a></li>
+  <li><a href="https://github.com/libevent/libevent">libevent/libevent</a></li>
+  <li><a href="https://github.com/yhirose/cpp-httplib">yhirose/cpp-httplib</a></li>
+  <li><a href="https://github.com/ithewei/libhv">ithewei/libhv</a></li>
+  <li><a href="https://github.com/libcpr/cpr">libcpr/cpr</a></li>
+  <li><a href="https://github.com/skypjack/uvw">skypjack/uvw</a></li>
+</ol>
+
+<h2 id="数据结构">数据结构</h2>
+
+<ol>
+  <li><a href="https://github.com/cameron314/concurrentqueue">cameron314/concurrentqueue</a></li>
+  <li><a href="https://github.com/cameron314/readerwriterqueue">cameron314/readerwriterqueue</a></li>
+  <li><a href="https://github.com/Alinshans/MyTinySTL">Alinshans/MyTinySTL</a></li>
+  <li><a href="https://github.com/electronicarts/EASTL">electronicarts/EASTL</a></li>
+  <li><a href="https://github.com/zouxiaohang/TinySTL">zouxiaohang/TinySTL</a></li>
+  <li><a href="https://github.com/skarupke/flat_hash_map">skarupke/flat_hash_map</a></li>
+  <li><a href="https://github.com/VcDevel/Vc">VcDevel/Vc</a></li>
+  <li><a href="https://github.com/boostorg/pfr">boostorg/pfr</a></li>
+  <li><a href="https://github.com/stotko/stdgpu">stotko/stdgpu</a></li>
+  <li><a href="https://github.com/VcDevel/std-simd">VcDevel/std-simd</a></li>
+  <li><a href="https://github.com/frozenca/BTree">frozenca/BTree</a></li>
+</ol>
+
+<h2 id="python绑定">Python绑定</h2>
+
+<ol>
+  <li><a href="https://github.com/pybind/pybind11">pybind/pybind11</a></li>
+  <li><a href="https://github.com/wjakob/nanobind">wjakob/nanobind</a></li>
+  <li><a href="https://github.com/zdzhaoyong/Svar">zdzhaoyong/Svar</a></li>
+</ol>
+
+<h2 id="反射">反射</h2>
+
+<ol>
+  <li><a href="https://github.com/Neargye/magic_enum">Neargye/magic_enum</a></li>
+  <li><a href="https://github.com/rttrorg/rttr">rttrorg/rttr</a></li>
+  <li><a href="https://github.com/Neargye/nameof">Neargye/nameof</a></li>
+  <li><a href="https://github.com/veselink1/refl-cpp">veselink1/refl-cpp</a></li>
+  <li><a href="https://github.com/skypjack/meta">skypjack/meta</a></li>
+  <li><a href="https://github.com/cbeck88/visit_struct">cbeck88/visit_struct</a></li>
+  <li><a href="https://github.com/chakaz/reflang">chakaz/reflang</a></li>
+  <li><a href="https://github.com/bravikov/nameof">bravikov/nameof</a></li>
+</ol>
+
+<h2 id="模板元编程">模板元编程</h2>
+
+<ol>
+  <li><a href="https://github.com/boostorg/hana">boostorg/hana</a></li>
+  <li><a href="https://github.com/brunocodutra/metal">brunocodutra/metal</a></li>
+  <li><a href="https://github.com/sabel83/mpllibs">sabel83/mpllibs</a></li>
+  <li><a href="https://github.com/ldionne/mpl11">ldionne/mpl11</a></li>
+</ol>
+
+<h2 id="并发">并发</h2>
+
+<ol>
+  <li><a href="https://github.com/progschj/ThreadPool">progschj/ThreadPool</a></li>
+  <li><a href="https://github.com/oneapi-src/oneTBB">oneapi-src/oneTBB</a></li>
+  <li><a href="https://github.com/David-Haim/concurrencpp">David-Haim/concurrencpp</a></li>
+  <li><a href="https://github.com/mbrossard/threadpool">mbrossard/threadpool</a></li>
+  <li><a href="https://github.com/lzpong/threadpool">lzpong/threadpool</a></li>
+  <li><a href="https://github.com/lizhenghn123/zl_threadpool">lizhenghn123/zl_threadpool</a></li>
+  <li><a href="https://github.com/tghosgor/threadpool11">tghosgor/threadpool11</a></li>
+  <li><a href="https://github.com/electronicarts/EAThread">electronicarts/EAThread</a></li>
+</ol>
+
+<h2 id="惰性求值">惰性求值</h2>
+
+<ol>
+  <li><a href="https://github.com/jscheiny/Streams">jscheiny/Streams</a></li>
+  <li><a href="https://github.com/MarcDirven/cpp-lazy">MarcDirven/cpp-lazy</a></li>
+  <li><a href="https://github.com/SaadAttieh/lazyCode">SaadAttieh/lazyCode</a></li>
+</ol>
+
+<h2 id="有限元">有限元</h2>
+
+<ol>
+  <li><a href="https://github.com/mfem/mfem">mfem/mfem</a></li>
+  <li><a href="https://github.com/dealii/dealii">dealii/dealii</a></li>
+  <li><a href="https://github.com/NGSolve/ngsolve">NGSolve/ngsolve</a></li>
+  <li><a href="https://github.com/halbux/sparselizard">halbux/sparselizard</a></li>
+  <li><a href="https://github.com/feelpp/feelpp">feelpp/feelpp</a></li>
+  <li><a href="https://github.com/M3Group/AsFem">M3Group/AsFem</a></li>
+  <li><a href="https://github.com/open-beam/openbeam">open-beam/openbeam</a></li>
+</ol>
+
+<h2 id="物理场仿真">物理场仿真</h2>
+
+<ol>
+  <li><a href="https://github.com/jrouwe/JoltPhysics">jrouwe/JoltPhysics</a></li>
+  <li><a href="https://github.com/simbody/simbody">simbody/simbody</a></li>
+  <li><a href="https://github.com/projectchrono/chrono">projectchrono/chrono</a></li>
+</ol>
+
+<h2 id="git包括github">Git（包括GitHub）</h2>
+
+<ol>
+  <li><a href="https://github.com/libgit2/libgit2">libgit2/libgit2</a></li>
+  <li><a href="https://github.com/p-ranav/cppgit2">p-ranav/cppgit2</a></li>
+</ol>
+
+<h2 id="参考">参考</h2>
+
+<ol>
+  <li><a href="https://github.com/fffaraz/awesome-cpp">fffaraz/awesome-cpp</a></li>
+  <li><a href="https://github.com/p-ranav/awesome-hpp">p-ranav/awesome-hpp</a></li>
+  <li><a href="https://www.zhihu.com/question/56634628/answer/2366534212">如何评价xmake？-Tsunaou的回答-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/655334316">XMake：现代化的C++构建工具-Hytracen的文章-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/353121634">使用conda作为C++包管理器-林大豆折腾记的文章-知乎</a></li>
+  <li><a href="https://www.zhihu.com/question/51134387/answer/386066052">你工作中最推荐的C/C++程序库有哪些，为什么？-Zhao Zhang的回答-知乎</a></li>
+  <li><a href="https://www.zhihu.com/question/51134387/answer/571858930">你工作中最推荐的C/C++程序库有哪些，为什么？-iiif的回答-知乎</a></li>
+  <li><a href="https://www.zhihu.com/question/23153437/answer/1962068242">有什么高质量的现代C++风格的开源代码?-夏天的回答-知乎</a></li>
+  <li><a href="https://www.zhihu.com/question/23153437/answer/56630876696">有什么高质量的现代C++风格的开源代码?-南山烟雨珠江潮的回答-知乎</a></li>
+  <li><a href="https://www.zhihu.com/question/47567490/answer/1866897272">如何塑造一个拿的出手的GitHub账号？-吴师兄学算法的回答-知乎</a></li>
+  <li><a href="https://www.zhihu.com/question/21376384/answer/1925233838">你读过的最好的C++开源代码是什么？-编程指北的回答-知乎</a></li>
+  <li><a href="https://www.zhihu.com/question/281276664/answer/907647528">有哪些优秀的C++代码库可以推荐学习？-idealvin的回答-知乎</a></li>
+  <li><a href="https://www.zhihu.com/question/433864615/answer/1616753838">求问c++解析配置文件，解析命令输入的最佳实践，最好能给到相应的库？-邱昊宇的回答-知乎</a></li>
+  <li><a href="https://www.zhihu.com/question/40165082/answer/1925222483">Google对C++的影响有多大？-编程指北的回答-知乎</a></li>
+  <li><a href="https://www.zhihu.com/question/20792016/answer/1982761892">有哪些值得推荐的小型C语言开源项目？-fanfan的回答-知乎</a></li>
+  <li><a href="https://www.zhihu.com/question/496257115/answer/2842977837">有什么高质量的C++单头文件库?-liulun的回答-知乎</a></li>
+  <li><a href="https://www.zhihu.com/question/496257115/answer/2255551935">有什么高质量的C++单头文件库?-芒果浩明的回答-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/492392194">全网唯一值得推荐的C/C++框架和库-C语言编程指南的文章-知乎</a></li>
+  <li><a href="https://www.zhihu.com/question/554686788/answer/3173063665">如何评价Painter Engine？-DBinary的回答-知乎</a></li>
+  <li><a href="https://www.zhihu.com/question/280881677/answer/3151447745">如何找合适的C++项目给自己的简历加分？-1412的回答-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/65436463">OpenBLAS gemm从零入门-白牛的文章-知乎</a></li>
+</ol>
+
+  </div>
+
+  
+  
+<script src="https://utteranc.es/client.js"
+        repo="YWpepper/YWpepper.github.io"
+        issue-term="title"
+        label="comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
+
+  
+</article>
+
+<div class="pagination">
+  
+    <span class="prev" >
+      <a href="http://localhost:4000/awesome-list/">
+        ← 上一篇
+      </a>
+    </span>
+  
+  
+    <span class="next" >
+      <a href="http://localhost:4000/cpp-time/">
+        下一篇 →
+      </a>
+    </span>
+  
+</div>
+      </div>
+    </div>
+
+    
+
+  </body>
+
+  
+  <script>
+    document.getElementById("main").classList.add("withtoc");
+  </script>
+  
+
+  <div class="wrapper-footer-mobile">
+    <footer class="footer">
+      <!-- Refer to https://codepen.io/ruandre/pen/howFi -->
+<ul class="svg-icon">
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li><a href="https://github.com/zxl19" class="icon-13 github" title="GitHub"><svg viewBox="0 0 512 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg><!--[if lt IE 9]><em>GitHub</em><![endif]--></a></li>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</ul>
+
+
+
+<p>Copyright © 2020-2025 zxl19. All Rights Reserved.</p>
+
+    </footer>
+
+
+</html>

@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>如何利用GitHub搭建个人主页 – zxl19 – 一个工程师的存档点</title>
+
+      <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="如题，简单记录一下本博客的搭建过程。
+
+" />
+    <meta property="og:description" content="如题，简单记录一下本博客的搭建过程。
+
+" />
+    
+    <meta name="author" content="zxl19" />
+
+    
+    <meta property="og:title" content="如何利用GitHub搭建个人主页" />
+    <meta property="twitter:title" content="如何利用GitHub搭建个人主页" />
+    
+  <!-- Async font loading -->
+<script>
+  window.WebFontConfig = {
+      custom: {
+          families: ['Spoqa Han Sans:100,300,400,700'],
+          urls: ['https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css']
+      },
+      timeout: 60000
+  };
+  (function(d) {
+      var wf = d.createElement('script'), s = d.scripts[0];
+      wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js';
+      s.parentNode.insertBefore(wf, s);
+  })(document);
+</script>
+
+<!--adobe fonts-->
+<script>
+    (function(d) {
+      var config = {
+        kitId: 'vbt3gjx',
+        scriptTimeout: 3000,
+        async: true
+      },
+      h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+    })(document);
+</script> 
+
+  <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link rel="stylesheet" type="text/css" href="/style.css" />
+  <link rel="alternate" type="application/rss+xml" title="zxl19 - 一个工程师的存档点" href="/feed.xml" />
+  <link rel="shortcut icon" href="https://raw.githubusercontent.com/zxl19/zxl19.github.io/master/images/icon.png">
+  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+  <script src="https://unpkg.com/feather-icons"></script>
+  <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        inlineMath: [['$','$']]
+      }
+    });
+  </script>
+
+  <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+
+</head>
+
+  <body>
+    <div class="wrapper-sidebar">
+  <header class="sidebar clearfix">
+    <div class="site-info">
+      
+        <a href="/" class="site-avatar"><img src="https://raw.githubusercontent.com/zxl19/zxl19.github.io/master/images/avatar.jpg" /></a>
+       
+      <h1 class="site-name"><a href="/">zxl19</a></h1>
+      <p class="site-description">一个工程师的存档点</p>
+    </div>
+  </header>
+
+  <div class="navlist">
+    <nav>
+      
+      
+      <a href="/">首页</a>
+      
+      
+      
+      <a href="/about">关于</a>
+      
+      
+      
+      <a href="/archive">归档</a>
+      
+      
+      
+      <a href="/tags">标签</a>
+      
+      
+    </nav>
+  </div>
+
+  <div class="wrapper-footer-desktop">
+    <footer class="footer">
+      <!-- Refer to https://codepen.io/ruandre/pen/howFi -->
+<ul class="svg-icon">
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li><a href="https://github.com/zxl19" class="icon-13 github" title="GitHub"><svg viewBox="0 0 512 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg><!--[if lt IE 9]><em>GitHub</em><![endif]--></a></li>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</ul>
+
+
+
+<p>Copyright © 2020-2025 zxl19. All Rights Reserved.</p>
+
+    </footer>
+  </div>
+</div>
+
+    
+      <aside class="toc">
+        <ul>
+  <li><a href="#">如何利用GitHub搭建个人主页</a>
+    <ul>
+      <li><a href="#搭建过程">搭建过程</a>
+        <ul>
+          <li><a href="#选择博客模板">选择博客模板</a></li>
+          <li><a href="#选择开源协议">选择开源协议</a></li>
+          <li><a href="#设置赞赏按钮">设置赞赏按钮</a></li>
+          <li><a href="#设置收藏夹图标">设置收藏夹图标</a></li>
+          <li><a href="#设置版权声明">设置版权声明</a></li>
+          <li><a href="#设置评论区组件">设置评论区组件</a></li>
+          <li><a href="#设置访问统计工具">设置访问统计工具</a></li>
+          <li><a href="#设置搜索引擎优化">设置搜索引擎优化</a></li>
+          <li><a href="#设置自定义404页面">设置自定义404页面</a></li>
+        </ul>
+      </li>
+      <li><a href="#博客模板使用说明及格式约定">博客模板使用说明及格式约定</a></li>
+      <li><a href="#常见问题及解决方法">常见问题及解决方法</a>
+        <ul>
+          <li><a href="#无法生成网站">无法生成网站</a></li>
+          <li><a href="#github图片显示失败">GitHub图片显示失败</a></li>
+          <li><a href="#在gitee上同步博客">在Gitee上同步博客</a></li>
+          <li><a href="#另外一种简单的搭建教程">另外一种简单的搭建教程</a></li>
+          <li><a href="#博客模板更新同步">博客模板更新同步</a></li>
+        </ul>
+      </li>
+      <li><a href="#参考">参考</a></li>
+    </ul>
+  </li>
+</ul>
+      </aside>
+    
+
+    <div id="main" role="main" class="wrapper-content">
+      <div class="container">
+        <article class="posts">
+  <h1>如何利用GitHub搭建个人主页</h1>
+
+  <div clsss="meta">
+    <span class="author">
+      zxl19
+    </span>
+
+    <span class="date">
+      2020-05-05
+    </span>
+
+    <ul class="tag">
+      
+      <li>
+        <a href="http://localhost:4000/tags#Blog">
+          Blog
+        </a>
+      </li>
+      
+      <li>
+        <a href="http://localhost:4000/tags#GitHub">
+          GitHub
+        </a>
+      </li>
+      
+      <li>
+        <a href="http://localhost:4000/tags#Note">
+          Note
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+
+  <div class="entry">
+    <p>如题，简单记录一下本博客的搭建过程。</p>
+
+<!-- more -->
+
+<h2 id="搭建过程">搭建过程</h2>
+
+<h3 id="选择博客模板">选择博客模板</h3>
+
+<p>选择合适的博客模板可以实现更加复杂的博客功能并提高博客的美观性，具体可以在<a href="http://jekyllthemes.org">Jekyll Themes</a>网站上进行选择。本博客使用<a href="https://github.com/FromEndWorld/LOFFER">FromEndWorld/LOFFER</a>模板进行搭建，具体使用方式参考模板教程，在此向原作者表示感谢。完成此步骤之后，可以实现基本的博客功能。</p>
+
+<ol>
+  <li><a href="https://github.com/academicpages/academicpages.github.io">academicpages/academicpages.github.io</a></li>
+  <li><a href="https://github.com/RayeRen/acad-homepage.github.io">RayeRen/acad-homepage.github.io</a></li>
+  <li><a href="https://github.com/gaowei-space/markdown-blog">gaowei-space/markdown-blog</a></li>
+  <li><a href="https://github.com/FromEndWorld/LOFFER">FromEndWorld/LOFFER</a></li>
+</ol>
+
+<h3 id="选择开源协议">选择开源协议</h3>
+
+<p>在仓库中新建<code class="language-plaintext highlighter-rouge">LICENSE</code>文件，GitHub会自动提示可供选择的开源协议，并提供<a href="https://choosealicense.com">说明</a>以供参考。本博客模板使用MIT开源协议，MIT与BSD类似，但是比BSD协议更加宽松，是目前最少限制的协议，这个协议唯一的条件就是在修改后的代码或者发行包包含原作者的许可信息，适用于商业软件。<strong>2023年2月18日，本博客改为使用CC-BY-SA-4.0（知识共享-署名-相同方式共享-4.0版）开源协议，这是一种适用于非软件的开源协议。</strong></p>
+
+<ol>
+  <li><a href="https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository">Licensing a repository-GitHub Docs</a></li>
+  <li><a href="https://opensource.guide/legal/">The Legal Side of Open Source</a></li>
+  <li><a href="https://choosealicense.com">Choose an open source license</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Creative_Commons_license">Creative Commons license-Wikipedia</a></li>
+  <li><a href="https://creativecommons.org/licenses/">About The Licenses-Creative Commons</a></li>
+</ol>
+
+<h3 id="设置赞赏按钮">设置赞赏按钮</h3>
+
+<p>在仓库中<code class="language-plaintext highlighter-rouge">Settings</code>-&gt;<code class="language-plaintext highlighter-rouge">General</code>-&gt;<code class="language-plaintext highlighter-rouge">Features</code>-&gt;<code class="language-plaintext highlighter-rouge">Sponsorships</code>，设置赞赏按钮，会在<code class="language-plaintext highlighter-rouge">.github</code>文件夹中生成<code class="language-plaintext highlighter-rouge">FUNDING.yml</code>文件，按照文件内的提示进行设置即可。如果不想注册相关网站可以上传微信赞赏码<sup id="fnref:1"><a href="#fn:1" class="footnote" rel="footnote" role="doc-noteref">1</a></sup>，在文件中添加微信赞赏码的链接来代替。</p>
+
+<p align="center">
+    <a href="https://zxl19.github.io">
+        <img src="https://raw.githubusercontent.com/zxl19/zxl19.github.io/master/images/funding.png" alt="buy me a coffee" width="300" />
+    </a>
+</p>
+
+<h3 id="设置收藏夹图标">设置收藏夹图标</h3>
+
+<p>收藏夹图标（favicon）指的是在网页标签栏和书签中显示的小图标，使用<a href="https://android-material-icon-generator.bitdroid.de">图标生成器</a>制作收藏夹图标<sup id="fnref:2"><a href="#fn:2" class="footnote" rel="footnote" role="doc-noteref">2</a></sup>，在<code class="language-plaintext highlighter-rouge">_config.yml</code>文件中设置。</p>
+
+<p align="center">
+    <a href="https://zxl19.github.io">
+        <img src="https://raw.githubusercontent.com/zxl19/zxl19.github.io/master/images/icon.png" alt="my favicon" width="50" />
+    </a>
+</p>
+
+<ol>
+  <li><a href="https://simpleicons.org">Simple Icons</a></li>
+  <li><a href="https://android-material-icon-generator.bitdroid.de">Android Material Icon Generator</a></li>
+  <li><a href="https://redketchup.io/favicon-generator">Favicon Generator</a></li>
+  <li><a href="https://favicon.io">favicon.io</a></li>
+  <li><a href="https://www.logosc.cn/logo/favicon">免费Favicon.ico图标在线生成器</a></li>
+  <li><a href="https://geticon.cn">图标制作大师</a></li>
+  <li><a href="https://www.bitbug.net">在线制作ico图标</a></li>
+</ol>
+
+<h3 id="设置版权声明">设置版权声明</h3>
+
+<p>设置版权声明<sup id="fnref:3"><a href="#fn:3" class="footnote" rel="footnote" role="doc-noteref">3</a></sup>，最新使用年份需要手动更新，作为页脚文本显示，在<code class="language-plaintext highlighter-rouge">_config.yml</code>文件中设置：</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">footer-text</span><span class="pi">:</span> <span class="s">Copyright © 2020-20xx zxl19. All Rights Reserved.</span>
+</code></pre></div></div>
+
+<p>加入《伯尔尼公约》的国家具有版权自动保护原则，作品创作完成即享有版权，不强制使用版权声明，版权声明格式规范：</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[Copyright] © &lt;start_year&gt;[-current_year] &lt;author&gt;. [All Rights Reserved.]
+</code></pre></div></div>
+
+<h3 id="设置评论区组件">设置评论区组件</h3>
+
+<p>LOFFER模板自V0.5.0开始支持<a href="https://utteranc.es">utterances</a>评论区组件，安装这个GitHub App后可以将博客评论映射到仓库Issue。</p>
+
+<ol>
+  <li>
+    <p>脚本和配置选项说明，可以直接添加到博客模板中：</p>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="dl">"</span><span class="s2">https://utteranc.es/client.js</span><span class="dl">"</span>
+         <span class="nx">repo</span><span class="o">=</span><span class="dl">"</span><span class="s2">zxl19/zxl19.github.io</span><span class="dl">"</span>            <span class="c1">// 仓库名称</span>
+         <span class="nx">issue</span><span class="o">-</span><span class="nx">term</span><span class="o">=</span><span class="dl">"</span><span class="s2">title</span><span class="dl">"</span>                      <span class="c1">// Issue标题格式</span>
+         <span class="nx">label</span><span class="o">=</span><span class="dl">"</span><span class="s2">comment</span><span class="dl">"</span>                         <span class="c1">// Issue标签</span>
+         <span class="nx">theme</span><span class="o">=</span><span class="dl">"</span><span class="s2">github-light</span><span class="dl">"</span>                    <span class="c1">// 评论区主题</span>
+         <span class="nx">crossorigin</span><span class="o">=</span><span class="dl">"</span><span class="s2">anonymous</span><span class="dl">"</span>                 <span class="c1">// 跨域设置</span>
+         <span class="k">async</span><span class="o">&gt;</span>
+ <span class="o">&lt;</span><span class="sr">/script</span><span class="err">&gt;
+</span></code></pre></div>    </div>
+  </li>
+  <li>
+    <p>在<code class="language-plaintext highlighter-rouge">_config.yml</code>文件中设置：</p>
+
+    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="na">utteranc</span><span class="pi">:</span>
+     <span class="na">repo</span><span class="pi">:</span> <span class="s">zxl19/zxl19.github.io</span>
+     <span class="na">issue-term</span><span class="pi">:</span> <span class="s">title</span>
+     <span class="na">label</span><span class="pi">:</span> <span class="s">comment</span>
+     <span class="na">theme</span><span class="pi">:</span> <span class="s">github-light</span>
+     <span class="na">crossorigin</span><span class="pi">:</span> <span class="s">anonymous</span>
+</code></pre></div>    </div>
+
+    <p><code class="language-plaintext highlighter-rouge">utterance.html</code>文件会读取<code class="language-plaintext highlighter-rouge">_config.yml</code>文件中的设置：</p>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="dl">"</span><span class="s2">https://utteranc.es/client.js</span><span class="dl">"</span>
+         <span class="nx">repo</span><span class="o">=</span><span class="dl">"</span><span class="s2">YWpepper/YWpepper.github.io</span><span class="dl">"</span>
+         <span class="c1">// 博客模板在这里有笔误，应为site.utteranc.issue-term</span>
+         <span class="nx">issue</span><span class="o">-</span><span class="nx">term</span><span class="o">=</span><span class="dl">"</span><span class="s2">title</span><span class="dl">"</span>
+         <span class="nx">label</span><span class="o">=</span><span class="dl">"</span><span class="s2">comment</span><span class="dl">"</span>
+         <span class="nx">theme</span><span class="o">=</span><span class="dl">"</span><span class="s2">github-light</span><span class="dl">"</span>
+         <span class="nx">crossorigin</span><span class="o">=</span><span class="dl">"</span><span class="s2">anonymous</span><span class="dl">"</span>
+         <span class="k">async</span><span class="o">&gt;</span>
+ <span class="o">&lt;</span><span class="sr">/script</span><span class="err">&gt;
+</span></code></pre></div>    </div>
+  </li>
+</ol>
+
+<h3 id="设置访问统计工具">设置访问统计工具</h3>
+
+<p>使用<a href="https://clustrmaps.com">ClustrMaps</a>组件实时统计博客访问信息并进行可视化<sup id="fnref:4"><a href="#fn:4" class="footnote" rel="footnote" role="doc-noteref">4</a></sup>，需要注册账号，同一个账号支持管理多个网址的访问信息并支持单独调整显示样式，如果需要重置某个网址的访问信息统计，需要删除其对应的项目。</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">'text/javascript'</span> <span class="na">id=</span><span class="s">'clustrmaps'</span> <span class="na">src=</span><span class="s">'//cdn.clustrmaps.com/map_v2.js?cl=ffffff&amp;w=300&amp;t=tt&amp;d=hibP75SF_WZXl_4j4ksPzYOneT4Qb5-laVZ2YVjfDdA'</span><span class="nt">&gt;&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<p><strong>2024年11月：RevolverMaps停止提供服务。</strong></p>
+
+<ol>
+  <li><a href="https://www.revolvermaps.com">RevolverMaps</a></li>
+  <li><a href="https://clustrmaps.com">ClustrMaps</a></li>
+  <li><a href="https://www.free-website-hit-counter.com">Free website hit counter</a></li>
+</ol>
+
+<h3 id="设置搜索引擎优化">设置搜索引擎优化</h3>
+
+<p>搜索引擎优化（Search Engine Optimization，SEO）的目的是为了提高博客在搜索结果中的排名，在搜索引擎中搜索博客地址：</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>site:https://zxl19.github.io
+</code></pre></div></div>
+
+<p>如果搜索结果中包含博客内容，则说明博客已被搜索引擎收录。</p>
+
+<ol>
+  <li><a href="https://search.google.com/search-console/about">Google Search Console</a></li>
+  <li><a href="https://www.xml-sitemaps.com">XML-Sitemaps</a></li>
+</ol>
+
+<h3 id="设置自定义404页面">设置自定义404页面</h3>
+
+<p>在<code class="language-plaintext highlighter-rouge">404.md</code>文件头部添加：</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">permalink</span><span class="pi">:</span> <span class="s">/404.html</span>
+<span class="nn">---</span>
+</code></pre></div></div>
+
+<ol>
+  <li><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-custom-404-page-for-your-github-pages-site">Creating a custom 404 page for your GitHub Pages site-GitHub Docs</a></li>
+</ol>
+
+<h2 id="博客模板使用说明及格式约定">博客模板使用说明及格式约定</h2>
+
+<ol>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">_posts</code>文件夹中的每个<code class="language-plaintext highlighter-rouge">.md</code>文件对应一篇文章，文件名格式为<code class="language-plaintext highlighter-rouge">year-month-day-url.md</code>，以本文为例进行说明：</p>
+
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">year-month-day</code>为文件创建日期，例如：<code class="language-plaintext highlighter-rouge">2020-05-05</code>；</li>
+      <li><code class="language-plaintext highlighter-rouge">url</code>为文章对应的二级域名，建议使用文章主题词，一般为两个单词，最多不超过三个单词，例如：<code class="language-plaintext highlighter-rouge">blog-setup</code>；</li>
+      <li>博客模板不会使用隐藏的<code class="language-plaintext highlighter-rouge">.md</code>文件生成网页，因此在文件名前加<code class="language-plaintext highlighter-rouge">.</code>可以将文件隐藏，进而将对应文章隐藏；</li>
+    </ul>
+  </li>
+  <li>
+    <p>文章头部格式约定，以本文为例进行说明：</p>
+
+    <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p"> ---</span>
+ layout: post
+ title: 如何利用GitHub搭建个人主页
+ date: 2020-05-05
+ author: zxl19
+ categories:
+ tags: [Blog, GitHub, Note]
+ comments: true
+ toc: true
+ pinned: false
+<span class="p"> ---
+</span></code></pre></div>    </div>
+
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">layout</code>：排版样式，文章为<code class="language-plaintext highlighter-rouge">post</code>，对应<code class="language-plaintext highlighter-rouge">_layouts</code>文件夹中的<code class="language-plaintext highlighter-rouge">post.html</code>文件；</li>
+      <li><code class="language-plaintext highlighter-rouge">title</code>：博客中显示的标题；</li>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">date</code>：博客中显示的日期：</p>
+
+        <ul>
+          <li>博客模板根据此处的日期对于文章进行排序；</li>
+          <li>建议此处使用最近一次修改日期，文件名中使用创建日期；</li>
+          <li>为了避免文章顺序频繁变化，约定此处使用文件创建日期；</li>
+        </ul>
+      </li>
+      <li><code class="language-plaintext highlighter-rouge">author</code>：作者，多个作者使用英文逗号隔开，不需要使用中括号括起来；</li>
+      <li><code class="language-plaintext highlighter-rouge">categories</code>：含义尚不明；</li>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">tags</code>：标签；</p>
+
+        <ul>
+          <li>按照字母顺序排列，数量上尽量精简；</li>
+          <li>多个标签使用英文逗号隔开，使用中括号括起来；</li>
+          <li>
+            <p>最后一个标签表示文章类型，目前分为以下三种：</p>
+
+            <table>
+              <thead>
+                <tr>
+                  <th style="text-align: left">标签</th>
+                  <th style="text-align: left">文章类型</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="text-align: left"><code class="language-plaintext highlighter-rouge">Archive</code></td>
+                  <td style="text-align: left">资料存档，不定期更新</td>
+                </tr>
+                <tr>
+                  <td style="text-align: left"><code class="language-plaintext highlighter-rouge">Blog</code></td>
+                  <td style="text-align: left">博客，与生活相关</td>
+                </tr>
+                <tr>
+                  <td style="text-align: left"><code class="language-plaintext highlighter-rouge">Note</code></td>
+                  <td style="text-align: left">学习笔记，不定期更新</td>
+                </tr>
+              </tbody>
+            </table>
+          </li>
+        </ul>
+      </li>
+      <li><code class="language-plaintext highlighter-rouge">comments</code>：是否开放评论，默认开放；</li>
+      <li><code class="language-plaintext highlighter-rouge">toc</code>：是否生成目录，默认生成；</li>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">pinned</code>：是否置顶，默认不置顶；</p>
+
+        <ul>
+          <li>置顶文章会在博客首页顶端显示，应尽量减少置顶文章数量，使博客显示美观；</li>
+          <li>约定将所有需要置顶的文章链接按照时间顺序添加到<code class="language-plaintext highlighter-rouge">2023-02-27-hall-of-fame.md</code>文件中，只将这篇文章置顶；</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>文章正文格式约定：</p>
+
+    <ul>
+      <li>为了防止自动截取摘要失败，约定在文章第一段后添加手动截取摘要的标记<code class="language-plaintext highlighter-rouge">&lt;!-- more --&gt;</code>，将包含特殊符号、代码块、表格的部分放在标记之后；</li>
+      <li>为了文章显示美观，约定文章中不使用一级标题<code class="language-plaintext highlighter-rouge">#</code>，从二级标题<code class="language-plaintext highlighter-rouge">##</code>开始使用；</li>
+      <li>
+        <table>
+          <tbody>
+            <tr>
+              <td>为了防止排版样式显示错误，在文章正文中避免使用<code class="language-plaintext highlighter-rouge">|</code>，约定使用汉字“</td>
+              <td>”（gǔn）代替；</td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+      <li>为了防止有序列表序号显示不连续，约定将代码段和表格缩进到有序列表中；</li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="常见问题及解决方法">常见问题及解决方法</h2>
+
+<h3 id="无法生成网站">无法生成网站</h3>
+
+<p>仓库属性必须为<code class="language-plaintext highlighter-rouge">Public</code>，否则无法生成网站。如果仓库属性设置错误，需要修改仓库属性后<code class="language-plaintext highlighter-rouge">git commit</code>+<code class="language-plaintext highlighter-rouge">git push</code>一次才能恢复正常。</p>
+
+<h3 id="github图片显示失败">GitHub图片显示失败</h3>
+
+<ol>
+  <li>修改hosts文件，具体参考<a href="https://blog.csdn.net/qq_38232598/article/details/91346392">CSDN博客</a>进行解决；</li>
+  <li>科学上网；</li>
+</ol>
+
+<h3 id="在gitee上同步博客">在Gitee上同步博客</h3>
+
+<p>在Gitee上也可以搭建个人主页，可以保证访问速度和稳定性，具体参考<a href="https://www.bilibili.com/video/BV1cJ411h7q3">B站视频</a>。</p>
+
+<p>曾尝试将本博客仓库托管到Gitee后同步搭建Gitee Pages，未成功。</p>
+
+<h3 id="另外一种简单的搭建教程">另外一种简单的搭建教程</h3>
+
+<p>不使用博客模板新建仓库，搭建简单的GitHub Page，参考<a href="https://www.zhihu.com/question/20962496/answer/677815713">知乎回答</a>，可以搭建一个简单的个人主页，可以作为项目介绍页或者简历使用，美观性较差，也难以实现更加复杂的功能。</p>
+
+<h3 id="博客模板更新同步">博客模板更新同步</h3>
+
+<p>由于博客仓库通过博客模板构建，在博客模板更新后无法通过Pull Request的方式进行同步。为实现对于博客模板更新的同步，可以保留<code class="language-plaintext highlighter-rouge">_posts</code>文件夹下的文件，将其他文件直接替换为更新后博客模板中的文件，在进行简单配置后即可完成同步更新。</p>
+
+<h2 id="参考">参考</h2>
+
+<ol>
+  <li><a href="https://www.zhihu.com/question/20962496/answer/677815713">如何在GitHub上写博客？-少数派的回答-知乎</a></li>
+  <li><a href="https://www.bilibili.com/video/BV1cJ411h7q3">Gitee码云pages+Jekyll主题搭建个人博客-bilibili</a></li>
+  <li><a href="https://www.runoob.com/w3cnote/open-source-license.html">各种开源协议介绍-菜鸟教程</a></li>
+  <li><a href="https://opensource.guide">Open Source Guides</a></li>
+  <li><a href="https://github.com/github/choosealicense.com">github/choosealicense.com</a></li>
+  <li><a href="https://www.jianshu.com/p/d587b91bacb3">几条经验美化你的GitHub开源项目-简书</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/50613376">Favicon的使用方法与制作-UIhacker的文章-知乎</a></li>
+  <li><a href="https://github.com/simple-icons/simple-icons">simple-icons/simple-icons</a></li>
+  <li><a href="https://github.com/Maddoc42/Android-Material-Icon-Generator">Maddoc42/Android-Material-Icon-Generator</a></li>
+  <li><a href="https://redketchup.io">Online Tools-RedKetchup</a></li>
+  <li><a href="https://www.zhihu.com/question/19916364/answer/950648013">规范的版权Copyright说明怎么写？-赵智功的回答-知乎</a></li>
+  <li><a href="https://www.zhihu.com/question/19916364/answer/330516163">规范的版权Copyright说明怎么写？-谪人的回答-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/23670911">网站页面底部的著作权（版权）声明应该怎么写？-零识的文章-知乎</a></li>
+  <li><a href="https://blog.csdn.net/masonman/article/details/39482605">关于网站版权声明(Copyright)的格式和写法-CSDN博客</a></li>
+  <li><a href="https://www.revolvermaps.com">RevolverMaps</a></li>
+  <li><a href="https://clustrmaps.com">ClustrMaps</a></li>
+  <li><a href="https://nofakenews.net/2024/11/15/have-you-noticed-a-change-to-the-website">Have you noticed a change to the website?-NoFakeNews</a></li>
+  <li><a href="https://blog.csdn.net/weixin_43835470/article/details/144537126">网站访问统计小工具RevolverMaps无法用了——平替ClustrMaps-CSDN博客</a></li>
+  <li><a href="https://fgc346.github.io/2023/04/13/OwnSiteByGoogleSearch/">谷歌搜索到自己在github的个人博客</a></li>
+  <li><a href="https://docs.github.com/en/pages">GitHub Pages documentation-GitHub Docs</a></li>
+  <li><a href="https://blog.csdn.net/qq_38232598/article/details/91346392">【最新】解决Github网页上图片显示失败的问题-CSDN博客</a></li>
+  <li><a href="https://www.zhihu.com/question/281476526">如何制作个人学术主页？-知乎</a></li>
+</ol>
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1">
+      <p>以我的赞赏码为例。 <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:2">
+      <p>以我的收藏夹图标为例。 <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:3">
+      <p>以我的版权声明为例。 <a href="#fnref:3" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:4">
+      <p>以我的脚本为例。 <a href="#fnref:4" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div>
+
+  
+  
+<script src="https://utteranc.es/client.js"
+        repo="YWpepper/YWpepper.github.io"
+        issue-term="title"
+        label="comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
+
+  
+</article>
+
+<div class="pagination">
+  
+  
+    <span class="next" >
+      <a href="http://localhost:4000/markdown-note/">
+        下一篇 →
+      </a>
+    </span>
+  
+</div>
+      </div>
+    </div>
+
+    
+
+  </body>
+
+  
+  <script>
+    document.getElementById("main").classList.add("withtoc");
+  </script>
+  
+
+  <div class="wrapper-footer-mobile">
+    <footer class="footer">
+      <!-- Refer to https://codepen.io/ruandre/pen/howFi -->
+<ul class="svg-icon">
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li><a href="https://github.com/zxl19" class="icon-13 github" title="GitHub"><svg viewBox="0 0 512 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg><!--[if lt IE 9]><em>GitHub</em><![endif]--></a></li>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</ul>
+
+
+
+<p>Copyright © 2020-2025 zxl19. All Rights Reserved.</p>
+
+    </footer>
+
+
+</html>

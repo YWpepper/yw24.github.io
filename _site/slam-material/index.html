@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>SLAM学习资料存档 – zxl19 – 一个工程师的存档点</title>
+
+      <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="SLAM学习资料存档，包括SLAM基础理论、卡尔曼滤波、组合导航等。
+
+" />
+    <meta property="og:description" content="SLAM学习资料存档，包括SLAM基础理论、卡尔曼滤波、组合导航等。
+
+" />
+    
+    <meta name="author" content="zxl19" />
+
+    
+    <meta property="og:title" content="SLAM学习资料存档" />
+    <meta property="twitter:title" content="SLAM学习资料存档" />
+    
+  <!-- Async font loading -->
+<script>
+  window.WebFontConfig = {
+      custom: {
+          families: ['Spoqa Han Sans:100,300,400,700'],
+          urls: ['https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css']
+      },
+      timeout: 60000
+  };
+  (function(d) {
+      var wf = d.createElement('script'), s = d.scripts[0];
+      wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js';
+      s.parentNode.insertBefore(wf, s);
+  })(document);
+</script>
+
+<!--adobe fonts-->
+<script>
+    (function(d) {
+      var config = {
+        kitId: 'vbt3gjx',
+        scriptTimeout: 3000,
+        async: true
+      },
+      h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+    })(document);
+</script> 
+
+  <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link rel="stylesheet" type="text/css" href="/style.css" />
+  <link rel="alternate" type="application/rss+xml" title="zxl19 - 一个工程师的存档点" href="/feed.xml" />
+  <link rel="shortcut icon" href="https://raw.githubusercontent.com/zxl19/zxl19.github.io/master/images/icon.png">
+  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+  <script src="https://unpkg.com/feather-icons"></script>
+  <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        inlineMath: [['$','$']]
+      }
+    });
+  </script>
+
+  <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+
+</head>
+
+  <body>
+    <div class="wrapper-sidebar">
+  <header class="sidebar clearfix">
+    <div class="site-info">
+      
+        <a href="/" class="site-avatar"><img src="https://raw.githubusercontent.com/zxl19/zxl19.github.io/master/images/avatar.jpg" /></a>
+       
+      <h1 class="site-name"><a href="/">zxl19</a></h1>
+      <p class="site-description">一个工程师的存档点</p>
+    </div>
+  </header>
+
+  <div class="navlist">
+    <nav>
+      
+      
+      <a href="/">首页</a>
+      
+      
+      
+      <a href="/about">关于</a>
+      
+      
+      
+      <a href="/archive">归档</a>
+      
+      
+      
+      <a href="/tags">标签</a>
+      
+      
+    </nav>
+  </div>
+
+  <div class="wrapper-footer-desktop">
+    <footer class="footer">
+      <!-- Refer to https://codepen.io/ruandre/pen/howFi -->
+<ul class="svg-icon">
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li><a href="https://github.com/zxl19" class="icon-13 github" title="GitHub"><svg viewBox="0 0 512 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg><!--[if lt IE 9]><em>GitHub</em><![endif]--></a></li>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</ul>
+
+
+
+<p>Copyright © 2020-2025 zxl19. All Rights Reserved.</p>
+
+    </footer>
+  </div>
+</div>
+
+    
+      <aside class="toc">
+        <ul>
+  <li><a href="#">SLAM学习资料存档</a>
+    <ul>
+      <li><a href="#slam基础理论">SLAM基础理论</a>
+        <ul>
+          <li><a href="#书籍">书籍</a></li>
+          <li><a href="#在线位姿转换">在线位姿转换</a></li>
+          <li><a href="#github">GitHub</a></li>
+          <li><a href="#公开课">公开课</a></li>
+        </ul>
+      </li>
+      <li><a href="#卡尔曼滤波">卡尔曼滤波</a>
+        <ul>
+          <li><a href="#网站">网站</a></li>
+          <li><a href="#github-1">GitHub</a>
+            <ul>
+              <li><a href="#matlab">MATLAB</a></li>
+              <li><a href="#python">Python</a></li>
+              <li><a href="#c">C++</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><a href="#组合导航">组合导航</a>
+        <ul>
+          <li><a href="#教材">教材</a></li>
+          <li><a href="#网站-1">网站</a></li>
+          <li><a href="#github-2">GitHub</a></li>
+        </ul>
+      </li>
+      <li><a href="#自动驾驶">自动驾驶</a>
+        <ul>
+          <li><a href="#网站-2">网站</a></li>
+          <li><a href="#github-3">GitHub</a></li>
+        </ul>
+      </li>
+      <li><a href="#参考">参考</a></li>
+    </ul>
+  </li>
+</ul>
+      </aside>
+    
+
+    <div id="main" role="main" class="wrapper-content">
+      <div class="container">
+        <article class="posts">
+  <h1>SLAM学习资料存档</h1>
+
+  <div clsss="meta">
+    <span class="author">
+      zxl19
+    </span>
+
+    <span class="date">
+      2022-10-11
+    </span>
+
+    <ul class="tag">
+      
+      <li>
+        <a href="http://localhost:4000/tags#SLAM">
+          SLAM
+        </a>
+      </li>
+      
+      <li>
+        <a href="http://localhost:4000/tags#Archive">
+          Archive
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+
+  <div class="entry">
+    <p>SLAM学习资料存档，包括SLAM基础理论、卡尔曼滤波、组合导航等。</p>
+
+<!-- more -->
+
+<h2 id="slam基础理论">SLAM基础理论</h2>
+
+<h3 id="书籍">书籍</h3>
+
+<ol>
+  <li>《视觉SLAM十四讲》</li>
+  <li>《自动驾驶中的SLAM技术》</li>
+  <li><a href="https://www.cs.cmu.edu/~kaess/pub/Dellaert17fnt.html">Factor graphs for robot perception</a></li>
+  <li><a href="http://ingmec.ual.es/~jlblanco/papers/jlblanco2010geometry3D_techrep.pdf">A tutorial on SE(3) transformation parameterizations and on-manifold optimization</a></li>
+  <li><a href="https://graphics.stanford.edu/courses/cs348a-17-winter/Papers/quaternion.pdf">Quaternions and Rotations</a></li>
+  <li><a href="https://arxiv.org/pdf/1812.01537.pdf">A micro Lie theory for state estimation in robotics</a></li>
+  <li><a href="https://www.iri.upc.edu/people/jsola/JoanSola/objectes/notes/kinematics.pdf">Quaternion kinematics for the error-state Kalman filter</a></li>
+  <li><a href="https://gaoyichao.com/Xiaotu//resource/refs/PR.MIT.en.pdf">Probabilistic Robotics</a></li>
+  <li><a href="http://asrl.utias.utoronto.ca/~tdb/bib/barfoot_ser17.pdf">State Estimation for Robotics – First Edition</a></li>
+  <li><a href="http://asrl.utias.utoronto.ca/~tdb/bib/barfoot_ser23.pdf">State Estimation for Robotics – Draft Second Edition</a></li>
+  <li><a href="http://asrl.utias.utoronto.ca/~tdb/bib/barfoot_ser17_identities.pdf">SO(3) and SE(3) Identities and Approximations</a></li>
+  <li><a href="https://norlab.ulaval.ca/research/LieCheatsheet/">Lie theory cheatsheet</a></li>
+  <li><a href="https://assets.cambridge.org/97805215/40513/frontmatter/9780521540513_frontmatter.pdf">Multiple view geometry in computer vision</a></li>
+  <li><a href="http://hades.mech.northwestern.edu/images/7/7f/MR.pdf">Modern Robotics</a></li>
+</ol>
+
+<h3 id="在线位姿转换">在线位姿转换</h3>
+
+<ol>
+  <li><a href="https://danceswithcode.net/danceswithcode.net/engineeringnotes/index.html">Engineering Notes</a></li>
+  <li><a href="https://www.andre-gaschler.com/rotationconverter/">3D Rotation Converter</a></li>
+  <li><a href="https://quaternions.online">Quaternions</a></li>
+</ol>
+
+<h3 id="github">GitHub</h3>
+
+<ol>
+  <li><a href="https://github.com/gaoxiang12/slambook">gaoxiang12/slambook</a></li>
+  <li><a href="https://github.com/gaoxiang12/slambook2">gaoxiang12/slambook2</a></li>
+  <li><a href="https://github.com/gaoxiang12/slambook-en">gaoxiang12/slambook-en</a></li>
+  <li><a href="https://github.com/gaoxiang12/slam_in_autonomous_driving">gaoxiang12/slam_in_autonomous_driving</a></li>
+  <li><a href="https://github.com/AlbertSlam/Lee-SLAM-source">AlbertSlam/Lee-SLAM-source</a></li>
+  <li><a href="https://github.com/jlblancoc/tutorial-se3-manifold">jlblancoc/tutorial-se3-manifold</a></li>
+  <li><a href="https://github.com/StevenCui/VIO-Doc">StevenCui/VIO-Doc</a></li>
+  <li><a href="https://github.com/TurtleZhong/Map-based-Visual-Localization">TurtleZhong/Map-based-Visual-Localization</a></li>
+  <li><a href="https://github.com/PetWorm/IMU-Preintegration-Propogation-Doc">PetWorm/IMU-Preintegration-Propogation-Doc</a></li>
+  <li><a href="https://github.com/PetWorm/IMU_error_state_propagation_doc">PetWorm/IMU_error_state_propagation_doc</a></li>
+  <li><a href="https://github.com/norlab-ulaval/cheatsheet_LieAlgebra">norlab-ulaval/cheatsheet_LieAlgebra</a></li>
+  <li><a href="https://github.com/jlblancoc/factor-graphs-course">jlblancoc/factor-graphs-course</a></li>
+  <li><a href="https://github.com/gongbingg/slam">gongbingg/slam</a></li>
+  <li><a href="https://github.com/Joanna-HE/Supplementary-file-for-IKFoM">Joanna-HE/Supplementary-file-for-IKFoM</a></li>
+  <li><a href="https://github.com/slam-code/SLAM">slam-code/SLAM</a></li>
+  <li><a href="https://github.com/brytsknguyen/slict">brytsknguyen/slict</a></li>
+  <li><a href="https://github.com/Tompson11/SLAM_comparison">Tompson11/SLAM_comparison</a></li>
+  <li><a href="https://github.com/ganlumomo/VisualInertialOdometry">ganlumomo/VisualInertialOdometry</a></li>
+  <li><a href="https://github.com/brytsknguyen/oblam_deskew">brytsknguyen/oblam_deskew</a></li>
+  <li><a href="https://github.com/YZH-bot/SLAM_Box">YZH-bot/SLAM_Box</a></li>
+</ol>
+
+<h3 id="公开课">公开课</h3>
+
+<ol>
+  <li><a href="https://space.bilibili.com/38737757">泡泡机器人</a></li>
+  <li><a href="https://www.shenlanxueyuan.com">深蓝学院</a></li>
+  <li><a href="https://www.zdjszx.com">自动驾驶之心</a></li>
+  <li><a href="https://www.youtube.com/watch?v=_W3Ua1Yg2fk">RI Seminar: Michael Kaess: Robust and Efficient Real-time Mapping for Autonomous Robots</a></li>
+  <li><a href="https://canvas.kth.se/courses/40649">Optimization-based Localization And Mapping-KTH</a></li>
+</ol>
+
+<h2 id="卡尔曼滤波">卡尔曼滤波</h2>
+
+<h3 id="网站">网站</h3>
+
+<ol>
+  <li><a href="https://www.kalmanfilter.net/default.aspx">Kalman Filter Tutorial</a></li>
+  <li><a href="https://www.cs.unc.edu/~welch/kalman/">The Kalman Filter</a></li>
+  <li><a href="https://www.cs.unc.edu/~welch/media/pdf/kalman_intro.pdf">An Introduction to the Kalman Filter</a></li>
+  <li><a href="https://www.cs.utexas.edu/~pingali/CS378/2008sp/papers/SIGGRAPH2001_CoursePack_08.pdf">An Introduction to the Kalman Filter-SIGGRAPH 2001</a></li>
+  <li><a href="https://web.mit.edu/kirtley/kirtley/binlustuff/literature/control/Kalman%20filter.pdf">Tutorial: The Kalman Filter</a></li>
+  <li><a href="https://aircconline.com/ijcses/V8N1/8117ijcses01.pdf">A Kalman Filtering Tutorial for Undergraduate Students</a></li>
+  <li><a href="https://homes.cs.washington.edu/~todorov/courses/cseP590/readings/tutorialEKF.pdf">Extended Kalman Filter Tutorial</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/48876718">卡尔曼滤波（Kalman Filter）原理与公式推导-涅索斯衬衫的文章-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/42390886">卡尔曼滤波器（观测器）原理极简介绍-Invictus的文章-知乎</a></li>
+  <li><a href="https://www.zhihu.com/question/281995386/answer/3371567219">卡尔曼滤波Kalman Filter之美在于什么？-自动驾驶之心的回答-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/441182819">简明ESKF推导-半闲居士的文章-知乎</a></li>
+  <li><a href="https://www.zhihu.com/question/601596796/answer/3127818634">slam中基于滤波的方法的问题及如何调参?-半闲居士的回答-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/538975422">LIO中ESKF相关公式的详尽说明-xiaotaw的文章-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/75714471">Computing Jacobian, why error state?——优化中为何对误差状态求导-邱笑晨的文章-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/545370811">简单易懂(?)的误差状态卡尔曼滤波器(Error State Kalman Filter, ESKF)的原理与实现（一）原理简介-llo的文章-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/545525697">简单易懂(?)的误差状态卡尔曼滤波器(Error State Kalman Filter, ESKF)的原理与实现（二）算法实现-llo的文章-知乎</a></li>
+</ol>
+
+<h3 id="github-1">GitHub</h3>
+
+<h4 id="matlab">MATLAB</h4>
+
+<ol>
+  <li><a href="https://github.com/alirezaahmadi/KalmanFilter-Vehicle-GNSS-INS">alirezaahmadi/KalmanFilter-Vehicle-GNSS-INS</a></li>
+  <li><a href="https://github.com/yuzhou42/MSCKF">yuzhou42/MSCKF</a></li>
+  <li><a href="https://github.com/meyiao/LaserSLAM">meyiao/LaserSLAM</a></li>
+  <li><a href="https://github.com/RomaTeng/EKF-SLAM-on-Manifold">RomaTeng/EKF-SLAM-on-Manifold</a></li>
+  <li><a href="https://github.com/jaijuneja/ekf-slam-matlab">jaijuneja/ekf-slam-matlab</a></li>
+  <li><a href="https://github.com/yuzhou42/ESKF-Attitude-Estimation">yuzhou42/ESKF-Attitude-Estimation</a></li>
+</ol>
+
+<h4 id="python">Python</h4>
+
+<ol>
+  <li><a href="https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python">rlabbe/Kalman-and-Bayesian-Filters-in-Python</a></li>
+  <li><a href="https://github.com/rlabbe/filterpy">rlabbe/filterpy</a></li>
+  <li><a href="https://github.com/pykalman/pykalman">pykalman/pykalman</a></li>
+  <li><a href="https://github.com/commaai/rednose">commaai/rednose</a></li>
+  <li><a href="https://github.com/zziz/kalman-filter">zziz/kalman-filter</a></li>
+  <li><a href="https://github.com/enginBozkurt/Error-State-Extended-Kalman-Filter">enginBozkurt/Error-State-Extended-Kalman-Filter</a></li>
+  <li><a href="https://github.com/diegoavillegasg/IMU-GNSS-Lidar-sensor-fusion-using-Extended-Kalman-Filter-for-State-Estimation">diegoavillegasg/IMU-GNSS-Lidar-sensor-fusion-using-Extended-Kalman-Filter-for-State-Estimation</a></li>
+  <li><a href="https://github.com/aipiano/ESEKF_IMU">aipiano/ESEKF_IMU</a></li>
+  <li><a href="https://github.com/soarbear/imu_ekf">soarbear/imu_ekf</a></li>
+  <li><a href="https://github.com/jnez71/kalmaNN">jnez71/kalmaNN</a></li>
+</ol>
+
+<h4 id="c">C++</h4>
+
+<ol>
+  <li><a href="https://github.com/mherb/kalman">mherb/kalman</a></li>
+  <li><a href="https://github.com/hmartiro/kalman-cpp">hmartiro/kalman-cpp</a></li>
+  <li><a href="https://github.com/sfwa/ukf">sfwa/ukf</a></li>
+  <li><a href="https://github.com/hku-mars/IKFoM">hku-mars/IKFoM</a></li>
+  <li><a href="https://github.com/xiahouzuoxin/kalman_filter">xiahouzuoxin/kalman_filter</a></li>
+  <li><a href="https://github.com/artivis/kalmanif">artivis/kalmanif</a></li>
+  <li><a href="https://github.com/je310/ESKF">je310/ESKF</a></li>
+  <li><a href="https://github.com/jeremyfix/easykf">jeremyfix/easykf</a></li>
+  <li><a href="https://github.com/pronenewbits/Embedded_EKF_Library">pronenewbits/Embedded_EKF_Library</a></li>
+  <li><a href="https://github.com/pronenewbits/Embedded_UKF_Library">pronenewbits/Embedded_UKF_Library</a></li>
+  <li><a href="https://github.com/OpenSLAM-org/openslam_MTK">OpenSLAM-org/openslam_MTK</a></li>
+  <li><a href="https://github.com/xinyang-go/eskf">xinyang-go/eskf</a></li>
+  <li><a href="https://github.com/zha0ming1e/InEKF">zha0ming1e/InEKF</a></li>
+</ol>
+
+<h2 id="组合导航">组合导航</h2>
+
+<h3 id="教材">教材</h3>
+
+<ol>
+  <li>《捷联惯导算法与组合导航原理》</li>
+  <li>《惯性仪器测试与数据分析》</li>
+  <li>《惯性导航》</li>
+</ol>
+
+<h3 id="网站-1">网站</h3>
+
+<ol>
+  <li><a href="http://www.psins.org.cn">高精度捷联惯性导航算法</a></li>
+  <li><a href="https://www.bilibili.com/video/BV11K411J7gp">卡尔曼滤波与组合导航原理【西北工业大学 严恭敏】</a></li>
+  <li><a href="https://www.bilibili.com/video/BV1R54y1E7ut">PSINS导航工具箱入门与详解【西北工业大学 严恭敏】</a></li>
+  <li><a href="http://i2nav.cn">武汉大学多源智能导航实验室</a></li>
+  <li><a href="https://www.bilibili.com/video/BV1nR4y1E7Yj">武汉大学惯性导航课程合集【2021年秋】</a></li>
+  <li><a href="https://www.bilibili.com/video/BV1na411Z7rQ">武汉大学研究生组合导航课程合集【2022年春】</a></li>
+  <li><a href="http://www.starlino.com/imu_guide.html">A Guide To using IMU (Accelerometer and Gyroscope Devices) in Embedded Applications-Starlino Electronics</a></li>
+  <li><a href="https://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-696.pdf">An introduction to inertial navigation</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/388859808">简明预积分推导-半闲居士的文章-知乎</a></li>
+</ol>
+
+<h3 id="github-2">GitHub</h3>
+
+<ol>
+  <li><a href="https://github.com/LiZhengXiao99/Navigation-Learning">LiZhengXiao99/Navigation-Learning</a></li>
+  <li><a href="https://github.com/benzenemo/TightlyCoupledINSGNSS">benzenemo/TightlyCoupledINSGNSS</a></li>
+  <li><a href="https://github.com/yandld/nav_matlab">yandld/nav_matlab</a></li>
+  <li><a href="https://github.com/i2Nav-WHU/Wheel-SLAM">i2Nav-WHU/Wheel-SLAM</a></li>
+  <li><a href="https://github.com/yuzhou42/GPS-INS-Integrated-Navigation">yuzhou42/GPS-INS-Integrated-Navigation</a></li>
+  <li><a href="https://github.com/jayoungo/SINS-GPS-Integrated-Navigation">jayoungo/SINS-GPS-Integrated-Navigation</a></li>
+</ol>
+
+<h2 id="自动驾驶">自动驾驶</h2>
+
+<h3 id="网站-2">网站</h3>
+
+<ol>
+  <li><a href="https://www.zhihu.com/question/355954682/answer/897296676">无人驾驶领域，你推荐那些综述性文章？-王方浩的回答-知乎</a></li>
+  <li><a href="https://dig-into-apollo.readthedocs.io/en/latest/index.html">Dig into Apollo</a></li>
+  <li><a href="https://daobook.github.io/apollo-book/docs/start/index.html">Apollo 开放平台</a></li>
+  <li><a href="https://thomasfermi.github.io/Algorithms-for-Automated-Driving/Introduction/intro.html">Algorithms for Automated Driving</a></li>
+</ol>
+
+<h3 id="github-3">GitHub</h3>
+
+<ol>
+  <li><a href="https://github.com/commaai/openpilot">commaai/openpilot</a></li>
+  <li><a href="https://github.com/ApolloAuto/apollo">ApolloAuto/apollo</a></li>
+  <li><a href="https://github.com/autowarefoundation/autoware">autowarefoundation/autoware</a></li>
+  <li><a href="https://github.com/daohu527/dig-into-apollo">daohu527/dig-into-apollo</a></li>
+  <li><a href="https://github.com/OpenDriveLab/End-to-end-Autonomous-Driving">OpenDriveLab/End-to-end-Autonomous-Driving</a></li>
+  <li><a href="https://github.com/OpenDriveLab/Birds-eye-view-Perception">OpenDriveLab/Birds-eye-view-Perception</a></li>
+  <li><a href="https://github.com/YannZyl/Apollo-Note">YannZyl/Apollo-Note</a></li>
+  <li><a href="https://github.com/thomasfermi/Algorithms-for-Automated-Driving">thomasfermi/Algorithms-for-Automated-Driving</a></li>
+  <li><a href="https://github.com/slam-code/apollo">slam-code/apollo</a></li>
+  <li><a href="https://github.com/nwaysir/Autopilot-Updating-Notes">nwaysir/Autopilot-Updating-Notes</a></li>
+</ol>
+
+<h2 id="参考">参考</h2>
+
+<ol>
+  <li><a href="https://zhuanlan.zhihu.com/p/259917664">《视觉SLAM学习过程所用资料总结》-行知SLAM的文章-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/293039582">聊聊这两年学习slam啃过的书！-小凡的文章-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/116769131">超全SLAM学习资源汇总-阿木实验室的文章-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/434874344">SLAM相关学习资料：综述/激光/视觉/数据集/常用库-菠萝包包包的文章-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/358455662">李群和李代数——名字听起来很猛其实也没那么复杂-菠萝包包包的文章-知乎</a></li>
+  <li><a href="http://robots.stanford.edu/probabilistic-robotics/">Probabilistic Robotics</a></li>
+  <li><a href="http://asrl.utias.utoronto.ca/~tdb/">Tim Barfoot</a></li>
+  <li><a href="http://hades.mech.northwestern.edu/index.php/Modern_Robotics">Modern Robotics</a></li>
+  <li><a href="https://www.zhihu.com/question/396119527/answer/1235876702">硕士研究生阶段如何学习slam机器人？-Range的回答-知乎</a></li>
+  <li><a href="https://blog.csdn.net/hw140701/article/details/106255294">工具网站推荐-欧拉角四元数在线可视化转化网站/三维在线旋转变换网站-CSDN博客</a></li>
+  <li><a href="https://teacher.nwpu.edu.cn/yangongmin.html">严恭敏的个人主页</a></li>
+</ol>
+
+  </div>
+
+  
+  
+<script src="https://utteranc.es/client.js"
+        repo="YWpepper/YWpepper.github.io"
+        issue-term="title"
+        label="comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
+
+  
+</article>
+
+<div class="pagination">
+  
+    <span class="prev" >
+      <a href="http://localhost:4000/wps-font/">
+        ← 上一篇
+      </a>
+    </span>
+  
+  
+    <span class="next" >
+      <a href="http://localhost:4000/dingchangshi/">
+        下一篇 →
+      </a>
+    </span>
+  
+</div>
+      </div>
+    </div>
+
+    
+
+  </body>
+
+  
+  <script>
+    document.getElementById("main").classList.add("withtoc");
+  </script>
+  
+
+  <div class="wrapper-footer-mobile">
+    <footer class="footer">
+      <!-- Refer to https://codepen.io/ruandre/pen/howFi -->
+<ul class="svg-icon">
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li><a href="https://github.com/zxl19" class="icon-13 github" title="GitHub"><svg viewBox="0 0 512 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg><!--[if lt IE 9]><em>GitHub</em><![endif]--></a></li>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</ul>
+
+
+
+<p>Copyright © 2020-2025 zxl19. All Rights Reserved.</p>
+
+    </footer>
+
+
+</html>

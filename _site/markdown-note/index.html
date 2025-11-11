@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Markdown学习笔记 – zxl19 – 一个工程师的存档点</title>
+
+      <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="我的Markdown学习笔记，部分语法在网页显示中无法正常识别，但是在编辑器中均显示无误。
+
+" />
+    <meta property="og:description" content="我的Markdown学习笔记，部分语法在网页显示中无法正常识别，但是在编辑器中均显示无误。
+
+" />
+    
+    <meta name="author" content="zxl19" />
+
+    
+    <meta property="og:title" content="Markdown学习笔记" />
+    <meta property="twitter:title" content="Markdown学习笔记" />
+    
+  <!-- Async font loading -->
+<script>
+  window.WebFontConfig = {
+      custom: {
+          families: ['Spoqa Han Sans:100,300,400,700'],
+          urls: ['https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css']
+      },
+      timeout: 60000
+  };
+  (function(d) {
+      var wf = d.createElement('script'), s = d.scripts[0];
+      wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js';
+      s.parentNode.insertBefore(wf, s);
+  })(document);
+</script>
+
+<!--adobe fonts-->
+<script>
+    (function(d) {
+      var config = {
+        kitId: 'vbt3gjx',
+        scriptTimeout: 3000,
+        async: true
+      },
+      h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+    })(document);
+</script> 
+
+  <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link rel="stylesheet" type="text/css" href="/style.css" />
+  <link rel="alternate" type="application/rss+xml" title="zxl19 - 一个工程师的存档点" href="/feed.xml" />
+  <link rel="shortcut icon" href="https://raw.githubusercontent.com/zxl19/zxl19.github.io/master/images/icon.png">
+  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+  <script src="https://unpkg.com/feather-icons"></script>
+  <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        inlineMath: [['$','$']]
+      }
+    });
+  </script>
+
+  <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+
+</head>
+
+  <body>
+    <div class="wrapper-sidebar">
+  <header class="sidebar clearfix">
+    <div class="site-info">
+      
+        <a href="/" class="site-avatar"><img src="https://raw.githubusercontent.com/zxl19/zxl19.github.io/master/images/avatar.jpg" /></a>
+       
+      <h1 class="site-name"><a href="/">zxl19</a></h1>
+      <p class="site-description">一个工程师的存档点</p>
+    </div>
+  </header>
+
+  <div class="navlist">
+    <nav>
+      
+      
+      <a href="/">首页</a>
+      
+      
+      
+      <a href="/about">关于</a>
+      
+      
+      
+      <a href="/archive">归档</a>
+      
+      
+      
+      <a href="/tags">标签</a>
+      
+      
+    </nav>
+  </div>
+
+  <div class="wrapper-footer-desktop">
+    <footer class="footer">
+      <!-- Refer to https://codepen.io/ruandre/pen/howFi -->
+<ul class="svg-icon">
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li><a href="https://github.com/zxl19" class="icon-13 github" title="GitHub"><svg viewBox="0 0 512 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg><!--[if lt IE 9]><em>GitHub</em><![endif]--></a></li>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</ul>
+
+
+
+<p>Copyright © 2020-2025 zxl19. All Rights Reserved.</p>
+
+    </footer>
+  </div>
+</div>
+
+    
+      <aside class="toc">
+        <ul>
+  <li><a href="#">Markdown学习笔记</a>
+    <ul>
+      <li><a href="#markdown-hello-world">Markdown Hello World</a></li>
+      <li><a href="#标题">标题</a>
+        <ul>
+          <li><a href="#使用和-标记一级和二级标题">使用<code class="language-plaintext highlighter-rouge">=</code>和<code class="language-plaintext highlighter-rouge">-</code>标记一级和二级标题</a></li>
+          <li><a href="#使用标记一级到六级标题">使用<code class="language-plaintext highlighter-rouge">#</code>标记一级到六级标题</a></li>
+        </ul>
+      </li>
+      <li><a href="#段落格式">段落格式</a>
+        <ul>
+          <li><a href="#段落">段落</a></li>
+          <li><a href="#字体">字体</a></li>
+          <li><a href="#分隔线">分隔线</a></li>
+          <li><a href="#删除线">删除线</a></li>
+          <li><a href="#下划线">下划线</a></li>
+          <li><a href="#脚注">脚注</a></li>
+        </ul>
+      </li>
+      <li><a href="#列表">列表</a>
+        <ul>
+          <li><a href="#有序列表">有序列表</a></li>
+          <li><a href="#无序列表">无序列表</a></li>
+          <li><a href="#列表嵌套">列表嵌套</a></li>
+        </ul>
+      </li>
+      <li><a href="#区块">区块</a>
+        <ul>
+          <li><a href="#区块中使用列表">区块中使用列表</a></li>
+          <li><a href="#列表中使用区块">列表中使用区块</a></li>
+        </ul>
+      </li>
+      <li><a href="#代码">代码</a>
+        <ul>
+          <li><a href="#行内代码">行内代码</a></li>
+          <li><a href="#代码区块">代码区块</a></li>
+          <li><a href="#语言支持">语言支持</a></li>
+        </ul>
+      </li>
+      <li><a href="#链接">链接</a>
+        <ul>
+          <li><a href="#普通链接">普通链接</a></li>
+          <li><a href="#高级链接">高级链接</a></li>
+        </ul>
+      </li>
+      <li><a href="#图片">图片</a>
+        <ul>
+          <li><a href="#使用markdown">使用Markdown</a></li>
+          <li><a href="#使用html">使用HTML</a></li>
+        </ul>
+      </li>
+      <li><a href="#表格">表格</a>
+        <ul>
+          <li><a href="#基础用法">基础用法</a></li>
+          <li><a href="#对齐方式">对齐方式</a></li>
+        </ul>
+      </li>
+      <li><a href="#高级技巧">高级技巧</a>
+        <ul>
+          <li><a href="#任务列表">任务列表</a></li>
+          <li><a href="#折叠内容">折叠内容</a></li>
+          <li><a href="#支持html元素">支持HTML元素</a></li>
+          <li><a href="#转义字符">转义字符</a></li>
+          <li><a href="#公式">公式</a></li>
+          <li><a href="#绘图">绘图</a></li>
+        </ul>
+      </li>
+      <li><a href="#教程">教程</a></li>
+      <li><a href="#参考">参考</a></li>
+    </ul>
+  </li>
+</ul>
+      </aside>
+    
+
+    <div id="main" role="main" class="wrapper-content">
+      <div class="container">
+        <article class="posts">
+  <h1>Markdown学习笔记</h1>
+
+  <div clsss="meta">
+    <span class="author">
+      zxl19
+    </span>
+
+    <span class="date">
+      2020-05-13
+    </span>
+
+    <ul class="tag">
+      
+      <li>
+        <a href="http://localhost:4000/tags#Markdown">
+          Markdown
+        </a>
+      </li>
+      
+      <li>
+        <a href="http://localhost:4000/tags#Note">
+          Note
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+
+  <div class="entry">
+    <p>我的Markdown学习笔记，部分语法在网页显示中无法正常识别，但是在编辑器中均显示无误。</p>
+
+<!-- more -->
+
+<h2 id="markdown-hello-world">Markdown Hello World</h2>
+
+<ol>
+  <li>Markdown是标记语言（markup language）的一种，标记语言是指一种文本编码系统（text-encoding system），它由插入文本文档中的一组符号组成，以控制其结构、格式或各部分之间的关系；</li>
+  <li>常用的标记语言除了Markdown，还有AsciiDoc、reStructuredText、Typst等；</li>
+</ol>
+
+<h2 id="标题">标题</h2>
+
+<h3 id="使用和-标记一级和二级标题">使用<code class="language-plaintext highlighter-rouge">=</code>和<code class="language-plaintext highlighter-rouge">-</code>标记一级和二级标题</h3>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gu">一级标题
+======
+</span>
+<span class="gh">二级标题
+------
+</span></code></pre></div></div>
+
+<h3 id="使用标记一级到六级标题">使用<code class="language-plaintext highlighter-rouge">#</code>标记一级到六级标题</h3>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh"># 一级标题</span>
+<span class="gu">## 二级标题</span>
+<span class="gu">### 三级标题</span>
+<span class="gu">#### 四级标题</span>
+<span class="gu">##### 五级标题</span>
+<span class="gu">###### 六级标题</span>
+</code></pre></div></div>
+
+<h2 id="段落格式">段落格式</h2>
+
+<h3 id="段落">段落</h3>
+
+<ul>
+  <li>段内换行：两个以上空格加回车；</li>
+  <li>新建段落：一个空行；</li>
+</ul>
+
+<h3 id="字体">字体</h3>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="ge">*斜体*</span>
+<span class="ge">_斜体_</span>
+<span class="gs">**加粗**</span>
+<span class="gs">__加粗__</span>
+<span class="gs">***加粗斜体**</span><span class="err">*</span>
+<span class="gs">___加粗斜体__</span>_
+</code></pre></div></div>
+
+<h3 id="分隔线">分隔线</h3>
+
+<p>在一行中用三个以上的<code class="language-plaintext highlighter-rouge">*</code>或<code class="language-plaintext highlighter-rouge">-</code>或<code class="language-plaintext highlighter-rouge">_</code>来建立一个分隔线，之间可以插入空格。</p>
+
+<h3 id="删除线">删除线</h3>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~~删除内容~~
+</code></pre></div></div>
+
+<h3 id="下划线">下划线</h3>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;u&gt;</span>下划线文本<span class="nt">&lt;/u&gt;</span>
+</code></pre></div></div>
+
+<h3 id="脚注">脚注</h3>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>正文内容[^1]。
+
+<span class="p">[</span><span class="ss">^1</span><span class="p">]:</span> <span class="sx">脚注内容</span>
+</code></pre></div></div>
+
+<h2 id="列表">列表</h2>
+
+<h3 id="有序列表">有序列表</h3>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">1.</span> 第一点
+<span class="p">2.</span> 第二点
+<span class="p">3.</span> 第三点
+</code></pre></div></div>
+
+<h3 id="无序列表">无序列表</h3>
+
+<p>使用<code class="language-plaintext highlighter-rouge">*</code>、<code class="language-plaintext highlighter-rouge">+</code>、<code class="language-plaintext highlighter-rouge">-</code>作为列表标记：</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">*</span> 第一点
+<span class="p">*</span> 第二点
+<span class="p">*</span> 第三点
+</code></pre></div></div>
+
+<h3 id="列表嵌套">列表嵌套</h3>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">1.</span> 第一项：
+<span class="p">    -</span> 第一项嵌套的第一个元素
+<span class="p">    -</span> 第一项嵌套的第二个元素
+<span class="p">2.</span> 第二项：
+<span class="p">    -</span> 第二项嵌套的第一个元素
+<span class="p">    -</span> 第二项嵌套的第二个元素
+</code></pre></div></div>
+
+<h2 id="区块">区块</h2>
+
+<p>使用<code class="language-plaintext highlighter-rouge">&gt;</code>，可嵌套使用：</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gt">&gt; 最外层</span>
+<span class="gt">&gt; &gt; 第一层嵌套</span>
+<span class="gt">&gt; &gt; &gt; 第二层嵌套</span>
+</code></pre></div></div>
+
+<h3 id="区块中使用列表">区块中使用列表</h3>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gt">&gt; 1. 第一项</span>
+<span class="gt">&gt; 2. 第二项</span>
+<span class="gt">&gt; + 第一项</span>
+<span class="gt">&gt; + 第二项</span>
+<span class="gt">&gt; + 第三项</span>
+</code></pre></div></div>
+
+<h3 id="列表中使用区块">列表中使用区块</h3>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">*</span> 第一项
+<span class="gt">    &gt; 区块内容</span>
+<span class="gt">    &gt; 区块内容</span>
+<span class="p">*</span> 第二项
+</code></pre></div></div>
+
+<h2 id="代码">代码</h2>
+
+<h3 id="行内代码">行内代码</h3>
+
+<p>使用反引号<kbd>`</kbd>（Tab键上方）。</p>
+
+<h3 id="代码区块">代码区块</h3>
+
+<ul>
+  <li>缩进四个空格<kbd>Tab</kbd>（Tab键）；</li>
+  <li>三个反引号<kbd>`</kbd>（可以指定代码语言从而高亮显示）；</li>
+</ul>
+
+<h3 id="语言支持">语言支持</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">名称</th>
+      <th style="text-align: left">关键字</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">C/C++</td>
+      <td style="text-align: left">c, cpp</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">LaTeX</td>
+      <td style="text-align: left">latex</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">MATLAB</td>
+      <td style="text-align: left">matlab</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Mermaid</td>
+      <td style="text-align: left">mermaid</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Python</td>
+      <td style="text-align: left">py, python</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Shell</td>
+      <td style="text-align: left">bash, shell</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">text</td>
+      <td style="text-align: left">text, plain</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="链接">链接</h2>
+
+<h3 id="普通链接">普通链接</h3>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="nv">链接名称</span><span class="p">](</span><span class="sx">链接地址</span><span class="p">)</span>
+
+<span class="nt">&lt;链接地址&gt;</span>
+</code></pre></div></div>
+
+<h3 id="高级链接">高级链接</h3>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="nv">链接名称</span><span class="p">][</span><span class="ss">1</span><span class="p">]</span>
+
+<span class="p">[</span><span class="ss">1</span><span class="p">]:</span> <span class="sx">链接地址</span>
+</code></pre></div></div>
+
+<h2 id="图片">图片</h2>
+
+<h3 id="使用markdown">使用Markdown</h3>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">![</span><span class="nv">alt 属性文本</span><span class="p">](</span><span class="sx">图片地址</span><span class="p">)</span>
+
+<span class="p">![</span><span class="nv">alt 属性文本</span><span class="p">](</span><span class="sx">图片地址</span> <span class="nn">"可选标题"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="使用html">使用HTML</h3>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;p</span> <span class="na">align=</span><span class="s">"对齐方式"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"超链接"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"图片地址"</span> <span class="na">alt=</span><span class="s">"属性文本"</span> <span class="na">width=</span><span class="s">"宽度"</span> <span class="na">height=</span><span class="s">"高度"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;/a&gt;</span>
+<span class="nt">&lt;/p&gt;</span>
+</code></pre></div></div>
+
+<ol>
+  <li>
+    <p>对齐方式：</p>
+
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">center</code>：居中；</li>
+      <li><code class="language-plaintext highlighter-rouge">left</code>：左对齐；</li>
+      <li><code class="language-plaintext highlighter-rouge">right</code>：右对齐；</li>
+    </ul>
+  </li>
+  <li>
+    <p>宽度和高度单位为像素或百分比；</p>
+  </li>
+</ol>
+
+<h2 id="表格">表格</h2>
+
+<h3 id="基础用法">基础用法</h3>
+
+<ol>
+  <li>使用<kbd>|</kbd>来分隔不同的单元格；</li>
+  <li>使用<kbd>-</kbd>来分隔表头和其他行；</li>
+</ol>
+
+<p>示例：</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>| 表头 | 表头 |
+| ---- | ---- |
+| 单元格 | 单元格 |
+| 单元格 | 单元格 |
+</code></pre></div></div>
+
+<h3 id="对齐方式">对齐方式</h3>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">----:</code>：设置内容和标题栏居右对齐；</li>
+  <li><code class="language-plaintext highlighter-rouge">:----</code>：设置内容和标题栏居左对齐；</li>
+  <li><code class="language-plaintext highlighter-rouge">:---:</code>：设置内容和标题栏居中对齐；</li>
+</ul>
+
+<h2 id="高级技巧">高级技巧</h2>
+
+<h3 id="任务列表">任务列表</h3>
+
+<p>Markdown支持带有复选框（checkbox）的任务列表：</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">-</span> [ ] 不勾选，未完成的任务
+<span class="p">-</span> [x] 勾选，已完成的任务
+</code></pre></div></div>
+
+<h3 id="折叠内容">折叠内容</h3>
+
+<p>Markdown支持通过点击交互的折叠内容：</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;details&gt;</span>
+    <span class="nt">&lt;summary&gt;</span> 标题 <span class="nt">&lt;/summary&gt;</span>
+    被折叠的内容
+<span class="nt">&lt;/details&gt;</span>
+</code></pre></div></div>
+
+<h3 id="支持html元素">支持HTML元素</h3>
+
+<ol>
+  <li>不在Markdown涵盖范围之内的标签，都可以直接在文档里面用HTML撰写；</li>
+  <li>目前支持的HTML元素有：<code class="language-plaintext highlighter-rouge">&lt;kbd&gt;</code>、<code class="language-plaintext highlighter-rouge">&lt;b&gt;</code>、<code class="language-plaintext highlighter-rouge">&lt;i&gt;</code>、<code class="language-plaintext highlighter-rouge">&lt;em&gt;</code>、<code class="language-plaintext highlighter-rouge">&lt;sup&gt;</code>、<code class="language-plaintext highlighter-rouge">&lt;sub&gt;</code>、<code class="language-plaintext highlighter-rouge">&lt;br&gt;</code>等；</li>
+</ol>
+
+<h3 id="转义字符">转义字符</h3>
+
+<p>Markdown支持在以下符号前加上反斜杠<code class="language-plaintext highlighter-rouge">\</code>来插入普通符号：</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="se">\ </span>  反斜线
+<span class="err">`</span>   反引号
+<span class="p">*</span>   星号
+_   下划线
+{}  花括号
+[]  方括号
+()  小括号
+<span class="gh">#   井字号</span>
+<span class="p">+</span>   加号
+<span class="p">-</span>   减号
+.   英文句点
+!   感叹号
+</code></pre></div></div>
+
+<h3 id="公式">公式</h3>
+
+<ol>
+  <li><strong>行内公式</strong>：使用两个美元符号<code class="language-plaintext highlighter-rouge">$$</code>括起来；</li>
+  <li><strong>行间公式</strong>：使用一个美元符号<code class="language-plaintext highlighter-rouge">$</code>括起来；</li>
+</ol>
+
+<h3 id="绘图">绘图</h3>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>可以，但没必要。
+</code></pre></div></div>
+
+<p>Markdown支持使用Mermaid语法进行绘图，但是已有较多交互式绘图工具能够完成类似的绘图任务，本文不再赘述。</p>
+
+<h2 id="教程">教程</h2>
+
+<ol>
+  <li><a href="https://www.runoob.com/markdown/md-tutorial.html">Markdown教程-菜鸟教程</a></li>
+  <li><a href="https://markdown.com.cn">Markdown官方教程</a></li>
+  <li><a href="https://www.markdownguide.org">Markdown Guide</a></li>
+  <li><a href="https://keatonlao.gitee.io/a-study-note-for-markdown/">一份Markdown学习笔记</a></li>
+  <li><a href="http://younghz.github.io/Markdown/">Markdown基本语法</a></li>
+  <li><a href="https://support.typora.io/Markdown-Reference/">Markdown Reference</a></li>
+  <li><a href="https://spec.commonmark.org">CommonMark Spec</a></li>
+  <li><a href="https://github.github.com/gfm/">GitHub Flavored Markdown Spec</a></li>
+</ol>
+
+<h2 id="参考">参考</h2>
+
+<ol>
+  <li><a href="https://en.wikipedia.org/wiki/Markup_language">Markup language-Wikipedia</a></li>
+  <li><a href="https://www.augmentedmind.de/2020/12/06/plain-text-documentation-in-vcs/">Plain text documentation in version control-the 3 best markup languages</a></li>
+  <li><a href="https://www.zhihu.com/question/591143170/answer/2949290734">如何看待typst?-HexUp的回答-知乎</a></li>
+  <li><a href="https://github.com/younghz/Markdown">younghz/Markdown</a></li>
+  <li><a href="https://github.com/commonmark/commonmark-spec">commonmark/commonmark-spec</a></li>
+  <li><a href="https://asciidoc.org">AsciiDoc</a></li>
+  <li><a href="https://docutils.sourceforge.io/rst.html">reStructuredText-SourceForge</a></li>
+  <li><a href="https://www.writethedocs.org/guide/writing/reStructuredText/">Introduction to reStructuredText-Write the Docs</a></li>
+  <li><a href="https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html">reStructuredText-Sphinx documentation</a></li>
+  <li><a href="https://typst.app">Typst</a></li>
+  <li><a href="https://github.com/typst/typst">typst/typst</a></li>
+  <li><a href="https://www.jianshu.com/p/c2b75ff24c33">代码块-简书</a></li>
+  <li><a href="https://www.jianshu.com/p/0b257de21eb5">待办事项-简书</a></li>
+  <li><a href="https://mermaid.js.org">Mermaid</a></li>
+  <li><a href="https://github.com/mermaid-js/mermaid">mermaid-js/mermaid</a></li>
+  <li><a href="https://blog.csdn.net/qq_57508808/article/details/136110461">循序渐进-讲解Markdown进阶（Mermaid绘图）-附使用案例-CSDN博客</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/440934038">程序员画图-mermaid(流程图)-leancode的文章-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/355997933">Mermaid从入门到入土——Markdown进阶语法-陈修竹的文章-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/69495726">Markdown进阶技能：用代码画流程图（编程零基础也适用）-黄浮云的文章-知乎</a></li>
+</ol>
+
+  </div>
+
+  
+  
+<script src="https://utteranc.es/client.js"
+        repo="YWpepper/YWpepper.github.io"
+        issue-term="title"
+        label="comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
+
+  
+</article>
+
+<div class="pagination">
+  
+    <span class="prev" >
+      <a href="http://localhost:4000/blog-setup/">
+        ← 上一篇
+      </a>
+    </span>
+  
+  
+    <span class="next" >
+      <a href="http://localhost:4000/vscode-setup/">
+        下一篇 →
+      </a>
+    </span>
+  
+</div>
+      </div>
+    </div>
+
+    
+
+  </body>
+
+  
+  <script>
+    document.getElementById("main").classList.add("withtoc");
+  </script>
+  
+
+  <div class="wrapper-footer-mobile">
+    <footer class="footer">
+      <!-- Refer to https://codepen.io/ruandre/pen/howFi -->
+<ul class="svg-icon">
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li><a href="https://github.com/zxl19" class="icon-13 github" title="GitHub"><svg viewBox="0 0 512 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg><!--[if lt IE 9]><em>GitHub</em><![endif]--></a></li>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</ul>
+
+
+
+<p>Copyright © 2020-2025 zxl19. All Rights Reserved.</p>
+
+    </footer>
+
+
+</html>
