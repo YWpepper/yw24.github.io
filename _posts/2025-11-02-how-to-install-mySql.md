@@ -22,7 +22,7 @@ tags:
 
 1. 设置实际运行的端口 3308，因为我的电脑上有 WSL 会有镜像问题
 
-<img src="https://cdn.nlark.com/yuque/0/2025/png/40742019/1762142013620-2eb8d811-510a-427d-a214-8313c63e73b3.png" width="70%">
+<img src="http://cdn.nlark.com/yuque/0/2025/png/40742019/1762142013620-2eb8d811-510a-427d-a214-8313c63e73b3.png" width="70%">
 
 ## 安装报错
 
@@ -130,7 +130,7 @@ port=3307
 + 具有成本低、速度快、体积小且开放源代码等优点。
 + 全球数据库引擎使用排行榜：
 
-![](https://pica.zhimg.com/v2-64e9d5ab42a89c506420bcf17e625d44_1440w.jpg)
+<img src="https://pica.zhimg.com/v2-64e9d5ab42a89c506420bcf17e625d44_1440w.jpg" width="70%">
 
 ### 【三】下载 MySQL 服务端
 
@@ -140,19 +140,19 @@ port=3307
 
 #### （2）点击 downloads
 
-![](https://pic2.zhimg.com/v2-73f621867acaf68bc699326a1653537d_1440w.jpg)
+<img src="https://pic2.zhimg.com/v2-73f621867acaf68bc699326a1653537d_1440w.jpg" width="70%">
 
-![](https://picx.zhimg.com/v2-41787b19ae771ba440d66b39524e2463_1440w.jpg)
+<img src="https://picx.zhimg.com/v2-41787b19ae771ba440d66b39524e2463_1440w.jpg" width="70%">
 
 #### （3）选择 MySQL Community Server
 
-![](https://pic2.zhimg.com/v2-7da1db22a0e0246216aa93a1d4bfb45b_1440w.jpg)
+<img src="https://pic2.zhimg.com/v2-7da1db22a0e0246216aa93a1d4bfb45b_1440w.jpg" width="70%">
 
 #### （4）选择版本
 
-![](https://pic1.zhimg.com/v2-fd39072cf256372a9259ef2ecc48bd58_1440w.jpg)
+<img src="https://pic1.zhimg.com/v2-fd39072cf256372a9259ef2ecc48bd58_1440w.jpg" width="70%">
 
-![](https://pic3.zhimg.com/v2-3c90ad4e36584ed39ea6c0c28f8ffd7c_1440w.jpg)
+<img src="https://pic3.zhimg.com/v2-3c90ad4e36584ed39ea6c0c28f8ffd7c_1440w.jpg" width="70%">
 
 ### 【四】安装 MySQL
 
@@ -160,27 +160,27 @@ port=3307
 
 + 右键压缩包选择解压，可以改文件夹名字也可以不改
 
-![](https://pic3.zhimg.com/v2-7a24844ce2598f24b3261dd0b1444a44_1440w.jpg)
+<img src="https://pic3.zhimg.com/v2-7a24844ce2598f24b3261dd0b1444a44_1440w.jpg" width="70%">
 
 #### （2）配置环境变量
 
 + 打开设置搜索环境变量
 + 将 MySQL 的 bin 目录添加到环境变量中
 
-![](https://pic3.zhimg.com/v2-1b1009da6e889dd87147a744b16cc97a_1440w.jpg)
+<img src="https://pic3.zhimg.com/v2-1b1009da6e889dd87147a744b16cc97a_1440w.jpg" width="70%">
 
 #### （3）打开终端
 
 + win+r
 + 以管理员身份运行
 
-![](https://pic3.zhimg.com/v2-d49d26e468fd9fd84deb769abfe3205a_1440w.jpg)
+<img src="https://pic3.zhimg.com/v2-d49d26e468fd9fd84deb769abfe3205a_1440w.jpg" width="70%">
 
 #### （4）配置 MySQL 配置文件
 
 + 在你的 MySQL 安装目录下新建一个文件，文件名 `my.ini`
 
-![](https://pica.zhimg.com/v2-3611fbaadac1e1f556ae97c3e5f4fc54_1440w.jpg)
+<img src="https://pica.zhimg.com/v2-3611fbaadac1e1f556ae97c3e5f4fc54_1440w.jpg" width="70%">
 
 + 复制并且修改路径
 
@@ -214,11 +214,11 @@ port=3306
 default-character-set=utf8mb4
 ```
 
-![](https://picx.zhimg.com/v2-56210162f1ea7d9cc80a5be6ce25277b_1440w.jpg)
+<img src="https://picx.zhimg.com/v2-56210162f1ea7d9cc80a5be6ce25277b_1440w.jpg" width="70%">
 
 + 再创建一个 data 文件夹
 
-![](https://pic1.zhimg.com/v2-e9420745dfcad84c75e0dd7247dad57a_1440w.jpg)
+<img src="https://pic1.zhimg.com/v2-e9420745dfcad84c75e0dd7247dad57a_1440w.jpg" width="70%">
 
 #### （5）初始化 MySQL 服务端
 
@@ -230,14 +230,14 @@ mysqld --initialize --console
 
 + 复制并记住临时密码：`****`
 
-![](https://pic3.zhimg.com/v2-6f33a38a79b7e4ae723edf73ec84eab2_1440w.jpg)
+<img src="https://pic3.zhimg.com/v2-6f33a38a79b7e4ae723edf73ec84eab2_1440w.jpg" width="70%">
 
 #### （6）注册系统服务
 
 + 未注册之前是没有 MySQL 服务的
 + 搜索栏里搜索服务 或者 右键我的电脑 打开计算机管理 → 服务和应用程序 → 服务
 
-![](https://pic2.zhimg.com/v2-b04efc134337ad6c1b61b7e8bec42865_1440w.jpg)
+<img src="https://pic2.zhimg.com/v2-b04efc134337ad6c1b61b7e8bec42865_1440w.jpg" width="70%">
 
 + 执行命令注册
 
@@ -245,9 +245,9 @@ mysqld --initialize --console
 mysqld --install
 ```
 
-![](https://pic4.zhimg.com/v2-b9bf9eef852fc9df22ac3dd4ddce330d_1440w.jpg)
+<img src="https://pic4.zhimg.com/v2-b9bf9eef852fc9df22ac3dd4ddce330d_1440w.jpg" width="70%">
 
-![](https://pic3.zhimg.com/v2-1ba8be270ba8d4c872783616fbb19e44_1440w.jpg)
+<img src="https://pic3.zhimg.com/v2-1ba8be270ba8d4c872783616fbb19e44_1440w.jpg" width="70%">
 
 + 如果后续要移除的话，cmd 中以管理员身份运行
 
@@ -261,7 +261,7 @@ mysqld --remove
 
 **方式一：**
 
-![](https://pic4.zhimg.com/v2-564797523dad3ef2a3fa502a0ab342d5_1440w.jpg)
+<img src="https://pic4.zhimg.com/v2-564797523dad3ef2a3fa502a0ab342d5_1440w.jpg" width="70%">
 
 **方式二：** cmd 中以管理员身份运行
 
@@ -269,13 +269,13 @@ mysqld --remove
 net start mysql  # 启动MySQL服务
 ```
 
-![](https://pic3.zhimg.com/v2-937a6679f4fe354d48b15b4b03e31d6c_1440w.jpg)
+<img src="https://pic3.zhimg.com/v2-937a6679f4fe354d48b15b4b03e31d6c_1440w.jpg" width="70%">
 
 ```bash
 net stop mysql  # 停止MySQL服务
 ```
 
-![](https://pic1.zhimg.com/v2-af17dd937ad8dab5caf21c70f69f5fb8_1440w.jpg)
+<img src="https://pic1.zhimg.com/v2-af17dd937ad8dab5caf21c70f69f5fb8_1440w.jpg" width="70%">
 
 ### 【五】MySQL 操作
 
@@ -308,7 +308,7 @@ mysql -uroot -p
 ****
 ```
 
-![](https://pica.zhimg.com/v2-8a159a0d71e3492637e8e4cb9648ce0c_1440w.jpg)
+<img src="https://pica.zhimg.com/v2-8a159a0d71e3492637e8e4cb9648ce0c_1440w.jpg" width="70%">
 
 **修改密码：**
 
@@ -316,7 +316,7 @@ mysql -uroot -p
 alter user 'root'@'localhost' identified by '****';
 ```
 
-![](https://pic3.zhimg.com/v2-0e8397a2c714459bd74e8f0639dc197c_1440w.jpg)
+<img src="https://pic3.zhimg.com/v2-0e8397a2c714459bd74e8f0639dc197c_1440w.jpg" width="70%">
 
 **刷新权限：**
 
@@ -324,7 +324,7 @@ alter user 'root'@'localhost' identified by '****';
 flush privileges;
 ```
 
-![](https://pic3.zhimg.com/v2-62485287f11618a38cfda7036c9ca484_1440w.jpg)
+<img src="https://pic3.zhimg.com/v2-62485287f11618a38cfda7036c9ca484_1440w.jpg" width="70%">
 
 **退出：**
 
@@ -351,7 +351,7 @@ mysqld --skip-grant-tables
 + 执行 MySQL 登入命令 `mysql -uroot -p`
 + 输入密码的时候什么都不要输，直接 enter
 
-![](https://pic2.zhimg.com/v2-2bb097e513664db57488e2a0e4ee167f_1440w.jpg)
+<img src="https://pic2.zhimg.com/v2-2bb097e513664db57488e2a0e4ee167f_1440w.jpg" width="70%">
 
 + 继续修改密码，先刷新一下权限
 
