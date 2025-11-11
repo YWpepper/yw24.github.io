@@ -4,6 +4,8 @@ lang: zh-CN
 date: 2025-03-07
 author: pepper
 permalink: /posts/2025/03/how_to_learn_graphNetwork/
+pinned: false
+toc: true
 tags:
   - graph
   - booksresourse

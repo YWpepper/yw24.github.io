@@ -4,6 +4,8 @@ lang: zh-CN
 date: 2025-02-09
 author: pepper
 permalink: /posts/2025/02/how_to_do_ScientificResearchDrawings/
+pinned: false
+toc: true
 tags:
   - Server
   - Windows

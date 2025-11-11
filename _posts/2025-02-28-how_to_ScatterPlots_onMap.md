@@ -3,6 +3,8 @@ title: 'how_to_ScatterPlots_onMap'
 date: 2025-02-28
 author: pepper
 permalink: /posts/2025/02/how_to_ScatterPlots_onMap/
+pinned: false
+toc: true
 tags:
   - Rearch
   - Papper

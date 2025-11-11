@@ -4,6 +4,8 @@ lang: zh-CN
 date: 2025-04-10
 author: pepper
 permalink: /posts/2025/04/dailyResource/
+pinned: false
+toc: true
 tags:
   - daily
 ---

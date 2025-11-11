@@ -4,6 +4,8 @@ lang: zh-CN
 date: 2025-11-11
 author: pepper
 permalink: /posts/2025/11/how_to_make_Xinference/
+pinned: false
+toc: true
 tags:
   - LLM
 ---

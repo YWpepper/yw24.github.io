@@ -4,6 +4,8 @@ lang: zh-CN
 date: 2025-02-11
 author: pepper
 permalink: /posts/2025/02/what_Torchversion_install/
+pinned: false
+toc: true
 tags:
   - daily
 ---
