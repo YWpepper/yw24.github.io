@@ -149,7 +149,7 @@ https://github.com/waydabber/BetterDisplay/releases?page=6
 
   ### 2. Markdown常用快捷键
 
-  ```txt
+  ```java
   Ctrl 0 到 Ctrl 6： 普通文本、一级文本~六级文本
   Ctrl B： 加粗
   Ctrl I： 斜体
@@ -178,7 +178,7 @@ https://github.com/waydabber/BetterDisplay/releases?page=6
 
   ### 1. 书籍资源
 
-  ```txt
+  ```java
   主站: http://www.https.ng
   镜像站点:
   - http://38.147.170.240:5959
