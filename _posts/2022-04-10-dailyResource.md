@@ -22,7 +22,7 @@ tags:
 https://github.com/waydabber/BetterDisplay/releases?page=6
 ```
 
-2. Adobe ps 免费激活版本 ：[link](https://www.cnblogs.com/FRIM/p/18130753)
+2. Adobe ps 免费激活版本 :[link](https://www.cnblogs.com/FRIM/p/18130753)
 
 3. 绘图的时候图例位置参数设置
 
@@ -70,11 +70,11 @@ https://github.com/waydabber/BetterDisplay/releases?page=6
     nohup python -u run_script.py > script.log 2>&1 &
 
     # - 参数说明
-    # nohup：忽略挂断信号
-    #  -u（Python参数）：禁用输出缓冲
-    #  > script.log：标准输出重定向
-    #  2>&1：错误输出合并
-    #   &：后台运行 
+    # nohup:忽略挂断信号
+    #  -u（Python参数）:禁用输出缓冲
+    #  > script.log:标准输出重定向
+    #  2>&1:错误输出合并
+    #   &:后台运行 
     ```
 
 - 验证进程状态
@@ -101,7 +101,7 @@ https://github.com/waydabber/BetterDisplay/releases?page=6
   sudo nano /etc/systemd/model.service
   ```
 
-- 服务内容：
+- 服务内容:
 
   ```bash
   [Unit]
@@ -117,7 +117,7 @@ https://github.com/waydabber/BetterDisplay/releases?page=6
   WantedBy=multi-user.target
   ```
 
-- 启用服务：
+- 启用服务:
 
   ```bash
   sudo systemctl daemon-reload
@@ -150,28 +150,28 @@ https://github.com/waydabber/BetterDisplay/releases?page=6
   ### 2. Markdown常用快捷键
 
   ```java
-  Ctrl 0 到 Ctrl 6： 普通文本、一级文本~六级文本
-  Ctrl B： 加粗
-  Ctrl I： 斜体
-  Ctrl U： 下划线
-  Shift Alt 5： 删除线
-  Shift Ctrl ~： 行内代码块
-  Ctrl K： 超链接
-  Ctrl T： 表格
-  Ctrl Shift Q： 引用
-  Shift Ctrl I： 插入图片
-  Shift Ctrl M： 公式块
-  [ ]： 任务列表(可勾选的序列)
-  <sup>内容</sup>： 上标
-  <sub>内容</sub>： 下标
-  :smile:： 😄
-  [toc]： 展示目录
-  Ctrl L： 选中一行
-  Ctrl D： 选中内容/单词
-  Ctrl Home： 跳转到文章开头
-  Ctrl End： 跳转到文章结尾
-  Ctrl F： 搜索
-  Ctrl H： 替换
+  Ctrl 0 到 Ctrl 6: 普通文本、一级文本~六级文本
+  Ctrl B: 加粗
+  Ctrl I: 斜体
+  Ctrl U: 下划线
+  Shift Alt 5: 删除线
+  Shift Ctrl ~: 行内代码块
+  Ctrl K: 超链接
+  Ctrl T: 表格
+  Ctrl Shift Q: 引用
+  Shift Ctrl I: 插入图片
+  Shift Ctrl M: 公式块
+  [ ]: 任务列表(可勾选的序列)
+  <sup>内容</sup>: 上标
+  <sub>内容</sub>: 下标
+  :smile:: 😄
+  [toc]: 展示目录
+  Ctrl L: 选中一行
+  Ctrl D: 选中内容/单词
+  Ctrl Home: 跳转到文章开头
+  Ctrl End: 跳转到文章结尾
+  Ctrl F: 搜索
+  Ctrl H: 替换
   ```
 
   ## 3 学习资源
