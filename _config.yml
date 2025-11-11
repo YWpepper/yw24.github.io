@@ -115,6 +115,9 @@ kramdown:
   math_engine_opts:
     preview: true
     preview_as_code: true
+  # Parse block-level and span-level math
+  parse_block_html: true
+  parse_span_html: true
 
 # Set the Sass partials directory, as we're using @imports
 sass:
@@ -132,6 +135,20 @@ plugins:
   - jekyll-sitemap # Create a sitemap using the official Jekyll sitemap gem
   - jekyll-feed # Create an Atom feed using the official Jekyll feed gem
   - jekyll-paginate
+  - jekyll-pandoc  # Pandoc support for LaTeX
+
+# Pandoc configuration
+pandoc:
+  extensions:
+    - normalize
+    - smart
+    - mathjax
+    - csl: _styles/apa.csl
+  outputs:
+    html5:
+      - input: tex
+      - output: html5
+      - extra_args: ['--mathjax', '--no-highlight']
 
 # Exclude these files from your production _site
 exclude:

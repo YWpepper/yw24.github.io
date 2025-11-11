@@ -295,133 +295,173 @@ HuggingFace是一个集中管理和共享预训练模型的平台\url{https://hu
 \begin{itemize}
 \item 创建文件夹统一存放所有基座模型
 \begin{lstlisting}[language=bash]
+mkdir Hugging-Face
+\end{lstlisting}
 
-##### 7. 可视化页面上加载模型测试，检验是否加载成功
+\item 修改HuggingFace的镜像源
+\begin{lstlisting}[language=bash]
+export HF_ENDPOINT=https://hf-mirror.com
+\end{lstlisting}
 
-- 注意：这里的路径是模型文件夹内部的**模型特定快照的唯一哈希值**，而不是整个模型文件夹
-![[1.png]]
+\item 修改模型下载的默认位置
+\begin{lstlisting}[language=bash]
+export HF_HOME=/root/autodl-tmp/Hugging-Face
+\end{lstlisting}
 
-```
+\item 注意:这种配置方式只在当前shell会话中有效,如果你希望这个环境变量在每次启动终端时都生效,可以将其添加到你的用户配置文件中(修改\texttt{\textasciitilde/.bashrc}或\texttt{\textasciitilde/.zshrc})
+
+\item 检查环境变量是否生效
+\begin{lstlisting}[language=bash]
+echo $HF_ENDPOINT
+echo $HF_HOME
+\end{lstlisting}
+
+\item 安装HuggingFace官方下载工具
+\begin{lstlisting}[language=bash]
+pip install -U huggingface_hub
+\end{lstlisting}
+
+\item 执行下载命令
+\begin{lstlisting}[language=bash]
+huggingface-cli download --resume-download deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B
+\end{lstlisting}
+
+\item 如果直接本机下载了模型压缩包,如何放到你的服务器上?——在AutoDL上打开JupyterLab直接上传,或者下载软件通过SFTP协议传送
+\end{itemize}
+
+\subsection{可视化页面上加载模型测试,检验是否加载成功}
+
+注意:这里的路径是模型文件夹内部的\textbf{模型特定快照的唯一哈希值},而不是整个模型文件夹
+
+\begin{verbatim}
 /root/autodl-tmp/Hugging-Face/hub/models--deepseek-ai--DeepSeek-R1-Distill-Qwen-1.5B/snapshots/530ca3e1ad39d440e182c2e4317aa40f012512fa
-```
+\end{verbatim}
 
-##### 8. 准备用于训练的数据集，添加到指定位置
+\subsection{准备用于训练的数据集,添加到指定位置}
 
-- **README_zh** 中详细介绍了如何配置和描述你的自定义数据集
-- 按照格式准备用于微调的数据集 **magic_conch.json**，数据示例：
-
-```
+\begin{itemize}
+\item \texttt{README\_zh}中详细介绍了如何配置和描述你的自定义数据集
+\item 按照格式准备用于微调的数据集\texttt{magic\_conch.json},数据示例:
+\begin{lstlisting}[language=json]
 [
-  {
-    "instruction": "请问你是谁",
-    "input": "",
-    "output": "您好，我是蟹堡王的神奇海螺，很高兴为您服务！我可以回答关于蟹堡王和汉堡制作的任何问题，您有什么需要帮助的吗？"
-  },
-  {
-    "instruction": "怎么修复这个报错",
-    "input": "我正在使用蟹堡王全自动智能汉堡制作机，报错信息是：汉堡食谱为空",
-    "output": "根据您提供的错误信息，'汉堡食谱为空' 可能是因为系统没有加载正确的食谱文件或食谱文件被删除。您可以尝试以下步骤：\n1. 检查食谱文件是否存在，并确保文件路径正确。\n2. 重新加载或更新食谱文件。\n3. 如果问题依然存在，尝试重启机器并检查是否有软件更新。\n希望这些步骤能帮助您修复问题。如果仍有困难，请与蟹堡王技术支持联系。"
-  }
+    {
+        "instruction": "请问你是谁",
+        "input": "",
+        "output": "您好,我是蟹堡王的神奇海螺,很高兴为您服务!我可以回答关于蟹堡王和汉堡制作的任何问题,您有什么需要帮助的吗?"
+    },
+    {
+        "instruction": "怎么修复这个报错",
+        "input": "我正在使用蟹堡王全自动智能汉堡制作机,报错信息是:汉堡食谱为空",
+        "output": "根据您提供的错误信息,'汉堡食谱为空'可能是因为系统没有加载正确的食谱文件或食谱文件被删除。您可以尝试以下步骤:\n1.检查食谱文件是否存在,并确保文件路径正确。\n2.重新加载或更新食谱文件。\n3.如果问题依然存在,尝试重启机器并检查是否有软件更新。\n希望这些步骤能帮助您修复问题。如果仍有困难,请与蟹堡王技术支持联系。"
+    }
 ]
-```
+\end{lstlisting}
 
-- 修改 **dataset_info.json** 文件，添加如下配置：
-
-```
+\item 修改\texttt{dataset\_info.json}文件,添加如下配置:
+\begin{lstlisting}[language=json]
 "magic_conch": {
-"file_name": "magic_conch.json"
-},
-```
+    "file_name": "magic_conch.json"
+}
+\end{lstlisting}
 
-- 将数据集 magic_conch.json 放到 LLama-Factory 的 **data 目录** 下
+\item 将数据集\texttt{magic\_conch.json}放到LLama-Factory的\texttt{data}目录下
+\end{itemize}
 
-##### 9. 在页面上进行微调的相关设置，开始微调
+\subsection{在页面上进行微调的相关设置,开始微调}
 
-- 选择微调算法 **Lora**
-- 添加数据集 **magic_conch**
-- 修改其他训练相关参数，如学习率、训练轮数、截断长度、验证集比例等
-  - 学习率（Learning Rate）：决定了模型每次更新时权重改变的幅度。过大可能会错过最优解；过小会学得很慢或陷入局部最优解
-  - 训练轮数（Epochs）：太少模型会欠拟合（没学好），太大会过拟合（学过头了）
-  - 最大梯度范数（Max Gradient Norm）：当梯度的值超过这个范围时会被截断，防止梯度爆炸现象
-  - 最大样本数（Max Samples）：每轮训练中最多使用的样本数
-  - 计算类型（Computation Type）：在训练时使用的数据类型，常见的有 float32 和 float16。在性能和精度之间找平衡
-  - 截断长度（Truncation Length）：处理长文本时如果太长超过这个阈值的部分会被截断掉，避免内存溢出
-  - 批处理大小（Batch Size）：由于内存限制，每轮训练我们要将训练集数据分批次送进去，这个批次大小就是 Batch Size
-  - 梯度累积（Gradient Accumulation）：默认情况下模型会在每个 batch 处理完后进行一次更新一个参数，但你可以通过设置这个梯度累计，让他直到处理完多个小批次的数据后才进行一次更新
-  - 验证集比例（Validation Set Proportion）：数据集分为训练集和验证集两个部分，训练集用来学习训练，验证集用来验证学习效果如何
-  - 学习率调节器（Learning Rate Scheduler）：在训练的过程中帮你自动调整优化学习率
-- 页面上点击**启动训练**，或复制命令到终端启动训练
-  - 实践中推荐用 `nohup` 命令将训练任务放到后台执行，这样即使关闭终端任务也会继续运行。同时将日志重定向到文件中保存下来
-- 在训练过程中注意观察损失曲线，**尽可能将损失降到最低**
-  - 如损失降低太慢，尝试增大学习率
-  - 如训练结束损失还呈下降趋势，增大训练轮数确保拟合
+\begin{itemize}
+\item 选择微调算法\textbf{Lora}
+\item 添加数据集\texttt{magic\_conch}
+\item 修改其他训练相关参数,如学习率、训练轮数、截断长度、验证集比例等
+    \begin{itemize}
+    \item 学习率(Learning Rate):决定了模型每次更新时权重改变的幅度。过大可能会错过最优解;过小会学得很慢或陷入局部最优解
+    \item 训练轮数(Epochs):太少模型会欠拟合(没学好),太大会过拟合(学过头了)
+    \item 最大梯度范数(Max Gradient Norm):当梯度的值超过这个范围时会被截断,防止梯度爆炸现象
+    \item 最大样本数(Max Samples):每轮训练中最多使用的样本数
+    \item 计算类型(Computation Type):在训练时使用的数据类型,常见的有float32和float16。在性能和精度之间找平衡
+    \item 截断长度(Truncation Length):处理长文本时如果太长超过这个阈值的部分会被截断掉,避免内存溢出
+    \item 批处理大小(Batch Size):由于内存限制,每轮训练我们要将训练集数据分批次送进去,这个批次大小就是Batch Size
+    \item 梯度累积(Gradient Accumulation):默认情况下模型会在每个batch处理完后进行一次更新一个参数,但你可以通过设置这个梯度累计,让他直到处理完多个小批次的数据后才进行一次更新
+    \item 验证集比例(Validation Set Proportion):数据集分为训练集和验证集两个部分,训练集用来学习训练,验证集用来验证学习效果如何
+    \item 学习率调节器(Learning Rate Scheduler):在训练的过程中帮你自动调整优化学习率
+    \end{itemize}
+\item 页面上点击\textbf{启动训练},或复制命令到终端启动训练
+    \begin{itemize}
+    \item 实践中推荐用\texttt{nohup}命令将训练任务放到后台执行,这样即使关闭终端任务也会继续运行。同时将日志重定向到文件中保存下来
+    \end{itemize}
+\item 在训练过程中注意观察损失曲线,\textbf{尽可能将损失降到最低}
+    \begin{itemize}
+    \item 如损失降低太慢,尝试增大学习率
+    \item 如训练结束损失还呈下降趋势,增大训练轮数确保拟合
+    \end{itemize}
+\end{itemize}
 
-##### 10. 微调结束，评估微调效果
+\subsection{微调结束,评估微调效果}
 
-- 观察损失曲线的变化；观察最终损失
-- 在交互页面上通过预测/对话等方式测试微调好的效果
-- **检查点**：保存的是模型在训练过程中的一个中间状态，包含了模型权重、训练过程中使用的配置（如学习率、批次大小）等信息，对LoRA来说，检查点包含了**训练得到的 B 和 A 这两个低秩矩阵的权重**
-- 若微调效果不理想，你可以：
-  - 使用更强的预训练模型
-  - 增加数据量
-  - 优化数据质量（数据清洗、数据增强等，可学习相关论文如何实现）
-  - 调整训练参数，如学习率、训练轮数、优化器、批次大小等等
+\begin{itemize}
+\item 观察损失曲线的变化;观察最终损失
+\item 在交互页面上通过预测/对话等方式测试微调好的效果
+\item \textbf{检查点}:保存的是模型在训练过程中的一个中间状态,包含了模型权重、训练过程中使用的配置(如学习率、批次大小)等信息,对LoRA来说,检查点包含了\textbf{训练得到的B和A这两个低秩矩阵的权重}
+\item 若微调效果不理想,你可以:
+    \begin{itemize}
+    \item 使用更强的预训练模型
+    \item 增加数据量
+    \item 优化数据质量(数据清洗、数据增强等,可学习相关论文如何实现)
+    \item 调整训练参数,如学习率、训练轮数、优化器、批次大小等等
+    \end{itemize}
+\end{itemize}
 
-##### 11. 导出合并后的模型
+\subsection{导出合并后的模型}
 
-- 为什么要合并：因为 LoRA 只是通过**低秩矩阵**调整原始模型的部分权重，而**不直接修改原模型的权重**。合并步骤将 LoRA 权重与原始模型权重融合生成一个完整的模型
-- 先创建目录，用于存放导出后的模型
-
-```
+\begin{itemize}
+\item 为什么要合并:因为LoRA只是通过\textbf{低秩矩阵}调整原始模型的部分权重,而\textbf{不直接修改原模型的权重}。合并步骤将LoRA权重与原始模型权重融合生成一个完整的模型
+\item 先创建目录,用于存放导出后的模型
+\begin{lstlisting}[language=bash]
 mkdir -p Models/deepseek-r1-1.5b-merged
-```
+\end{lstlisting}
+\item 在页面上配置导出路径,导出即可
+\end{itemize}
 
-- 在页面上配置导出路径，导出即可
-![[截屏2025-02-23 21.09.52.png]]
+\section{五、模型部署和暴露接口}
 
-## 五、模型部署和暴露接口
+\subsection{创建新的conda虚拟环境用于部署模型}
 
-##### 1. 创建新的 conda 虚拟环境用于部署模型
-
-- 创建环境
-
-```bash
+\begin{itemize}
+\item 创建环境
+\begin{lstlisting}[language=bash]
 conda create -n fastApi python=3.10
-```
+\end{lstlisting}
 
-- 激活环境
-
-```bash
+\item 激活环境
+\begin{lstlisting}[language=bash]
 conda activate fastApi
-```
+\end{lstlisting}
 
-- 在该环境中下载部署模型需要的依赖
-
-```bash
+\item 在该环境中下载部署模型需要的依赖
+\begin{lstlisting}[language=bash]
 conda install -c conda-forge fastapi uvicorn transformers pytorch
-```
+\end{lstlisting}
 
-```bash
+\begin{lstlisting}[language=bash]
 pip install safetensors sentencepiece protobuf
-```
+\end{lstlisting}
+\end{itemize}
 
-##### 2. 通过 FastAPI 部署模型并暴露 HTTP 接口
+\subsection{通过FastAPI部署模型并暴露HTTP接口}
 
-- 创建 App 文件夹
-
-```bash
+\begin{itemize}
+\item 创建App文件夹
+\begin{lstlisting}[language=bash]
 mkdir App
-```
+\end{lstlisting}
 
-- 创建 main.py 文件，作为启动应用的入口
-
-```bash
+\item 创建\texttt{main.py}文件,作为启动应用的入口
+\begin{lstlisting}[language=bash]
 touch main.py
-```
+\end{lstlisting}
 
-- 修改 main.py 文件并保存
-
-```python
+\item 修改\texttt{main.py}文件并保存
+\begin{lstlisting}[language=python]
 from fastapi import FastAPI
 from transformers import AutoModelForCausalLM, AutoTokenizer
 import torch
@@ -431,136 +471,131 @@ app = FastAPI()
 # 模型路径
 model_path = "/root/autodl-tmp/Models/deepseek-r1-1.5b-merged"
 
-# 加载 tokenizer （分词器）
+# 加载tokenizer(分词器)
 tokenizer = AutoTokenizer.from_pretrained(model_path)
 
-# 加载模型并移动到可用设备（GPU/CPU）
+# 加载模型并移动到可用设备(GPU/CPU)
 device = "cuda" if torch.cuda.is_available() else "cpu"
 model = AutoModelForCausalLM.from_pretrained(model_path).to(device)
 
 @app.get("/generate")
 async def generate_text(prompt: str):
-    # 使用 tokenizer 编码输入的 prompt
-    inputs = tokenizer(prompt, return_tensors="pt").to(device)
-    
-    # 使用模型生成文本
-    outputs = model.generate(inputs["input_ids"], max_length=150)
-    
-    # 解码生成的输出
-    generated_text = tokenizer.decode(outputs[0], skip_special_tokens=True)
-    
-    return {"generated_text": generated_text}
+        # 使用tokenizer编码输入的prompt
+        inputs = tokenizer(prompt, return_tensors="pt").to(device)
+        
+        # 使用模型生成文本
+        outputs = model.generate(inputs["input_ids"], max_length=150)
+        
+        # 解码生成的输出
+        generated_text = tokenizer.decode(outputs[0], skip_special_tokens=True)
+        
+        return {"generated_text": generated_text}
+\end{lstlisting}
 
-```
-
-- 进入包含 `main.py` 文件的目录，然后运行以下命令来启动 FastAPI 应用
-
-```
+\item 进入包含\texttt{main.py}文件的目录,然后运行以下命令来启动FastAPI应用
+\begin{lstlisting}[language=bash]
 uvicorn main:app --reload --host 0.0.0.0
-```
+\end{lstlisting}
 
-- `main` 是 Python 文件名（要注意不包含 `.py` 扩展名）
+\begin{itemize}
+\item \texttt{main}是Python文件名(要注意不包含\texttt{.py}扩展名)
+\item \texttt{app}是FastAPI实例的变量名(代码中\texttt{app = FastAPI()})
+\item \texttt{--reload}使代码更改后可以自动重载,适用于开发环境
+\item \texttt{host 0.0.0.0}:将FastAPI应用绑定到所有可用的网络接口,这样我们的本机就可以通过内网穿透访问该服务
+\end{itemize}
 
-- `app` 是 FastAPI 实例的变量名（代码中 `app = FastAPI()`）
-- `--reload` 使代码更改后可以自动重载，适用于开发环境
-- `host 0.0.0.0`：将 FastAPI 应用绑定到所有可用的网络接口，这样我们的本机就可以通过内网穿透访问该服务
+\item 配置端口转发,使得本机可以访问该服务,参考:\href{https://www.autodl.com/docs/ssh_proxy/}{SSH隧道}
 
-- 配置端口转发，使得本机可以访问该服务 [SSH隧道](https://www.autodl.com/docs/ssh_proxy/)
-- 浏览器输入以下 url，测试服务是否启动成功
-
-```
+\item 浏览器输入以下url,测试服务是否启动成功
+\begin{verbatim}
 http://localhost:8000/docs
-```
+\end{verbatim}
 
-![[Pasted image 20250223232930.png]]
+\item 或者你也可以通过postMan来测试
+\begin{verbatim}
+http://localhost:8000/generate?prompt=你是谁?
+\end{verbatim}
+\end{itemize}
 
-- 或者你也可以通过 postMan 来测试
+\section{六、web后端调用}
 
-```
-http://localhost:8000/generate?prompt=你是谁？
-```
+\subsection{pom.xml导入依赖}
 
-![[Pasted image 20250223232958.png]]
-
-## 六、web后端调用
-
-##### 1. pom.xml 导入依赖
-
-```xml
+\begin{lstlisting}[language=xml]
 <dependency>  
-    <groupId>org.apache.httpcomponents.client5</groupId>  
-    <artifactId>httpclient5</artifactId>  
-    <version>5.2.1</version>  
+        <groupId>org.apache.httpcomponents.client5</groupId>  
+        <artifactId>httpclient5</artifactId>  
+        <version>5.2.1</version>  
 </dependency>
-```
+\end{lstlisting}
 
-##### 2. 自定义方法发送并处理 HTTP 请求，实现对话功能
+\subsection{自定义方法发送并处理HTTP请求,实现对话功能}
 
-```java
+\begin{lstlisting}[language=java]
 @Service  
 public class ChatServiceImpl implements ChatService {  
-      
-    @Autowired  
-    private RestTemplate restTemplate;  
-    @Autowired  
-    private AiServiceConfig aiServiceConfig;  
-  
-    @Override  
-    public String callAiForOneReply(String prompt) {  
-        // 获取基础URL http://localhost:8000  
-        String baseUrl = aiServiceConfig.getBaseUrl();  
-        // 构建完整的请求URL http://localhost:8000/generate?prompt=XXX  
-        String url = String.format("%s/generate?prompt=%s", baseUrl, prompt);  
-        // 发送GET请求并获取响应  
-        GenerateResponse response = restTemplate.getForObject(url, GenerateResponse.class);  
-        // 从响应中取出 generated_text 字段值返回  
-        return response != null ? response.getGenerated_text() : "";  
-    }  
+            
+        @Autowired  
+        private RestTemplate restTemplate;  
+        @Autowired  
+        private AiServiceConfig aiServiceConfig;  
+    
+        @Override  
+        public String callAiForOneReply(String prompt) {  
+                // 获取基础URL http://localhost:8000  
+                String baseUrl = aiServiceConfig.getBaseUrl();  
+                // 构建完整的请求URL http://localhost:8000/generate?prompt=XXX  
+                String url = String.format("%s/generate?prompt=%s", baseUrl, prompt);  
+                // 发送GET请求并获取响应  
+                GenerateResponse response = restTemplate.getForObject(url, GenerateResponse.class);  
+                // 从响应中取出generated_text字段值返回  
+                return response != null ? response.getGenerated_text() : "";  
+        }  
 }
-```
+\end{lstlisting}
 
-##### 3. 本机启动 Demo 前后端工程，测试对话效果
+\subsection{本机启动Demo前后端工程,测试对话效果}
 
-###### 3.1 启动前端工程
+\subsubsection{启动前端工程}
 
-- 前端项目地址：
-
-```
+\begin{itemize}
+\item 前端项目地址:
+\begin{verbatim}
 https://github.com/huangyf2013320506/magic_conch_frontend.git
-```
+\end{verbatim}
 
-- 执行：
-
-```bash
+\item 执行:
+\begin{lstlisting}[language=bash]
 npm install
-```
+\end{lstlisting}
 
-```bash
+\begin{lstlisting}[language=bash]
 npm run dev
-```
+\end{lstlisting}
+\end{itemize}
 
-###### 3.2 启动后端工程
+\subsubsection{启动后端工程}
 
-- 后端项目地址：
-
-```
+\begin{itemize}
+\item 后端项目地址:
+\begin{verbatim}
 https://github.com/huangyf2013320506/magic_conch_backend.git
-```
+\end{verbatim}
 
-- 执行：
-
-```bash
+\item 执行:
+\begin{lstlisting}[language=bash]
 mvn clean install
-```
+\end{lstlisting}
 
-- 在 `MagicConchBackendApplication.java` 类中启动
+\item 在\texttt{MagicConchBackendApplication.java}类中启动
+\end{itemize}
 
-##### 4. FastAPI 支持自定义多种请求响应格式，可自行探索
+\subsection{FastAPI支持自定义多种请求响应格式,可自行探索}
 
-##### 5. 如何开放服务端口到公网
+\subsection{如何开放服务端口到公网}
 
-- AutoDL 当前仅支持个人用户通过端口转发在本地访问服务，如需开放服务端口到公网一般需要企业认证，请参考：\href{https://www.autodl.com/docs/port/}{开放端口}
+AutoDL当前仅支持个人用户通过端口转发在本地访问服务,如需开放服务端口到公网一般需要企业认证,请参考:\href{https://www.autodl.com/docs/port/}{开放端口}
 
-\paragraph{6. 企业部署还需考虑高并发、高可用、安全机制等问题}
+\subsection{企业部署还需考虑高并发、高可用、安全机制等问题}
 
 \end{document}
