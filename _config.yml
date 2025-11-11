@@ -55,7 +55,7 @@ footer-links:
   email: # youremailaddress@mail.com
   facebook: # https://www.facebook.com/<>
   flickr: # https://www.flickr.com/<>
-  github: ywpepper # https://github.com/<>
+  github:  # https://github.com/<>
   instagram: # https://instagram.com/<>
   linkedin: # https://www.linkedin.com/in/<>
   pinterest: # https://www.pinterest.com/<>
@@ -86,7 +86,7 @@ gitalk:
 google_analytics:
 
 utteranc:
-  repo: ywpepper/HomePage # Your github repo path, also see: https://utteranc.es
+  repo: ywpepper/ywpepper.github.io # Your github repo path, also see: https://utteranc.es
   issue-term: title
   label: comment
   theme: github-light
