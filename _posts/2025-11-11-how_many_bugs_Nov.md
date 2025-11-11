@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 'how_many_bugs_Nov'
-date: 2025-11-31
+date: 2025-11-11
 author: pepper
 tags: [Windows, Note]
 comments: true
