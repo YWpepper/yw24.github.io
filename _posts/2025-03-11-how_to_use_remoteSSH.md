@@ -1,5 +1,5 @@
 ---
-title: '如何使用远程SSH连接'
+title: 'how_to_use_remoteSSH'
 lang: zh-CN
 date: 2025-03-11
 author: pepper
