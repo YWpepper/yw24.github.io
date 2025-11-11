@@ -109,43 +109,43 @@ Ruby类似脚本语言，而Jekyll，作为Ruby的明星项目之一，是一款
 
 * 修改编译器标志
 
-      ```bash
-      ## 有时，编译器标志可能会导致这些问题。
-      ## 您可以尝试在安装 gem 时添加编译器标志来忽略某些警告。例如：
-      gem install wdm -- --with-cflags="-Wno-error=implicit-function-declaration"
-      ```
+    ```bash
+    # 有时，编译器标志可能会导致这些问题。
+    # 您可以尝试在安装 gem 时添加编译器标志来忽略某些警告。例如：
+    gem install wdm -- --with-cflags="-Wno-error=implicit-function-declaration"
+    ```
 
 * 启动Ruby安装程序
 
-      ```bash
-      # 似乎可以用来更新某些安装包        
-      ridk install
-      ```
+    ```bash
+    # 似乎可以用来更新某些安装包        
+    ridk install
+    ```
 
     <Center>
-    <img src='/images/blog/01/2.png' style='zoom:50%'>
+    <img src='https://images.weserv.nl/?url=cdn.nlark.com/yuque/0/2025/png/40742019/1762873049879-14808f28-9a50-4ee6-91c8-6ebdcdb39a3a.png?x-oss-process=image%2Fformat%2Cwebp' style='zoom:50%'>
     </Center>
 
 ### Debug报错
 
 现在才发现这个仓库的**配置文件更新**了，呜呜，之前自己一直有一个包安不上去
     <Center>
-    <img src='/images/blog/01/3.png' style='zoom:50%'>
+    <img src='https://images.weserv.nl/?url=cdn.nlark.com/yuque/0/2025/png/40742019/1762873066326-bf0a17d3-50aa-4341-b2a7-5c227d32fae3.png?x-oss-process=image%2Fformat%2Cwebp' style='zoom:50%'>
     </Center>
 
 无法安装的包如下，报错如下：
     <Center>
-    <img src='/images/blog/01/4.png' style='zoom:50%'>
+    <img src='https://images.weserv.nl/?url=cdn.nlark.com/yuque/0/2025/png/40742019/1762873095186-b69af19e-a559-4306-9c66-c9915b8d87d9.png?x-oss-process=image%2Fformat%2Cwebp' style='zoom:50%'>
     </Center>
 
 配置文件原本如下:
     <Center>
-    <img src='/images/blog/01/5.png' style='zoom:50%'>
+    <img src='https://images.weserv.nl/?url=cdn.nlark.com/yuque/0/2025/png/40742019/1762873168809-8a4d0723-158d-49ea-889f-ec17ab5cf60b.png?x-oss-process=image%2Fformat%2Cwebp' style='zoom:50%'>
     </Center>
 
 通过我全部这个配置文件，然后一个一个的加入报错的需要，就避开了那个魔法包:
     <Center>
-    <img src='/images/blog/01/6.png' style='zoom:50%'>
+    <img src='https://images.weserv.nl/?url=cdn.nlark.com/yuque/0/2025/png/40742019/1762873188694-21fe1da0-4181-48f3-9465-1ddae6476f83.png?x-oss-process=image%2Fformat%2Cwebp' style='zoom:50%'>
     </Center>
 
 修改后的配置文件:
@@ -195,13 +195,13 @@ bundle config
 **中国的交流会** [link](https://groups.google.com/g/shanghaionrails?pli=1)
 一个google群组，第一次发现还有如此好玩的东西
 <Center>
-<img src='/images/blog/01/8.png' style='zoom:50%'>
+<img src='https://images.weserv.nl/?url=cdn.nlark.com/yuque/0/2025/png/40742019/1762873258271-5310cc62-5963-429a-b1a6-662280f57cd3.png?x-oss-process=image%2Fformat%2Cwebp' style='zoom:50%'>
 </Center>
 
 **国外的Ruby大会** [link](https://rubycommunityconference.konfeo.com/en/groups)
 <center>
-<img src='/images/blog/01/9.png' style='zoom:50%'>
-<img src='/images/blog/01/10.png' style='zoom:50%'>
+<img src='https://images.weserv.nl/?url=cdn.nlark.com/yuque/0/2025/png/40742019/1762873271153-b2fc1ac3-b7f7-47f9-a448-34e16e7d10bc.png?x-oss-process=image%2Fformat%2Cwebp' style='zoom:50%'>
+<img src='https://images.weserv.nl/?url=cdn.nlark.com/yuque/0/2025/png/40742019/1762873289115-bba3d649-7104-41e5-af9f-47d2040942ab.png?x-oss-process=image%2Fformat%2Cwebp' style='zoom:50%'>
 </center>
 
 ---
