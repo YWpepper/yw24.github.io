@@ -1,6 +1,7 @@
 ---
 title: 'how_to_ScatterPlots_onMap'
 date: 2025-02-28
+author: pepper
 permalink: /posts/2025/02/how_to_ScatterPlots_onMap/
 tags:
   - Rearch
@@ -12,6 +13,7 @@ tags:
 ---
 
 - 使用英文版本的中国地图
+
   ```python
     fig.update_layout(
         mapbox={
@@ -25,6 +27,7 @@ tags:
         margin={"r":0, "t":40, "l":0, "b":0},
         title="China Traffic Prediction Error Heatmap (English Labels)"
     )
+
 ```
 
 

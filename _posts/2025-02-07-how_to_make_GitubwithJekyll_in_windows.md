@@ -2,9 +2,10 @@
 title: 'how_to_make_GitubwithJekyll_in_windows'
 lang: zh-CN
 date: 2025-02-07
+author: pepper
 permalink: /posts/2025/02/how_to_make_GitubwithJekyll_in_windows/
 toc: true
-pinned: true
+pinned: false
 tags:
   - Server
   - Windows

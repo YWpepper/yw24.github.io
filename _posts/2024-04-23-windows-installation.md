@@ -2,7 +2,7 @@
 layout: post
 title: Windows系统安装记录及问题解决
 date: 2023-04-23
-author: zxl19
+author: pepper
 tags: [Windows, Note]
 comments: true
 toc: true

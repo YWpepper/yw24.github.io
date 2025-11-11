@@ -2,6 +2,7 @@
 title: 'how_to_learn_graphNetwork'
 lang: zh-CN
 date: 2025-03-07
+author: pepper
 permalink: /posts/2025/03/how_to_learn_graphNetwork/
 tags:
   - graph
@@ -76,4 +77,3 @@ Paperswithcode是一个大家都很熟悉的网站，它将研究论文与其代
 [A Comprehensive Survey on Graph Neural Networks](https://arxiv.org/abs/1901.00596)
 
 这篇研究论文总结了GNNs中的大部分的重要发现，简要概述了GNNs背后的历史，并讨论了不同类型的GNN架构。
-

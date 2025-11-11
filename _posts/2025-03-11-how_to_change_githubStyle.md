@@ -2,6 +2,7 @@
 title: 'how_to_change_githubStyle'
 lang: zh-CN
 date: 2025-03-11
+author: pepper
 permalink: /posts/2025/03/how_to_change_githubStyle/
 tags:
   - ssh
@@ -19,8 +20,6 @@ tags:
 
   <img src="https://virginia-pepper.oss-cn-guangzhou.aliyuncs.com/img/blog/202503111120750.png" alt="image-20250311112017564" style="zoom:50%;" />
 
-
-
 - 然后修改自己的配置字体
 
 <img src="https://virginia-pepper.oss-cn-guangzhou.aliyuncs.com/img/blog/202503111059876.png" alt="image-20250311105942797" style="zoom:48%;" />
@@ -31,12 +30,7 @@ tags:
 
 <img src="https://virginia-pepper.oss-cn-guangzhou.aliyuncs.com/img/blog/202503111132809.png" alt="image-20250311113238628" style="zoom: 33%;" />
 
-
-
-
-
 <p align="center" >
   <img src="https://virginia-pepper.oss-cn-guangzhou.aliyuncs.com/img/blog/202503111136080.png" alt="image-20250311113617888" style="display: inline-block; margin-right: 10px; zoom:50%;" />
   <img src="https://virginia-pepper.oss-cn-guangzhou.aliyuncs.com/img/blog/202503111121620.png" alt="image-20250311112152533" style="zoom:33%;" />
 </p>
-

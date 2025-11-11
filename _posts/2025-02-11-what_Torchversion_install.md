@@ -2,6 +2,7 @@
 title: 'what_Torchversion_install'
 lang: zh-CN
 date: 2025-02-11
+author: pepper
 permalink: /posts/2025/02/what_Torchversion_install/
 tags:
   - daily
@@ -12,7 +13,8 @@ tags:
 We’d prefer you install the [latest version](https://pytorch.org/get-started/locally), but old binaries and installation instructions are provided below for your convenience.
 
 记得给conda换源，终端脚本：
-```shell 
+
+```shell
 # 生成.condarc配置文件（如果不存在）
 conda config --set show_channel_urls yes
 
@@ -33,6 +35,7 @@ pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 ```
 
 手动操作：
+
 ```
 nano ~/.condarc
 # 粘贴
@@ -51,12 +54,13 @@ custom_channels:
   menpo: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
   simpleitk: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
 ```
+
 或者在指定安装源：
+
 ```
 pip install ray fastdtw tslearn torch_geometric  tqdm -i http://mirrors.aliyun.com/pypi/simple/ --trusted-host mirrors.aliyun.com
 pip install  "ray[tune]"  -i http://pypi.doubanio.com/simple/ --trusted-host pypi.doubanio.com
 ```
-
 
 ## Commands for Versions >= 1.0.0[](https://pytorch.org/get-started/previous-versions/#commands-for-versions--100)
 
@@ -71,7 +75,6 @@ pip install  "ray[tune]"  -i http://pypi.doubanio.com/simple/ --trusted-host pyp
 
 ##### Linux and Windows[](https://pytorch.org/get-started/previous-versions/#linux-and-windows)
 
-    
     # ROCM 6.4 (Linux only)
     pip install torch==2.8.0 torchvision==0.23.0 torchaudio==2.8.0 --index-url https://download.pytorch.org/whl/rocm6.4
     # CUDA 12.6
@@ -95,7 +98,6 @@ pip install  "ray[tune]"  -i http://pypi.doubanio.com/simple/ --trusted-host pyp
 
 ##### Linux and Windows[](https://pytorch.org/get-started/previous-versions/#linux-and-windows)
 
-    
     # ROCM 6.3 (Linux only)
     pip install torch==2.7.1 torchvision==0.22.1 torchaudio==2.7.1 --index-url https://download.pytorch.org/whl/rocm6.3
     # CUDA 11.8
@@ -119,7 +121,6 @@ pip install  "ray[tune]"  -i http://pypi.doubanio.com/simple/ --trusted-host pyp
 
 ##### Linux and Windows[](https://pytorch.org/get-started/previous-versions/#linux-and-windows)
 
-    
     # ROCM 6.3 (Linux only)
     pip install torch==2.7.0 torchvision==0.22.0 torchaudio==2.7.0 --index-url https://download.pytorch.org/whl/rocm6.3
     # CUDA 11.8
@@ -1777,30 +1778,24 @@ Follow the install from source instructions in the README.md of the PyTorch chec
 
 Download the `whl` file with the desired version from the following html pages:
 
--   [https://download.pytorch.org/whl/cpu/torch\_stable.html](https://download.pytorch.org/whl/cpu/torch_stable.html) # CPU-only build
--   [https://download.pytorch.org/whl/cu80/torch\_stable.html](https://download.pytorch.org/whl/cu80/torch_stable.html) # CUDA 8.0 build
--   [https://download.pytorch.org/whl/cu90/torch\_stable.html](https://download.pytorch.org/whl/cu90/torch_stable.html) # CUDA 9.0 build
--   [https://download.pytorch.org/whl/cu92/torch\_stable.html](https://download.pytorch.org/whl/cu92/torch_stable.html) # CUDA 9.2 build
--   [https://download.pytorch.org/whl/cu100/torch\_stable.html](https://download.pytorch.org/whl/cu100/torch_stable.html) # CUDA 10.0 build
+- [https://download.pytorch.org/whl/cpu/torch\_stable.html](https://download.pytorch.org/whl/cpu/torch_stable.html) # CPU-only build
+- [https://download.pytorch.org/whl/cu80/torch\_stable.html](https://download.pytorch.org/whl/cu80/torch_stable.html) # CUDA 8.0 build
+- [https://download.pytorch.org/whl/cu90/torch\_stable.html](https://download.pytorch.org/whl/cu90/torch_stable.html) # CUDA 9.0 build
+- [https://download.pytorch.org/whl/cu92/torch\_stable.html](https://download.pytorch.org/whl/cu92/torch_stable.html) # CUDA 9.2 build
+- [https://download.pytorch.org/whl/cu100/torch\_stable.html](https://download.pytorch.org/whl/cu100/torch_stable.html) # CUDA 10.0 build
 
 Then, install the file with `pip install [downloaded file]`
 
 Note: most pytorch versions are available only for specific CUDA versions. For example pytorch=1.0.1 is not available for CUDA 9.2
 
-
-
-
-
-
-
 Via pip
 Download the whl file with the desired version from the following html pages:
 
-https://download.pytorch.org/whl/cpu/torch_stable.html # CPU-only build
-https://download.pytorch.org/whl/cu80/torch_stable.html # CUDA 8.0 build
-https://download.pytorch.org/whl/cu90/torch_stable.html # CUDA 9.0 build
-https://download.pytorch.org/whl/cu92/torch_stable.html # CUDA 9.2 build
-https://download.pytorch.org/whl/cu100/torch_stable.html # CUDA 10.0 build
+<https://download.pytorch.org/whl/cpu/torch_stable.html> # CPU-only build
+<https://download.pytorch.org/whl/cu80/torch_stable.html> # CUDA 8.0 build
+<https://download.pytorch.org/whl/cu90/torch_stable.html> # CUDA 9.0 build
+<https://download.pytorch.org/whl/cu92/torch_stable.html> # CUDA 9.2 build
+<https://download.pytorch.org/whl/cu100/torch_stable.html> # CUDA 10.0 build
 Then, install the file with pip install [downloaded file]
 
 Note: most pytorch versions are available only for specific CUDA versions. For example pytorch=1.0.1 is not available for CUDA 9.2
@@ -1810,83 +1805,83 @@ These predate the html page above and have to be manually installed by downloadi
 
 These predate the html page above and have to be manually installed by downloading the wheel file and `pip install downloaded_file`
 
--   [cu75/torch-0.3.0.post4-cp36-cp36m-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.3.0.post4-cp36-cp36m-linux_x86_64.whl)
--   [cu75/torch-0.3.0.post4-cp35-cp35m-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.3.0.post4-cp35-cp35m-linux_x86_64.whl)
--   [cu75/torch-0.3.0.post4-cp27-cp27mu-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.3.0.post4-cp27-cp27mu-linux_x86_64.whl)
--   [cu75/torch-0.3.0.post4-cp27-cp27m-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.3.0.post4-cp27-cp27m-linux_x86_64.whl)
--   [cu75/torch-0.2.0.post3-cp36-cp36m-manylinux1\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.2.0.post3-cp36-cp36m-manylinux1_x86_64.whl)
--   [cu75/torch-0.2.0.post3-cp35-cp35m-manylinux1\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.2.0.post3-cp35-cp35m-manylinux1_x86_64.whl)
--   [cu75/torch-0.2.0.post3-cp27-cp27mu-manylinux1\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.2.0.post3-cp27-cp27mu-manylinux1_x86_64.whl)
--   [cu75/torch-0.2.0.post3-cp27-cp27m-manylinux1\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.2.0.post3-cp27-cp27m-manylinux1_x86_64.whl)
--   [cu75/torch-0.2.0.post2-cp36-cp36m-manylinux1\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.2.0.post2-cp36-cp36m-manylinux1_x86_64.whl)
--   [cu75/torch-0.2.0.post2-cp35-cp35m-manylinux1\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.2.0.post2-cp35-cp35m-manylinux1_x86_64.whl)
--   [cu75/torch-0.2.0.post2-cp27-cp27mu-manylinux1\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.2.0.post2-cp27-cp27mu-manylinux1_x86_64.whl)
--   [cu75/torch-0.2.0.post2-cp27-cp27m-manylinux1\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.2.0.post2-cp27-cp27m-manylinux1_x86_64.whl)
--   [cu75/torch-0.2.0.post1-cp36-cp36m-manylinux1\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.2.0.post1-cp36-cp36m-manylinux1_x86_64.whl)
--   [cu75/torch-0.2.0.post1-cp35-cp35m-manylinux1\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.2.0.post1-cp35-cp35m-manylinux1_x86_64.whl)
--   [cu75/torch-0.2.0.post1-cp27-cp27mu-manylinux1\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.2.0.post1-cp27-cp27mu-manylinux1_x86_64.whl)
--   [cu75/torch-0.2.0.post1-cp27-cp27m-manylinux1\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.2.0.post1-cp27-cp27m-manylinux1_x86_64.whl)
--   [cu75/torch-0.1.12.post2-cp36-cp36m-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.12.post2-cp36-cp36m-linux_x86_64.whl)
--   [cu75/torch-0.1.12.post2-cp35-cp35m-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.12.post2-cp35-cp35m-linux_x86_64.whl)
--   [cu75/torch-0.1.12.post2-cp27-none-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.12.post2-cp27-none-linux_x86_64.whl)
--   [cu75/torch-0.1.12.post1-cp36-cp36m-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.12.post1-cp36-cp36m-linux_x86_64.whl)
--   [cu75/torch-0.1.12.post1-cp35-cp35m-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.12.post1-cp35-cp35m-linux_x86_64.whl)
--   [cu75/torch-0.1.12.post1-cp27-none-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.12.post1-cp27-none-linux_x86_64.whl)
--   [cu75/torch-0.1.11.post5-cp36-cp36m-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.11.post5-cp36-cp36m-linux_x86_64.whl)
--   [cu75/torch-0.1.11.post5-cp35-cp35m-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.11.post5-cp35-cp35m-linux_x86_64.whl)
--   [cu75/torch-0.1.11.post5-cp27-none-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.11.post5-cp27-none-linux_x86_64.whl)
--   [cu75/torch-0.1.11.post4-cp36-cp36m-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.11.post4-cp36-cp36m-linux_x86_64.whl)
--   [cu75/torch-0.1.11.post4-cp35-cp35m-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.11.post4-cp35-cp35m-linux_x86_64.whl)
--   [cu75/torch-0.1.11.post4-cp27-none-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.11.post4-cp27-none-linux_x86_64.whl)
--   [cu75/torch-0.1.10.post2-cp36-cp36m-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.10.post2-cp36-cp36m-linux_x86_64.whl)
--   [cu75/torch-0.1.10.post2-cp35-cp35m-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.10.post2-cp35-cp35m-linux_x86_64.whl)
--   [cu75/torch-0.1.10.post2-cp27-none-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.10.post2-cp27-none-linux_x86_64.whl)
--   [cu75/torch-0.1.10.post1-cp36-cp36m-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.10.post1-cp36-cp36m-linux_x86_64.whl)
--   [cu75/torch-0.1.10.post1-cp35-cp35m-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.10.post1-cp35-cp35m-linux_x86_64.whl)
--   [cu75/torch-0.1.10.post1-cp27-none-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.10.post1-cp27-none-linux_x86_64.whl)
--   [cu75/torch-0.1.9.post2-cp36-cp36m-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.9.post2-cp36-cp36m-linux_x86_64.whl)
--   [cu75/torch-0.1.9.post2-cp35-cp35m-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.9.post2-cp35-cp35m-linux_x86_64.whl)
--   [cu75/torch-0.1.9.post2-cp27-none-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.9.post2-cp27-none-linux_x86_64.whl)
--   [cu75/torch-0.1.9.post1-cp36-cp36m-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.9.post1-cp36-cp36m-linux_x86_64.whl)
--   [cu75/torch-0.1.9.post1-cp35-cp35m-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.9.post1-cp35-cp35m-linux_x86_64.whl)
--   [cu75/torch-0.1.9.post1-cp27-none-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.9.post1-cp27-none-linux_x86_64.whl)
--   [cu75/torch-0.1.8.post1-cp36-cp36m-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.8.post1-cp36-cp36m-linux_x86_64.whl)
--   [cu75/torch-0.1.8.post1-cp35-cp35m-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.8.post1-cp35-cp35m-linux_x86_64.whl)
--   [cu75/torch-0.1.8.post1-cp27-none-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.8.post1-cp27-none-linux_x86_64.whl)
--   [cu75/torch-0.1.7.post2-cp36-cp36m-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.7.post2-cp36-cp36m-linux_x86_64.whl)
--   [cu75/torch-0.1.7.post2-cp35-cp35m-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.7.post2-cp35-cp35m-linux_x86_64.whl)
--   [cu75/torch-0.1.7.post2-cp27-none-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.7.post2-cp27-none-linux_x86_64.whl)
--   [cu75/torch-0.1.6.post22-cp35-cp35m-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.6.post22-cp35-cp35m-linux_x86_64.whl)
--   [cu75/torch-0.1.6.post22-cp27-none-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.6.post22-cp27-none-linux_x86_64.whl)
--   [cu75/torch-0.1.6.post20-cp35-cp35m-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.6.post20-cp35-cp35m-linux_x86_64.whl)
--   [cu75/torch-0.1.6.post20-cp27-cp27mu-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.6.post20-cp27-cp27mu-linux_x86_64.whl)
+- [cu75/torch-0.3.0.post4-cp36-cp36m-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.3.0.post4-cp36-cp36m-linux_x86_64.whl)
+- [cu75/torch-0.3.0.post4-cp35-cp35m-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.3.0.post4-cp35-cp35m-linux_x86_64.whl)
+- [cu75/torch-0.3.0.post4-cp27-cp27mu-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.3.0.post4-cp27-cp27mu-linux_x86_64.whl)
+- [cu75/torch-0.3.0.post4-cp27-cp27m-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.3.0.post4-cp27-cp27m-linux_x86_64.whl)
+- [cu75/torch-0.2.0.post3-cp36-cp36m-manylinux1\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.2.0.post3-cp36-cp36m-manylinux1_x86_64.whl)
+- [cu75/torch-0.2.0.post3-cp35-cp35m-manylinux1\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.2.0.post3-cp35-cp35m-manylinux1_x86_64.whl)
+- [cu75/torch-0.2.0.post3-cp27-cp27mu-manylinux1\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.2.0.post3-cp27-cp27mu-manylinux1_x86_64.whl)
+- [cu75/torch-0.2.0.post3-cp27-cp27m-manylinux1\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.2.0.post3-cp27-cp27m-manylinux1_x86_64.whl)
+- [cu75/torch-0.2.0.post2-cp36-cp36m-manylinux1\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.2.0.post2-cp36-cp36m-manylinux1_x86_64.whl)
+- [cu75/torch-0.2.0.post2-cp35-cp35m-manylinux1\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.2.0.post2-cp35-cp35m-manylinux1_x86_64.whl)
+- [cu75/torch-0.2.0.post2-cp27-cp27mu-manylinux1\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.2.0.post2-cp27-cp27mu-manylinux1_x86_64.whl)
+- [cu75/torch-0.2.0.post2-cp27-cp27m-manylinux1\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.2.0.post2-cp27-cp27m-manylinux1_x86_64.whl)
+- [cu75/torch-0.2.0.post1-cp36-cp36m-manylinux1\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.2.0.post1-cp36-cp36m-manylinux1_x86_64.whl)
+- [cu75/torch-0.2.0.post1-cp35-cp35m-manylinux1\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.2.0.post1-cp35-cp35m-manylinux1_x86_64.whl)
+- [cu75/torch-0.2.0.post1-cp27-cp27mu-manylinux1\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.2.0.post1-cp27-cp27mu-manylinux1_x86_64.whl)
+- [cu75/torch-0.2.0.post1-cp27-cp27m-manylinux1\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.2.0.post1-cp27-cp27m-manylinux1_x86_64.whl)
+- [cu75/torch-0.1.12.post2-cp36-cp36m-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.12.post2-cp36-cp36m-linux_x86_64.whl)
+- [cu75/torch-0.1.12.post2-cp35-cp35m-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.12.post2-cp35-cp35m-linux_x86_64.whl)
+- [cu75/torch-0.1.12.post2-cp27-none-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.12.post2-cp27-none-linux_x86_64.whl)
+- [cu75/torch-0.1.12.post1-cp36-cp36m-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.12.post1-cp36-cp36m-linux_x86_64.whl)
+- [cu75/torch-0.1.12.post1-cp35-cp35m-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.12.post1-cp35-cp35m-linux_x86_64.whl)
+- [cu75/torch-0.1.12.post1-cp27-none-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.12.post1-cp27-none-linux_x86_64.whl)
+- [cu75/torch-0.1.11.post5-cp36-cp36m-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.11.post5-cp36-cp36m-linux_x86_64.whl)
+- [cu75/torch-0.1.11.post5-cp35-cp35m-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.11.post5-cp35-cp35m-linux_x86_64.whl)
+- [cu75/torch-0.1.11.post5-cp27-none-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.11.post5-cp27-none-linux_x86_64.whl)
+- [cu75/torch-0.1.11.post4-cp36-cp36m-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.11.post4-cp36-cp36m-linux_x86_64.whl)
+- [cu75/torch-0.1.11.post4-cp35-cp35m-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.11.post4-cp35-cp35m-linux_x86_64.whl)
+- [cu75/torch-0.1.11.post4-cp27-none-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.11.post4-cp27-none-linux_x86_64.whl)
+- [cu75/torch-0.1.10.post2-cp36-cp36m-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.10.post2-cp36-cp36m-linux_x86_64.whl)
+- [cu75/torch-0.1.10.post2-cp35-cp35m-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.10.post2-cp35-cp35m-linux_x86_64.whl)
+- [cu75/torch-0.1.10.post2-cp27-none-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.10.post2-cp27-none-linux_x86_64.whl)
+- [cu75/torch-0.1.10.post1-cp36-cp36m-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.10.post1-cp36-cp36m-linux_x86_64.whl)
+- [cu75/torch-0.1.10.post1-cp35-cp35m-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.10.post1-cp35-cp35m-linux_x86_64.whl)
+- [cu75/torch-0.1.10.post1-cp27-none-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.10.post1-cp27-none-linux_x86_64.whl)
+- [cu75/torch-0.1.9.post2-cp36-cp36m-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.9.post2-cp36-cp36m-linux_x86_64.whl)
+- [cu75/torch-0.1.9.post2-cp35-cp35m-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.9.post2-cp35-cp35m-linux_x86_64.whl)
+- [cu75/torch-0.1.9.post2-cp27-none-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.9.post2-cp27-none-linux_x86_64.whl)
+- [cu75/torch-0.1.9.post1-cp36-cp36m-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.9.post1-cp36-cp36m-linux_x86_64.whl)
+- [cu75/torch-0.1.9.post1-cp35-cp35m-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.9.post1-cp35-cp35m-linux_x86_64.whl)
+- [cu75/torch-0.1.9.post1-cp27-none-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.9.post1-cp27-none-linux_x86_64.whl)
+- [cu75/torch-0.1.8.post1-cp36-cp36m-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.8.post1-cp36-cp36m-linux_x86_64.whl)
+- [cu75/torch-0.1.8.post1-cp35-cp35m-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.8.post1-cp35-cp35m-linux_x86_64.whl)
+- [cu75/torch-0.1.8.post1-cp27-none-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.8.post1-cp27-none-linux_x86_64.whl)
+- [cu75/torch-0.1.7.post2-cp36-cp36m-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.7.post2-cp36-cp36m-linux_x86_64.whl)
+- [cu75/torch-0.1.7.post2-cp35-cp35m-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.7.post2-cp35-cp35m-linux_x86_64.whl)
+- [cu75/torch-0.1.7.post2-cp27-none-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.7.post2-cp27-none-linux_x86_64.whl)
+- [cu75/torch-0.1.6.post22-cp35-cp35m-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.6.post22-cp35-cp35m-linux_x86_64.whl)
+- [cu75/torch-0.1.6.post22-cp27-none-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.6.post22-cp27-none-linux_x86_64.whl)
+- [cu75/torch-0.1.6.post20-cp35-cp35m-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.6.post20-cp35-cp35m-linux_x86_64.whl)
+- [cu75/torch-0.1.6.post20-cp27-cp27mu-linux\_x86\_64.whl](https://download.pytorch.org/whl/cu75/torch-0.1.6.post20-cp27-cp27mu-linux_x86_64.whl)
 
 ### Windows binaries[](https://pytorch.org/get-started/previous-versions/#windows-binaries)
 
--   [cpu/torch-1.0.0-cp35-cp35m-win\_amd64.whl](https://download.pytorch.org/whl/cpu/torch-1.0.0-cp35-cp35m-win_amd64.whl)
--   [cu80/torch-1.0.0-cp35-cp35m-win\_amd64.whl](https://download.pytorch.org/whl/cu80/torch-1.0.0-cp35-cp35m-win_amd64.whl)
--   [cu90/torch-1.0.0-cp35-cp35m-win\_amd64.whl](https://download.pytorch.org/whl/cu90/torch-1.0.0-cp35-cp35m-win_amd64.whl)
--   [cu100/torch-1.0.0-cp35-cp35m-win\_amd64.whl](https://download.pytorch.org/whl/cu100/torch-1.0.0-cp35-cp35m-win_amd64.whl)
--   [cpu/torch-1.0.0-cp36-cp36m-win\_amd64.whl](https://download.pytorch.org/whl/cpu/torch-1.0.0-cp36-cp36m-win_amd64.whl)
--   [cu80/torch-1.0.0-cp36-cp36m-win\_amd64.whl](https://download.pytorch.org/whl/cu80/torch-1.0.0-cp36-cp36m-win_amd64.whl)
--   [cu90/torch-1.0.0-cp36-cp36m-win\_amd64.whl](https://download.pytorch.org/whl/cu90/torch-1.0.0-cp36-cp36m-win_amd64.whl)
--   [cu100/torch-1.0.0-cp36-cp36m-win\_amd64.whl](https://download.pytorch.org/whl/cu100/torch-1.0.0-cp36-cp36m-win_amd64.whl)
--   [cpu/torch-1.0.0-cp37-cp37m-win\_amd64.whl](https://download.pytorch.org/whl/cpu/torch-1.0.0-cp37-cp37m-win_amd64.whl)
--   [cu80/torch-1.0.0-cp37-cp37m-win\_amd64.whl](https://download.pytorch.org/whl/cu80/torch-1.0.0-cp37-cp37m-win_amd64.whl)
--   [cu90/torch-1.0.0-cp37-cp37m-win\_amd64.whl](https://download.pytorch.org/whl/cu90/torch-1.0.0-cp37-cp37m-win_amd64.whl)
--   [cu100/torch-1.0.0-cp37-cp37m-win\_amd64.whl](https://download.pytorch.org/whl/cu100/torch-1.0.0-cp37-cp37m-win_amd64.whl)
--   [cpu/torch-0.4.1-cp35-cp35m-win\_amd64.whl](https://download.pytorch.org/whl/cpu/torch-0.4.1-cp35-cp35m-win_amd64.whl)
--   [cu80/torch-0.4.1-cp35-cp35m-win\_amd64.whl](https://download.pytorch.org/whl/cu80/torch-0.4.1-cp35-cp35m-win_amd64.whl)
--   [cu90/torch-0.4.1-cp35-cp35m-win\_amd64.whl](https://download.pytorch.org/whl/cu90/torch-0.4.1-cp35-cp35m-win_amd64.whl)
--   [cu92/torch-0.4.1-cp35-cp35m-win\_amd64.whl](https://download.pytorch.org/whl/cu92/torch-0.4.1-cp35-cp35m-win_amd64.whl)
--   [cpu/torch-0.4.1-cp36-cp36m-win\_amd64.whl](https://download.pytorch.org/whl/cpu/torch-0.4.1-cp36-cp36m-win_amd64.whl)
--   [cu80/torch-0.4.1-cp36-cp36m-win\_amd64.whl](https://download.pytorch.org/whl/cu80/torch-0.4.1-cp36-cp36m-win_amd64.whl)
--   [cu90/torch-0.4.1-cp36-cp36m-win\_amd64.whl](https://download.pytorch.org/whl/cu90/torch-0.4.1-cp36-cp36m-win_amd64.whl)
--   [cu92/torch-0.4.1-cp36-cp36m-win\_amd64.whl](https://download.pytorch.org/whl/cu92/torch-0.4.1-cp36-cp36m-win_amd64.whl)
--   [cpu/torch-0.4.1-cp37-cp37m-win\_amd64.whl](https://download.pytorch.org/whl/cpu/torch-0.4.1-cp37-cp37m-win_amd64.whl)
--   [cu80/torch-0.4.1-cp37-cp37m-win\_amd64.whl](https://download.pytorch.org/whl/cu80/torch-0.4.1-cp37-cp37m-win_amd64.whl)
--   [cu90/torch-0.4.1-cp37-cp37m-win\_amd64.whl](https://download.pytorch.org/whl/cu90/torch-0.4.1-cp37-cp37m-win_amd64.whl)
--   [cu92/torch-0.4.1-cp37-cp37m-win\_amd64.whl](https://download.pytorch.org/whl/cu92/torch-0.4.1-cp37-cp37m-win_amd64.whl)
+- [cpu/torch-1.0.0-cp35-cp35m-win\_amd64.whl](https://download.pytorch.org/whl/cpu/torch-1.0.0-cp35-cp35m-win_amd64.whl)
+- [cu80/torch-1.0.0-cp35-cp35m-win\_amd64.whl](https://download.pytorch.org/whl/cu80/torch-1.0.0-cp35-cp35m-win_amd64.whl)
+- [cu90/torch-1.0.0-cp35-cp35m-win\_amd64.whl](https://download.pytorch.org/whl/cu90/torch-1.0.0-cp35-cp35m-win_amd64.whl)
+- [cu100/torch-1.0.0-cp35-cp35m-win\_amd64.whl](https://download.pytorch.org/whl/cu100/torch-1.0.0-cp35-cp35m-win_amd64.whl)
+- [cpu/torch-1.0.0-cp36-cp36m-win\_amd64.whl](https://download.pytorch.org/whl/cpu/torch-1.0.0-cp36-cp36m-win_amd64.whl)
+- [cu80/torch-1.0.0-cp36-cp36m-win\_amd64.whl](https://download.pytorch.org/whl/cu80/torch-1.0.0-cp36-cp36m-win_amd64.whl)
+- [cu90/torch-1.0.0-cp36-cp36m-win\_amd64.whl](https://download.pytorch.org/whl/cu90/torch-1.0.0-cp36-cp36m-win_amd64.whl)
+- [cu100/torch-1.0.0-cp36-cp36m-win\_amd64.whl](https://download.pytorch.org/whl/cu100/torch-1.0.0-cp36-cp36m-win_amd64.whl)
+- [cpu/torch-1.0.0-cp37-cp37m-win\_amd64.whl](https://download.pytorch.org/whl/cpu/torch-1.0.0-cp37-cp37m-win_amd64.whl)
+- [cu80/torch-1.0.0-cp37-cp37m-win\_amd64.whl](https://download.pytorch.org/whl/cu80/torch-1.0.0-cp37-cp37m-win_amd64.whl)
+- [cu90/torch-1.0.0-cp37-cp37m-win\_amd64.whl](https://download.pytorch.org/whl/cu90/torch-1.0.0-cp37-cp37m-win_amd64.whl)
+- [cu100/torch-1.0.0-cp37-cp37m-win\_amd64.whl](https://download.pytorch.org/whl/cu100/torch-1.0.0-cp37-cp37m-win_amd64.whl)
+- [cpu/torch-0.4.1-cp35-cp35m-win\_amd64.whl](https://download.pytorch.org/whl/cpu/torch-0.4.1-cp35-cp35m-win_amd64.whl)
+- [cu80/torch-0.4.1-cp35-cp35m-win\_amd64.whl](https://download.pytorch.org/whl/cu80/torch-0.4.1-cp35-cp35m-win_amd64.whl)
+- [cu90/torch-0.4.1-cp35-cp35m-win\_amd64.whl](https://download.pytorch.org/whl/cu90/torch-0.4.1-cp35-cp35m-win_amd64.whl)
+- [cu92/torch-0.4.1-cp35-cp35m-win\_amd64.whl](https://download.pytorch.org/whl/cu92/torch-0.4.1-cp35-cp35m-win_amd64.whl)
+- [cpu/torch-0.4.1-cp36-cp36m-win\_amd64.whl](https://download.pytorch.org/whl/cpu/torch-0.4.1-cp36-cp36m-win_amd64.whl)
+- [cu80/torch-0.4.1-cp36-cp36m-win\_amd64.whl](https://download.pytorch.org/whl/cu80/torch-0.4.1-cp36-cp36m-win_amd64.whl)
+- [cu90/torch-0.4.1-cp36-cp36m-win\_amd64.whl](https://download.pytorch.org/whl/cu90/torch-0.4.1-cp36-cp36m-win_amd64.whl)
+- [cu92/torch-0.4.1-cp36-cp36m-win\_amd64.whl](https://download.pytorch.org/whl/cu92/torch-0.4.1-cp36-cp36m-win_amd64.whl)
+- [cpu/torch-0.4.1-cp37-cp37m-win\_amd64.whl](https://download.pytorch.org/whl/cpu/torch-0.4.1-cp37-cp37m-win_amd64.whl)
+- [cu80/torch-0.4.1-cp37-cp37m-win\_amd64.whl](https://download.pytorch.org/whl/cu80/torch-0.4.1-cp37-cp37m-win_amd64.whl)
+- [cu90/torch-0.4.1-cp37-cp37m-win\_amd64.whl](https://download.pytorch.org/whl/cu90/torch-0.4.1-cp37-cp37m-win_amd64.whl)
+- [cu92/torch-0.4.1-cp37-cp37m-win\_amd64.whl](https://download.pytorch.org/whl/cu92/torch-0.4.1-cp37-cp37m-win_amd64.whl)
 
 ### Mac and misc. binaries[](https://pytorch.org/get-started/previous-versions/#mac-and-misc-binaries)
 
@@ -1896,76 +1891,68 @@ e.g.,
 
 `conda install pytorch=0.4.1 cuda90 -c pytorch` `conda install pytorch=0.4.1 cuda92 -c pytorch` `conda install pytorch=0.4.1 cuda80 -c pytorch` `conda install pytorch=0.4.1 -c pytorch` # No CUDA
 
--   [torchvision-0.1.6-py3-none-any.whl](https://download.pytorch.org/whl/torchvision-0.1.6-py3-none-any.whl)
--   [torchvision-0.1.6-py2-none-any.whl](https://download.pytorch.org/whl/torchvision-0.1.6-py2-none-any.whl)
--   [torch-1.0.0-cp37-none-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/cpu/torch-1.0.0-cp37-none-macosx_10_7_x86_64.whl)
--   [torch-1.0.0-cp36-none-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/cpu/torch-1.0.0-cp36-none-macosx_10_7_x86_64.whl)
--   [torch-1.0.0-cp35-none-macosx\_10\_6\_x86\_64.whl](https://download.pytorch.org/whl/cpu/torch-1.0.0-cp35-none-macosx_10_6_x86_64.whl)
--   [torch-1.0.0-cp27-none-macosx\_10\_6\_x86\_64.whl](https://download.pytorch.org/whl/cpu/torch-1.0.0-cp27-none-macosx_10_6_x86_64.whl)
--   [torch-0.4.0-cp36-cp36m-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.4.0-cp36-cp36m-macosx_10_7_x86_64.whl)
--   [torch-0.4.0-cp35-cp35m-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.4.0-cp35-cp35m-macosx_10_6_x86_64.whl)
--   [torch-0.4.0-cp27-none-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.4.0-cp27-none-macosx_10_6_x86_64.whl)
--   [torch-0.3.1-cp36-cp36m-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.3.1-cp36-cp36m-macosx_10_7_x86_64.whl)
--   [torch-0.3.1-cp35-cp35m-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.3.1-cp35-cp35m-macosx_10_6_x86_64.whl)
--   [torch-0.3.1-cp27-none-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.3.1-cp27-none-macosx_10_6_x86_64.whl)
--   [torch-0.3.0.post4-cp36-cp36m-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.3.0.post4-cp36-cp36m-macosx_10_7_x86_64.whl)
--   [torch-0.3.0.post4-cp35-cp35m-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.3.0.post4-cp35-cp35m-macosx_10_6_x86_64.whl)
--   [torch-0.3.0.post4-cp27-none-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.3.0.post4-cp27-none-macosx_10_6_x86_64.whl)
--   [torch-0.2.0.post3-cp36-cp36m-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.2.0.post3-cp36-cp36m-macosx_10_7_x86_64.whl)
--   [torch-0.2.0.post3-cp35-cp35m-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.2.0.post3-cp35-cp35m-macosx_10_7_x86_64.whl)
--   [torch-0.2.0.post3-cp27-none-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.2.0.post3-cp27-none-macosx_10_7_x86_64.whl)
--   [torch-0.2.0.post2-cp36-cp36m-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.2.0.post2-cp36-cp36m-macosx_10_7_x86_64.whl)
--   [torch-0.2.0.post2-cp35-cp35m-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.2.0.post2-cp35-cp35m-macosx_10_7_x86_64.whl)
--   [torch-0.2.0.post2-cp27-none-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.2.0.post2-cp27-none-macosx_10_7_x86_64.whl)
--   [torch-0.2.0.post1-cp36-cp36m-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.2.0.post1-cp36-cp36m-macosx_10_7_x86_64.whl)
--   [torch-0.2.0.post1-cp35-cp35m-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.2.0.post1-cp35-cp35m-macosx_10_7_x86_64.whl)
--   [torch-0.2.0.post1-cp27-none-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.2.0.post1-cp27-none-macosx_10_7_x86_64.whl)
--   [torch-0.1.12.post2-cp36-cp36m-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.12.post2-cp36-cp36m-macosx_10_7_x86_64.whl)
--   [torch-0.1.12.post2-cp35-cp35m-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.12.post2-cp35-cp35m-macosx_10_7_x86_64.whl)
--   [torch-0.1.12.post2-cp27-none-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.12.post2-cp27-none-macosx_10_7_x86_64.whl)
--   [torch-0.1.12.post1-cp36-cp36m-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.12.post1-cp36-cp36m-macosx_10_7_x86_64.whl)
--   [torch-0.1.12.post1-cp35-cp35m-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.12.post1-cp35-cp35m-macosx_10_7_x86_64.whl)
--   [torch-0.1.12.post1-cp27-none-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.12.post1-cp27-none-macosx_10_7_x86_64.whl)
--   [torch-0.1.11.post5-cp36-cp36m-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.11.post5-cp36-cp36m-macosx_10_7_x86_64.whl)
--   [torch-0.1.11.post5-cp35-cp35m-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.11.post5-cp35-cp35m-macosx_10_7_x86_64.whl)
--   [torch-0.1.11.post5-cp27-none-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.11.post5-cp27-none-macosx_10_7_x86_64.whl)
--   [torch-0.1.11.post4-cp36-cp36m-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.11.post4-cp36-cp36m-macosx_10_7_x86_64.whl)
--   [torch-0.1.11.post4-cp35-cp35m-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.11.post4-cp35-cp35m-macosx_10_7_x86_64.whl)
--   [torch-0.1.11.post4-cp27-none-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.11.post4-cp27-none-macosx_10_7_x86_64.whl)
--   [torch-0.1.10.post1-cp36-cp36m-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.10.post1-cp36-cp36m-macosx_10_7_x86_64.whl)
--   [torch-0.1.10.post1-cp35-cp35m-macosx\_10\_6\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.10.post1-cp35-cp35m-macosx_10_6_x86_64.whl)
--   [torch-0.1.10.post1-cp27-none-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.10.post1-cp27-none-macosx_10_7_x86_64.whl)
--   [torch-0.1.9.post2-cp36-cp36m-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.9.post2-cp36-cp36m-macosx_10_7_x86_64.whl)
--   [torch-0.1.9.post2-cp35-cp35m-macosx\_10\_6\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.9.post2-cp35-cp35m-macosx_10_6_x86_64.whl)
--   [torch-0.1.9.post2-cp27-none-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.9.post2-cp27-none-macosx_10_7_x86_64.whl)
--   [torch-0.1.9.post1-cp36-cp36m-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.9.post1-cp36-cp36m-macosx_10_7_x86_64.whl)
--   [torch-0.1.9.post1-cp35-cp35m-macosx\_10\_6\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.9.post1-cp35-cp35m-macosx_10_6_x86_64.whl)
--   [torch-0.1.9.post1-cp27-none-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.9.post1-cp27-none-macosx_10_7_x86_64.whl)
--   [torch-0.1.8.post1-cp36-cp36m-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.8.post1-cp36-cp36m-macosx_10_7_x86_64.whl)
--   [torch-0.1.8.post1-cp35-cp35m-macosx\_10\_6\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.8.post1-cp35-cp35m-macosx_10_6_x86_64.whl)
--   [torch-0.1.8.post1-cp27-none-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.8.post1-cp27-none-macosx_10_7_x86_64.whl)
--   [torch-0.1.7.post2-cp36-cp36m-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.7.post2-cp36-cp36m-macosx_10_7_x86_64.whl)
--   [torch-0.1.7.post2-cp35-cp35m-macosx\_10\_6\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.7.post2-cp35-cp35m-macosx_10_6_x86_64.whl)
--   [torch-0.1.7.post2-cp27-none-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.7.post2-cp27-none-macosx_10_7_x86_64.whl)
--   [torch-0.1.6.post22-cp35-cp35m-macosx\_10\_6\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.6.post22-cp35-cp35m-macosx_10_6_x86_64.whl)
--   [torch-0.1.6.post22-cp27-none-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.6.post22-cp27-none-macosx_10_7_x86_64.whl)
--   [torch-0.1.6.post20-cp35-cp35m-linux\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.6.post20-cp35-cp35m-linux_x86_64.whl)
--   [torch-0.1.6.post20-cp27-cp27mu-linux\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.6.post20-cp27-cp27mu-linux_x86_64.whl)
--   [torch-0.1.6.post17-cp35-cp35m-linux\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.6.post17-cp35-cp35m-linux_x86_64.whl)
--   [torch-0.1.6.post17-cp27-cp27mu-linux\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.6.post17-cp27-cp27mu-linux_x86_64.whl)
--   [torch-0.1-cp35-cp35m-macosx\_10\_6\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1-cp35-cp35m-macosx_10_6_x86_64.whl)
--   [torch-0.1-cp27-cp27m-macosx\_10\_6\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1-cp27-cp27m-macosx_10_6_x86_64.whl)
--   [torch\_cuda80-0.1.6.post20-cp35-cp35m-linux\_x86\_64.whl](https://download.pytorch.org/whl/torch_cuda80-0.1.6.post20-cp35-cp35m-linux_x86_64.whl)
--   [torch\_cuda80-0.1.6.post20-cp27-cp27mu-linux\_x86\_64.whl](https://download.pytorch.org/whl/torch_cuda80-0.1.6.post20-cp27-cp27mu-linux_x86_64.whl)
--   [torch\_cuda80-0.1.6.post17-cp35-cp35m-linux\_x86\_64.whl](https://download.pytorch.org/whl/torch_cuda80-0.1.6.post17-cp35-cp35m-linux_x86_64.whl)
--   [torch\_cuda80-0.1.6.post17-cp27-cp27mu-linux\_x86\_64.whl](https://download.pytorch.org/whl/torch_cuda80-0.1.6.post17-cp27-cp27mu-linux_x86_64.whl)
-
-
-
-
-
-
-
-
+- [torchvision-0.1.6-py3-none-any.whl](https://download.pytorch.org/whl/torchvision-0.1.6-py3-none-any.whl)
+- [torchvision-0.1.6-py2-none-any.whl](https://download.pytorch.org/whl/torchvision-0.1.6-py2-none-any.whl)
+- [torch-1.0.0-cp37-none-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/cpu/torch-1.0.0-cp37-none-macosx_10_7_x86_64.whl)
+- [torch-1.0.0-cp36-none-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/cpu/torch-1.0.0-cp36-none-macosx_10_7_x86_64.whl)
+- [torch-1.0.0-cp35-none-macosx\_10\_6\_x86\_64.whl](https://download.pytorch.org/whl/cpu/torch-1.0.0-cp35-none-macosx_10_6_x86_64.whl)
+- [torch-1.0.0-cp27-none-macosx\_10\_6\_x86\_64.whl](https://download.pytorch.org/whl/cpu/torch-1.0.0-cp27-none-macosx_10_6_x86_64.whl)
+- [torch-0.4.0-cp36-cp36m-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.4.0-cp36-cp36m-macosx_10_7_x86_64.whl)
+- [torch-0.4.0-cp35-cp35m-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.4.0-cp35-cp35m-macosx_10_6_x86_64.whl)
+- [torch-0.4.0-cp27-none-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.4.0-cp27-none-macosx_10_6_x86_64.whl)
+- [torch-0.3.1-cp36-cp36m-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.3.1-cp36-cp36m-macosx_10_7_x86_64.whl)
+- [torch-0.3.1-cp35-cp35m-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.3.1-cp35-cp35m-macosx_10_6_x86_64.whl)
+- [torch-0.3.1-cp27-none-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.3.1-cp27-none-macosx_10_6_x86_64.whl)
+- [torch-0.3.0.post4-cp36-cp36m-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.3.0.post4-cp36-cp36m-macosx_10_7_x86_64.whl)
+- [torch-0.3.0.post4-cp35-cp35m-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.3.0.post4-cp35-cp35m-macosx_10_6_x86_64.whl)
+- [torch-0.3.0.post4-cp27-none-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.3.0.post4-cp27-none-macosx_10_6_x86_64.whl)
+- [torch-0.2.0.post3-cp36-cp36m-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.2.0.post3-cp36-cp36m-macosx_10_7_x86_64.whl)
+- [torch-0.2.0.post3-cp35-cp35m-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.2.0.post3-cp35-cp35m-macosx_10_7_x86_64.whl)
+- [torch-0.2.0.post3-cp27-none-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.2.0.post3-cp27-none-macosx_10_7_x86_64.whl)
+- [torch-0.2.0.post2-cp36-cp36m-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.2.0.post2-cp36-cp36m-macosx_10_7_x86_64.whl)
+- [torch-0.2.0.post2-cp35-cp35m-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.2.0.post2-cp35-cp35m-macosx_10_7_x86_64.whl)
+- [torch-0.2.0.post2-cp27-none-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.2.0.post2-cp27-none-macosx_10_7_x86_64.whl)
+- [torch-0.2.0.post1-cp36-cp36m-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.2.0.post1-cp36-cp36m-macosx_10_7_x86_64.whl)
+- [torch-0.2.0.post1-cp35-cp35m-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.2.0.post1-cp35-cp35m-macosx_10_7_x86_64.whl)
+- [torch-0.2.0.post1-cp27-none-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.2.0.post1-cp27-none-macosx_10_7_x86_64.whl)
+- [torch-0.1.12.post2-cp36-cp36m-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.12.post2-cp36-cp36m-macosx_10_7_x86_64.whl)
+- [torch-0.1.12.post2-cp35-cp35m-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.12.post2-cp35-cp35m-macosx_10_7_x86_64.whl)
+- [torch-0.1.12.post2-cp27-none-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.12.post2-cp27-none-macosx_10_7_x86_64.whl)
+- [torch-0.1.12.post1-cp36-cp36m-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.12.post1-cp36-cp36m-macosx_10_7_x86_64.whl)
+- [torch-0.1.12.post1-cp35-cp35m-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.12.post1-cp35-cp35m-macosx_10_7_x86_64.whl)
+- [torch-0.1.12.post1-cp27-none-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.12.post1-cp27-none-macosx_10_7_x86_64.whl)
+- [torch-0.1.11.post5-cp36-cp36m-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.11.post5-cp36-cp36m-macosx_10_7_x86_64.whl)
+- [torch-0.1.11.post5-cp35-cp35m-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.11.post5-cp35-cp35m-macosx_10_7_x86_64.whl)
+- [torch-0.1.11.post5-cp27-none-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.11.post5-cp27-none-macosx_10_7_x86_64.whl)
+- [torch-0.1.11.post4-cp36-cp36m-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.11.post4-cp36-cp36m-macosx_10_7_x86_64.whl)
+- [torch-0.1.11.post4-cp35-cp35m-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.11.post4-cp35-cp35m-macosx_10_7_x86_64.whl)
+- [torch-0.1.11.post4-cp27-none-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.11.post4-cp27-none-macosx_10_7_x86_64.whl)
+- [torch-0.1.10.post1-cp36-cp36m-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.10.post1-cp36-cp36m-macosx_10_7_x86_64.whl)
+- [torch-0.1.10.post1-cp35-cp35m-macosx\_10\_6\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.10.post1-cp35-cp35m-macosx_10_6_x86_64.whl)
+- [torch-0.1.10.post1-cp27-none-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.10.post1-cp27-none-macosx_10_7_x86_64.whl)
+- [torch-0.1.9.post2-cp36-cp36m-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.9.post2-cp36-cp36m-macosx_10_7_x86_64.whl)
+- [torch-0.1.9.post2-cp35-cp35m-macosx\_10\_6\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.9.post2-cp35-cp35m-macosx_10_6_x86_64.whl)
+- [torch-0.1.9.post2-cp27-none-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.9.post2-cp27-none-macosx_10_7_x86_64.whl)
+- [torch-0.1.9.post1-cp36-cp36m-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.9.post1-cp36-cp36m-macosx_10_7_x86_64.whl)
+- [torch-0.1.9.post1-cp35-cp35m-macosx\_10\_6\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.9.post1-cp35-cp35m-macosx_10_6_x86_64.whl)
+- [torch-0.1.9.post1-cp27-none-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.9.post1-cp27-none-macosx_10_7_x86_64.whl)
+- [torch-0.1.8.post1-cp36-cp36m-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.8.post1-cp36-cp36m-macosx_10_7_x86_64.whl)
+- [torch-0.1.8.post1-cp35-cp35m-macosx\_10\_6\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.8.post1-cp35-cp35m-macosx_10_6_x86_64.whl)
+- [torch-0.1.8.post1-cp27-none-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.8.post1-cp27-none-macosx_10_7_x86_64.whl)
+- [torch-0.1.7.post2-cp36-cp36m-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.7.post2-cp36-cp36m-macosx_10_7_x86_64.whl)
+- [torch-0.1.7.post2-cp35-cp35m-macosx\_10\_6\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.7.post2-cp35-cp35m-macosx_10_6_x86_64.whl)
+- [torch-0.1.7.post2-cp27-none-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.7.post2-cp27-none-macosx_10_7_x86_64.whl)
+- [torch-0.1.6.post22-cp35-cp35m-macosx\_10\_6\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.6.post22-cp35-cp35m-macosx_10_6_x86_64.whl)
+- [torch-0.1.6.post22-cp27-none-macosx\_10\_7\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.6.post22-cp27-none-macosx_10_7_x86_64.whl)
+- [torch-0.1.6.post20-cp35-cp35m-linux\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.6.post20-cp35-cp35m-linux_x86_64.whl)
+- [torch-0.1.6.post20-cp27-cp27mu-linux\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.6.post20-cp27-cp27mu-linux_x86_64.whl)
+- [torch-0.1.6.post17-cp35-cp35m-linux\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.6.post17-cp35-cp35m-linux_x86_64.whl)
+- [torch-0.1.6.post17-cp27-cp27mu-linux\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1.6.post17-cp27-cp27mu-linux_x86_64.whl)
+- [torch-0.1-cp35-cp35m-macosx\_10\_6\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1-cp35-cp35m-macosx_10_6_x86_64.whl)
+- [torch-0.1-cp27-cp27m-macosx\_10\_6\_x86\_64.whl](https://download.pytorch.org/whl/torch-0.1-cp27-cp27m-macosx_10_6_x86_64.whl)
+- [torch\_cuda80-0.1.6.post20-cp35-cp35m-linux\_x86\_64.whl](https://download.pytorch.org/whl/torch_cuda80-0.1.6.post20-cp35-cp35m-linux_x86_64.whl)
+- [torch\_cuda80-0.1.6.post20-cp27-cp27mu-linux\_x86\_64.whl](https://download.pytorch.org/whl/torch_cuda80-0.1.6.post20-cp27-cp27mu-linux_x86_64.whl)
+- [torch\_cuda80-0.1.6.post17-cp35-cp35m-linux\_x86\_64.whl](https://download.pytorch.org/whl/torch_cuda80-0.1.6.post17-cp35-cp35m-linux_x86_64.whl)
+- [torch\_cuda80-0.1.6.post17-cp27-cp27mu-linux\_x86\_64.whl](https://download.pytorch.org/whl/torch_cuda80-0.1.6.post17-cp27-cp27mu-linux_x86_64.whl)
 
 ---

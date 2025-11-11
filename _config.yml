@@ -1,14 +1,13 @@
 #
 # 这个文档包含了本博客的设定信息，你可以编辑它来个性化自己的博客，
-#
 
 # 你的博客名称，请用你想要的博客名替换“LOFFER”，以下修改都可类似处理
 # 注意，“name: LOFFER”，冒号后面的空格不可以省略。
 # 井号后面的文字是说明文档，不会被程序读取。
 
 # 描述/签名
-name: Pepper小辣椒
-description: 一个工程师的存档点
+name: Pepper
+description: 一只老虎的工作笔记
 
 # 输入你的网站域名（如果你没有添加自己的域名，而是直接用GitHub pages分配的域名的话可以省略）
 url: 
@@ -89,7 +88,7 @@ utteranc:
   repo: ywpepper/ywpepper.github.io # Your github repo path, also see: https://utteranc.es
   issue-term: title
   label: comment
-  theme: github-light
+  theme: github-dark
   crossorigin: anonymous
 
 #

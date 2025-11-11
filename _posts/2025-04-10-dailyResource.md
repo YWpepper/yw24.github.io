@@ -2,6 +2,7 @@
 title: 'dailyResource'
 lang: zh-CN
 date: 2025-04-10
+author: pepper
 permalink: /posts/2025/04/dailyResource/
 tags:
   - daily
@@ -15,9 +16,10 @@ tags:
 1. mac 电脑外接显示屏
   对于屏幕分辨率的问题，其中较好的一个仓库软件叫做betterdisaplay，可以用来调整刷新赫兹以及分辨率，但是要注意下载符合mac的系统版本的软件；
 `https://github.com/waydabber/BetterDisplay/releases?page=6`
-2. adobe ps ：https://www.cnblogs.com/FRIM/p/18130753
+2. adobe ps ：<https://www.cnblogs.com/FRIM/p/18130753>
 
 3. 绘图的时候图例位置参数设置
+
 ```python
     # 紧凑型图例
     handles, labels = plt.gca().get_legend_handles_labels()
@@ -42,8 +44,6 @@ tags:
     # )
 ```
 
-
-
 ---
 **google colab**
 时刻触发脚本
@@ -56,12 +56,13 @@ function ConnectButton(){
 setInterval(ConnectButton,60000);
 ```
 
-
 #### 2. 后台进程管理方案
+
 - 使用nohup持久运行
 `nohup python -u run_script.py > script.log 2>&1 &`
 
 - 参数说明
+
 ```
   nohup：忽略挂断信号
   -u（Python参数）：禁用输出缓冲
@@ -71,6 +72,7 @@ setInterval(ConnectButton,60000);
 ```
 
 - 验证进程状态
+
 ```
 查看进程列表
 ps aux | grep "python run_script.py"
@@ -78,18 +80,21 @@ ps aux | grep "python run_script.py"
 tail -f script.log
 ```
 
-- 终止进程 
+- 终止进程
+
 ```
 #优雅终止
 pkill -f "python run_script.py"
 #强制终止（无响应时）
 kill -9 1708
 ```
+
 - 高级管理方案（生产环境推荐）
 使用systemd服务 创建服务文件：
 `sudo nano /etc/systemd/model.service`
 
 - 服务内容：
+
 ```
 [Unit]
 Description=Model Training Service
@@ -105,6 +110,7 @@ WantedBy=multi-user.target
 ```
 
 - 启用服务：
+
 ```
 sudo systemctl daemon-reload
 sudo systemctl enable model
@@ -112,6 +118,7 @@ sudo systemctl start model
 ```
 
 - 使用tmux会话管理
+
 ```
 安装tmux
 sudo apt install tmux -y
@@ -127,9 +134,8 @@ tmux attach -t model_train
 tmux attach -t python_session
 ```
 
-
-
 #### markdown
+
 - Markdown中常用的快捷键
 
 ```txt
@@ -157,10 +163,10 @@ tmux attach -t python_session
     Ctrl h： 替换
 ```
 
-
 - 美剧
 Home Watch TV Show  Hacks - Season 1 - [Episode 1](https://cineb.rs/watch-tv/watch-hacks-free-69823.4805626)
 - 书籍
+
 ```
 http://38.147.170.240:5959/c1/baidupan/222222/%E5%85%B6%E5%AE%83/EPUB
 本站网址
@@ -173,9 +179,10 @@ http://45.145.228.171
 http://193.134.211.102:1234 http://193.134.211.108:1234
 前面不要加httpS，是http
 ```
+
 ---
 traffic 学习
-This list can be considered outdated. For a more up-to-date list, check: https://github.com/lixus7/Time-Series-Works-Conferences
+This list can be considered outdated. For a more up-to-date list, check: <https://github.com/lixus7/Time-Series-Works-Conferences>
 
 # Traffic Prediction
 
@@ -183,17 +190,17 @@ Traffic prediction is the task of predicting future traffic measurements (e.g. v
 
 Things are usually better defined through exclusions, so here are similar things that I do not include:
 
-* NYC taxi and bike (and other similar datsets, like uber), are not included, because they tend to be represented as a grid, not a graph.
+- NYC taxi and bike (and other similar datsets, like uber), are not included, because they tend to be represented as a grid, not a graph.
 
-* Predicting human mobility, either indoors, or through checking-in in Point of Interest (POI), or through a transport network.
+- Predicting human mobility, either indoors, or through checking-in in Point of Interest (POI), or through a transport network.
 
-* Predicting trajectory.
+- Predicting trajectory.
 
-* Predicting the movement of individual cars through sensors for the purpose of self-driving car.
+- Predicting the movement of individual cars through sensors for the purpose of self-driving car.
 
-* Traffic data imputations.
+- Traffic data imputations.
 
-* Traffic anomaly detections.
+- Traffic anomaly detections.
 
 The papers are haphazardly selected.
 
@@ -202,7 +209,6 @@ The papers are haphazardly selected.
 A tabular summary of paper and publically available datasets.
 The paper is reverse chronologically sorted.
 NO GUARANTEE is made that this table is complete or accurate (please raise an issue if you spot any error).
-
 
 | paper | venue | published date | # other datsets | METR-LA | PeMS-BAY | PeMS-D7(M) | PeMS-D7(L) | PeMS-04 | PeMS-08 | LOOP | SZ-taxi | Los-loop | PeMS-03 | PeMS-07 | PeMS-I-405 | PeMS-04(S) | TOTAL open |
 |:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|-|:-:|
@@ -230,7 +236,7 @@ NO GUARANTEE is made that this table is complete or accurate (please raise an is
 | STGAT | IEEE Access | 22 Jul 20 |  | 1 | 1 |  |  |  |  |  |  |  |  |  |  |  | 2 |
 | STNN | T-ITS | 16 Jul 20 |  |  |  |  |  |  |  |  |  |  |  |  |  |  | 0 |
 | AGCRN | arXiv | 6 Jul 20 |  |  |  |  |  | 1 | 1 |  |  |  |  |  |  |  | 2 |
-| GWNN-LSTM | 	J. Phys. Conf. Ser. | 20 Jun 20 |  | 1 |  |  |  |  |  |  |  |  |  |  |  |  | 1 |
+| GWNN-LSTM |  J. Phys. Conf. Ser. | 20 Jun 20 |  | 1 |  |  |  |  |  |  |  |  |  |  |  |  | 1 |
 | A3T-GCN | arXiv | 20 Jun 20 |  |  |  |  |  |  |  |  | 1 | 1 |  |  |  |  | 2 |
 | TSE-SC | Trans-GIS | 1 Jun 20 |  | 1 | 1 |  |  |  |  |  |  |  |  |  |  |  | 2 |
 | MTGNN | arXiv | 24 May 20 |  | 1 | 1 |  |  |  |  |  |  |  |  |  |  |  | 2 |
@@ -268,159 +274,133 @@ NO GUARANTEE is made that this table is complete or accurate (please raise an is
 | SBU-LSTM | UrbComp | 14 Aug 17 |  |  |  |  |  |  |  | 1 |  |  |  |  |  |  | 1 |
 | GRU | YAC | 5 Jan 17 |  |  | 1 |  |  |  |  |  |  |  |  |  |  |  | 1 |
 
-
-
-
-
-
-
 ## Performance
-
 
 ![METR-LA MAE@60 mins](https://github.com/aprbw/traffic_prediction/blob/master/METRLA_MAE_60.PNG)
 
 ![PeMS-BAY MAE@60 mins](https://github.com/aprbw/traffic_prediction/blob/master/PeMSBAY_MAE_60.PNG)
 
-
 NOTES: The experimental setttings may vary. But the common setting is:
 
-* Observation window = 12 timesteps
+- Observation window = 12 timesteps
 
-* Prediction horizon = 1 timesteps
+- Prediction horizon = 1 timesteps
 
-* Prediction window = 12 timesteps
+- Prediction window = 12 timesteps
 
-* Metrics = MAE, RMSE, MAPE
+- Metrics = MAE, RMSE, MAPE
 
-* Train, validation, and test splits = 7/1/2 OR 6/2/2
+- Train, validation, and test splits = 7/1/2 OR 6/2/2
 
 However, there are many caveats:
 
-* Some use different models for different prediction horizon.
+- Some use different models for different prediction horizon.
 
-* Some use different batch size when testing previous models, as they increase the observation and prediction windows from previous studies, and have difficulties fitting it on GPU using the same batch size.
+- Some use different batch size when testing previous models, as they increase the observation and prediction windows from previous studies, and have difficulties fitting it on GPU using the same batch size.
 
-* Regarding adjacency matrix, some derive it using Gaussian RBF from the coordinates, some use the actual connectivity, some simply learn it, and some use combinations.
+- Regarding adjacency matrix, some derive it using Gaussian RBF from the coordinates, some use the actual connectivity, some simply learn it, and some use combinations.
 
-* Some might also add more context, such as time of day, or day of the week, or weather.
+- Some might also add more context, such as time of day, or day of the week, or weather.
 
-* DeepGLO in particular, since it is treating it as a multi-channel timeseries without the spatial information, use rolling validation,
+- DeepGLO in particular, since it is treating it as a multi-channel timeseries without the spatial information, use rolling validation,
 
-* Many different treatment of missing datasets, from exclusion to imputations.
-
-
-
-
-
-
-
+- Many different treatment of missing datasets, from exclusion to imputations.
 
 ## Dataset
 
 [Publically available datasets and where to find them.](https://en.wikipedia.org/wiki/Fantastic_Beasts_and_Where_to_Find_Them)
 
-* **METR-LA**
-[DCRNN Google Drive](https://drive.google.com/drive/folders/10FOTa6HXPqX8Pf5WRoRwcFnW9BrNZEIX); 
-[DCRNN Baidu](https://pan.baidu.com/s/14Yy9isAIZYdU__OYEQGa_g#list/path=%2F); 
+- **METR-LA**
+[DCRNN Google Drive](https://drive.google.com/drive/folders/10FOTa6HXPqX8Pf5WRoRwcFnW9BrNZEIX);
+[DCRNN Baidu](https://pan.baidu.com/s/14Yy9isAIZYdU__OYEQGa_g#list/path=%2F);
 [Sensor coordinates and adjacency matrix, also from DCRNN](https://github.com/liyaguang/DCRNN/tree/master/data/sensor_graph)
 
-* California department of transportation (**Caltrans**) Performance Measurement System (**PeMS**). The website is: http://pems.dot.ca.gov/. From the website: The traffic data displayed on the map is collected in real-time from over 39,000 individual detectors. These sensors span the freeway system across all major metropolitan areas of the State of California
+- California department of transportation (**Caltrans**) Performance Measurement System (**PeMS**). The website is: <http://pems.dot.ca.gov/>. From the website: The traffic data displayed on the map is collected in real-time from over 39,000 individual detectors. These sensors span the freeway system across all major metropolitan areas of the State of California
 
-    * **PeMS-BAY**
-    [DCRNN Google Drive](https://drive.google.com/drive/folders/10FOTa6HXPqX8Pf5WRoRwcFnW9BrNZEIX); 
+  - **PeMS-BAY**
+    [DCRNN Google Drive](https://drive.google.com/drive/folders/10FOTa6HXPqX8Pf5WRoRwcFnW9BrNZEIX);
     [DCRNN Baidu](https://pan.baidu.com/s/14Yy9isAIZYdU__OYEQGa_g#list/path=%2F)
-    
+
     [Sensor coordinates and adjacency matrix, DCRNN github](https://github.com/liyaguang/DCRNN/tree/master/data/sensor_graph)
 
-    * **PeMS-D7(M)** 
+  - **PeMS-D7(M)**
     [PKUAI26 STGCN Github](https://github.com/PKUAI26/STGCN-IJCAI-18/blob/master/data_loader/PeMS-M.zip)
 
-    * **PeMS-D7(L)** 
+  - **PeMS-D7(L)**
 
-    * **PeMS-04** 
+  - **PeMS-04**
     [ATSGCN Github](https://github.com/Davidham3/ASTGCN/tree/master/data);
     [Baidu with code: "p72z"](https://pan.baidu.com/s/1ZPIiOM__r1TRlmY4YGlolw);
     [From Davidham3 Github STSGCN](https://github.com/Davidham3/STSGCN)
 
-    * **PeMS-08** 
+  - **PeMS-08**
     [ATSGCN github](https://github.com/Davidham3/ASTGCN/tree/master/data);
     [Baidu with code: "p72z"](https://pan.baidu.com/s/1ZPIiOM__r1TRlmY4YGlolw);
     [From Davidham3 github STSGCN](https://github.com/Davidham3/STSGCN)
 
-    * **PeMS-03** 
+  - **PeMS-03**
     [Baidu with code: "p72z"](https://pan.baidu.com/s/1ZPIiOM__r1TRlmY4YGlolw);
     [From Davidham3 github STSGCN](https://github.com/Davidham3/STSGCN)
 
-    * **PeMS-07** 
+  - **PeMS-07**
     [Baidu with code: "p72z"](https://pan.baidu.com/s/1ZPIiOM__r1TRlmY4YGlolw);
     [From Davidham3 github STSGCN](https://github.com/Davidham3/STSGCN)
 
-    * **PeMS-SF** [UCI](https://archive.ics.uci.edu/ml/datasets/PEMS-SF)
+  - **PeMS-SF** [UCI](https://archive.ics.uci.edu/ml/datasets/PEMS-SF)
 
-    * **PeMS-11160** [GP-DCRNN github](https://github.com/tanwimallick/graph_partition_based_DCRNN)
+  - **PeMS-11160** [GP-DCRNN github](https://github.com/tanwimallick/graph_partition_based_DCRNN)
 
-* **LOOP** https://github.com/zhiyongc/Seattle-Loop-Data
+- **LOOP** <https://github.com/zhiyongc/Seattle-Loop-Data>
 
-* **Q-Traffic** https://github.com/JingqingZ/BaiduTraffic
+- **Q-Traffic** <https://github.com/JingqingZ/BaiduTraffic>
 
 [Baidu, code: 'umqd'](https://pan.baidu.com/share/init?surl=s1bauEJs8ONtC65ZkC4N3A)
 
-* **RMTMC - MnDOT** https://www.d.umn.edu/~tkwon/TMCdata/TMCarchive.html The data in this archive are continuously collected by the Regional Trasportation Management Center (RTMC), a division of Minesotta Deaprtment of Transport (MnDOT) USA.
+- **RMTMC - MnDOT** <https://www.d.umn.edu/~tkwon/TMCdata/TMCarchive.html> The data in this archive are continuously collected by the Regional Trasportation Management Center (RTMC), a division of Minesotta Deaprtment of Transport (MnDOT) USA.
 
-* **OpenITS** http://www.openits.cn/openData/index.jhtml
+- **OpenITS** <http://www.openits.cn/openData/index.jhtml>
 
-* **FHWA** https://www.fhwa.dot.gov/policyinformation/tables/tmasdata/
-
-
+- **FHWA** <https://www.fhwa.dot.gov/policyinformation/tables/tmasdata/>
 
 The following datasets are not publically available:
 
-* INRIX https://pdfs.semanticscholar.org/4b9c/9389719caff7409d9f9cee8628aef4e38b3b.pdf
+- INRIX <https://pdfs.semanticscholar.org/4b9c/9389719caff7409d9f9cee8628aef4e38b3b.pdf>
 
-* Beijing
+- Beijing
 
-    * BJER4
-    
-    * BJF
-    
-    * BRF
-    
-    * BRF-L
-    
-    * W3-715
-    
-    * E5-2907
+  - BJER4
 
-    * NE-BJ https://github.com/tsinghua-fib-lab/Traffic-Benchmark
+  - BJF
 
-* Xiamen https://ieeexplore.ieee.org/document/8029849
+  - BRF
+
+  - BRF-L
+
+  - W3-715
+
+  - E5-2907
+
+  - NE-BJ <https://github.com/tsinghua-fib-lab/Traffic-Benchmark>
+
+- Xiamen <https://ieeexplore.ieee.org/document/8029849>
 
 Also relevant:
 
-* [Davidham3 list](https://github.com/Davidham3/open-traffic-datasets)
-
-
-
+- [Davidham3 list](https://github.com/Davidham3/open-traffic-datasets)
 
 ## Libraries
 
-* [LibCity](https://libcity.ai/) [GitHub](https://github.com/LibCity/Bigscity-LibCity)
+- [LibCity](https://libcity.ai/) [GitHub](https://github.com/LibCity/Bigscity-LibCity)
 
-* Tsinghua Fib Lab [GitHub](https://github.com/tsinghua-fib-lab/Traffic-Benchmark)
+- Tsinghua Fib Lab [GitHub](https://github.com/tsinghua-fib-lab/Traffic-Benchmark)
 
-* [PyTorch Geometric](https://pytorch-geometric.readthedocs.io)
-
+- [PyTorch Geometric](https://pytorch-geometric.readthedocs.io)
 
 ## Paper
 
 The papers are sorted alphabetically based on model name. The citations are based on Google scholar citation.
 
 You can find the bibtex in traffic_prediction.bib (not complete yet)
-
-
-
-
-
 
 |      model     | citations |        venue        | published date | paper                                                                                                                                                                                                                                  | codes                                                      |
 |:--------------:|:---------:|:-------------------:|:--------------:|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------|
@@ -449,7 +429,7 @@ You can find the bibtex in traffic_prediction.bib (not complete yet)
 |       GTS      |     0     |        UCONN        |    3 Aug 20    | [End-to-End Structure-Aware Convolutional Networks on Graphs](https://opencommons.uconn.edu/dissertations/2555/)                                                                                                                       | []()                                                       |
 |       GTS      |     0     |        ICLR         |    4 May 21    | [Discrete Graph Structure Learning for Forecasting Multiple Time Series](https://openreview.net/forum?id=WEHSlH5mOk)       | [PyTorch](https://github.com/chaoshangcs/GTS) |
 |       GWN      |     46    |        IJCAI        |    10 Aug 19   | [Graph WaveNet for Deep Spatial-Temporal Graph Modeling](https://www.ijcai.org/Proceedings/2019/0264.pdf)                                                                                                                              | [PyTorch](https://github.com/nnzhan/Graph-WaveNet)         |
-|    GWNN-LSTM   |     0     | 	J. Phys. Conf. Ser. |    20 Jun 20   | [Graph Wavelet Long Short-Term Memory Neural Network: A Novel Spatial-Temporal Network for Traffic Prediction.](https://iopscience.iop.org/article/10.1088/1742-6596/1549/4/042070/meta)                                               | []()                                                       |
+|    GWNN-LSTM   |     0     |  J. Phys. Conf. Ser. |    20 Jun 20   | [Graph Wavelet Long Short-Term Memory Neural Network: A Novel Spatial-Temporal Network for Traffic Prediction.](https://iopscience.iop.org/article/10.1088/1742-6596/1549/4/042070/meta)                                               | []()                                                       |
 |      GWNV2     |     0     |        arXiv        |    11 Dec 19   | [Incrementally Improving Graph WaveNet Performance on Traffic Prediction](https://arxiv.org/abs/1912.07390)                                                                                                                            | [PyTorch](https://github.com/sshleifer/Graph-WaveNet)      |
 |     H-STGCN    |     0     |         KDD         |    23 Aug 20   | [Hybrid Spatio-Temporal Graph Convolutional Network: Improving Traffic Prediction with Navigation Data](https://dl.acm.org/doi/pdf/10.1145/3394486.3403358)                                                                            | []()                                                       |
 |     HetGAT     |     0     |        JAIHC        |    23 Jan 21   | [HetGAT: a heterogeneous graph attention network for freeway traffic speed prediction](https://link.springer.com/article/10.1007/s12652-020-02807-0)                                                                            | []()                                                       |
@@ -492,96 +472,78 @@ You can find the bibtex in traffic_prediction.bib (not complete yet)
 
 Things that would be in the table above if I have more time:
 
-
 ## Other works
 
+- Multi-Attention Temporal and Graph Convolution Network for Traffic Flow Forecasting [PyTorch](https://github.com/lk485/matgcn)
 
-* Multi-Attention Temporal and Graph Convolution Network for Traffic Flow Forecasting [PyTorch](https://github.com/lk485/matgcn)
-
-* [Foreseeing Congestion using LSTM on Urban Traffic Flow Clusters](https://ieeexplore.ieee.org/document/9010150)
+- [Foreseeing Congestion using LSTM on Urban Traffic Flow Clusters](https://ieeexplore.ieee.org/document/9010150)
 ICSAI 2019
 [Keras](https://github.com/wangz315/ClusterPredictTrafficFlow);
 dataset: CityPulse
 
-* [Using LSTM and GRU neural network methods for traffic flow prediction](https://ieeexplore.ieee.org/abstract/document/7804912)
+- [Using LSTM and GRU neural network methods for traffic flow prediction](https://ieeexplore.ieee.org/abstract/document/7804912)
 IEEE YAC 2016
 [Keras](https://github.com/xiaochus/TrafficFlowPrediction);
 dataset: PeMS but different from everyone else
 
-* [A Dynamic Traffic Awareness System for Urban Driving](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8875288)
+- [A Dynamic Traffic Awareness System for Urban Driving](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8875288)
 IEEE GreenCom 2019
 [Keras](https://github.com/wangz315/ClusterPredictTrafficFlow);
 dataset: CityPulse
 
-* [Inductive Graph Neural Networks for Spatiotemporal Kriging (IGNNK)](https://arxiv.org/abs/2006.07527)
+- [Inductive Graph Neural Networks for Spatiotemporal Kriging (IGNNK)](https://arxiv.org/abs/2006.07527)
 AAAI 2021
 [PyTorch](https://github.com/Kaimaoge/IGNNK)
 dataset: METR-LA, PeMS-BAY, LOOP, NREL, USHCN.
 
-
-
-
 Other works that is not based on a static-spatial-graph of timeseries:
 
-* [VLUC](https://arxiv.org/abs/1911.06982)
+- [VLUC](https://arxiv.org/abs/1911.06982)
 
-* [STDN](https://arxiv.org/pdf/1803.01254.pdf)
+- [STDN](https://arxiv.org/pdf/1803.01254.pdf)
 
-* [Deep Representation Learning for Trajectory Similarity Computation](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=8509283)
+- [Deep Representation Learning for Trajectory Similarity Computation](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=8509283)
 
-* [Curb-GAN](https://github.com/Curb-GAN/Curb-GAN) SIG KDD 2020
+- [Curb-GAN](https://github.com/Curb-GAN/Curb-GAN) SIG KDD 2020
 
-* [BusTr](https://dl.acm.org/doi/pdf/10.1145/3394486.3403376) SIG KDD 2020
+- [BusTr](https://dl.acm.org/doi/pdf/10.1145/3394486.3403376) SIG KDD 2020
 
-* [DeepMove](https://dl.acm.org/doi/pdf/10.1145/3178876.3186058) WWW 2018
+- [DeepMove](https://dl.acm.org/doi/pdf/10.1145/3178876.3186058) WWW 2018
 
-* https://github.com/Alro10/deep-learning-time-series
+- <https://github.com/Alro10/deep-learning-time-series>
 
-* https://github.com/henriquejosefaria/CSC
+- <https://github.com/henriquejosefaria/CSC>
 
-* https://github.com/shakibyzn/Traffic-flow-prediction
+- <https://github.com/shakibyzn/Traffic-flow-prediction>
 
-* https://deepmind.com/blog/article/traffic-prediction-with-advanced-graph-neural-networks
+- <https://deepmind.com/blog/article/traffic-prediction-with-advanced-graph-neural-networks>
 
+Other lists:
 
+- [Davidham3 list](https://github.com/Davidham3/spatio-temporal-paper-list)
 
+- <https://paperswithcode.com/task/traffic-prediction>
 
+- [A Survey on Modern Deep Neural Network for Traffic Prediction: Trends, Methods and Challenges](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=9112608) IEEE TKDE 2020
 
+- [A Comprehensive Survey on Traffic Prediction](https://arxiv.org/abs/2004.08555) to be published in IEEE Transactions on Intelligent Transportation Systems.
 
-Other lists: 
+- [A Comprehensive Survey on Graph Neural Networks](https://arxiv.org/pdf/1901.00596.pdf) IEEE Trans. Neural Netw. Learn. Syst. 2020
 
-* [Davidham3 list](https://github.com/Davidham3/spatio-temporal-paper-list)
+- [A Comprehensive Survey on Geometric Deep Learning](https://ieeexplore.ieee.org/abstract/document/9003285) IEEE Access 19 Feb 2020.
 
-* https://paperswithcode.com/task/traffic-prediction
+- [Graph Neural Network for Traffic Forecasting: A Survey](https://arxiv.org/abs/2101.11174) Expert Systems with Applications [GitHub](https://github.com/jwwthu/GNN4Traffic)
 
-* [A Survey on Modern Deep Neural Network for Traffic Prediction: Trends, Methods and Challenges](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=9112608) IEEE TKDE 2020
+- [BigsCity LibCity: Traffic Prediction Paper Collection](https://github.com/LibCity/Bigscity-LibCity-Paper) In the paper collection, we collected traffic prediction papers published in the recent years (2016-now) on 11 top conferences and journals, namely, AAAI, IJCAI, KDD, CIKM, ICDM, WWW, NIPS, ICLR, SIGSPATIAL, IEEE TKDE and IEEE TITS. In addition, the surveys since 2016 and representative papers mentioned in the surveys are also included.
 
-* [A Comprehensive Survey on Traffic Prediction](https://arxiv.org/abs/2004.08555) to be published in IEEE Transactions on Intelligent Transportation Systems.
+- Older, pre-ML approaches: [On the modeling of traffic and crowds: A survey of models, speculations, and perspectives](https://epubs.siam.org/doi/pdf/10.1137/090746677?casa_token=ramTXeUx3owAAAAA%3ABIA7wFjs6ZdGWqqCQ2iicLrZfUaZSTgZJtO8eYGDSvaI5IFPIQkCoZPi_btisCGJEV43HDedswY&) SIAM 2011
 
-* [A Comprehensive Survey on Graph Neural Networks](https://arxiv.org/pdf/1901.00596.pdf) IEEE Trans. Neural Netw. Learn. Syst. 2020
+- <https://github.com/Knowledge-Precipitation-Tribe/Urban-computing-papers>
 
-* [A Comprehensive Survey on Geometric Deep Learning](https://ieeexplore.ieee.org/abstract/document/9003285) IEEE Access 19 Feb 2020.
+- <https://github.com/jdlc105/Must-read-papers-and-continuous-tracking-on-Graph-Neural-Network-GNN-progress>
 
-* [Graph Neural Network for Traffic Forecasting: A Survey](https://arxiv.org/abs/2101.11174) Expert Systems with Applications [GitHub](https://github.com/jwwthu/GNN4Traffic)
-
-* [BigsCity LibCity: Traffic Prediction Paper Collection](https://github.com/LibCity/Bigscity-LibCity-Paper) In the paper collection, we collected traffic prediction papers published in the recent years (2016-now) on 11 top conferences and journals, namely, AAAI, IJCAI, KDD, CIKM, ICDM, WWW, NIPS, ICLR, SIGSPATIAL, IEEE TKDE and IEEE TITS. In addition, the surveys since 2016 and representative papers mentioned in the surveys are also included. 
-
-* Older, pre-ML approaches: [On the modeling of traffic and crowds: A survey of models, speculations, and perspectives](https://epubs.siam.org/doi/pdf/10.1137/090746677?casa_token=ramTXeUx3owAAAAA%3ABIA7wFjs6ZdGWqqCQ2iicLrZfUaZSTgZJtO8eYGDSvaI5IFPIQkCoZPi_btisCGJEV43HDedswY&) SIAM 2011
-
-* https://github.com/Knowledge-Precipitation-Tribe/Urban-computing-papers
-
-* https://github.com/jdlc105/Must-read-papers-and-continuous-tracking-on-Graph-Neural-Network-GNN-progress
-
-* [DL-Traff: Survey and Benchmark of Deep Learning Models for Urban Traffic Prediction](https://arxiv.org/abs/2108.09091) CIKM 2021 [GitHub PyTorch](https://github.com/deepkashiwa20/DL-Traff-Grid)
-
-
-
-
-
+- [DL-Traff: Survey and Benchmark of Deep Learning Models for Urban Traffic Prediction](https://arxiv.org/abs/2108.09091) CIKM 2021 [GitHub PyTorch](https://github.com/deepkashiwa20/DL-Traff-Grid)
 
 # Acknowledgement
 
-* [Willianto Aslim](https://github.com/asalimw)
-
-
-
+- [Willianto Aslim](https://github.com/asalimw)
