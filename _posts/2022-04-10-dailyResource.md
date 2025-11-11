@@ -176,11 +176,7 @@ https://github.com/waydabber/BetterDisplay/releases?page=6
 
   ## 3 学习资源
 
-  ### 1. 美剧资源
-
-  - [Hacks - Season 1](https://cineb.rs/watch-tv/watch-hacks-free-69823.4805626)
-
-  ### 2. 书籍资源
+  ### 1. 书籍资源
 
   ```txt
   主站: http://www.https.ng

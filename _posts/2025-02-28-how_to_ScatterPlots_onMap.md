@@ -43,7 +43,7 @@ fig.update_layout(
 - [数据来源](https://github.com/datadesk/los-angeles-police-killings-data)
 
 <Center>
-  <img src='https://cdn.nlark.com/yuque/0/2025/png/40742019/1762870316241-305be9e7-b868-4e58-b5e9-d398f22186a0.png?x-oss-process=image%2Fformat%2Cwebp' style='zoom:50%'>
+  <img src="https://images.weserv.nl/?url=cdn.nlark.com/yuque/0/2025/png/40742019/1762870316241-305be9e7-b868-4e58-b5e9-d398f22186a0.png?x-oss-process=image%2Fformat%2Cwebp" style="zoom:50%">
 </Center>
 
 ### 背景介绍
