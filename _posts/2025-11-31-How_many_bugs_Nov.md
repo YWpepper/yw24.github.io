@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 11月Bug记录
+title: 'how_many_bugs_Nov'
 date: 2025-11-31
 author: pepper
 tags: [Windows, Note]
