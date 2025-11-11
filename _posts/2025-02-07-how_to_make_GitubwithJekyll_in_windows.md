@@ -12,6 +12,7 @@ tags:
 ---
 
 这篇博客介绍了如何在gitubPage上的学术网站（个人学术页面）。
+<!-- more -->
 
 ## Ruby+Jekylls
 

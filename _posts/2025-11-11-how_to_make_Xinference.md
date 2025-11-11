@@ -10,7 +10,7 @@ tags:
 
 ---------------
 这篇博客介绍了选用Xinference作为RAGFlow的模型推理框架的技术说明。
-
+<!-- more -->
 --------------
 
 # Xinference部署[教程](https://inference.readthedocs.io/zh-cn/latest/index.html)

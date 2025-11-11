@@ -9,7 +9,7 @@ tags:
   - booksresourse
 ---
 这篇博客介绍了图神经网络（GNNs）。
-
+<!-- more -->
 ---
 
 图神经网络（GNNs）是深度学习的一个相对较新的领域，从最近开始越来越流行。Twitter、Google或Facebook等大公司都会开始对于GNN投入研究，事实证明了GNN优于其他使用图数据的机器学习模型。  

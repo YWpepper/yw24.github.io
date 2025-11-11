@@ -8,6 +8,7 @@ tags:
   - daily
 ---
 这篇博客介绍了如何安装和使用 PyTorch 最新版本，同时提供了旧版本的安装指南，帮助用户根据需求快速开始机器学习开发。
+<!-- more -->
 
 ---
 We’d prefer you install the [latest version](https://pytorch.org/get-started/locally), but old binaries and installation instructions are provided below for your convenience.
