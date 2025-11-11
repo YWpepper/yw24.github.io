@@ -9,7 +9,8 @@ tags:
   - ssh
   - sever
 ---
-
+安装 MySQL 关系型数据库管理系统的操作指南；
+<!-- more -->
 ## 各种数据库的端口
 
 + MySQL：3306
@@ -22,7 +23,7 @@ tags:
 
 1. 设置实际运行的端口 3308，因为我的电脑上有 WSL 会有镜像问题
 
-<img src="http://cdn.nlark.com/yuque/0/2025/png/40742019/1762142013620-2eb8d811-510a-427d-a214-8313c63e73b3.png" width="70%">
+<img src="https://images.weserv.nl/?url=cdn.nlark.com/yuque/0/2025/png/40742019/1762142013620-2eb8d811-510a-427d-a214-8313c63e73b3.png" width="70%">
 
 ## 安装报错
 
