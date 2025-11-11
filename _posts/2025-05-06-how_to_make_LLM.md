@@ -8,11 +8,9 @@ tags:
   - LLM
 ---
 
----------------
 这篇博客介绍了SFT（有监督微调）、RLHF（强化学习）、RAG（检索增强生成）的技术说明。
-<!-- more -->
----------------
-一、简介
+
+## 一、简介
 
 主要分为以下五部分：
 
@@ -427,7 +425,7 @@ async def generate_text(prompt: str):
 uvicorn main:app --reload --host 0.0.0.0
 ```
 
- - `main` 是 Python 文件名（要注意不包含 `.py` 扩展名）
+- `main` 是 Python 文件名（要注意不包含 `.py` 扩展名）
 
 - `app` 是 FastAPI 实例的变量名（代码中 `app = FastAPI()`）
 - `--reload` 使代码更改后可以自动重载，适用于开发环境
