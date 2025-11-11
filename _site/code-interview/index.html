@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>代码面试编程知识点总结 – Pepper小辣椒 – 一个工程师的存档点</title>
+
+      <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="代码面试编程知识点总结，内容来自牛客网剑指offer和题霸面试必考真题【算法篇】专题。
+
+" />
+    <meta property="og:description" content="代码面试编程知识点总结，内容来自牛客网剑指offer和题霸面试必考真题【算法篇】专题。
+
+" />
+    
+    <meta name="author" content="Pepper小辣椒" />
+
+    
+    <meta property="og:title" content="代码面试编程知识点总结" />
+    <meta property="twitter:title" content="代码面试编程知识点总结" />
+    
+  <!-- Async font loading -->
+<script>
+  window.WebFontConfig = {
+      custom: {
+          families: ['Spoqa Han Sans:100,300,400,700'],
+          urls: ['https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css']
+      },
+      timeout: 60000
+  };
+  (function(d) {
+      var wf = d.createElement('script'), s = d.scripts[0];
+      wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js';
+      s.parentNode.insertBefore(wf, s);
+  })(document);
+</script>
+
+<!--adobe fonts-->
+<script>
+    (function(d) {
+      var config = {
+        kitId: 'vbt3gjx',
+        scriptTimeout: 3000,
+        async: true
+      },
+      h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+    })(document);
+</script> 
+
+  <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link rel="stylesheet" type="text/css" href="/HomePage/style.css" />
+  <link rel="alternate" type="application/rss+xml" title="Pepper小辣椒 - 一个工程师的存档点" href="/HomePage/feed.xml" />
+  <link rel="shortcut icon" href="https://raw.githubusercontent.com/zxl19/zxl19.github.io/master/images/icon.png">
+  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+  <script src="https://unpkg.com/feather-icons"></script>
+  <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        inlineMath: [['$','$']]
+      }
+    });
+  </script>
+
+  <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+
+</head>
+
+  <body>
+    <div class="wrapper-sidebar">
+  <header class="sidebar clearfix">
+    <div class="site-info">
+      
+        <a href="/HomePage/" class="site-avatar"><img src="https://raw.githubusercontent.com/zxl19/zxl19.github.io/master/images/avatar.jpg" /></a>
+       
+      <h1 class="site-name"><a href="/HomePage/">Pepper小辣椒</a></h1>
+      <p class="site-description">一个工程师的存档点</p>
+    </div>
+  </header>
+
+  <div class="navlist">
+    <nav>
+      
+      
+      <a href="/HomePage/">首页</a>
+      
+      
+      
+      <a href="/HomePage/about">关于</a>
+      
+      
+      
+      <a href="/HomePage/archive">归档</a>
+      
+      
+      
+      <a href="/HomePage/tags">标签</a>
+      
+      
+    </nav>
+  </div>
+
+  <div class="wrapper-footer-desktop">
+    <footer class="footer">
+      <!-- Refer to https://codepen.io/ruandre/pen/howFi -->
+<ul class="svg-icon">
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li><a href="https://github.com/zxl19" class="icon-13 github" title="GitHub"><svg viewBox="0 0 512 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg><!--[if lt IE 9]><em>GitHub</em><![endif]--></a></li>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</ul>
+
+
+
+<p>Copyright © 2020-2025 zxl19. All Rights Reserved.</p>
+
+    </footer>
+  </div>
+</div>
+
+    
+      <aside class="toc">
+        <ul>
+  <li><a href="#">代码面试编程知识点总结</a>
+    <ul>
+      <li><a href="#剑指offer">剑指offer</a>
+        <ul>
+          <li><a href="#数据结构">数据结构</a>
+            <ul>
+              <li><a href="#链表">链表</a>
+                <ul>
+                  <li><a href="#jz6-从尾到头打印链表">JZ6 从尾到头打印链表</a></li>
+                  <li><a href="#jz24-反转链表">JZ24 反转链表</a></li>
+                  <li><a href="#jz25-合并两个排序的链表">JZ25 合并两个排序的链表</a></li>
+                  <li><a href="#jz52-两个链表的第一个公共节点">JZ52 两个链表的第一个公共节点</a></li>
+                  <li><a href="#jz22-链表中倒数最后k个结点">JZ22 链表中倒数最后k个结点</a></li>
+                  <li><a href="#jz18-删除链表的节点">JZ18 删除链表的节点</a></li>
+                </ul>
+              </li>
+              <li><a href="#树">树</a>
+                <ul>
+                  <li><a href="#jz55-二叉树的深度">JZ55 二叉树的深度</a></li>
+                  <li><a href="#jz77-按之字形顺序打印二叉树">JZ77 按之字形顺序打印二叉树</a></li>
+                  <li><a href="#jz7-重建二叉树">JZ7 重建二叉树</a></li>
+                  <li><a href="#jz27-二叉树的镜像">JZ27 二叉树的镜像</a></li>
+                </ul>
+              </li>
+              <li><a href="#队列栈">队列&amp;栈</a>
+                <ul>
+                  <li><a href="#jz9-用两个栈实现队列">JZ9 用两个栈实现队列</a></li>
+                  <li><a href="#jz30-包含min函数的栈">JZ30 包含min函数的栈</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><a href="#算法">算法</a>
+            <ul>
+              <li><a href="#搜索算法">搜索算法</a>
+                <ul>
+                  <li><a href="#jz72-数字在升序数组中出现的次数">JZ72 数字在升序数组中出现的次数</a></li>
+                  <li><a href="#jz4-二维数组中的查找">JZ4 二维数组中的查找</a></li>
+                  <li><a href="#jz11-旋转数组的最小数字">JZ11 旋转数组的最小数字</a></li>
+                </ul>
+              </li>
+              <li><a href="#动态规划">动态规划</a>
+                <ul>
+                  <li><a href="#jz42-连续子数组的最大和">JZ42 连续子数组的最大和</a></li>
+                  <li><a href="#jz69-跳台阶">JZ69 跳台阶</a></li>
+                  <li><a href="#jz10-斐波那契数列">JZ10 斐波那契数列</a></li>
+                </ul>
+              </li>
+              <li><a href="#回溯">回溯</a></li>
+              <li><a href="#排序">排序</a>
+                <ul>
+                  <li><a href="#jz3-数组中重复的数字">JZ3 数组中重复的数字</a></li>
+                  <li><a href="#jz40-最小的k个数">JZ40 最小的K个数</a></li>
+                </ul>
+              </li>
+              <li><a href="#位运算">位运算</a>
+                <ul>
+                  <li><a href="#jz65-不用加减乘除做加法">JZ65 不用加减乘除做加法</a></li>
+                  <li><a href="#jz15-二进制中1的个数">JZ15 二进制中1的个数</a></li>
+                  <li><a href="#jz12-数值的整数次方">JZ12 数值的整数次方</a></li>
+                </ul>
+              </li>
+              <li><a href="#模拟">模拟</a></li>
+              <li><a href="#其他算法">其他算法</a>
+                <ul>
+                  <li><a href="#jz51-构建乘积数组">JZ51 构建乘积数组</a></li>
+                  <li><a href="#jz2-替换空格">JZ2 替换空格</a></li>
+                  <li><a href="#jz13-调整数组顺序使奇数位于偶数前面">JZ13 调整数组顺序使奇数位于偶数前面</a></li>
+                  <li><a href="#jz28-数组中出现次数超过一半的数字">JZ28 数组中出现次数超过一半的数字</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><a href="#题霸面试必考真题">题霸面试必考真题</a>
+        <ul>
+          <li><a href="#nc1-大数加法">NC1 大数加法</a></li>
+          <li><a href="#nc4-判断链表中是否有环">NC4 判断链表中是否有环</a></li>
+          <li><a href="#nc14-按之字形顺序打印二叉树">NC14 按之字形顺序打印二叉树</a></li>
+          <li><a href="#nc34-求路径">NC34 求路径</a></li>
+          <li><a href="#nc53-删除链表的倒数第n个节点">NC53 删除链表的倒数第n个节点</a></li>
+          <li><a href="#nc66-两个链表的第一个公共节点">NC66 两个链表的第一个公共节点</a></li>
+          <li><a href="#nc127-最长公共子串">NC127 最长公共子串</a></li>
+          <li><a href="#nc140-排序">NC140 排序</a></li>
+        </ul>
+      </li>
+      <li><a href="#参考">参考</a></li>
+    </ul>
+  </li>
+</ul>
+      </aside>
+    
+
+    <div id="main" role="main" class="wrapper-content">
+      <div class="container">
+        <article class="posts">
+  <h1>代码面试编程知识点总结</h1>
+
+  <div clsss="meta">
+    <span class="author">
+      zxl19
+    </span>
+
+    <span class="date">
+      2021-09-25
+    </span>
+
+    <ul class="tag">
+      
+      <li>
+        <a href="http://localhost:4000/HomePage/tags#C++">
+          C++
+        </a>
+      </li>
+      
+      <li>
+        <a href="http://localhost:4000/HomePage/tags#Note">
+          Note
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+
+  <div class="entry">
+    <p>代码面试编程知识点总结，内容来自牛客网<a href="https://www.nowcoder.com/ta/coding-interviews">剑指offer</a>和<a href="https://www.nowcoder.com/ta/job-code-total">题霸面试必考真题【算法篇】</a>专题。</p>
+
+<!-- more -->
+
+<h2 id="剑指offer">剑指offer</h2>
+
+<h3 id="数据结构">数据结构</h3>
+
+<h4 id="链表">链表</h4>
+
+<h5 id="jz6-从尾到头打印链表">JZ6 从尾到头打印链表</h5>
+
+<ol>
+  <li>利用STL中的<code class="language-plaintext highlighter-rouge">reverse()</code>函数反转区间元素次序；</li>
+  <li>利用<code class="language-plaintext highlighter-rouge">stack</code>“先进后出”的特性反转区间元素次序；</li>
+</ol>
+
+<h5 id="jz24-反转链表">JZ24 反转链表</h5>
+
+<p>使用两个指针完成，一个指针<code class="language-plaintext highlighter-rouge">ppre</code>用来指向当前节点的前一节点；一个指针<code class="language-plaintext highlighter-rouge">pnext</code>用来指向当前节点的下一节点。</p>
+
+<p>核心代码：</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">while</span><span class="p">(</span><span class="n">pHead</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">pnext</span> <span class="o">=</span> <span class="n">pHead</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+    <span class="n">pHead</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">ppre</span><span class="p">;</span>
+    <span class="n">ppre</span> <span class="o">=</span> <span class="n">pHead</span><span class="p">;</span>
+    <span class="n">pHead</span> <span class="o">=</span> <span class="n">pnext</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h5 id="jz25-合并两个排序的链表">JZ25 合并两个排序的链表</h5>
+
+<p>使用两个指针完成。</p>
+
+<h5 id="jz52-两个链表的第一个公共节点">JZ52 两个链表的第一个公共节点</h5>
+
+<p>使用双指针，先后遍历两个链表，会在公共节点处相遇。</p>
+
+<p>核心代码：</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">while</span> <span class="p">(</span><span class="n">p1</span> <span class="o">!=</span> <span class="n">p2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">p1</span> <span class="o">=</span> <span class="n">p1</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+    <span class="n">p2</span> <span class="o">=</span> <span class="n">p2</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">p1</span> <span class="o">!=</span> <span class="n">p2</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">p1</span> <span class="o">==</span> <span class="nb">nullptr</span><span class="p">)</span> <span class="n">p1</span> <span class="o">=</span> <span class="n">pHead2</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">p2</span> <span class="o">==</span> <span class="nb">nullptr</span><span class="p">)</span> <span class="n">p2</span> <span class="o">=</span> <span class="n">pHead1</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h5 id="jz22-链表中倒数最后k个结点">JZ22 链表中倒数最后k个结点</h5>
+
+<p>使用两个相距k的指针同时前进。</p>
+
+<h5 id="jz18-删除链表的节点">JZ18 删除链表的节点</h5>
+
+<ol>
+  <li>使用两个指针分别指向当前节点和当前节点的上一节点；</li>
+  <li>注意删除链表头结点的特殊情况；</li>
+</ol>
+
+<p>核心代码：</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="n">head</span> <span class="o">==</span> <span class="nb">nullptr</span><span class="p">)</span> <span class="k">return</span> <span class="nb">nullptr</span><span class="p">;</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">head</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">==</span> <span class="n">val</span><span class="p">)</span> <span class="k">return</span> <span class="n">head</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+<span class="n">ListNode</span><span class="o">*</span> <span class="n">p_last</span> <span class="o">=</span> <span class="nb">nullptr</span><span class="p">;</span>
+<span class="n">ListNode</span><span class="o">*</span> <span class="n">p_current</span> <span class="o">=</span> <span class="n">head</span><span class="p">;</span>
+<span class="k">while</span><span class="p">(</span><span class="n">p_current</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">p_current</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">==</span> <span class="n">val</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">p_last</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">p_current</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">p_last</span> <span class="o">=</span> <span class="n">p_current</span><span class="p">;</span>
+    <span class="n">p_current</span> <span class="o">=</span> <span class="n">p_current</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">return</span> <span class="n">head</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h4 id="树">树</h4>
+
+<h5 id="jz55-二叉树的深度">JZ55 二叉树的深度</h5>
+
+<p>递归调用，分别计算左右子树的深度并取最大值；</p>
+
+<p>核心代码：</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">pRoot</span><span class="p">)</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">lval</span> <span class="o">=</span> <span class="n">TreeDepth</span><span class="p">(</span><span class="n">pRoot</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>
+<span class="kt">int</span> <span class="n">rval</span> <span class="o">=</span> <span class="n">TreeDepth</span><span class="p">(</span><span class="n">pRoot</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+<span class="k">return</span> <span class="n">max</span><span class="p">(</span><span class="n">lval</span><span class="p">,</span> <span class="n">rval</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h5 id="jz77-按之字形顺序打印二叉树">JZ77 按之字形顺序打印二叉树</h5>
+
+<ol>
+  <li>使用<code class="language-plaintext highlighter-rouge">queue</code>保存上一层根节点，不断在循环中更新；</li>
+  <li>使用<code class="language-plaintext highlighter-rouge">vector&lt;vector&gt;</code>保存每一层节点；</li>
+  <li>根据层数判断是否需要反转输出；</li>
+</ol>
+
+<h5 id="jz7-重建二叉树">JZ7 重建二叉树</h5>
+
+<ol>
+  <li>判断空二叉树、单节点情况；</li>
+  <li>前序遍历中，根在最前面；</li>
+  <li>在中序遍历中找到根节点，分出左右树，左闭右开；</li>
+  <li>递归调用重建；</li>
+</ol>
+
+<h5 id="jz27-二叉树的镜像">JZ27 二叉树的镜像</h5>
+
+<p>交换左右节点，递归调用。</p>
+
+<h4 id="队列栈">队列&amp;栈</h4>
+
+<h5 id="jz9-用两个栈实现队列">JZ9 用两个栈实现队列</h5>
+
+<ol>
+  <li>实现<code class="language-plaintext highlighter-rouge">stack</code>的<code class="language-plaintext highlighter-rouge">push()</code>和<code class="language-plaintext highlighter-rouge">pop()</code>成员函数；</li>
+  <li>一个栈保存正序队列，另外一个栈保存反序队列；</li>
+</ol>
+
+<h5 id="jz30-包含min函数的栈">JZ30 包含min函数的栈</h5>
+
+<p>使用两个栈，一个正常保存元素，一个保存当前最小值；</p>
+
+<h3 id="算法">算法</h3>
+
+<h4 id="搜索算法">搜索算法</h4>
+
+<h5 id="jz72-数字在升序数组中出现的次数">JZ72 数字在升序数组中出现的次数</h5>
+
+<ol>
+  <li>暴力求解；</li>
+  <li>数组有序，采用二分查找；</li>
+  <li>利用STL中的<code class="language-plaintext highlighter-rouge">equal_range()</code>函数查找，本质上也是二分查找；</li>
+</ol>
+
+<h5 id="jz4-二维数组中的查找">JZ4 二维数组中的查找</h5>
+
+<ol>
+  <li>判断输入二维数组是否为空（两个维度都要判断）；</li>
+  <li>考虑元素排列有序，从左下角开始遍历优于从右上角开始遍历，因为不需考虑下标越界的问题；</li>
+  <li>如果当前元素大于目标元素，则减小行数；如果当前元素小于目标元素，则增大列数；</li>
+  <li>暴力求解注意行列数可能不同；</li>
+</ol>
+
+<h5 id="jz11-旋转数组的最小数字">JZ11 旋转数组的最小数字</h5>
+
+<p>采用两头比较，两个指针指向数组头尾。</p>
+
+<h4 id="动态规划">动态规划</h4>
+
+<h5 id="jz42-连续子数组的最大和">JZ42 连续子数组的最大和</h5>
+
+<p><code class="language-plaintext highlighter-rouge">dp[i]</code>代表以第<code class="language-plaintext highlighter-rouge">i</code>个元素为截止点的连续子序列的最大和。</p>
+
+<h5 id="jz69-跳台阶">JZ69 跳台阶</h5>
+
+<p>递归调用。</p>
+
+<h5 id="jz10-斐波那契数列">JZ10 斐波那契数列</h5>
+
+<p>可以通过递归调用求解，类似问题还有JZ70 矩形覆盖。</p>
+
+<p>此类问题可以转化为动态规划问题，找到递推公式后自下而上求解，例如：JZ71 跳台阶扩展问题。</p>
+
+<h4 id="回溯">回溯</h4>
+
+<h4 id="排序">排序</h4>
+
+<h5 id="jz3-数组中重复的数字">JZ3 数组中重复的数字</h5>
+
+<ol>
+  <li>数组中数字有范围；</li>
+  <li>使用<code class="language-plaintext highlighter-rouge">a[i]</code>保存数字<code class="language-plaintext highlighter-rouge">i</code>出现的次数；</li>
+</ol>
+
+<h5 id="jz40-最小的k个数">JZ40 最小的K个数</h5>
+
+<ol>
+  <li>使用<code class="language-plaintext highlighter-rouge">vector</code>保存最小的K个数；</li>
+  <li>每次循环后都利用STL中的<code class="language-plaintext highlighter-rouge">sort()</code>函数排序；</li>
+  <li>新元素只需与其中的最大值比较；</li>
+</ol>
+
+<h4 id="位运算">位运算</h4>
+
+<h5 id="jz65-不用加减乘除做加法">JZ65 不用加减乘除做加法</h5>
+
+<ol>
+  <li>无进位和运算是按位异或运算；</li>
+  <li>进位和运算是按位与运算并且结果左移一位；</li>
+  <li>计算无进位和+进位和；</li>
+</ol>
+
+<p>核心代码：</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">while</span> <span class="p">(</span><span class="n">num2</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 负数左移会在低位补1，所以转化为无符号整数</span>
+    <span class="kt">int</span> <span class="n">c</span> <span class="o">=</span> <span class="p">((</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)(</span><span class="n">num1</span> <span class="o">&amp;</span> <span class="n">num2</span><span class="p">))</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">num1</span> <span class="o">^=</span> <span class="n">num2</span><span class="p">;</span>
+    <span class="n">num2</span> <span class="o">=</span> <span class="n">c</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">return</span> <span class="n">num1</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h5 id="jz15-二进制中1的个数">JZ15 二进制中1的个数</h5>
+
+<ol>
+  <li>
+    <p>使用位运算；</p>
+
+    <p>核心代码：</p>
+
+    <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>        <span class="c1">// 取最后一位数字，优于n % 2;</span>
+     <span class="n">count</span><span class="o">++</span><span class="p">;</span>
+ <span class="p">}</span>
+ <span class="n">n</span> <span class="o">=</span> <span class="n">n</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">;</span>         <span class="c1">// 右移一位，优于n = n / 2;</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>采用其他方法注意负数补码；</p>
+  </li>
+</ol>
+
+<h5 id="jz12-数值的整数次方">JZ12 数值的整数次方</h5>
+
+<ol>
+  <li>底数和指数不能同时为零；</li>
+  <li>正负指数分类讨论；</li>
+  <li>负指数时底数不能为零；</li>
+</ol>
+
+<h4 id="模拟">模拟</h4>
+
+<h4 id="其他算法">其他算法</h4>
+
+<h5 id="jz51-构建乘积数组">JZ51 构建乘积数组</h5>
+
+<p>双层循环暴力求解。</p>
+
+<h5 id="jz2-替换空格">JZ2 替换空格</h5>
+
+<p>使用<code class="language-plaintext highlighter-rouge">string</code>类的<code class="language-plaintext highlighter-rouge">append()</code>和<code class="language-plaintext highlighter-rouge">push_back()</code>成员函数，注意二者作用的区别。</p>
+
+<h5 id="jz13-调整数组顺序使奇数位于偶数前面">JZ13 调整数组顺序使奇数位于偶数前面</h5>
+
+<ol>
+  <li>使用两个<code class="language-plaintext highlighter-rouge">queue</code>分别保存奇数和偶数；</li>
+  <li>利用<code class="language-plaintext highlighter-rouge">queue</code>“先进先出”的特性调整数组顺序；</li>
+</ol>
+
+<h5 id="jz28-数组中出现次数超过一半的数字">JZ28 数组中出现次数超过一半的数字</h5>
+
+<ol>
+  <li>暴力求解：根据数据范围构建一维数组<code class="language-plaintext highlighter-rouge">a[]</code>，使用<code class="language-plaintext highlighter-rouge">a[i]</code>保存数字<code class="language-plaintext highlighter-rouge">i</code>出现的次数，以空间换时间；</li>
+  <li>对数组排序，若数组中出现次数超过一半的数字存在，则下标为<code class="language-plaintext highlighter-rouge">[N/2]</code>的元素满足要求；</li>
+</ol>
+
+<h2 id="题霸面试必考真题">题霸面试必考真题</h2>
+
+<h3 id="nc1-大数加法">NC1 大数加法</h3>
+
+<ol>
+  <li>判断输入是否为空；</li>
+  <li>为输出字符串多留一位，供进位使用；</li>
+  <li>从最低位开始计算；</li>
+  <li>
+    <p>字符转整数；</p>
+
+    <p>核心代码：</p>
+
+    <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">ind1</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">?</span> <span class="n">s</span><span class="p">[</span><span class="n">ind1</span><span class="p">]</span> <span class="o">-</span> <span class="sc">'0'</span> <span class="o">:</span> <span class="mi">0</span><span class="p">;</span>
+ <span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="n">ind2</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">?</span> <span class="n">t</span><span class="p">[</span><span class="n">ind2</span><span class="p">]</span> <span class="o">-</span> <span class="sc">'0'</span> <span class="o">:</span> <span class="mi">0</span><span class="p">;</span>
+</code></pre></div>    </div>
+  </li>
+  <li>判断是否进位，若有，取子字符串输出；</li>
+</ol>
+
+<h3 id="nc4-判断链表中是否有环">NC4 判断链表中是否有环</h3>
+
+<p>使用快慢指针，慢指针每次走一步，快指针每次走两步，如果相遇说明有环。</p>
+
+<h3 id="nc14-按之字形顺序打印二叉树">NC14 按之字形顺序打印二叉树</h3>
+
+<p>同JZ59。</p>
+
+<h3 id="nc34-求路径">NC34 求路径</h3>
+
+<p>动态规划问题，<code class="language-plaintext highlighter-rouge">dp[i][j]</code>表示从起点到达第<code class="language-plaintext highlighter-rouge">i</code>行第<code class="language-plaintext highlighter-rouge">j</code>列的路径数。</p>
+
+<h3 id="nc53-删除链表的倒数第n个节点">NC53 删除链表的倒数第n个节点</h3>
+
+<ol>
+  <li>判断输入是否为空；</li>
+  <li>两个相距n的指针同时前进；</li>
+</ol>
+
+<h3 id="nc66-两个链表的第一个公共节点">NC66 两个链表的第一个公共节点</h3>
+
+<p>同JZ36。</p>
+
+<h3 id="nc127-最长公共子串">NC127 最长公共子串</h3>
+
+<p>动态规划问题；</p>
+
+<h3 id="nc140-排序">NC140 排序</h3>
+
+<p>几种常用的排序算法；</p>
+
+<p>以选择排序为例：</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">N</span> <span class="o">=</span> <span class="n">arr</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">N</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">minIdx</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">N</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">arr</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="n">j</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">arr</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="n">minIdx</span><span class="p">))</span> <span class="p">{</span>
+            <span class="n">minIdx</span> <span class="o">=</span> <span class="n">j</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">swap</span><span class="p">(</span><span class="n">arr</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">arr</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="n">minIdx</span><span class="p">));</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>还可以直接利用STL中的<code class="language-plaintext highlighter-rouge">sort()</code>函数排序。</p>
+
+<h2 id="参考">参考</h2>
+
+<ol>
+  <li><a href="https://www.nowcoder.com/ta/coding-interviews">剑指offer-牛客网</a></li>
+  <li><a href="https://www.nowcoder.com/ta/job-code-total">题霸面试必考真题【算法篇】-牛客网</a></li>
+</ol>
+
+  </div>
+
+  
+  
+<script src="https://utteranc.es/client.js"
+        repo="zxl19/zxl19.github.io"
+        issue-term="title"
+        label="comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
+
+  
+</article>
+
+<div class="pagination">
+  
+    <span class="prev" >
+      <a href="http://localhost:4000/HomePage/stl-note/">
+        ← 上一篇
+      </a>
+    </span>
+  
+  
+    <span class="next" >
+      <a href="http://localhost:4000/HomePage/cpp-note/">
+        下一篇 →
+      </a>
+    </span>
+  
+</div>
+      </div>
+    </div>
+
+    
+
+  </body>
+
+  
+  <script>
+    document.getElementById("main").classList.add("withtoc");
+  </script>
+  
+
+  <div class="wrapper-footer-mobile">
+    <footer class="footer">
+      <!-- Refer to https://codepen.io/ruandre/pen/howFi -->
+<ul class="svg-icon">
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li><a href="https://github.com/zxl19" class="icon-13 github" title="GitHub"><svg viewBox="0 0 512 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg><!--[if lt IE 9]><em>GitHub</em><![endif]--></a></li>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</ul>
+
+
+
+<p>Copyright © 2020-2025 zxl19. All Rights Reserved.</p>
+
+    </footer>
+
+
+</html>

@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>摄影知识学习笔记 – Pepper小辣椒 – 一个工程师的存档点</title>
+
+      <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="我的摄影知识学习笔记。
+
+" />
+    <meta property="og:description" content="我的摄影知识学习笔记。
+
+" />
+    
+    <meta name="author" content="Pepper小辣椒" />
+
+    
+    <meta property="og:title" content="摄影知识学习笔记" />
+    <meta property="twitter:title" content="摄影知识学习笔记" />
+    
+  <!-- Async font loading -->
+<script>
+  window.WebFontConfig = {
+      custom: {
+          families: ['Spoqa Han Sans:100,300,400,700'],
+          urls: ['https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css']
+      },
+      timeout: 60000
+  };
+  (function(d) {
+      var wf = d.createElement('script'), s = d.scripts[0];
+      wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js';
+      s.parentNode.insertBefore(wf, s);
+  })(document);
+</script>
+
+<!--adobe fonts-->
+<script>
+    (function(d) {
+      var config = {
+        kitId: 'vbt3gjx',
+        scriptTimeout: 3000,
+        async: true
+      },
+      h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+    })(document);
+</script> 
+
+  <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link rel="stylesheet" type="text/css" href="/HomePage/style.css" />
+  <link rel="alternate" type="application/rss+xml" title="Pepper小辣椒 - 一个工程师的存档点" href="/HomePage/feed.xml" />
+  <link rel="shortcut icon" href="https://raw.githubusercontent.com/zxl19/zxl19.github.io/master/images/icon.png">
+  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+  <script src="https://unpkg.com/feather-icons"></script>
+  <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        inlineMath: [['$','$']]
+      }
+    });
+  </script>
+
+  <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+
+</head>
+
+  <body>
+    <div class="wrapper-sidebar">
+  <header class="sidebar clearfix">
+    <div class="site-info">
+      
+        <a href="/HomePage/" class="site-avatar"><img src="https://raw.githubusercontent.com/zxl19/zxl19.github.io/master/images/avatar.jpg" /></a>
+       
+      <h1 class="site-name"><a href="/HomePage/">Pepper小辣椒</a></h1>
+      <p class="site-description">一个工程师的存档点</p>
+    </div>
+  </header>
+
+  <div class="navlist">
+    <nav>
+      
+      
+      <a href="/HomePage/">首页</a>
+      
+      
+      
+      <a href="/HomePage/about">关于</a>
+      
+      
+      
+      <a href="/HomePage/archive">归档</a>
+      
+      
+      
+      <a href="/HomePage/tags">标签</a>
+      
+      
+    </nav>
+  </div>
+
+  <div class="wrapper-footer-desktop">
+    <footer class="footer">
+      <!-- Refer to https://codepen.io/ruandre/pen/howFi -->
+<ul class="svg-icon">
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li><a href="https://github.com/zxl19" class="icon-13 github" title="GitHub"><svg viewBox="0 0 512 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg><!--[if lt IE 9]><em>GitHub</em><![endif]--></a></li>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</ul>
+
+
+
+<p>Copyright © 2020-2025 zxl19. All Rights Reserved.</p>
+
+    </footer>
+  </div>
+</div>
+
+    
+      <aside class="toc">
+        <ul>
+  <li><a href="#">摄影知识学习笔记</a>
+    <ul>
+      <li><a href="#photography-hello-world">Photography Hello World</a>
+        <ul>
+          <li><a href="#重要概念">重要概念</a>
+            <ul>
+              <li><a href="#曝光三要素">曝光三要素</a></li>
+              <li><a href="#焦距">焦距</a></li>
+            </ul>
+          </li>
+          <li><a href="#阳光十六法则">阳光十六法则</a></li>
+          <li><a href="#视频拍摄相关">视频拍摄相关</a></li>
+        </ul>
+      </li>
+      <li><a href="#书籍">书籍</a></li>
+      <li><a href="#前期准备">前期准备</a>
+        <ul>
+          <li><a href="#工具">工具</a>
+            <ul>
+              <li><a href="#手机app">手机APP</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><a href="#后期处理">后期处理</a>
+        <ul>
+          <li><a href="#工具-1">工具</a>
+            <ul>
+              <li><a href="#照片后期">照片后期</a>
+                <ul>
+                  <li><a href="#付费软件">付费软件</a></li>
+                  <li><a href="#开源软件">开源软件</a></li>
+                  <li><a href="#在线处理">在线处理</a></li>
+                </ul>
+              </li>
+              <li><a href="#视频剪辑">视频剪辑</a></li>
+            </ul>
+          </li>
+          <li><a href="#教程">教程</a></li>
+        </ul>
+      </li>
+      <li><a href="#摄影up主">摄影UP主</a></li>
+      <li><a href="#相关网站">相关网站</a></li>
+      <li><a href="#参考">参考</a></li>
+    </ul>
+  </li>
+</ul>
+      </aside>
+    
+
+    <div id="main" role="main" class="wrapper-content">
+      <div class="container">
+        <article class="posts">
+  <h1>摄影知识学习笔记</h1>
+
+  <div clsss="meta">
+    <span class="author">
+      zxl19
+    </span>
+
+    <span class="date">
+      2021-08-03
+    </span>
+
+    <ul class="tag">
+      
+      <li>
+        <a href="http://localhost:4000/HomePage/tags#Photography">
+          Photography
+        </a>
+      </li>
+      
+      <li>
+        <a href="http://localhost:4000/HomePage/tags#Blog">
+          Blog
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+
+  <div class="entry">
+    <p>我的摄影知识学习笔记。</p>
+
+<!-- more -->
+
+<h2 id="photography-hello-world">Photography Hello World</h2>
+
+<h3 id="重要概念">重要概念</h3>
+
+<h4 id="曝光三要素">曝光三要素</h4>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>刀锐奶化，毒德大学！
+</code></pre></div></div>
+
+<ol>
+  <li><a href="https://www.bilibili.com/video/BV1Gk4y1q7MF">【DPReview】什么是向右曝光？该在什么时候使用它？</a></li>
+  <li><a href="https://www.bilibili.com/video/BV1oW411W7yr">一学就会的曝光基础</a></li>
+  <li><a href="https://www.bilibili.com/video/BV11x41157WX">完美曝光的秘诀</a></li>
+  <li><a href="https://www.bilibili.com/video/BV13Y411f7Wv">【科普】快门速度怎么调？这个视频带你彻底认识相机快门！</a></li>
+  <li><a href="https://www.bilibili.com/video/BV18v4y167Eb">【科普】光圈究竟影响什么？一个视频解答你对光圈所有疑问！</a></li>
+  <li><a href="https://www.bilibili.com/video/BV1n24y1s7wM">【科普】ISO到底是什么？这个视频重构你对ISO的认知！</a></li>
+  <li><a href="https://space.bilibili.com/84480709/channel/collectiondetail?sid=1243116">旅行摄影101</a></li>
+  <li><a href="https://www.zhihu.com/question/36095338/answer/968639013">新手如何系统性地学习摄影？-爱摄影的郭同学的回答-知乎</a></li>
+  <li><a href="https://www.zhihu.com/question/36095338/answer/2051012517">新手如何系统性地学习摄影？-500px摄影社区的回答-知乎</a></li>
+  <li><a href="https://www.zhihu.com/question/21427664/answer/40346193">如何理解ISO、快门、光圈、曝光这几个概念？-王波的回答-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/152172663">相机光圈、快门、焦距、感光度基本介绍-林青春的文章-知乎</a></li>
+  <li><a href="https://www.zhihu.com/question/412237760/answer/1386682793">“毒德大学”，“刀锐奶化”这些梗最初起源于哪？-家政学叫兽的回答-知乎</a></li>
+</ol>
+
+<h4 id="焦距">焦距</h4>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>35 equivalent lenses, they are just never wide enough or never tight enough, like story of my life.
+
+等效35啊，不够广阔也不够紧凑，就像我艰难的人生。
+</code></pre></div></div>
+
+<ol>
+  <li><a href="https://www.bilibili.com/video/BV1nK41157no">【硬核科普】焦段是什么？</a></li>
+  <li><a href="https://www.bilibili.com/video/BV1Ki421R732">如何选择街头摄影的镜头焦段？丨35mm 50mm 85mm丨定焦vs变焦</a></li>
+  <li><a href="https://www.bilibili.com/video/BV1Gg4y1G7uV">【DPReview】这才是最好的焦段！</a></li>
+  <li><a href="https://www.bilibili.com/video/BV1p741137BZ">【DPReview】富士 Fujifilm X100V 上手初评</a></li>
+  <li><a href="https://www.bilibili.com/video/BV1mt411s7xX">【毒德大学字幕组】DPReview 尼康Nikon Z 6 测评</a></li>
+</ol>
+
+<h3 id="阳光十六法则">阳光十六法则</h3>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>艳阳十六阴天八，多云十一日暮四。
+阴云压顶五点六，雨天落雪同日暮。
+室内球场二秒足，客厅戏台快门八。
+</code></pre></div></div>
+
+<ol>
+  <li><a href="https://en.wikipedia.org/wiki/Sunny_16_rule">Sunny 16 rule-Wikipedia</a></li>
+  <li><a href="https://www.zhihu.com/question/424109671/answer/1517706641">学摄影需要死记硬背光圈快门数值吗？-张二二的回答-知乎</a></li>
+  <li><a href="https://www.zhihu.com/question/424109671/answer/1517337655">学摄影需要死记硬背光圈快门数值吗？-平老虎的回答-知乎</a></li>
+  <li><a href="https://www.zhihu.com/question/38169738/answer/917901861">阳光16法则该如何去测光？-平老虎的回答-知乎</a></li>
+  <li><a href="https://www.zhihu.com/question/38169738/answer/75286013">阳光16法则该如何去测光？-Spinlips的回答-知乎</a></li>
+  <li><a href="https://www.bilibili.com/video/BV13j411f7gs">【KingJvpes】玩胶片不可不学的阳光十六法则（中字）</a></li>
+</ol>
+
+<h3 id="视频拍摄相关">视频拍摄相关</h3>
+
+<ol>
+  <li><a href="https://www.bilibili.com/video/BV1kE411c7yZ">【硬核科普】奇妙的帧率增加了！</a></li>
+  <li><a href="https://www.bilibili.com/video/BV1Fv411H7P5">【硬核科普】为什么你拍的视频颜色不好看？99%的人都会忽视这个原理！</a></li>
+  <li><a href="https://www.bilibili.com/video/BV1ua4y127pk">灯光一直闪、屏幕有条纹？彻底搞懂“频闪”是什么！</a></li>
+  <li><a href="https://www.bilibili.com/video/BV1AM411K7r2">黑边=电影感？被观众们忽略的电影画幅，是如何讲故事的？</a></li>
+</ol>
+
+<h2 id="书籍">书籍</h2>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>大家注意啊！现在啊，白平衡自动，ISO100，光圈11（吸气声），光圈优先，现在开始拍！
+</code></pre></div></div>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>苦学摄影多年，只为求得今日一鸣惊人，无数牛逼的构图在我脑海里疯狂浮现，诸位，献丑了！
+</code></pre></div></div>
+
+<ul>
+  <li>《美国纽约摄影学院摄影教材》</li>
+  <li>《一本摄影书》</li>
+  <li>《旅行摄影圣经》</li>
+</ul>
+
+<ol>
+  <li><a href="https://zhuanlan.zhihu.com/p/44462745">推荐一些摄影有关的书籍-平老虎的文章-知乎</a></li>
+  <li><a href="https://www.bilibili.com/video/BV14K411K7df">【干货】获奖摄影师的学习方法！从0到职业该如何有方法的学习？</a></li>
+  <li><a href="https://www.bilibili.com/video/BV1yC4y1u7a5">号称“摄影耶稣光、中华李万江”的李老师名场面合集！</a></li>
+  <li><a href="https://www.bilibili.com/video/BV1Km4y1j7KQ">苦学摄影多年 只为求得今日一鸣惊人</a></li>
+</ol>
+
+<h2 id="前期准备">前期准备</h2>
+
+<h3 id="工具">工具</h3>
+
+<h4 id="手机app">手机APP</h4>
+
+<ol>
+  <li>Snap Bridge</li>
+  <li>巧摄</li>
+  <li>极摄</li>
+  <li>观星</li>
+  <li>莉景天气</li>
+  <li>日出日落月相</li>
+</ol>
+
+<h2 id="后期处理">后期处理</h2>
+
+<h3 id="工具-1">工具</h3>
+
+<h4 id="照片后期">照片后期</h4>
+
+<h5 id="付费软件">付费软件</h5>
+
+<ol>
+  <li>Capture One</li>
+  <li>Lightroom</li>
+  <li>Luminar</li>
+  <li>Photoshop</li>
+  <li>Affinity</li>
+</ol>
+
+<h5 id="开源软件">开源软件</h5>
+
+<ol>
+  <li>GIMP</li>
+  <li>Darktable</li>
+  <li>RawTherapee</li>
+  <li>Filmulator</li>
+</ol>
+
+<h5 id="在线处理">在线处理</h5>
+
+<ol>
+  <li><a href="https://www.photopea.com/">Photopea</a></li>
+  <li><a href="https://ps.gaoding.com/#/">稿定</a></li>
+</ol>
+
+<h4 id="视频剪辑">视频剪辑</h4>
+
+<ol>
+  <li>Premiere</li>
+  <li><a href="https://spdpd.net/">视频大拍档</a></li>
+  <li><a href="https://www.wondershare.cn/products-solutions/video-creativity/video.html">万兴喵影</a></li>
+</ol>
+
+<h3 id="教程">教程</h3>
+
+<ol>
+  <li><a href="https://www.bilibili.com/read/cv13519248">全20集【Adobe Lightroom Classic从思路到后期调色】各功能详解视频教程目录</a></li>
+  <li><a href="https://www.bilibili.com/read/cv13519185">全15集【Luminar 4后期教程】手把手教你软件操作 - 旅行摄影小课堂出品</a></li>
+  <li><a href="https://www.bilibili.com/read/cv960192">B站视频制作教程推荐</a></li>
+  <li><a href="https://www.bilibili.com/video/BV1EW411R77n">【何同学】如何在B站学习做视频？ (P2附Pr零基础剪辑教程）</a></li>
+  <li><a href="https://www.bilibili.com/video/BV1e64y1X72U">【负片】获奖摄影师的Capture One胶片后期指南</a></li>
+  <li><a href="https://www.bilibili.com/video/BV1M64y147n3">【Lightroom教程】6个新手也能入门摄影后期的操作小技巧</a></li>
+  <li><a href="https://www.bilibili.com/video/BV1b64y1i7sy">【干货】富士用户的Capture One后期指南【HSINYALIN】</a></li>
+  <li><a href="https://www.bilibili.com/video/BV1JK4y1v7CM">RawTherapee：一个比付费后期软件（Lightroom等）更强大的免费软件</a></li>
+  <li><a href="https://www.bilibili.com/video/BV17p4y1s7o6">RawTherapee免费胶片模拟软件上手指南-HaldCLUT</a></li>
+</ol>
+
+<h2 id="摄影up主">摄影UP主</h2>
+
+<ol>
+  <li><a href="https://space.bilibili.com/946974">影视飓风</a></li>
+  <li><a href="https://space.bilibili.com/3816626">Linksphotograph</a></li>
+  <li><a href="https://space.bilibili.com/37029661">小鹿Lawrence</a></li>
+  <li><a href="https://space.bilibili.com/86295604">摄影教程</a></li>
+  <li><a href="https://space.bilibili.com/294081438">摄影师顾俊</a></li>
+  <li><a href="https://space.bilibili.com/45478017">HusseinsDrama</a></li>
+  <li><a href="https://space.bilibili.com/238171819">陈忠祥</a></li>
+  <li><a href="https://space.bilibili.com/110683415">摄影师泰罗</a></li>
+  <li><a href="https://space.bilibili.com/110974">视频大拍档</a></li>
+  <li><a href="https://space.bilibili.com/351739137">林海音Haiyin</a></li>
+  <li><a href="https://space.bilibili.com/277329684">Thomas看看世界</a></li>
+  <li><a href="https://space.bilibili.com/25706078">小墨与阿猴</a></li>
+  <li><a href="https://space.bilibili.com/430726">HIRO_午饭饭</a></li>
+  <li><a href="https://space.bilibili.com/23686287">郭城安</a></li>
+  <li><a href="https://space.bilibili.com/318355178">万能的恰恰同学</a></li>
+  <li><a href="https://space.bilibili.com/85651824">李涛PS</a></li>
+  <li><a href="https://space.bilibili.com/55801838">彭弘Red</a></li>
+  <li><a href="https://space.bilibili.com/265720095">街头爬楼党</a></li>
+  <li><a href="https://space.bilibili.com/570820">爱摄影的程小胖</a></li>
+  <li><a href="https://space.bilibili.com/274697987">我叫杰杰杰杰哈</a></li>
+  <li><a href="https://space.bilibili.com/44230905">彩蜂摄影大马猫本</a></li>
+  <li><a href="https://space.bilibili.com/405561962">旅行摄影师唐僧</a></li>
+  <li><a href="https://space.bilibili.com/105686205">巫师后期</a></li>
+  <li><a href="https://space.bilibili.com/327578269">anddmc</a></li>
+  <li><a href="https://space.bilibili.com/84480709">摄影师EDI</a></li>
+  <li><a href="https://space.bilibili.com/7887262">永遠那么遠</a></li>
+  <li><a href="https://space.bilibili.com/300681641">我叫丐帮帮主</a></li>
+  <li><a href="https://space.bilibili.com/245627923">摄瘾研究所</a></li>
+  <li><a href="https://space.bilibili.com/386460499">摄影师姚佳俊</a></li>
+  <li><a href="https://space.bilibili.com/333497492">木易小月_</a></li>
+  <li><a href="https://space.bilibili.com/31858444">暂时没相机</a></li>
+  <li><a href="https://space.bilibili.com/8990248">毒德大学字幕组</a></li>
+  <li><a href="https://space.bilibili.com/1006125507">ThomasHeaton官方频道</a></li>
+  <li><a href="https://space.bilibili.com/1549051576">英国风光摄影师Nigel</a></li>
+  <li><a href="https://space.bilibili.com/32639842">EAPHOTOACADEMY</a></li>
+  <li><a href="https://space.bilibili.com/4012943">NOFACE不是大触</a></li>
+  <li><a href="https://space.bilibili.com/16198806">皇马卦HMAPHOTO</a></li>
+  <li><a href="https://space.bilibili.com/14118905">即影InstAmour</a></li>
+  <li><a href="https://space.bilibili.com/1343434879">蜂鸟TalkShow</a></li>
+  <li><a href="https://space.bilibili.com/31566136">庄扬帆SailsChong</a></li>
+  <li><a href="https://space.bilibili.com/7695611">HSINYALIN_林星亚</a></li>
+  <li><a href="https://space.bilibili.com/108866409">摸鱼摄影师</a></li>
+  <li><a href="https://space.bilibili.com/56744081">平老虎</a></li>
+  <li><a href="https://space.bilibili.com/700673344">Moden王先生</a></li>
+</ol>
+
+<h2 id="相关网站">相关网站</h2>
+
+<ol>
+  <li><a href="https://www.dpreview.com">Digital Photography Review</a></li>
+  <li><a href="https://petapixel.com">PetaPixel</a></li>
+  <li><a href="https://www.dxomark.com">DXOMARK</a></li>
+  <li><a href="https://www.photonstophotos.net">Photons to Photos</a></li>
+  <li><a href="https://dsclabs.com">DSC Labs</a></li>
+  <li><a href="https://www.digitalcameraworld.com">Digital Camera World</a></li>
+  <li><a href="https://digicamfinder.com">Digicam Finder</a></li>
+  <li><a href="https://dofsimulator.net/en/">DOF simulator</a></li>
+  <li><a href="https://jherr.github.io/depth-of-field/">Depth Of Field Simulator</a></li>
+  <li><a href="https://dofsim.net/">景深模拟器</a></li>
+  <li><a href="https://www.fujirumors.com">Fuji Rumors</a></li>
+  <li><a href="https://nikonrumors.com">Nikon Rumors</a></li>
+</ol>
+
+<p><strong>2023年3月：亚马逊宣布将在2023年4月10日关闭DPReview。</strong></p>
+
+<h2 id="参考">参考</h2>
+
+<ol>
+  <li><a href="https://zhuanlan.zhihu.com/p/93513748">7个免费在线PS网站（良心推荐，真正免费）-小盒的文章-知乎</a></li>
+  <li><a href="https://www.zhihu.com/question/293309623/answer/1675816377">哪些网站让你感觉发现了新大陆？-不做闲鱼的回答-知乎</a></li>
+  <li><a href="https://www.zhihu.com/question/312241261/answer/1066491001">b站上有什么好的摄影教学？-早见Hayami的回答-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/112964588">关注bilibili这17个UP主，你甚至可以在B站学摄影！-A妹的文章-知乎</a></li>
+  <li><a href="https://www.bilibili.com/video/BV1pS4y1V7wq">影视飓风都用什么APP？推荐9个小众APP，100%提升工作效率-bilibili</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/407938013">满足日常需求的应用（三）：图像编辑器丨Linux中国-Linux中国的文章-知乎</a></li>
+  <li><a href="https://www.zhihu.com/question/445559611/answer/1759893444">Linux上有哪些好用的绘图工具？-亿图图示的回答-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/430719348">在Linux命令行上编辑照片的4种方法丨Linux中国-Linux中国的文章-知乎</a></li>
+  <li><a href="https://www.dpreview.com/news/5901145460/dpreview-com-to-close">DPReview.com to close-DPReview</a></li>
+  <li><a href="https://petapixel.com/2023/04/03/digicam-finder-is-a-new-resource-that-replaces-dpreviews-camera-library/">Digicam Finder is a New Resource That Replaces DPReview’s Camera Library-PetaPixel</a></li>
+  <li><a href="https://www.bilibili.com/video/BV1ZM411N7EP">【DPReview】再见了，所有的DPReview-bilibili</a></li>
+  <li><a href="https://www.bilibili.com/video/BV1Ks4y1P7JA">【DPReview】我们最喜欢的DPReview TV时刻（用玩偶重现！）-bilibili</a></li>
+  <li><a href="https://www.bilibili.com/video/BV1HT411p7uE">【DPReview】胡子哥和乔丹在DPReview的这几年测评过的最喜欢的5款摄影器材-bilibili</a></li>
+  <li><a href="https://www.bilibili.com/video/BV1SVk4YTEva">20000元1张纸，这是什么？-bilibili</a></li>
+  <li><a href="https://www.zhihu.com/question/34306403/answer/2654034347">各大相机公司推出恒定F4的小三元镜头的目的是什么？非大光圈的恒定光圈意义体现在哪里？-知乎用户的回答-知乎</a></li>
+  <li><a href="https://github.com/jherr/depth-of-field">jherr/depth-of-field</a></li>
+</ol>
+
+  </div>
+
+  
+  
+<script src="https://utteranc.es/client.js"
+        repo="zxl19/zxl19.github.io"
+        issue-term="title"
+        label="comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
+
+  
+</article>
+
+<div class="pagination">
+  
+    <span class="prev" >
+      <a href="http://localhost:4000/HomePage/patent-note/">
+        ← 上一篇
+      </a>
+    </span>
+  
+  
+    <span class="next" >
+      <a href="http://localhost:4000/HomePage/blue-light-lenses/">
+        下一篇 →
+      </a>
+    </span>
+  
+</div>
+      </div>
+    </div>
+
+    
+
+  </body>
+
+  
+  <script>
+    document.getElementById("main").classList.add("withtoc");
+  </script>
+  
+
+  <div class="wrapper-footer-mobile">
+    <footer class="footer">
+      <!-- Refer to https://codepen.io/ruandre/pen/howFi -->
+<ul class="svg-icon">
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li><a href="https://github.com/zxl19" class="icon-13 github" title="GitHub"><svg viewBox="0 0 512 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg><!--[if lt IE 9]><em>GitHub</em><![endif]--></a></li>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</ul>
+
+
+
+<p>Copyright © 2020-2025 zxl19. All Rights Reserved.</p>
+
+    </footer>
+
+
+</html>

@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>rostopic命令行工具学习笔记 – Pepper小辣椒 – 一个工程师的存档点</title>
+
+      <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="我的rostopic命令行工具学习笔记。
+
+" />
+    <meta property="og:description" content="我的rostopic命令行工具学习笔记。
+
+" />
+    
+    <meta name="author" content="Pepper小辣椒" />
+
+    
+    <meta property="og:title" content="rostopic命令行工具学习笔记" />
+    <meta property="twitter:title" content="rostopic命令行工具学习笔记" />
+    
+  <!-- Async font loading -->
+<script>
+  window.WebFontConfig = {
+      custom: {
+          families: ['Spoqa Han Sans:100,300,400,700'],
+          urls: ['https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css']
+      },
+      timeout: 60000
+  };
+  (function(d) {
+      var wf = d.createElement('script'), s = d.scripts[0];
+      wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js';
+      s.parentNode.insertBefore(wf, s);
+  })(document);
+</script>
+
+<!--adobe fonts-->
+<script>
+    (function(d) {
+      var config = {
+        kitId: 'vbt3gjx',
+        scriptTimeout: 3000,
+        async: true
+      },
+      h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+    })(document);
+</script> 
+
+  <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link rel="stylesheet" type="text/css" href="/HomePage/style.css" />
+  <link rel="alternate" type="application/rss+xml" title="Pepper小辣椒 - 一个工程师的存档点" href="/HomePage/feed.xml" />
+  <link rel="shortcut icon" href="https://raw.githubusercontent.com/zxl19/zxl19.github.io/master/images/icon.png">
+  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+  <script src="https://unpkg.com/feather-icons"></script>
+  <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        inlineMath: [['$','$']]
+      }
+    });
+  </script>
+
+  <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+
+</head>
+
+  <body>
+    <div class="wrapper-sidebar">
+  <header class="sidebar clearfix">
+    <div class="site-info">
+      
+        <a href="/HomePage/" class="site-avatar"><img src="https://raw.githubusercontent.com/zxl19/zxl19.github.io/master/images/avatar.jpg" /></a>
+       
+      <h1 class="site-name"><a href="/HomePage/">Pepper小辣椒</a></h1>
+      <p class="site-description">一个工程师的存档点</p>
+    </div>
+  </header>
+
+  <div class="navlist">
+    <nav>
+      
+      
+      <a href="/HomePage/">首页</a>
+      
+      
+      
+      <a href="/HomePage/about">关于</a>
+      
+      
+      
+      <a href="/HomePage/archive">归档</a>
+      
+      
+      
+      <a href="/HomePage/tags">标签</a>
+      
+      
+    </nav>
+  </div>
+
+  <div class="wrapper-footer-desktop">
+    <footer class="footer">
+      <!-- Refer to https://codepen.io/ruandre/pen/howFi -->
+<ul class="svg-icon">
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li><a href="https://github.com/zxl19" class="icon-13 github" title="GitHub"><svg viewBox="0 0 512 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg><!--[if lt IE 9]><em>GitHub</em><![endif]--></a></li>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</ul>
+
+
+
+<p>Copyright © 2020-2025 zxl19. All Rights Reserved.</p>
+
+    </footer>
+  </div>
+</div>
+
+    
+      <aside class="toc">
+        <ul>
+  <li><a href="#">rostopic命令行工具学习笔记</a>
+    <ul>
+      <li><a href="#rostopic-hello-world">rostopic Hello World</a></li>
+      <li><a href="#子命令含义">子命令含义</a>
+        <ul>
+          <li><a href="#rostopic-bw命令"><code class="language-plaintext highlighter-rouge">rostopic bw</code>命令</a>
+            <ul>
+              <li><a href="#语法说明">语法说明</a></li>
+              <li><a href="#选项含义">选项含义</a></li>
+            </ul>
+          </li>
+          <li><a href="#rostopic-delay命令"><code class="language-plaintext highlighter-rouge">rostopic delay</code>命令</a>
+            <ul>
+              <li><a href="#语法说明-1">语法说明</a></li>
+              <li><a href="#选项含义-1">选项含义</a></li>
+            </ul>
+          </li>
+          <li><a href="#rostopic-echo命令"><code class="language-plaintext highlighter-rouge">rostopic echo</code>命令</a>
+            <ul>
+              <li><a href="#语法说明-2">语法说明</a></li>
+              <li><a href="#选项含义-2">选项含义</a></li>
+            </ul>
+          </li>
+          <li><a href="#rostopic-find命令"><code class="language-plaintext highlighter-rouge">rostopic find</code>命令</a>
+            <ul>
+              <li><a href="#语法说明-3">语法说明</a></li>
+            </ul>
+          </li>
+          <li><a href="#rostopic-hz命令"><code class="language-plaintext highlighter-rouge">rostopic hz</code>命令</a>
+            <ul>
+              <li><a href="#语法说明-4">语法说明</a></li>
+              <li><a href="#选项含义-3">选项含义</a></li>
+            </ul>
+          </li>
+          <li><a href="#rostopic-info命令"><code class="language-plaintext highlighter-rouge">rostopic info</code>命令</a>
+            <ul>
+              <li><a href="#语法说明-5">语法说明</a></li>
+            </ul>
+          </li>
+          <li><a href="#rostopic-list命令"><code class="language-plaintext highlighter-rouge">rostopic list</code>命令</a>
+            <ul>
+              <li><a href="#语法说明-6">语法说明</a></li>
+              <li><a href="#选项含义-4">选项含义</a></li>
+            </ul>
+          </li>
+          <li><a href="#rostopic-pub命令"><code class="language-plaintext highlighter-rouge">rostopic pub</code>命令</a>
+            <ul>
+              <li><a href="#语法说明-7">语法说明</a></li>
+              <li><a href="#选项含义-5">选项含义</a></li>
+            </ul>
+          </li>
+          <li><a href="#rostopic-type命令"><code class="language-plaintext highlighter-rouge">rostopic type</code>命令</a>
+            <ul>
+              <li><a href="#语法说明-8">语法说明</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><a href="#参考">参考</a></li>
+    </ul>
+  </li>
+</ul>
+      </aside>
+    
+
+    <div id="main" role="main" class="wrapper-content">
+      <div class="container">
+        <article class="posts">
+  <h1>rostopic命令行工具学习笔记</h1>
+
+  <div clsss="meta">
+    <span class="author">
+      zxl19
+    </span>
+
+    <span class="date">
+      2023-03-06
+    </span>
+
+    <ul class="tag">
+      
+      <li>
+        <a href="http://localhost:4000/HomePage/tags#ROS">
+          ROS
+        </a>
+      </li>
+      
+      <li>
+        <a href="http://localhost:4000/HomePage/tags#Note">
+          Note
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+
+  <div class="entry">
+    <p>我的rostopic命令行工具学习笔记。</p>
+
+<!-- more -->
+
+<h2 id="rostopic-hello-world">rostopic Hello World</h2>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">rostopic</code>命令行工具可以显示关于ROS话题（topic）的信息，包括话题列表、发布者（publisher）、订阅者（subscriber）、频率、带宽、消息（message）内容等；</li>
+  <li>
+    <p>语法说明：</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> rostopic &lt;subcommand&gt; <span class="o">[</span>options] <span class="o">[</span>args]
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>显示帮助信息：</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> rostopic <span class="nt">-h</span>
+ rostopic &lt;subcommand&gt; <span class="nt">-h</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h2 id="子命令含义">子命令含义</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">subcommand</th>
+      <th style="text-align: left">含义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">bw</code></td>
+      <td style="text-align: left">Display bandwidth used by topic.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">delay</code></td>
+      <td style="text-align: left">Display delay for topic which has header.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">echo</code></td>
+      <td style="text-align: left">Print messages to screen.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">find</code></td>
+      <td style="text-align: left">Find topics by type.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">hz</code></td>
+      <td style="text-align: left">Display publishing rate of topic.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">info</code></td>
+      <td style="text-align: left">Print information about active topic.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">list</code></td>
+      <td style="text-align: left">Print information about active topics.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">pub</code></td>
+      <td style="text-align: left">Publish data to topic.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">type</code></td>
+      <td style="text-align: left">Print topic type.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="rostopic-bw命令"><code class="language-plaintext highlighter-rouge">rostopic bw</code>命令</h3>
+
+<h4 id="语法说明">语法说明</h4>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rostopic bw <span class="o">[</span>options] topic
+</code></pre></div></div>
+
+<ol>
+  <li>显示的带宽是接收带宽，如果网络连接状况不佳，或者<code class="language-plaintext highlighter-rouge">rostopic</code>命令行工具无法跟上发布者，接收带宽可能低于真实带宽；</li>
+  <li><code class="language-plaintext highlighter-rouge">rostopic</code>命令行工具是基于Python实现的，无法像基于C++实现的ROS节点一样保持高吞吐量（throughput）；</li>
+</ol>
+
+<h4 id="选项含义">选项含义</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">options</th>
+      <th style="text-align: left">含义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">-w WINDOW_SIZE</code>, <code class="language-plaintext highlighter-rouge">--window WINDOW_SIZE</code></td>
+      <td style="text-align: left">Window size, in # of messages, for calculating rate.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="rostopic-delay命令"><code class="language-plaintext highlighter-rouge">rostopic delay</code>命令</h3>
+
+<h4 id="语法说明-1">语法说明</h4>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rostopic delay <span class="o">[</span>options] topic
+</code></pre></div></div>
+
+<p>要求话题中的消息类型包含报头（header）；</p>
+
+<h4 id="选项含义-1">选项含义</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">options</th>
+      <th style="text-align: left">含义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">-w WINDOW_SIZE</code>, <code class="language-plaintext highlighter-rouge">--window WINDOW_SIZE</code></td>
+      <td style="text-align: left">Window size, in # of messages, for calculating rate.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--tcpnodelay</code></td>
+      <td style="text-align: left">Use the TCP_NODELAY transport hint when subscribing to topics.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="rostopic-echo命令"><code class="language-plaintext highlighter-rouge">rostopic echo</code>命令</h3>
+
+<h4 id="语法说明-2">语法说明</h4>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rostopic <span class="nb">echo</span> <span class="o">[</span>options] topic
+</code></pre></div></div>
+
+<p>可以使用<code class="language-plaintext highlighter-rouge">/topic/field</code>指定显示话题中的消息字段（field）；</p>
+
+<h4 id="选项含义-2">选项含义</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">options</th>
+      <th style="text-align: left">含义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--offset</code></td>
+      <td style="text-align: left">Display time in messages as offset from current time (e.g. to calculate lag/latency).</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--filter</code></td>
+      <td style="text-align: left">Display messages that match a specified Python expression. The Python expression can use any Python builtins plus the variable <code class="language-plaintext highlighter-rouge">m</code> (the message).</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">-c</code></td>
+      <td style="text-align: left">Clear the screen after each message is published. Cannot be used with <code class="language-plaintext highlighter-rouge">-p</code>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">-b</code></td>
+      <td style="text-align: left">Display messages in a bag file.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">-p</code></td>
+      <td style="text-align: left">Display messages in a matlab/octave-friendly plotting format. Cannot be used with <code class="language-plaintext highlighter-rouge">-c</code>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">-w NUM_WIDTH</code></td>
+      <td style="text-align: left">Print all numeric values with a fixed width.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--nostr</code>, <code class="language-plaintext highlighter-rouge">-noarr</code></td>
+      <td style="text-align: left">Exclude string and array fields from the plotting output.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">-n COUNT</code></td>
+      <td style="text-align: left">Echo <code class="language-plaintext highlighter-rouge">COUNT</code> messages and exit.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="rostopic-find命令"><code class="language-plaintext highlighter-rouge">rostopic find</code>命令</h3>
+
+<h4 id="语法说明-3">语法说明</h4>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rostopic find msg-type
+</code></pre></div></div>
+
+<h3 id="rostopic-hz命令"><code class="language-plaintext highlighter-rouge">rostopic hz</code>命令</h3>
+
+<h4 id="语法说明-4">语法说明</h4>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rostopic hz <span class="o">[</span>options] topic1 <span class="o">[</span>topic2...]
+</code></pre></div></div>
+
+<ol>
+  <li>显示的是消息的发布频率；</li>
+  <li>默认显示命令运行时间内的平均频率；</li>
+</ol>
+
+<h4 id="选项含义-3">选项含义</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">options</th>
+      <th style="text-align: left">含义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">-w WINDOW_SIZE</code></td>
+      <td style="text-align: left">Report rate using a window size (number of samples) for a temporally local estimate of the rate.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--filter FILTER_EXPR</code></td>
+      <td style="text-align: left">Only report rate for messages that match the Python <code class="language-plaintext highlighter-rouge">FILTER_EXPR</code>. WARNING: this option has a large performance hit and shouldn’t be used for high-rate topics.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="rostopic-info命令"><code class="language-plaintext highlighter-rouge">rostopic info</code>命令</h3>
+
+<h4 id="语法说明-5">语法说明</h4>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rostopic info topic
+</code></pre></div></div>
+
+<h3 id="rostopic-list命令"><code class="language-plaintext highlighter-rouge">rostopic list</code>命令</h3>
+
+<h4 id="语法说明-6">语法说明</h4>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rostopic list <span class="o">[</span>options] <span class="o">[</span>namespace]
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">namespace</code>参数表示只显示指定命名空间<code class="language-plaintext highlighter-rouge">/namespace</code>中的话题名，例如<code class="language-plaintext highlighter-rouge">/namespace/***</code>；</p>
+
+<h4 id="选项含义-4">选项含义</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">options</th>
+      <th style="text-align: left">含义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">-b</code></td>
+      <td style="text-align: left">List topics in a bag file.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">-p</code></td>
+      <td style="text-align: left">List only publishers.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">-s</code></td>
+      <td style="text-align: left">List only subscribers.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">-v</code></td>
+      <td style="text-align: left">Verbose mode.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--host</code></td>
+      <td style="text-align: left">Group list by hostname.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="rostopic-pub命令"><code class="language-plaintext highlighter-rouge">rostopic pub</code>命令</h3>
+
+<h4 id="语法说明-7">语法说明</h4>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rostopic pub topic <span class="nb">type</span> <span class="o">[</span>data...]
+</code></pre></div></div>
+
+<p>可以使用以下三种方法指定话题中发布的消息字段：</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Command-line arguments. Defaults to latch mode.</span>
+rostopic pub my_topic std_msgs/String <span class="s2">"hello there"</span>
+rostopic pub <span class="nt">-r</span> 10 /cmd_vel geometry_msgs/Twist <span class="se">\</span>
+    <span class="s1">'{linear: {x: 0.1, y: 0.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 0.0}}'</span>
+<span class="c"># Piped input. Defaults to rate mode (10hz). Example usage:</span>
+rostopic <span class="nb">echo </span>chatter | rostopic pub bar std_msgs/String
+<span class="c"># YAML data file. Defaults to rate mode (10hz). Example usage:</span>
+rostopic <span class="nb">echo </span>chatter <span class="o">&gt;</span> chatter.bagy    <span class="c"># Collect messages, then Ctrl-C</span>
+rostopic pub <span class="nt">-f</span> chatter.bagy bar std_msgs/String
+</code></pre></div></div>
+
+<h4 id="选项含义-5">选项含义</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">options</th>
+      <th style="text-align: left">含义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">-l</code>, <code class="language-plaintext highlighter-rouge">--latch</code></td>
+      <td style="text-align: left">Enable latch mode. Latching mode is the default when using command-line arguments.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">-r RATE</code></td>
+      <td style="text-align: left">Enable rate mode. Rate mode is the default (10hz) when using piped or file input.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">-1</code>, <code class="language-plaintext highlighter-rouge">--once</code></td>
+      <td style="text-align: left">Enable once mode.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">-f FILE</code></td>
+      <td style="text-align: left">Read message fields from YAML file. YAML syntax is equivalent to output of <code class="language-plaintext highlighter-rouge">rostopic echo</code>. Messages are separated using YAML document separator <code class="language-plaintext highlighter-rouge">---</code>. To use only the first message in a file, use the <code class="language-plaintext highlighter-rouge">--latch</code> option.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="rostopic-type命令"><code class="language-plaintext highlighter-rouge">rostopic type</code>命令</h3>
+
+<h4 id="语法说明-8">语法说明</h4>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rostopic <span class="nb">type </span>topic
+</code></pre></div></div>
+
+<h2 id="参考">参考</h2>
+
+<ol>
+  <li><a href="http://wiki.ros.org/rostopic">rostopic-ROS Wiki</a></li>
+</ol>
+
+  </div>
+
+  
+  
+<script src="https://utteranc.es/client.js"
+        repo="zxl19/zxl19.github.io"
+        issue-term="title"
+        label="comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
+
+  
+</article>
+
+<div class="pagination">
+  
+    <span class="prev" >
+      <a href="http://localhost:4000/HomePage/rosnode-command/">
+        ← 上一篇
+      </a>
+    </span>
+  
+  
+    <span class="next" >
+      <a href="http://localhost:4000/HomePage/foobar2000-setup/">
+        下一篇 →
+      </a>
+    </span>
+  
+</div>
+      </div>
+    </div>
+
+    
+
+  </body>
+
+  
+  <script>
+    document.getElementById("main").classList.add("withtoc");
+  </script>
+  
+
+  <div class="wrapper-footer-mobile">
+    <footer class="footer">
+      <!-- Refer to https://codepen.io/ruandre/pen/howFi -->
+<ul class="svg-icon">
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li><a href="https://github.com/zxl19" class="icon-13 github" title="GitHub"><svg viewBox="0 0 512 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg><!--[if lt IE 9]><em>GitHub</em><![endif]--></a></li>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</ul>
+
+
+
+<p>Copyright © 2020-2025 zxl19. All Rights Reserved.</p>
+
+    </footer>
+
+
+</html>

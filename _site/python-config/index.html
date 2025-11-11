@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Python读取配置文件 – Pepper小辣椒 – 一个工程师的存档点</title>
+
+      <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="Python读取配置文件的方法，使用标准库中的configparser模块读取.ini格式的配置文件。
+
+" />
+    <meta property="og:description" content="Python读取配置文件的方法，使用标准库中的configparser模块读取.ini格式的配置文件。
+
+" />
+    
+    <meta name="author" content="Pepper小辣椒" />
+
+    
+    <meta property="og:title" content="Python读取配置文件" />
+    <meta property="twitter:title" content="Python读取配置文件" />
+    
+  <!-- Async font loading -->
+<script>
+  window.WebFontConfig = {
+      custom: {
+          families: ['Spoqa Han Sans:100,300,400,700'],
+          urls: ['https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css']
+      },
+      timeout: 60000
+  };
+  (function(d) {
+      var wf = d.createElement('script'), s = d.scripts[0];
+      wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js';
+      s.parentNode.insertBefore(wf, s);
+  })(document);
+</script>
+
+<!--adobe fonts-->
+<script>
+    (function(d) {
+      var config = {
+        kitId: 'vbt3gjx',
+        scriptTimeout: 3000,
+        async: true
+      },
+      h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+    })(document);
+</script> 
+
+  <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link rel="stylesheet" type="text/css" href="/HomePage/style.css" />
+  <link rel="alternate" type="application/rss+xml" title="Pepper小辣椒 - 一个工程师的存档点" href="/HomePage/feed.xml" />
+  <link rel="shortcut icon" href="https://raw.githubusercontent.com/zxl19/zxl19.github.io/master/images/icon.png">
+  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+  <script src="https://unpkg.com/feather-icons"></script>
+  <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        inlineMath: [['$','$']]
+      }
+    });
+  </script>
+
+  <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+
+</head>
+
+  <body>
+    <div class="wrapper-sidebar">
+  <header class="sidebar clearfix">
+    <div class="site-info">
+      
+        <a href="/HomePage/" class="site-avatar"><img src="https://raw.githubusercontent.com/zxl19/zxl19.github.io/master/images/avatar.jpg" /></a>
+       
+      <h1 class="site-name"><a href="/HomePage/">Pepper小辣椒</a></h1>
+      <p class="site-description">一个工程师的存档点</p>
+    </div>
+  </header>
+
+  <div class="navlist">
+    <nav>
+      
+      
+      <a href="/HomePage/">首页</a>
+      
+      
+      
+      <a href="/HomePage/about">关于</a>
+      
+      
+      
+      <a href="/HomePage/archive">归档</a>
+      
+      
+      
+      <a href="/HomePage/tags">标签</a>
+      
+      
+    </nav>
+  </div>
+
+  <div class="wrapper-footer-desktop">
+    <footer class="footer">
+      <!-- Refer to https://codepen.io/ruandre/pen/howFi -->
+<ul class="svg-icon">
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li><a href="https://github.com/zxl19" class="icon-13 github" title="GitHub"><svg viewBox="0 0 512 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg><!--[if lt IE 9]><em>GitHub</em><![endif]--></a></li>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</ul>
+
+
+
+<p>Copyright © 2020-2025 zxl19. All Rights Reserved.</p>
+
+    </footer>
+  </div>
+</div>
+
+    
+      <aside class="toc">
+        <ul>
+  <li><a href="#">Python读取配置文件</a>
+    <ul>
+      <li><a href="#配置文件格式说明">配置文件格式说明</a></li>
+      <li><a href="#配置文件创建">配置文件创建</a>
+        <ul>
+          <li><a href="#手动写入">手动写入</a></li>
+          <li><a href="#程序写入">程序写入</a></li>
+        </ul>
+      </li>
+      <li><a href="#配置文件读取">配置文件读取</a>
+        <ul>
+          <li><a href="#基础api">基础API</a></li>
+          <li><a href="#数据类型转换">数据类型转换</a></li>
+          <li><a href="#回退值">回退值</a></li>
+        </ul>
+      </li>
+      <li><a href="#参考">参考</a></li>
+    </ul>
+  </li>
+</ul>
+      </aside>
+    
+
+    <div id="main" role="main" class="wrapper-content">
+      <div class="container">
+        <article class="posts">
+  <h1>Python读取配置文件</h1>
+
+  <div clsss="meta">
+    <span class="author">
+      zxl19
+    </span>
+
+    <span class="date">
+      2021-10-30
+    </span>
+
+    <ul class="tag">
+      
+      <li>
+        <a href="http://localhost:4000/HomePage/tags#Python">
+          Python
+        </a>
+      </li>
+      
+      <li>
+        <a href="http://localhost:4000/HomePage/tags#Note">
+          Note
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+
+  <div class="entry">
+    <p>Python读取配置文件的方法，使用标准库中的<code class="language-plaintext highlighter-rouge">configparser</code>模块读取<code class="language-plaintext highlighter-rouge">.ini</code>格式的配置文件。</p>
+
+<!-- more -->
+
+<h2 id="配置文件格式说明">配置文件格式说明</h2>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">.ini</code>格式的配置文件由若干个节（section）组成，每个节中包含键（key）及其对应的值（value），节、键、值中可以包含空格；</li>
+  <li>使用<code class="language-plaintext highlighter-rouge">[]</code>将节名括起来；</li>
+  <li>键不区分大小写，以小写形式存储；</li>
+  <li>值可以为空，在存储和读取时被当做字符串，非字符串类型的值需要进行类型转换，后续将进行详细说明；</li>
+  <li>使用<code class="language-plaintext highlighter-rouge">=</code>分隔键和值，也可以使用<code class="language-plaintext highlighter-rouge">:</code>，分隔符左右可以添加空格；</li>
+  <li>使用<code class="language-plaintext highlighter-rouge">;</code>添加注释，也可以使用<code class="language-plaintext highlighter-rouge">#</code>；</li>
+  <li>名为<code class="language-plaintext highlighter-rouge">DEFAULT</code>的节为默认节，在使用<code class="language-plaintext highlighter-rouge">get()</code>函数时其中的默认值优先于回退值（fallback value），后续将进行详细说明；</li>
+</ol>
+
+<p>配置文件示例：</p>
+
+<div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[DEFAULT]</span>
+<span class="py">key1</span> <span class="p">=</span> <span class="s">This is a string.</span>
+<span class="py">key2</span> <span class="p">=</span> <span class="s">100</span>
+<span class="py">key3</span> <span class="p">=</span> <span class="s">1.0</span>
+<span class="py">key4</span> <span class="p">=</span> <span class="s">True</span>
+
+<span class="nn">[SECTION_NAME]</span>
+<span class="c">; key1 = This is another string.
+; key2 = 200
+; key3 = 2.0
+; key4 = False
+</span></code></pre></div></div>
+
+<h2 id="配置文件创建">配置文件创建</h2>
+
+<h3 id="手动写入">手动写入</h3>
+
+<p>如题，直接写入创建的<code class="language-plaintext highlighter-rouge">.ini</code>文件即可。</p>
+
+<h3 id="程序写入">程序写入</h3>
+
+<p>语法类似于字典。</p>
+
+<p>示例：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">configparser</span>
+
+<span class="n">config</span> <span class="o">=</span> <span class="n">configparser</span><span class="p">.</span><span class="n">ConfigParser</span><span class="p">()</span>
+<span class="c1"># 以下三种方法等价：
+# 方法1
+</span><span class="n">config</span><span class="p">[</span><span class="s">'DEFAULT'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s">'key1'</span><span class="p">:</span> <span class="s">'This is a string.'</span><span class="p">,</span>
+                     <span class="s">'key2'</span><span class="p">:</span> <span class="s">'100'</span><span class="p">,</span>
+                     <span class="s">'key3'</span><span class="p">:</span> <span class="s">'1.0'</span><span class="p">,</span>
+                     <span class="s">'key4'</span><span class="p">:</span> <span class="s">'True'</span><span class="p">}</span>
+<span class="c1"># 方法2
+</span><span class="n">config</span><span class="p">[</span><span class="s">'DEFAULT'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">config</span><span class="p">[</span><span class="s">'DEFAULT'</span><span class="p">][</span><span class="s">'key1'</span><span class="p">]</span> <span class="o">=</span> <span class="s">'This is a string.'</span>
+<span class="n">config</span><span class="p">[</span><span class="s">'DEFAULT'</span><span class="p">][</span><span class="s">'key2'</span><span class="p">]</span> <span class="o">=</span> <span class="s">'100'</span>
+<span class="n">config</span><span class="p">[</span><span class="s">'DEFAULT'</span><span class="p">][</span><span class="s">'key3'</span><span class="p">]</span> <span class="o">=</span> <span class="s">'1.0'</span>
+<span class="n">config</span><span class="p">[</span><span class="s">'DEFAULT'</span><span class="p">][</span><span class="s">'key4'</span><span class="p">]</span> <span class="o">=</span> <span class="s">'True'</span>
+<span class="c1"># 方法3
+</span><span class="n">config</span><span class="p">[</span><span class="s">'DEFAULT'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">default_config</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s">'DEFAULT'</span><span class="p">]</span>
+<span class="n">default_config</span><span class="p">[</span><span class="s">'key1'</span><span class="p">]</span> <span class="o">=</span> <span class="s">'This is a string.'</span>
+<span class="n">default_config</span><span class="p">[</span><span class="s">'key2'</span><span class="p">]</span> <span class="o">=</span> <span class="s">'100'</span>
+<span class="n">default_config</span><span class="p">[</span><span class="s">'key3'</span><span class="p">]</span> <span class="o">=</span> <span class="s">'1.0'</span>
+<span class="n">default_config</span><span class="p">[</span><span class="s">'key4'</span><span class="p">]</span> <span class="o">=</span> <span class="s">'True'</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'config.ini'</span><span class="p">,</span> <span class="s">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">configfile</span><span class="p">:</span>
+    <span class="n">config</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">configfile</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="配置文件读取">配置文件读取</h2>
+
+<h3 id="基础api">基础API</h3>
+
+<p>默认按照字符串读取并存储。</p>
+
+<p>示例：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">configparser</span>
+
+<span class="n">config</span> <span class="o">=</span> <span class="n">configparser</span><span class="p">.</span><span class="n">ConfigParser</span><span class="p">()</span>
+<span class="n">config</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="s">'config.ini'</span><span class="p">)</span>
+<span class="c1"># 显示各节名称，不包括默认节
+</span><span class="n">config</span><span class="p">.</span><span class="n">sections</span><span class="p">()</span>
+<span class="c1"># 以下四种方法等价：
+# 方法1
+</span><span class="n">value1</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s">'DEFAULT'</span><span class="p">][</span><span class="s">'key1'</span><span class="p">]</span>
+<span class="c1"># 方法2
+</span><span class="n">default_config</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s">'DEFAULT'</span><span class="p">]</span>
+<span class="n">value1</span> <span class="o">=</span> <span class="n">default_config</span><span class="p">[</span><span class="s">'key1'</span><span class="p">]</span>
+<span class="c1"># 方法3
+</span><span class="n">value1</span> <span class="o">=</span> <span class="n">config</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'DEFAULT'</span><span class="p">,</span> <span class="s">'key1'</span><span class="p">)</span>
+<span class="c1"># 方法4
+</span><span class="n">value1</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s">'DEFAULT'</span><span class="p">].</span><span class="n">get</span><span class="p">(</span><span class="s">'key1'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="数据类型转换">数据类型转换</h3>
+
+<p>建议使用对应的成员函数进行类型转换，不推荐使用强制类型转换，因为<code class="language-plaintext highlighter-rouge">bool('False')=True</code>。</p>
+
+<p>示例：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 字符串
+</span><span class="n">value1</span> <span class="o">=</span> <span class="n">config</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'DEFAULT'</span><span class="p">,</span> <span class="s">'key1'</span><span class="p">)</span>
+<span class="c1"># 整型
+</span><span class="n">value2</span> <span class="o">=</span> <span class="n">config</span><span class="p">.</span><span class="n">getint</span><span class="p">(</span><span class="s">'DEFAULT'</span><span class="p">,</span> <span class="s">'key2'</span><span class="p">)</span>
+<span class="n">value2</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">config</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'DEFAULT'</span><span class="p">,</span> <span class="s">'key2'</span><span class="p">))</span>
+<span class="c1"># 浮点型
+</span><span class="n">value3</span> <span class="o">=</span> <span class="n">config</span><span class="p">.</span><span class="n">getfloat</span><span class="p">(</span><span class="s">'DEFAULT'</span><span class="p">,</span> <span class="s">'key3'</span><span class="p">)</span>
+<span class="n">value3</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">config</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'DEFAULT'</span><span class="p">,</span> <span class="s">'key3'</span><span class="p">))</span>
+<span class="c1"># 布尔型
+</span><span class="n">value4</span> <span class="o">=</span> <span class="n">config</span><span class="p">.</span><span class="n">getboolean</span><span class="p">(</span><span class="s">'DEFAULT'</span><span class="p">,</span> <span class="s">'key4'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="回退值">回退值</h3>
+
+<p>在使用成员函数读取键对应的值时，可以使用<code class="language-plaintext highlighter-rouge">fallback</code>关键词指定在键不存在时返回的值，即回退值。</p>
+
+<p>需要注意的是，<strong>默认值优先于回退值，如果键在默认节中有定义，则使用默认节中的值，回退值不起作用：</strong></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 默认节中不存在同名的键，使用回退值
+</span><span class="n">value5</span> <span class="o">=</span> <span class="n">config</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'SECTION_NAME'</span><span class="p">,</span> <span class="s">'key5'</span><span class="p">,</span> <span class="n">fallback</span> <span class="o">=</span> <span class="s">'fallback_value'</span><span class="p">)</span>
+<span class="c1"># 默认节中存在同名的键，使用默认值，回退值不起作用
+</span><span class="n">value1</span> <span class="o">=</span> <span class="n">config</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'SECTION_NAME'</span><span class="p">,</span> <span class="s">'key1'</span><span class="p">,</span> <span class="n">fallback</span> <span class="o">=</span> <span class="s">'fallback_value'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="参考">参考</h2>
+
+<ol>
+  <li><a href="https://docs.python.org/3/library/configparser.html">configparser-Python Documentation</a></li>
+  <li><a href="https://stackoverflow.com/questions/19379120/how-to-read-a-config-file-using-python">读取配置文件-Stack Overflow</a></li>
+  <li><a href="https://github.com/cacois/python-configparser-examples">cacois/python-configparser-examples</a></li>
+  <li><a href="https://github.com/jaraco/configparser">jaraco/configparser</a></li>
+</ol>
+
+  </div>
+
+  
+  
+<script src="https://utteranc.es/client.js"
+        repo="zxl19/zxl19.github.io"
+        issue-term="title"
+        label="comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
+
+  
+</article>
+
+<div class="pagination">
+  
+    <span class="prev" >
+      <a href="http://localhost:4000/HomePage/camera-note/">
+        ← 上一篇
+      </a>
+    </span>
+  
+  
+    <span class="next" >
+      <a href="http://localhost:4000/HomePage/python-rosbag/">
+        下一篇 →
+      </a>
+    </span>
+  
+</div>
+      </div>
+    </div>
+
+    
+
+  </body>
+
+  
+  <script>
+    document.getElementById("main").classList.add("withtoc");
+  </script>
+  
+
+  <div class="wrapper-footer-mobile">
+    <footer class="footer">
+      <!-- Refer to https://codepen.io/ruandre/pen/howFi -->
+<ul class="svg-icon">
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li><a href="https://github.com/zxl19" class="icon-13 github" title="GitHub"><svg viewBox="0 0 512 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg><!--[if lt IE 9]><em>GitHub</em><![endif]--></a></li>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</ul>
+
+
+
+<p>Copyright © 2020-2025 zxl19. All Rights Reserved.</p>
+
+    </footer>
+
+
+</html>

@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>使用MATLAB进行面向对象编程 – Pepper小辣椒 – 一个工程师的存档点</title>
+
+      <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="使用MATLAB进行面向对象编程（Object-Oriented Programming，OOP）。
+
+" />
+    <meta property="og:description" content="使用MATLAB进行面向对象编程（Object-Oriented Programming，OOP）。
+
+" />
+    
+    <meta name="author" content="Pepper小辣椒" />
+
+    
+    <meta property="og:title" content="使用MATLAB进行面向对象编程" />
+    <meta property="twitter:title" content="使用MATLAB进行面向对象编程" />
+    
+  <!-- Async font loading -->
+<script>
+  window.WebFontConfig = {
+      custom: {
+          families: ['Spoqa Han Sans:100,300,400,700'],
+          urls: ['https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css']
+      },
+      timeout: 60000
+  };
+  (function(d) {
+      var wf = d.createElement('script'), s = d.scripts[0];
+      wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js';
+      s.parentNode.insertBefore(wf, s);
+  })(document);
+</script>
+
+<!--adobe fonts-->
+<script>
+    (function(d) {
+      var config = {
+        kitId: 'vbt3gjx',
+        scriptTimeout: 3000,
+        async: true
+      },
+      h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+    })(document);
+</script> 
+
+  <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link rel="stylesheet" type="text/css" href="/HomePage/style.css" />
+  <link rel="alternate" type="application/rss+xml" title="Pepper小辣椒 - 一个工程师的存档点" href="/HomePage/feed.xml" />
+  <link rel="shortcut icon" href="https://raw.githubusercontent.com/zxl19/zxl19.github.io/master/images/icon.png">
+  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+  <script src="https://unpkg.com/feather-icons"></script>
+  <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        inlineMath: [['$','$']]
+      }
+    });
+  </script>
+
+  <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+
+</head>
+
+  <body>
+    <div class="wrapper-sidebar">
+  <header class="sidebar clearfix">
+    <div class="site-info">
+      
+        <a href="/HomePage/" class="site-avatar"><img src="https://raw.githubusercontent.com/zxl19/zxl19.github.io/master/images/avatar.jpg" /></a>
+       
+      <h1 class="site-name"><a href="/HomePage/">Pepper小辣椒</a></h1>
+      <p class="site-description">一个工程师的存档点</p>
+    </div>
+  </header>
+
+  <div class="navlist">
+    <nav>
+      
+      
+      <a href="/HomePage/">首页</a>
+      
+      
+      
+      <a href="/HomePage/about">关于</a>
+      
+      
+      
+      <a href="/HomePage/archive">归档</a>
+      
+      
+      
+      <a href="/HomePage/tags">标签</a>
+      
+      
+    </nav>
+  </div>
+
+  <div class="wrapper-footer-desktop">
+    <footer class="footer">
+      <!-- Refer to https://codepen.io/ruandre/pen/howFi -->
+<ul class="svg-icon">
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li><a href="https://github.com/zxl19" class="icon-13 github" title="GitHub"><svg viewBox="0 0 512 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg><!--[if lt IE 9]><em>GitHub</em><![endif]--></a></li>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</ul>
+
+
+
+<p>Copyright © 2020-2025 zxl19. All Rights Reserved.</p>
+
+    </footer>
+  </div>
+</div>
+
+    
+      <aside class="toc">
+        <ul>
+  <li><a href="#">使用MATLAB进行面向对象编程</a>
+    <ul>
+      <li><a href="#类的定义">类的定义</a>
+        <ul>
+          <li><a href="#matlab自带的类模板">MATLAB自带的类模板</a></li>
+          <li><a href="#示例类实现">示例类实现</a></li>
+          <li><a href="#说明">说明</a></li>
+        </ul>
+      </li>
+      <li><a href="#资料">资料</a>
+        <ul>
+          <li><a href="#书籍">书籍</a></li>
+          <li><a href="#视频">视频</a></li>
+        </ul>
+      </li>
+      <li><a href="#参考">参考</a></li>
+    </ul>
+  </li>
+</ul>
+      </aside>
+    
+
+    <div id="main" role="main" class="wrapper-content">
+      <div class="container">
+        <article class="posts">
+  <h1>使用MATLAB进行面向对象编程</h1>
+
+  <div clsss="meta">
+    <span class="author">
+      zxl19
+    </span>
+
+    <span class="date">
+      2021-07-06
+    </span>
+
+    <ul class="tag">
+      
+      <li>
+        <a href="http://localhost:4000/HomePage/tags#MATLAB">
+          MATLAB
+        </a>
+      </li>
+      
+      <li>
+        <a href="http://localhost:4000/HomePage/tags#Note">
+          Note
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+
+  <div class="entry">
+    <p>使用MATLAB进行面向对象编程（Object-Oriented Programming，OOP）。</p>
+
+<!-- more -->
+
+<h2 id="类的定义">类的定义</h2>
+
+<h3 id="matlab自带的类模板">MATLAB自带的类模板</h3>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">classdef</span> <span class="n">MyClass</span>
+    <span class="c1">%MYCLASS 此处显示有关此类的摘要</span>
+    <span class="c1">%   此处显示详细说明</span>
+
+    <span class="k">properties</span>
+        <span class="n">Property1</span>
+    <span class="k">end</span>
+
+    <span class="k">methods</span>
+        <span class="k">function</span> <span class="n">obj</span> <span class="o">=</span> <span class="n">MyClass</span><span class="p">(</span><span class="n">inputArg1</span><span class="p">,</span><span class="n">inputArg2</span><span class="p">)</span>
+            <span class="c1">%MYCLASS 构造此类的实例</span>
+            <span class="c1">%   此处显示详细说明</span>
+            <span class="n">obj</span><span class="o">.</span><span class="n">Property1</span> <span class="o">=</span> <span class="n">inputArg1</span> <span class="o">+</span> <span class="n">inputArg2</span><span class="p">;</span>
+        <span class="k">end</span>
+
+        <span class="k">function</span> <span class="n">outputArg</span> <span class="o">=</span> <span class="n">method1</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span><span class="n">inputArg</span><span class="p">)</span>
+            <span class="c1">%METHOD1 此处显示有关此方法的摘要</span>
+            <span class="c1">%   此处显示详细说明</span>
+            <span class="n">outputArg</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">Property1</span> <span class="o">+</span> <span class="n">inputArg</span><span class="p">;</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<h3 id="示例类实现">示例类实现</h3>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">classdef</span> <span class="p">(</span><span class="n">Attributes</span><span class="p">)</span> <span class="n">ClassName</span> <span class="o">&lt;</span> <span class="n">SuperclassName</span>
+    <span class="k">properties</span> <span class="p">(</span><span class="n">Attributes</span><span class="p">)</span>
+        <span class="n">PropertyName</span>
+        <span class="n">PropertyName</span> <span class="nb">size</span> <span class="nb">class</span> <span class="p">{</span><span class="n">validation</span> <span class="nb">functions</span><span class="p">}</span>
+    <span class="k">end</span>
+    <span class="k">methods</span> <span class="p">(</span><span class="n">Attributes</span><span class="p">)</span>
+        <span class="k">function</span> <span class="n">obj</span> <span class="o">=</span> <span class="n">methodName</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span><span class="n">arg2</span><span class="p">,</span><span class="k">...</span><span class="c">)</span>
+            <span class="k">...</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+    <span class="nb">events</span> <span class="p">(</span><span class="n">Attributes</span><span class="p">)</span>
+        <span class="n">EventName</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="k">classdef</span> <span class="p">(</span><span class="n">Attributes</span><span class="p">)</span> <span class="n">ClassName</span> <span class="o">&lt;</span> <span class="n">SuperclassName</span>
+    <span class="nb">enumeration</span>
+        <span class="n">EnumName</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<h3 id="说明">说明</h3>
+
+<ol>
+  <li>类文件以<code class="language-plaintext highlighter-rouge">classdef</code>关键词开始，以<code class="language-plaintext highlighter-rouge">end</code>结束；</li>
+  <li>类中包含变量（<code class="language-plaintext highlighter-rouge">properties</code>）、方法（<code class="language-plaintext highlighter-rouge">methods</code>）、事件（<code class="language-plaintext highlighter-rouge">events</code>）和枚举（<code class="language-plaintext highlighter-rouge">enumeration</code>），以<code class="language-plaintext highlighter-rouge">end</code>结束；</li>
+  <li>类文件中可在类声明后定义只在类中使用的函数；</li>
+  <li>可直接使用模板新建类文件；</li>
+  <li>类中的函数可定义在外部文件中，但是要和类文件放到同一文件夹中，文件夹名为<code class="language-plaintext highlighter-rouge">@</code>+<code class="language-plaintext highlighter-rouge">类名</code>；</li>
+  <li>类成员名可按<code class="language-plaintext highlighter-rouge">Tab</code>自动补全；</li>
+  <li>变量的属性（<code class="language-plaintext highlighter-rouge">Attributes</code>）默认<code class="language-plaintext highlighter-rouge">public</code>，可给默认初值；</li>
+  <li>属性包括：<code class="language-plaintext highlighter-rouge">GetAccess</code>、<code class="language-plaintext highlighter-rouge">SetAccess</code>、<code class="language-plaintext highlighter-rouge">Constant</code>，其中<code class="language-plaintext highlighter-rouge">Constant</code>可用类名直接调用，无需创建对象；</li>
+  <li>可有多个变量代码块，对应不同属性；</li>
+  <li>方法包括构造函数（可选），与类文件同名，在构造对象时调用进行初始化，返回<code class="language-plaintext highlighter-rouge">obj</code>；</li>
+  <li>定义<code class="language-plaintext highlighter-rouge">get</code>和<code class="language-plaintext highlighter-rouge">set</code>方法，在特定变量被访问时调用：e.g. 输入值合法性判断；</li>
+  <li>方法的属性也可定义，<code class="language-plaintext highlighter-rouge">Static</code>属性方法，可用类名直接调用，无需创建对象；</li>
+  <li>可重载函数、运算符：e.g. <code class="language-plaintext highlighter-rouge">plot</code>、<code class="language-plaintext highlighter-rouge">subsref</code>、<code class="language-plaintext highlighter-rouge">subsasgn</code>；</li>
+  <li>使用<code class="language-plaintext highlighter-rouge">&lt;</code>从父类继承，实现代码复用，多个父类间用<code class="language-plaintext highlighter-rouge">&amp;</code>连接；</li>
+  <li>继承<code class="language-plaintext highlighter-rouge">handle</code>类，通过传递句柄（相当于传递引用）减少值传递和拷贝，e.g. <code class="language-plaintext highlighter-rouge">reset</code>；</li>
+  <li>构建<code class="language-plaintext highlighter-rouge">delete</code>方法，相当于析构函数；</li>
+  <li>通过对<code class="language-plaintext highlighter-rouge">handle</code>类定义事件来监督对象和变量的变化，调用<code class="language-plaintext highlighter-rouge">addlistener</code>函数构建<code class="language-plaintext highlighter-rouge">listener</code>，通过<code class="language-plaintext highlighter-rouge">notify</code>函数触发事件，<code class="language-plaintext highlighter-rouge">listener</code>接收触发后执行预先定义的回调函数（<code class="language-plaintext highlighter-rouge">Callback</code>）；</li>
+  <li>被监督变化的变量属性需要为<code class="language-plaintext highlighter-rouge">SetObservable</code>；</li>
+  <li>在修改类的定义后已创建的类不会更改，因此需要运行<code class="language-plaintext highlighter-rouge">clear</code>，重新运行代码；</li>
+</ol>
+
+<h2 id="资料">资料</h2>
+
+<h3 id="书籍">书籍</h3>
+
+<ol>
+  <li><a href="https://www.mathworks.com/help/pdf_doc/matlab/matlab_oop.pdf">Object-Oriented Programming</a></li>
+  <li>A Guide to MATLAB Object-Oriented Programming</li>
+  <li>MATLAB面向对象编程——从入门到设计模式</li>
+  <li><a href="http://faculty.ce.berkeley.edu/sanjay/e7/oop.pdf">Object Oriented Programming and Classes in MATLAB</a></li>
+</ol>
+
+<h3 id="视频">视频</h3>
+
+<ol>
+  <li><a href="https://www.mathworks.com/videos/developing-classes-overview-68982.html">Developing Classes Overview</a></li>
+  <li><a href="https://www.bilibili.com/video/BV1EA411g71G?p=1">【官方油管搬运】（英字）和大师学MATLAB编程 （Loren Shure的课堂）</a></li>
+</ol>
+
+<h2 id="参考">参考</h2>
+
+<ol>
+  <li><a href="https://www.mathworks.com/products/matlab/object-oriented-programming.html">Object-Oriented Programming in MATLAB</a></li>
+  <li><a href="https://www.mathworks.com/company/newsletters/articles/introduction-to-object-oriented-programming-in-matlab.html">Introduction to Object-Oriented Programming in MATLAB</a></li>
+  <li><a href="https://www.mathworks.com/help/matlab/object-oriented-programming.html">Classes-MATLAB Help Center</a></li>
+  <li><a href="https://www.zhihu.com/question/30858386">MATLAB面向对象编程是什么样的体验？-知乎</a></li>
+</ol>
+
+  </div>
+
+  
+  
+<script src="https://utteranc.es/client.js"
+        repo="zxl19/zxl19.github.io"
+        issue-term="title"
+        label="comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
+
+  
+</article>
+
+<div class="pagination">
+  
+    <span class="prev" >
+      <a href="http://localhost:4000/HomePage/math-tool/">
+        ← 上一篇
+      </a>
+    </span>
+  
+  
+    <span class="next" >
+      <a href="http://localhost:4000/HomePage/greek-letter/">
+        下一篇 →
+      </a>
+    </span>
+  
+</div>
+      </div>
+    </div>
+
+    
+
+  </body>
+
+  
+  <script>
+    document.getElementById("main").classList.add("withtoc");
+  </script>
+  
+
+  <div class="wrapper-footer-mobile">
+    <footer class="footer">
+      <!-- Refer to https://codepen.io/ruandre/pen/howFi -->
+<ul class="svg-icon">
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li><a href="https://github.com/zxl19" class="icon-13 github" title="GitHub"><svg viewBox="0 0 512 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg><!--[if lt IE 9]><em>GitHub</em><![endif]--></a></li>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</ul>
+
+
+
+<p>Copyright © 2020-2025 zxl19. All Rights Reserved.</p>
+
+    </footer>
+
+
+</html>

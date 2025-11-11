@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>PT下载配置 – Pepper小辣椒 – 一个工程师的存档点</title>
+
+      <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="我的PT下载配置。
+
+" />
+    <meta property="og:description" content="我的PT下载配置。
+
+" />
+    
+    <meta name="author" content="Pepper小辣椒" />
+
+    
+    <meta property="og:title" content="PT下载配置" />
+    <meta property="twitter:title" content="PT下载配置" />
+    
+  <!-- Async font loading -->
+<script>
+  window.WebFontConfig = {
+      custom: {
+          families: ['Spoqa Han Sans:100,300,400,700'],
+          urls: ['https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css']
+      },
+      timeout: 60000
+  };
+  (function(d) {
+      var wf = d.createElement('script'), s = d.scripts[0];
+      wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js';
+      s.parentNode.insertBefore(wf, s);
+  })(document);
+</script>
+
+<!--adobe fonts-->
+<script>
+    (function(d) {
+      var config = {
+        kitId: 'vbt3gjx',
+        scriptTimeout: 3000,
+        async: true
+      },
+      h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+    })(document);
+</script> 
+
+  <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link rel="stylesheet" type="text/css" href="/HomePage/style.css" />
+  <link rel="alternate" type="application/rss+xml" title="Pepper小辣椒 - 一个工程师的存档点" href="/HomePage/feed.xml" />
+  <link rel="shortcut icon" href="https://raw.githubusercontent.com/zxl19/zxl19.github.io/master/images/icon.png">
+  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+  <script src="https://unpkg.com/feather-icons"></script>
+  <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        inlineMath: [['$','$']]
+      }
+    });
+  </script>
+
+  <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+
+</head>
+
+  <body>
+    <div class="wrapper-sidebar">
+  <header class="sidebar clearfix">
+    <div class="site-info">
+      
+        <a href="/HomePage/" class="site-avatar"><img src="https://raw.githubusercontent.com/zxl19/zxl19.github.io/master/images/avatar.jpg" /></a>
+       
+      <h1 class="site-name"><a href="/HomePage/">Pepper小辣椒</a></h1>
+      <p class="site-description">一个工程师的存档点</p>
+    </div>
+  </header>
+
+  <div class="navlist">
+    <nav>
+      
+      
+      <a href="/HomePage/">首页</a>
+      
+      
+      
+      <a href="/HomePage/about">关于</a>
+      
+      
+      
+      <a href="/HomePage/archive">归档</a>
+      
+      
+      
+      <a href="/HomePage/tags">标签</a>
+      
+      
+    </nav>
+  </div>
+
+  <div class="wrapper-footer-desktop">
+    <footer class="footer">
+      <!-- Refer to https://codepen.io/ruandre/pen/howFi -->
+<ul class="svg-icon">
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li><a href="https://github.com/zxl19" class="icon-13 github" title="GitHub"><svg viewBox="0 0 512 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg><!--[if lt IE 9]><em>GitHub</em><![endif]--></a></li>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</ul>
+
+
+
+<p>Copyright © 2020-2025 zxl19. All Rights Reserved.</p>
+
+    </footer>
+  </div>
+</div>
+
+    
+      <aside class="toc">
+        <ul>
+  <li><a href="#">PT下载配置</a>
+    <ul>
+      <li><a href="#客户端配置">客户端配置</a>
+        <ul>
+          <li><a href="#web-ui配置">Web UI配置</a></li>
+          <li><a href="#数据备份">数据备份</a></li>
+          <li><a href="#使用技巧">使用技巧</a></li>
+          <li><a href="#制作种子">制作种子</a></li>
+        </ul>
+      </li>
+      <li><a href="#浏览器插件配置">浏览器插件配置</a>
+        <ul>
+          <li><a href="#浏览器插件安装">浏览器插件安装</a></li>
+          <li><a href="#下载服务器设置">下载服务器设置</a></li>
+          <li><a href="#站点设置">站点设置</a></li>
+        </ul>
+      </li>
+      <li><a href="#自动辅种">自动辅种</a></li>
+      <li><a href="#播放器配置">播放器配置</a>
+        <ul>
+          <li><a href="#potplayer">PotPlayer</a></li>
+          <li><a href="#kodi">Kodi</a></li>
+        </ul>
+      </li>
+      <li><a href="#媒体库管理">媒体库管理</a>
+        <ul>
+          <li><a href="#jellyfin">Jellyfin</a></li>
+        </ul>
+      </li>
+      <li><a href="#参考">参考</a></li>
+    </ul>
+  </li>
+</ul>
+      </aside>
+    
+
+    <div id="main" role="main" class="wrapper-content">
+      <div class="container">
+        <article class="posts">
+  <h1>PT下载配置</h1>
+
+  <div clsss="meta">
+    <span class="author">
+      zxl19
+    </span>
+
+    <span class="date">
+      2023-09-07
+    </span>
+
+    <ul class="tag">
+      
+      <li>
+        <a href="http://localhost:4000/HomePage/tags#PT">
+          PT
+        </a>
+      </li>
+      
+      <li>
+        <a href="http://localhost:4000/HomePage/tags#Blog">
+          Blog
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+
+  <div class="entry">
+    <p>我的PT下载配置。</p>
+
+<!-- more -->
+
+<h2 id="客户端配置">客户端配置</h2>
+
+<p>使用qBittorrent。</p>
+
+<h3 id="web-ui配置">Web UI配置</h3>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">设置</code>-&gt;<code class="language-plaintext highlighter-rouge">Web UI</code>，勾选<code class="language-plaintext highlighter-rouge">Web用户界面（远程控制）</code>；</li>
+  <li>
+    <p>配置IP地址和端口：</p>
+
+    <ul>
+      <li>IP地址：<code class="language-plaintext highlighter-rouge">0.0.0.0</code>为任何IPv4地址，<code class="language-plaintext highlighter-rouge">::</code>为任何IPv6地址，<code class="language-plaintext highlighter-rouge">*</code>为IPv4和IPv6地址；</li>
+      <li>端口：默认<code class="language-plaintext highlighter-rouge">8080</code>；</li>
+    </ul>
+  </li>
+  <li>配置用户名和密码；</li>
+  <li>勾选<code class="language-plaintext highlighter-rouge">对本地主机上的客户端跳过身份验证</code>；</li>
+  <li>取消勾选<code class="language-plaintext highlighter-rouge">启用跨站请求伪造（CSRF）保护</code>；</li>
+  <li>在浏览器中输入<code class="language-plaintext highlighter-rouge">http://localhost:8080</code>打开Web UI；</li>
+</ol>
+
+<h3 id="数据备份">数据备份</h3>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">设置</code>-&gt;<code class="language-plaintext highlighter-rouge">下载</code>-&gt;<code class="language-plaintext highlighter-rouge">默认保存路径</code>，勾选<code class="language-plaintext highlighter-rouge">复制.torrent文件到</code>或<code class="language-plaintext highlighter-rouge">复制下载完成的.torrent文件到</code>，设置种子的保存路径；</li>
+  <li>备份<code class="language-plaintext highlighter-rouge">C:\Users\用户名\AppData\Local\qBittorrent\BT_backup</code>文件夹；</li>
+  <li>使用<a href="https://www.chiphell.com/thread-2458627-1-1.html">脚本</a>备份和恢复；</li>
+</ol>
+
+<h3 id="使用技巧">使用技巧</h3>
+
+<ol>
+  <li>校验时使用备用速度限制，将下载速度设置为1KB/s，上传速度不限，防止校验失败重复下载；</li>
+</ol>
+
+<h3 id="制作种子">制作种子</h3>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">工具</code>-&gt;<code class="language-plaintext highlighter-rouge">生成Torrent</code>；</li>
+  <li>选择文件或文件夹路径；</li>
+  <li>勾选<code class="language-plaintext highlighter-rouge">私有torrent（不会在DHT网络上分发）</code>；</li>
+  <li>默认勾选<code class="language-plaintext highlighter-rouge">优化对齐</code>；</li>
+  <li>输入<code class="language-plaintext highlighter-rouge">Tracker URL</code>；</li>
+  <li>点击<code class="language-plaintext highlighter-rouge">制作Torrent</code>；</li>
+</ol>
+
+<h2 id="浏览器插件配置">浏览器插件配置</h2>
+
+<p>使用PT助手Plus，用于跨站搜索、下载、辅种。</p>
+
+<h3 id="浏览器插件安装">浏览器插件安装</h3>
+
+<ol>
+  <li>使用最新版的Microsoft Edge浏览器；</li>
+  <li>在插件商店中安装PT Plugin Plus插件；</li>
+</ol>
+
+<h3 id="下载服务器设置">下载服务器设置</h3>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">服务器类型</code>选择<code class="language-plaintext highlighter-rouge">qBittorrent</code>；</li>
+  <li><code class="language-plaintext highlighter-rouge">服务器地址</code>输入Web UI地址（含端口）；</li>
+</ol>
+
+<h3 id="站点设置">站点设置</h3>
+
+<ol>
+  <li>点击<code class="language-plaintext highlighter-rouge">一键导入站点</code>，自动导入已在当前浏览器上登录过并且已被插件收录的站点；</li>
+  <li>
+    <p>自定义添加未被插件收录的站点：</p>
+
+    <ul>
+      <li>输入站点名称、站点标签、网站地址；</li>
+      <li>选择网站架构，大部分为<code class="language-plaintext highlighter-rouge">NexusPHP</code>；</li>
+    </ul>
+  </li>
+  <li>勾选<code class="language-plaintext highlighter-rouge">允许获取用户信息</code>、<code class="language-plaintext highlighter-rouge">允许搜索</code>；</li>
+</ol>
+
+<h2 id="自动辅种">自动辅种</h2>
+
+<ol>
+  <li><a href="https://github.com/ledccn/IYUUAutoReseed">ledccn/IYUUAutoReseed</a></li>
+  <li><a href="https://github.com/ledccn/IYUUPlus">ledccn/IYUUPlus</a></li>
+  <li><a href="https://github.com/madwind/flexget_qbittorrent_mod">madwind/flexget_qbittorrent_mod</a></li>
+  <li><a href="https://github.com/tongyifan/Reseed-backend">tongyifan/Reseed-backend</a></li>
+</ol>
+
+<h2 id="播放器配置">播放器配置</h2>
+
+<h3 id="potplayer">PotPlayer</h3>
+
+<ol>
+  <li>在安装时勾选<code class="language-plaintext highlighter-rouge">安装额外的编解码器（OpenCodec）</code>和<code class="language-plaintext highlighter-rouge">Detect H/W decoder/encoder</code>；</li>
+  <li><code class="language-plaintext highlighter-rouge">右键</code>-&gt;<code class="language-plaintext highlighter-rouge">视频</code>-&gt;<code class="language-plaintext highlighter-rouge">视频渲染器</code>-&gt;<code class="language-plaintext highlighter-rouge">内置Direct3D 11视频渲染器</code>；</li>
+  <li>在播放原盘文件时建议关闭硬件解码，否则可能会导致画面过曝或丢帧；</li>
+  <li>使用<code class="language-plaintext highlighter-rouge">Tab</code>键打开屏幕显示（On Screen Display，OSD），查看音视频的解码器和渲染器工作情况；</li>
+</ol>
+
+<h3 id="kodi">Kodi</h3>
+
+<p>TODO</p>
+
+<h2 id="媒体库管理">媒体库管理</h2>
+
+<h3 id="jellyfin">Jellyfin</h3>
+
+<p>TODO</p>
+
+<h2 id="参考">参考</h2>
+
+<ol>
+  <li><a href="https://www.qbittorrent.org">qBittorrent Official Website</a></li>
+  <li><a href="https://www.chiphell.com/thread-2458627-1-1.html">重装系统，QB里的种子怎么备份和恢复？-Chiphell</a></li>
+  <li><a href="https://www.bilibili.com/read/cv15737433">PT站种子制作发布新手全攻略-bilibili</a></li>
+  <li><a href="https://github.com/qbittorrent/qBittorrent">qbittorrent/qBittorrent</a></li>
+  <li><a href="https://github.com/pt-plugins/PT-Plugin-Plus">pt-plugins/PT-Plugin-Plus</a></li>
+  <li><a href="https://github.com/xbmc/xbmc">xbmc/xbmc</a></li>
+  <li><a href="https://github.com/jellyfin/jellyfin">jellyfin/jellyfin</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/370267554">【玩转下载一】PT助手的安装及使用，聚合搜索，批量管理，一键签到、下载-红尘的文章-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/370799025">【玩转影音一】plex、emby、jellyfin、elfilm简介及对比-红尘的文章-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/391078574">【电影知识·一】电影命名规则解析-红尘的文章-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/412077939">【电影知识·二】影片清晰度解读，什么是TC、HD、BD、WEB-DL、枪版、高清、流媒体、蓝光原盘-红尘的文章-知乎</a></li>
+  <li><a href="https://www.zhihu.com/question/266754983/answer/2393730119">4K\UHD电影 原盘\REMUX 和 BDrip之间的区别明显吗？-落下的夜的回答-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/354928248">浅析影视资源不同版本区别（REMUX）-周树人姓鲁的文章-知乎</a></li>
+  <li><a href="https://www.zhihu.com/question/31453118/answer/2647191266">哪个高清压制小组出的片质量最高最稳定最适合收藏？-哦咯槑的回答-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/504190202">超详细PotPlayer教程：下载安装与优化设置 保姆级教程-专做软件自动化的文章-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/639279632">Potplayer播放器-下载，安装，设置-Potplayer用户必看-东岸体验官的文章-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/600527656">Potplayer详细教程:入门使用&amp;进阶操作技巧指南-dimo的文章-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/210856993">手把手教你用Kodi，搭建最强私人「娱乐/学习」中心！（小白篇）-什么值得买的文章-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/469759517">玩转「KODI」篇一：初始配置、电影刮削和无损音轨直通-仙鱼的文章-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/478246252">玩转「KODI」篇二：IPTV保姆级教程-仙鱼的文章-知乎</a></li>
+  <li><a href="https://juejin.cn/post/7226181917997482040">Windows搭建私人影音媒体平台【远程访问Jellyfin播放器】-掘金</a></li>
+  <li><a href="https://post.smzdm.com/p/akmg5wgr/">让NAS成为你的私人影视中心，Jellyfin+kodi如何部署-什么值得买</a></li>
+  <li><a href="https://client.sspai.com/post/76951">Jellyfin+Kodi打造个人流媒体管理中心-少数派</a></li>
+</ol>
+
+  </div>
+
+  
+  
+<script src="https://utteranc.es/client.js"
+        repo="zxl19/zxl19.github.io"
+        issue-term="title"
+        label="comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
+
+  
+</article>
+
+<div class="pagination">
+  
+    <span class="prev" >
+      <a href="http://localhost:4000/HomePage/license-material/">
+        ← 上一篇
+      </a>
+    </span>
+  
+  
+    <span class="next" >
+      <a href="http://localhost:4000/HomePage/system-monitor/">
+        下一篇 →
+      </a>
+    </span>
+  
+</div>
+      </div>
+    </div>
+
+    
+
+  </body>
+
+  
+  <script>
+    document.getElementById("main").classList.add("withtoc");
+  </script>
+  
+
+  <div class="wrapper-footer-mobile">
+    <footer class="footer">
+      <!-- Refer to https://codepen.io/ruandre/pen/howFi -->
+<ul class="svg-icon">
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li><a href="https://github.com/zxl19" class="icon-13 github" title="GitHub"><svg viewBox="0 0 512 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg><!--[if lt IE 9]><em>GitHub</em><![endif]--></a></li>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</ul>
+
+
+
+<p>Copyright © 2020-2025 zxl19. All Rights Reserved.</p>
+
+    </footer>
+
+
+</html>

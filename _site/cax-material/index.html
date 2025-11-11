@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>CAX技术学习资料存档 – Pepper小辣椒 – 一个工程师的存档点</title>
+
+      <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="我的CAX技术学习资料存档。
+
+" />
+    <meta property="og:description" content="我的CAX技术学习资料存档。
+
+" />
+    
+    <meta name="author" content="Pepper小辣椒" />
+
+    
+    <meta property="og:title" content="CAX技术学习资料存档" />
+    <meta property="twitter:title" content="CAX技术学习资料存档" />
+    
+  <!-- Async font loading -->
+<script>
+  window.WebFontConfig = {
+      custom: {
+          families: ['Spoqa Han Sans:100,300,400,700'],
+          urls: ['https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css']
+      },
+      timeout: 60000
+  };
+  (function(d) {
+      var wf = d.createElement('script'), s = d.scripts[0];
+      wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js';
+      s.parentNode.insertBefore(wf, s);
+  })(document);
+</script>
+
+<!--adobe fonts-->
+<script>
+    (function(d) {
+      var config = {
+        kitId: 'vbt3gjx',
+        scriptTimeout: 3000,
+        async: true
+      },
+      h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+    })(document);
+</script> 
+
+  <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link rel="stylesheet" type="text/css" href="/HomePage/style.css" />
+  <link rel="alternate" type="application/rss+xml" title="Pepper小辣椒 - 一个工程师的存档点" href="/HomePage/feed.xml" />
+  <link rel="shortcut icon" href="https://raw.githubusercontent.com/zxl19/zxl19.github.io/master/images/icon.png">
+  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+  <script src="https://unpkg.com/feather-icons"></script>
+  <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        inlineMath: [['$','$']]
+      }
+    });
+  </script>
+
+  <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+
+</head>
+
+  <body>
+    <div class="wrapper-sidebar">
+  <header class="sidebar clearfix">
+    <div class="site-info">
+      
+        <a href="/HomePage/" class="site-avatar"><img src="https://raw.githubusercontent.com/zxl19/zxl19.github.io/master/images/avatar.jpg" /></a>
+       
+      <h1 class="site-name"><a href="/HomePage/">Pepper小辣椒</a></h1>
+      <p class="site-description">一个工程师的存档点</p>
+    </div>
+  </header>
+
+  <div class="navlist">
+    <nav>
+      
+      
+      <a href="/HomePage/">首页</a>
+      
+      
+      
+      <a href="/HomePage/about">关于</a>
+      
+      
+      
+      <a href="/HomePage/archive">归档</a>
+      
+      
+      
+      <a href="/HomePage/tags">标签</a>
+      
+      
+    </nav>
+  </div>
+
+  <div class="wrapper-footer-desktop">
+    <footer class="footer">
+      <!-- Refer to https://codepen.io/ruandre/pen/howFi -->
+<ul class="svg-icon">
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li><a href="https://github.com/zxl19" class="icon-13 github" title="GitHub"><svg viewBox="0 0 512 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg><!--[if lt IE 9]><em>GitHub</em><![endif]--></a></li>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</ul>
+
+
+
+<p>Copyright © 2020-2025 zxl19. All Rights Reserved.</p>
+
+    </footer>
+  </div>
+</div>
+
+    
+      <aside class="toc">
+        <ul>
+  <li><a href="#">CAX技术学习资料存档</a>
+    <ul>
+      <li><a href="#cax-hello-world">CAX Hello World</a></li>
+      <li><a href="#cad">CAD</a>
+        <ul>
+          <li><a href="#机械设计基础">机械设计基础</a></li>
+          <li><a href="#软件">软件</a></li>
+          <li><a href="#开源">开源</a></li>
+        </ul>
+      </li>
+      <li><a href="#cae">CAE</a>
+        <ul>
+          <li><a href="#有限元">有限元</a></li>
+          <li><a href="#软件-1">软件</a></li>
+        </ul>
+      </li>
+      <li><a href="#cam">CAM</a>
+        <ul>
+          <li><a href="#g代码">G代码</a></li>
+          <li><a href="#3d打印">3D打印</a>
+            <ul>
+              <li><a href="#模型">模型</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><a href="#参考">参考</a></li>
+    </ul>
+  </li>
+</ul>
+      </aside>
+    
+
+    <div id="main" role="main" class="wrapper-content">
+      <div class="container">
+        <article class="posts">
+  <h1>CAX技术学习资料存档</h1>
+
+  <div clsss="meta">
+    <span class="author">
+      zxl19
+    </span>
+
+    <span class="date">
+      2024-05-22
+    </span>
+
+    <ul class="tag">
+      
+      <li>
+        <a href="http://localhost:4000/HomePage/tags#CAX">
+          CAX
+        </a>
+      </li>
+      
+      <li>
+        <a href="http://localhost:4000/HomePage/tags#Archive">
+          Archive
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+
+  <div class="entry">
+    <p>我的CAX技术学习资料存档。</p>
+
+<!-- more -->
+
+<h2 id="cax-hello-world">CAX Hello World</h2>
+
+<p>计算机辅助技术（Computer-Aided Everything，CAX），包括计算机辅助设计（Computer-Aided Design，CAD）、计算机辅助工程（Computer-Aided Engineering，CAE）、计算机辅助制造（Computer-Aided Manufacturing，CAM）等。</p>
+
+<h2 id="cad">CAD</h2>
+
+<h3 id="机械设计基础">机械设计基础</h3>
+
+<ol>
+  <li><a href="https://github.com/muziing/domm">muziing/domm</a></li>
+  <li><a href="https://github.com/SeaniWu/CMCS">SeaniWu/CMCS</a></li>
+</ol>
+
+<h3 id="软件">软件</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">名称</th>
+      <th style="text-align: left">用途</th>
+      <th style="text-align: left">公司</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">UG NX</td>
+      <td style="text-align: left">车辆</td>
+      <td style="text-align: left">Siemens</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">CATIA</td>
+      <td style="text-align: left">车辆</td>
+      <td style="text-align: left">Dassault Systèmes</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Inventor</td>
+      <td style="text-align: left">机械</td>
+      <td style="text-align: left">Autodesk</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">SolidWorks</td>
+      <td style="text-align: left">机械</td>
+      <td style="text-align: left">Dassault Systèmes</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Rhino</td>
+      <td style="text-align: left">工业设计、建筑</td>
+      <td style="text-align: left">Robert McNeel</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="开源">开源</h3>
+
+<ol>
+  <li><a href="https://github.com/FreeCAD/FreeCAD">FreeCAD/FreeCAD</a></li>
+  <li><a href="https://github.com/openscad/openscad">openscad/openscad</a></li>
+  <li><a href="https://github.com/LibreCAD/LibreCAD">LibreCAD/LibreCAD</a></li>
+  <li><a href="https://github.com/BRL-CAD/brlcad">BRL-CAD/brlcad</a></li>
+</ol>
+
+<h2 id="cae">CAE</h2>
+
+<h3 id="有限元">有限元</h3>
+
+<ol>
+  <li><a href="https://github.com/jjcremmers/PyFEM">jjcremmers/PyFEM</a></li>
+  <li><a href="https://github.com/hplgit/fem-book">hplgit/fem-book</a></li>
+  <li><a href="https://github.com/Meelfy/FEM">Meelfy/FEM</a></li>
+  <li><a href="https://github.com/chtld/Finite_Element_Method_Matlab">chtld/Finite_Element_Method_Matlab</a></li>
+</ol>
+
+<h3 id="软件-1">软件</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">名称</th>
+      <th style="text-align: left">用途</th>
+      <th style="text-align: left">公司</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">HyperMesh</td>
+      <td style="text-align: left">前处理、网格划分</td>
+      <td style="text-align: left">Altair</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">ANSYS</td>
+      <td style="text-align: left">通用有限元分析</td>
+      <td style="text-align: left">ANSYS</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Abaqus</td>
+      <td style="text-align: left">通用有限元分析</td>
+      <td style="text-align: left">Dassault Systèmes</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">ADAMS</td>
+      <td style="text-align: left">多体动力学分析</td>
+      <td style="text-align: left">Hexagon</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">LS-DYNA</td>
+      <td style="text-align: left">非线性动力学分析</td>
+      <td style="text-align: left">ANSYS</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="cam">CAM</h2>
+
+<h3 id="g代码">G代码</h3>
+
+<ol>
+  <li><a href="https://zhuanlan.zhihu.com/p/445194379">G-Code代码教程-eyeglasses的文章-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/76438715">数控机床G、M代码大全，数控人手必备！-UG编程莫莫的文章-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/358380998">CNC加工中心最全G代码、M代码大全总结-模企汇人力资源的文章-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/71763326">史上最全的数控G代码编程详解-鸿莫ug编程的文章-知乎</a></li>
+</ol>
+
+<h3 id="3d打印">3D打印</h3>
+
+<ol>
+  <li>Meshmixer <a href="https://meshmixer.com">链接</a></li>
+  <li>MeshLab <a href="https://www.meshlab.net">链接</a></li>
+  <li>Cura <a href="https://ultimaker.com/software/ultimaker-cura/">链接</a></li>
+  <li>MeshInspector <a href="https://meshinspector.com">链接</a></li>
+</ol>
+
+<h4 id="模型">模型</h4>
+
+<ol>
+  <li><a href="https://github.com/nasa/NASA-3D-Resources">nasa/NASA-3D-Resources</a></li>
+  <li><a href="https://github.com/gklyne/things">gklyne/things</a></li>
+  <li><a href="https://github.com/jasminemoreira/3D_printing">jasminemoreira/3D_printing</a></li>
+</ol>
+
+<h2 id="参考">参考</h2>
+
+<ol>
+  <li><a href="https://www.zhihu.com/question/358903003/answer/46259999254">LaTeX中有哪些奇技淫巧？-SeaniWu的回答-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/81680138">Linux上5个最好CAD软件-Linux中国的文章-知乎</a></li>
+  <li><a href="https://github.com/cnr-isti-vclab/meshlab">cnr-isti-vclab/meshlab</a></li>
+  <li><a href="https://github.com/Ultimaker/Cura">Ultimaker/Cura</a></li>
+  <li><a href="https://github.com/MeshInspector/MeshInspector">MeshInspector/MeshInspector</a></li>
+</ol>
+
+  </div>
+
+  
+  
+<script src="https://utteranc.es/client.js"
+        repo="zxl19/zxl19.github.io"
+        issue-term="title"
+        label="comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
+
+  
+</article>
+
+<div class="pagination">
+  
+    <span class="prev" >
+      <a href="http://localhost:4000/HomePage/latex-editor/">
+        ← 上一篇
+      </a>
+    </span>
+  
+  
+    <span class="next" >
+      <a href="http://localhost:4000/HomePage/photography-master/">
+        下一篇 →
+      </a>
+    </span>
+  
+</div>
+      </div>
+    </div>
+
+    
+
+  </body>
+
+  
+  <script>
+    document.getElementById("main").classList.add("withtoc");
+  </script>
+  
+
+  <div class="wrapper-footer-mobile">
+    <footer class="footer">
+      <!-- Refer to https://codepen.io/ruandre/pen/howFi -->
+<ul class="svg-icon">
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li><a href="https://github.com/zxl19" class="icon-13 github" title="GitHub"><svg viewBox="0 0 512 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg><!--[if lt IE 9]><em>GitHub</em><![endif]--></a></li>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</ul>
+
+
+
+<p>Copyright © 2020-2025 zxl19. All Rights Reserved.</p>
+
+    </footer>
+
+
+</html>

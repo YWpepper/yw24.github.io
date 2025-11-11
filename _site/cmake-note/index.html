@@ -1,0 +1,1466 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>CMake学习笔记 – Pepper小辣椒 – 一个工程师的存档点</title>
+
+      <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="我的CMake学习笔记及常用工程模板。
+
+" />
+    <meta property="og:description" content="我的CMake学习笔记及常用工程模板。
+
+" />
+    
+    <meta name="author" content="Pepper小辣椒" />
+
+    
+    <meta property="og:title" content="CMake学习笔记" />
+    <meta property="twitter:title" content="CMake学习笔记" />
+    
+  <!-- Async font loading -->
+<script>
+  window.WebFontConfig = {
+      custom: {
+          families: ['Spoqa Han Sans:100,300,400,700'],
+          urls: ['https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css']
+      },
+      timeout: 60000
+  };
+  (function(d) {
+      var wf = d.createElement('script'), s = d.scripts[0];
+      wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js';
+      s.parentNode.insertBefore(wf, s);
+  })(document);
+</script>
+
+<!--adobe fonts-->
+<script>
+    (function(d) {
+      var config = {
+        kitId: 'vbt3gjx',
+        scriptTimeout: 3000,
+        async: true
+      },
+      h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+    })(document);
+</script> 
+
+  <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link rel="stylesheet" type="text/css" href="/HomePage/style.css" />
+  <link rel="alternate" type="application/rss+xml" title="Pepper小辣椒 - 一个工程师的存档点" href="/HomePage/feed.xml" />
+  <link rel="shortcut icon" href="https://raw.githubusercontent.com/zxl19/zxl19.github.io/master/images/icon.png">
+  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+  <script src="https://unpkg.com/feather-icons"></script>
+  <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        inlineMath: [['$','$']]
+      }
+    });
+  </script>
+
+  <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+
+</head>
+
+  <body>
+    <div class="wrapper-sidebar">
+  <header class="sidebar clearfix">
+    <div class="site-info">
+      
+        <a href="/HomePage/" class="site-avatar"><img src="https://raw.githubusercontent.com/zxl19/zxl19.github.io/master/images/avatar.jpg" /></a>
+       
+      <h1 class="site-name"><a href="/HomePage/">Pepper小辣椒</a></h1>
+      <p class="site-description">一个工程师的存档点</p>
+    </div>
+  </header>
+
+  <div class="navlist">
+    <nav>
+      
+      
+      <a href="/HomePage/">首页</a>
+      
+      
+      
+      <a href="/HomePage/about">关于</a>
+      
+      
+      
+      <a href="/HomePage/archive">归档</a>
+      
+      
+      
+      <a href="/HomePage/tags">标签</a>
+      
+      
+    </nav>
+  </div>
+
+  <div class="wrapper-footer-desktop">
+    <footer class="footer">
+      <!-- Refer to https://codepen.io/ruandre/pen/howFi -->
+<ul class="svg-icon">
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li><a href="https://github.com/zxl19" class="icon-13 github" title="GitHub"><svg viewBox="0 0 512 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg><!--[if lt IE 9]><em>GitHub</em><![endif]--></a></li>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</ul>
+
+
+
+<p>Copyright © 2020-2025 zxl19. All Rights Reserved.</p>
+
+    </footer>
+  </div>
+</div>
+
+    
+      <aside class="toc">
+        <ul>
+  <li><a href="#">CMake学习笔记</a>
+    <ul>
+      <li><a href="#cmake-hello-world">CMake Hello World</a></li>
+      <li><a href="#常用模板">常用模板</a>
+        <ul>
+          <li><a href="#文件夹结构">文件夹结构</a></li>
+          <li><a href="#cmakelists">CMakeLists</a>
+            <ul>
+              <li><a href="#非ros工程">非ROS工程</a></li>
+              <li><a href="#ros工程">ROS工程</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><a href="#cmakelists结构说明">CMakeLists结构说明</a>
+        <ul>
+          <li><a href="#基本结构">基本结构</a></li>
+          <li><a href="#常用变量">常用变量</a></li>
+          <li><a href="#常用命令">常用命令</a>
+            <ul>
+              <li><a href="#基础说明">基础说明</a></li>
+              <li><a href="#工程配置">工程配置</a></li>
+              <li><a href="#编译规则">编译规则</a></li>
+              <li><a href="#辅助函数">辅助函数</a></li>
+              <li><a href="#条件判断">条件判断</a>
+                <ul>
+                  <li><a href="#常用语法">常用语法</a></li>
+                  <li><a href="#表达式优先级">表达式优先级</a></li>
+                  <li><a href="#表达式类型说明">表达式类型说明</a></li>
+                </ul>
+              </li>
+              <li><a href="#循环遍历">循环遍历</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><a href="#资料">资料</a>
+        <ul>
+          <li><a href="#网站">网站</a></li>
+          <li><a href="#github">GitHub</a></li>
+          <li><a href="#书籍">书籍</a></li>
+        </ul>
+      </li>
+      <li><a href="#参考">参考</a></li>
+    </ul>
+  </li>
+</ul>
+      </aside>
+    
+
+    <div id="main" role="main" class="wrapper-content">
+      <div class="container">
+        <article class="posts">
+  <h1>CMake学习笔记</h1>
+
+  <div clsss="meta">
+    <span class="author">
+      zxl19
+    </span>
+
+    <span class="date">
+      2021-03-28
+    </span>
+
+    <ul class="tag">
+      
+      <li>
+        <a href="http://localhost:4000/HomePage/tags#C++">
+          C++
+        </a>
+      </li>
+      
+      <li>
+        <a href="http://localhost:4000/HomePage/tags#CMake">
+          CMake
+        </a>
+      </li>
+      
+      <li>
+        <a href="http://localhost:4000/HomePage/tags#Note">
+          Note
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+
+  <div class="entry">
+    <p>我的CMake学习笔记及常用工程模板。</p>
+
+<!-- more -->
+
+<h2 id="cmake-hello-world">CMake Hello World</h2>
+
+<ol>
+  <li>CMake是Cross Platform Make的简称，是开源、跨平台的构建生成（build generator）工具；</li>
+  <li>CMake工程的构建方式可以分为内部构建（in-source build）和外部构建（out-of-source build）两种，外部构建使用<code class="language-plaintext highlighter-rouge">build</code>文件夹存储编译生成文件，使源代码与编译生成文件分离，便于维护，推荐使用外部构建；</li>
+  <li>
+    <p>CMake使用<code class="language-plaintext highlighter-rouge">CMakeLists.txt</code>配置文件控制编译过程，以C++编译过程为例：</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">mkdir </span>build
+ <span class="nb">cd </span>build    <span class="c"># 外部构建</span>
+ cmake ..    <span class="c"># CMake根据CMakeLists.txt配置文件生成Makefile文件</span>
+ make <span class="nt">-j</span>     <span class="c"># 编译器根据Makefile文件完成编译过程</span>
+</code></pre></div>    </div>
+
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">-j</code>选项用于指定并行任务数，一般设置为CPU物理核心数<code class="language-plaintext highlighter-rouge">$(nproc)</code>；</li>
+      <li>如果任务中存在大量I/O等待，可以设置为CPU物理核心数加一；</li>
+      <li>如果不指定并行任务数，表示不限制，可能导致内存占用过多，编译过程卡死，需要谨慎使用；</li>
+    </ul>
+  </li>
+  <li>
+    <p>CMake提供了图形化交互界面CMake GUI，使用以下命令安装并运行：</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c"># 安装</span>
+ <span class="nb">sudo </span>apt <span class="nb">install </span>cmake-qt-gui
+ <span class="c"># 运行</span>
+ cmake-gui
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h2 id="常用模板">常用模板</h2>
+
+<h3 id="文件夹结构">文件夹结构</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">.</span>
+├── app                     <span class="c"># 存放可执行文件，调用各个模块</span>
+├── build                   <span class="c"># 存放编译生成文件</span>
+├── cmake                   <span class="c"># 存放.cmake文件，查找依赖库</span>
+├── CMakeLists.txt          <span class="c"># 工程编译规则</span>
+├── config                  <span class="c"># 存放配置文件，硬件参数和软件参数分开保存</span>
+├── doc                     <span class="c"># 存放各个模块的开发文档</span>
+├── docker                  <span class="c"># 存放Docker镜像</span>
+├── include                 <span class="c"># 存放头文件，模块化</span>
+├── launch                  <span class="c"># 存放.launch文件，启动ROS功能包的各个节点</span>
+├── LICENSE                 <span class="c"># 开源协议</span>
+├── log                     <span class="c"># 存放日志文件</span>
+├── msg                     <span class="c"># 存放.msg文件，自定义ROS消息类型</span>
+├── package.xml             <span class="c"># 依赖的ROS功能包</span>
+├── README.md               <span class="c"># 工程说明文档</span>
+├── rviz_cfg                <span class="c"># 存放.rviz文件，配置Rviz可视化参数</span>
+├── scripts                 <span class="c"># 存放Python脚本，用于后处理和可视化</span>
+├── src                     <span class="c"># 存放源文件，模块化，编译成库</span>
+│   ├── algorithm           <span class="c"># 基础算法，滤波器、最近邻、RANSAC、样条曲线等</span>
+│   ├── CMakeLists.txt      <span class="c"># 添加子目录</span>
+│   ├── common              <span class="c"># 模块间共用的类、函数、常量等</span>
+│   ├── slam                <span class="c"># SLAM算法，激光、视觉、时间同步、位姿估计</span>
+│   └── ui                  <span class="c"># 可视化界面</span>
+├── <span class="nb">test</span>                    <span class="c"># 存放单元测试文件，测试各个模块</span>
+└── third_party             <span class="c"># 存放非本地安装的第三方库</span>
+</code></pre></div></div>
+
+<ol>
+  <li>外部使用的头文件放在<code class="language-plaintext highlighter-rouge">include</code>文件夹中；</li>
+  <li>内部使用的头文件放在<code class="language-plaintext highlighter-rouge">src</code>文件夹中，与同名源文件放在同一目录下；</li>
+</ol>
+
+<h3 id="cmakelists">CMakeLists</h3>
+
+<h4 id="非ros工程">非ROS工程</h4>
+
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cmake_minimum_required</span><span class="p">(</span>VERSION 3.0<span class="p">)</span>
+<span class="nb">project</span><span class="p">(</span>project_name<span class="p">)</span>
+
+<span class="nb">set</span><span class="p">(</span>CMAKE_BUILD_TYPE <span class="s2">"Release"</span><span class="p">)</span>                                 <span class="c1"># 编译模式：Debug/Release</span>
+<span class="nb">set</span><span class="p">(</span>CMAKE_CXX_STANDARD 11<span class="p">)</span>                                      <span class="c1"># 指定C++标准：98、11、14、17、20</span>
+<span class="nb">set</span><span class="p">(</span>CMAKE_CXX_STANDARD_REQUIRED ON<span class="p">)</span>                             <span class="c1"># 强制使用指定的C++标准</span>
+<span class="nb">set</span><span class="p">(</span>CMAKE_CXX_EXTENSIONS OFF<span class="p">)</span>
+<span class="nb">set</span><span class="p">(</span>CMAKE_CXX_FLAGS <span class="s2">"-std=c++11 -Wall -pthread -fexceptions"</span><span class="p">)</span>   <span class="c1"># 针对C++的编译选项（经测试用此方式无法指定C++标准，可能是由于CMake版本较高）</span>
+<span class="nb">set</span><span class="p">(</span>CMAKE_CXX_FLAGS_DEBUG <span class="s2">"</span><span class="si">${</span><span class="nv">CMAKE_CXX_FLAGS</span><span class="si">}</span><span class="s2"> -O1 -g -ggdb"</span><span class="p">)</span>    <span class="c1"># 针对C++在Debug模式下的编译选项</span>
+<span class="nb">set</span><span class="p">(</span>CMAKE_CXX_FLAGS_RELEASE <span class="s2">"</span><span class="si">${</span><span class="nv">CMAKE_CXX_FLAGS</span><span class="si">}</span><span class="s2"> -O3"</span><span class="p">)</span>           <span class="c1"># 针对C++在Release模式下的编译选项</span>
+<span class="nb">set</span><span class="p">(</span>CMAKE_EXPORT_COMPILE_COMMANDS ON<span class="p">)</span>                           <span class="c1"># 生成compile_commands.json文件</span>
+
+<span class="nb">find_package</span><span class="p">(</span>Eigen3 REQUIRED QUIET<span class="p">)</span>
+<span class="nb">find_package</span><span class="p">(</span>Ceres REQUIRED QUIET<span class="p">)</span>
+<span class="nb">find_package</span><span class="p">(</span>PCL REQUIRED QUIET<span class="p">)</span>
+<span class="nb">find_package</span><span class="p">(</span>OpenCV REQUIRED QUIET<span class="p">)</span>
+<span class="nb">find_package</span><span class="p">(</span>G2O REQUIRED QUIET<span class="p">)</span>
+<span class="nb">find_package</span><span class="p">(</span>GTSAM REQUIRED QUIET<span class="p">)</span>
+<span class="nb">find_package</span><span class="p">(</span>gflags REQUIRED QUIET<span class="p">)</span>
+<span class="nb">find_package</span><span class="p">(</span>glog REQUIRED QUIET<span class="p">)</span>
+<span class="nb">find_package</span><span class="p">(</span>gtest REQUIRED QUIET<span class="p">)</span>
+<span class="nb">set</span><span class="p">(</span>SOPHUS_INCLUDE_DIRS <span class="s2">"</span><span class="si">${</span><span class="nv">PROJECT_SOURCE_DIR</span><span class="si">}</span><span class="s2">/third_party/Sophus"</span><span class="p">)</span>
+
+<span class="nb">include_directories</span><span class="p">(</span>
+    include
+    <span class="si">${</span><span class="nv">EIGEN3_INCLUDE_DIRS</span><span class="si">}</span>
+    <span class="c1"># ${CERES_INCLUDE_DIRS}</span>
+    <span class="si">${</span><span class="nv">PCL_INCLUDE_DIRS</span><span class="si">}</span>
+    <span class="si">${</span><span class="nv">OpenCV_INCLUDE_DIRS</span><span class="si">}</span>
+    <span class="si">${</span><span class="nv">G2O_INCLUDE_DIRS</span><span class="si">}</span>
+    <span class="si">${</span><span class="nv">GTSAM_INCLUDE_DIRS</span><span class="si">}</span>
+    <span class="si">${</span><span class="nv">SOPHUS_INCLUDE_DIRS</span><span class="si">}</span>
+<span class="p">)</span>
+
+<span class="c1"># link_directories(</span>
+<span class="c1">#     include</span>
+<span class="c1">#     ${CERES_LIBRARY_DIRS}</span>
+<span class="c1">#     ${PCL_LIBRARY_DIRS}</span>
+<span class="c1">#     ${OpenCV_LIBRARY_DIRS}</span>
+<span class="c1">#     ${G2O_INCLUDE_DIRS}</span>
+<span class="c1">#     ${GTSAM_LIBRARY_DIRS}</span>
+<span class="c1"># )</span>
+
+<span class="nb">add_executable</span><span class="p">(</span><span class="si">${</span><span class="nv">PROJECT_NAME</span><span class="si">}</span> src/main.cpp<span class="p">)</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span><span class="si">${</span><span class="nv">PROJECT_NAME</span><span class="si">}</span>
+    <span class="si">${</span><span class="nv">CERES_LIBRARIES</span><span class="si">}</span>
+    <span class="si">${</span><span class="nv">PCL_LIBRARIES</span><span class="si">}</span>
+    <span class="si">${</span><span class="nv">OpenCV_LIBRARIES</span><span class="si">}</span>
+    <span class="si">${</span><span class="nv">G2O_LIBRARIES</span><span class="si">}</span>
+    <span class="si">${</span><span class="nv">GTSAM_LIBRARIES</span><span class="si">}</span>
+    gflags
+    glog
+    gtest
+<span class="p">)</span>
+</code></pre></div></div>
+
+<h4 id="ros工程">ROS工程</h4>
+
+<ol>
+  <li>使用<code class="language-plaintext highlighter-rouge">catkin_create_pkg</code>命令新建功能包，会自动生成<code class="language-plaintext highlighter-rouge">CMakeLists.txt</code>文件，其中包含格式说明；</li>
+  <li>参考<a href="http://wiki.ros.org/catkin/CMakeLists.txt">ROS官方文档</a>；</li>
+  <li>参考<a href="https://github.com/HKUST-Aerial-Robotics/A-LOAM">HKUST-Aerial-Robotics/A-LOAM</a>、<a href="https://github.com/RobustFieldAutonomyLab/LeGO-LOAM">RobustFieldAutonomyLab/LeGO-LOAM</a>、<a href="https://github.com/TixiaoShan/LIO-SAM">TixiaoShan/LIO-SAM</a>、<a href="https://github.com/TixiaoShan/LVI-SAM">TixiaoShan/LVI-SAM</a>等算法；</li>
+  <li>参考<a href="https://github.com/koide3/hdl_graph_slam">koide3/hdl_graph_slam</a>使用Nodelet；</li>
+  <li>参考<a href="https://github.com/facontidavide/LeGO-LOAM-BOR">facontidavide/LeGO-LOAM-BOR</a>、<a href="https://github.com/koide3/LeGO-LOAM-BOR">koide3/LeGO-LOAM-BOR</a>实现离线和在线两种模式；</li>
+  <li>参考<a href="https://www.zhihu.com/question/553199862/answer/2672914532">知乎回答</a>进行正向设计；</li>
+</ol>
+
+<h2 id="cmakelists结构说明">CMakeLists结构说明</h2>
+
+<h3 id="基本结构">基本结构</h3>
+
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 工程配置</span>
+<span class="nb">cmake_minimum_required</span><span class="p">()</span>
+<span class="nb">project</span><span class="p">()</span>
+<span class="nb">set</span><span class="p">()</span>
+<span class="nb">unset</span><span class="p">()</span>
+<span class="nb">include</span><span class="p">()</span>
+
+<span class="c1"># 编译规则</span>
+<span class="nb">find_package</span><span class="p">()</span>
+<span class="nb">include_directories</span><span class="p">()</span>
+<span class="c1"># link_directories()</span>
+<span class="nb">add_library</span><span class="p">()</span>
+<span class="nb">add_executable</span><span class="p">()</span>
+<span class="nb">add_dependencies</span><span class="p">()</span>
+<span class="nb">target_link_libraries</span><span class="p">()</span>
+<span class="nb">target_include_directories</span><span class="p">()</span>
+
+<span class="c1"># 辅助函数</span>
+<span class="nb">option</span><span class="p">()</span>
+<span class="nb">message</span><span class="p">()</span>
+<span class="nb">add_definitions</span><span class="p">()</span>
+<span class="nb">add_subdirectory</span><span class="p">()</span>
+<span class="nb">aux_source_directory</span><span class="p">()</span>
+<span class="nb">add_compile_options</span><span class="p">()</span>
+<span class="nb">install</span><span class="p">()</span>
+<span class="nb">enable_testing</span><span class="p">()</span>
+<span class="nb">add_test</span><span class="p">()</span>
+
+<span class="c1"># 条件判断</span>
+<span class="nb">if</span><span class="p">()</span>
+    <span class="c1"># do something</span>
+<span class="nb">elseif</span><span class="p">()</span>
+    <span class="c1"># do something</span>
+<span class="nb">else</span><span class="p">()</span>
+    <span class="c1"># do something</span>
+<span class="nb">endif</span><span class="p">()</span>
+
+<span class="c1"># 循环遍历</span>
+<span class="c1">## for循环</span>
+<span class="nb">foreach</span><span class="p">()</span>
+    <span class="c1"># do something</span>
+<span class="nb">endforeach</span><span class="p">()</span>
+<span class="c1">## while循环</span>
+<span class="nb">while</span><span class="p">()</span>
+    <span class="c1"># do something</span>
+<span class="nb">endwhile</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h3 id="常用变量">常用变量</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">变量名</th>
+      <th style="text-align: left">含义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">PROJECT_NAME</code></td>
+      <td style="text-align: left">工程名</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">PROJECT_SOURCE_DIR</code></td>
+      <td style="text-align: left">工程顶层目录</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">PROJECT_BINARY_DIR</code></td>
+      <td style="text-align: left">工程编译目录</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">CMAKE_VERSION</code></td>
+      <td style="text-align: left">CMake版本</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">CMAKE_SOURCE_DIR</code></td>
+      <td style="text-align: left">工程顶层目录</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">CMAKE_BINARY_DIR</code></td>
+      <td style="text-align: left">工程编译目录</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">CMAKE_CURRENT_SOURCE_DIR</code></td>
+      <td style="text-align: left">当前处理<code class="language-plaintext highlighter-rouge">CMakeLists.txt</code>文件的所在目录</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">CMAKE_CURRENT_BINARY_DIR</code></td>
+      <td style="text-align: left">当前处理<code class="language-plaintext highlighter-rouge">CMakeLists.txt</code>文件的编译目录</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">CMAKE_BUILD_TYPE</code></td>
+      <td style="text-align: left">编译模式</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">CMAKE_CXX_STANDARD</code></td>
+      <td style="text-align: left">使用的C++标准</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">CMAKE_CXX_STANDARD_REQUIRED</code></td>
+      <td style="text-align: left">是否强制使用指定的C++标准</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">CMAKE_CXX_FLAGS</code></td>
+      <td style="text-align: left">编译参数</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">CMAKE_CXX_FLAGS_DEBUG</code></td>
+      <td style="text-align: left">Debug模式下的编译参数</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">CMAKE_CXX_FLAGS_RELEASE</code></td>
+      <td style="text-align: left">Release模式下的编译参数</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">CMAKE_MODULE_PATH</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">include()</code>命令和<code class="language-plaintext highlighter-rouge">find_package()</code>命令查找CMake模块的路径</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">CMAKE_INSTALL_PREFIX</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">install()</code>命令使用相对路径安装时的路径前缀</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">XXX_DIR</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">XXX</code>库的查找路径</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">XXX_FOUND</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">XXX</code>库是否找到</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">XXX_VERSION</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">XXX</code>库版本</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">XXX_INCLUDE_DIRS</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">XXX</code>库的头文件路径</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">XXX_LIBRARY_DIRS</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">XXX</code>库的链接路径</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">XXX_LIBRARIES</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">XXX</code>库的库文件名</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="常用命令">常用命令</h3>
+
+<h4 id="基础说明">基础说明</h4>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">CMakeLists.txt</code>文件使用<code class="language-plaintext highlighter-rouge">#</code>注释；</li>
+  <li>功能函数名不区分大小写，支持大小写混用，但是推荐使用小写，可读性更好；</li>
+  <li>功能函数参数中<code class="language-plaintext highlighter-rouge">&lt;...&gt;</code>表示必需项，<code class="language-plaintext highlighter-rouge">[...]</code>表示可选项，<code class="language-plaintext highlighter-rouge">|</code>表示或；</li>
+  <li>变量名和字符串区分大小写，推荐使用大写，可读性更好；</li>
+</ol>
+
+<h4 id="工程配置">工程配置</h4>
+
+<ol>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">cmake_minimum_required()</code>用于指定CMake的最低版本，常用命令格式如下：</p>
+
+    <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">cmake_minimum_required</span><span class="p">(</span>VERSION &lt;major.minor&gt;<span class="p">)</span>
+</code></pre></div>    </div>
+
+    <p>示例：</p>
+
+    <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">cmake_minimum_required</span><span class="p">(</span>VERSION 3.1.0<span class="p">)</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">project()</code>用于指定工程名，常用命令格式如下：</p>
+
+    <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">project</span><span class="p">(</span>&lt;project_name&gt;<span class="p">)</span>
+</code></pre></div>    </div>
+
+    <p>示例：</p>
+
+    <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">project</span><span class="p">(</span>HelloWorld<span class="p">)</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">set()</code>用于定义变量并赋值，常用命令格式如下：</p>
+
+    <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">set</span><span class="p">(</span>&lt;variable&gt; &lt;value&gt;<span class="p">)</span>
+</code></pre></div>    </div>
+
+    <ul>
+      <li>CMake中，<code class="language-plaintext highlighter-rouge">X</code>表示变量名，<code class="language-plaintext highlighter-rouge">${X}</code>表示变量值；</li>
+      <li>
+        <p>常用于设置编译选项，需要注意追加和覆盖的区别：</p>
+
+        <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nb">set</span><span class="p">(</span>CMAKE_CXX_FLAGS <span class="s2">"</span><span class="si">${</span><span class="nv">CMAKE_CXX_FLAGS</span><span class="si">}</span><span class="s2"> -O3"</span><span class="p">)</span>   <span class="c1"># 追加</span>
+  <span class="nb">set</span><span class="p">(</span>CMAKE_CXX_FLAGS <span class="s2">"-O3"</span><span class="p">)</span>                      <span class="c1"># 覆盖</span>
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">unset()</code>用于取消定义变量，常用命令格式如下：</p>
+
+    <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">unset</span><span class="p">(</span>&lt;variable&gt;<span class="p">)</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">include()</code>用于从文件或模块中加载并运行CMake代码，常用命令格式如下：</p>
+
+    <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">include</span><span class="p">(</span>&lt;file | module&gt;<span class="p">)</span>
+</code></pre></div>    </div>
+
+    <ul>
+      <li>
+        <p>推荐将查找依赖库的部分写到<code class="language-plaintext highlighter-rouge">cmake</code>文件夹中的<code class="language-plaintext highlighter-rouge">packages.cmake</code>文件中，使用<code class="language-plaintext highlighter-rouge">include()</code>包含该文件即可：</p>
+
+        <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nb">include</span><span class="p">(</span>cmake/packages.cmake<span class="p">)</span>
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">packages.cmake</code>文件示例：</p>
+
+        <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nb">list</span><span class="p">(</span>APPEND CMAKE_MODULE_PATH <span class="si">${</span><span class="nv">PROJECT_SOURCE_DIR</span><span class="si">}</span>/cmake<span class="p">)</span>
+
+  <span class="nb">find_package</span><span class="p">(</span>Eigen3 REQUIRED QUIET<span class="p">)</span>
+  <span class="nb">find_package</span><span class="p">(</span>PCL REQUIRED QUIET<span class="p">)</span>
+
+  <span class="nb">include_directories</span><span class="p">(</span>
+      include
+      <span class="si">${</span><span class="nv">EIGEN3_INCLUDE_DIRS</span><span class="si">}</span>
+      <span class="si">${</span><span class="nv">PCL_INCLUDE_DIRS</span><span class="si">}</span>
+  <span class="p">)</span>
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<h4 id="编译规则">编译规则</h4>
+
+<ol>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">find_package()</code>用于查找外部工程并加载相关设置，外部工程通常为功能包或第三方依赖库，常用命令格式如下：</p>
+
+    <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">find_package</span><span class="p">(</span>&lt;package&gt; [version] [QUIET] [REQUIRED]
+              <span class="s2">[[COMPONENTS] [components...]]</span><span class="p">)</span>
+</code></pre></div>    </div>
+
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">find_package()</code>具有三种模式：
+        <ul>
+          <li>Module模式：
+            <ul>
+              <li>搜索<code class="language-plaintext highlighter-rouge">Find&lt;PackageName&gt;.cmake</code>文件；</li>
+              <li>首先在<code class="language-plaintext highlighter-rouge">CMAKE_MODULE_PATH</code>中查找，其次在CMake安装的<code class="language-plaintext highlighter-rouge">Find Modules</code>中查找；</li>
+              <li>搜索的文件通常由操作系统或者CMake提供，启发式（heuristic）搜索，容易过时；</li>
+            </ul>
+          </li>
+          <li>Config模式：
+            <ul>
+              <li>搜索<code class="language-plaintext highlighter-rouge">&lt;lowercasePackageName&gt;-config.cmake</code>或<code class="language-plaintext highlighter-rouge">&lt;PackageName&gt;Config.cmake</code>文件；</li>
+              <li>如果指定了版本，则搜索<code class="language-plaintext highlighter-rouge">&lt;lowercasePackageName&gt;-config-version.cmake</code>或<code class="language-plaintext highlighter-rouge">&lt;PackageName&gt;ConfigVersion.cmake</code>文件；</li>
+              <li>搜索的文件通常由第三方依赖库提供，作为第三方依赖库的一部分安装，包含详细信息，不需要启发式搜索，相比于Module模式更加可靠，</li>
+            </ul>
+          </li>
+          <li>FetchContent重定向模式：
+            <ul>
+              <li>使用<code class="language-plaintext highlighter-rouge">FetchContent</code>模块；</li>
+              <li>3.24版本新增；</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>在安装第三方依赖库时，相关<code class="language-plaintext highlighter-rouge">.cmake</code>文件的路径会写入<code class="language-plaintext highlighter-rouge">XXX_DIR</code>环境变量中，<code class="language-plaintext highlighter-rouge">find_package()</code>通过查找<code class="language-plaintext highlighter-rouge">XXX_DIR</code>环境变量的值来查找上述<code class="language-plaintext highlighter-rouge">.cmake</code>文件，进而查找库文件的位置；</li>
+      <li>如果第三方依赖库未安装到系统中，可以对于<code class="language-plaintext highlighter-rouge">XXX_DIR</code>变量手动赋值，再使用<code class="language-plaintext highlighter-rouge">find_package()</code>查找第三方依赖库，常用于查找<code class="language-plaintext highlighter-rouge">third_party</code>文件夹中非本地安装的第三方依赖库；</li>
+    </ul>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">include_directories()</code>用于指定包含头文件目录，常用命令格式如下：</p>
+
+    <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">include_directories</span><span class="p">(</span>&lt;directory1&gt; [directory2 ...]<span class="p">)</span>
+</code></pre></div>    </div>
+
+    <ul>
+      <li>目录名被添加到<code class="language-plaintext highlighter-rouge">INCLUDE_DIRECTORIES</code>变量中；</li>
+      <li>如果使用相对路径，认为其相对于<code class="language-plaintext highlighter-rouge">CMAKE_CURRENT_SOURCE_DIR</code>；</li>
+      <li>纯头文件库只需要<code class="language-plaintext highlighter-rouge">include_directories()</code>即可，例如：Eigen；</li>
+    </ul>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">link_directories()</code>用于指定链接时查找的库文件目录，常用命令格式如下：</p>
+
+    <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">link_directories</span><span class="p">(</span>&lt;directory1&gt; [directory2 ...]<span class="p">)</span>
+</code></pre></div>    </div>
+
+    <ul>
+      <li>如果使用相对路径，认为其相对于<code class="language-plaintext highlighter-rouge">CMAKE_CURRENT_SOURCE_DIR</code>；</li>
+      <li>CMake和ROS均<strong>不建议</strong>使用<code class="language-plaintext highlighter-rouge">link_directories()</code>，因为使用<code class="language-plaintext highlighter-rouge">find_package()</code>已经能够获得外部工程的完整绝对路径，通常可以直接使用<code class="language-plaintext highlighter-rouge">target_link_libraries()</code>；</li>
+    </ul>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">add_library()</code>用于将指定的源文件编译成库，常用命令格式如下：</p>
+
+    <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">add_library</span><span class="p">(</span>&lt;name&gt; [STATIC | SHARED | MODULE]
+             &lt;source1&gt; [source2 ...]<span class="p">)</span>
+</code></pre></div>    </div>
+
+    <ul>
+      <li>
+        <p>库的类型说明：</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th style="text-align: left">库的类型</th>
+              <th style="text-align: left">说明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="text-align: left"><code class="language-plaintext highlighter-rouge">STATIC</code></td>
+              <td style="text-align: left">静态库，在链接时使用，在Linux系统中后缀为<code class="language-plaintext highlighter-rouge">.a</code>，在Windows系统中后缀为<code class="language-plaintext highlighter-rouge">.lib</code>，用空间换时间，全量更新</td>
+            </tr>
+            <tr>
+              <td style="text-align: left"><code class="language-plaintext highlighter-rouge">SHARED</code></td>
+              <td style="text-align: left">在程序运行时动态链接并加载，在Linux系统中被称为共享库，后缀为<code class="language-plaintext highlighter-rouge">.so</code>（shared object），在Windows系统中被称为动态链接库，后缀为<code class="language-plaintext highlighter-rouge">.dll</code>（dynamic link library），用时间换空间，增量更新</td>
+            </tr>
+            <tr>
+              <td style="text-align: left"><code class="language-plaintext highlighter-rouge">MODULE</code></td>
+              <td style="text-align: left">插件库，不链接，在程序运行时使用<code class="language-plaintext highlighter-rouge">dlopen</code>动态加载，使用较少</td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+      <li>如果未显式指定库的类型，将根据<code class="language-plaintext highlighter-rouge">BUILD_SHARED_LIBS</code>变量的值进行判断；</li>
+      <li>
+        <p>常用于将各个模块分别编译成库：</p>
+
+        <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nb">add_library</span><span class="p">(</span><span class="si">${</span><span class="nv">PROJECT_NAME</span><span class="si">}</span>.algorithm SHARED
+      foo1.cpp
+      bar1.cpp
+  <span class="p">)</span>
+  <span class="nb">add_library</span><span class="p">(</span><span class="si">${</span><span class="nv">PROJECT_NAME</span><span class="si">}</span>.common SHARED
+      foo2.cpp
+      bar2.cpp
+  <span class="p">)</span>
+  <span class="nb">add_library</span><span class="p">(</span><span class="si">${</span><span class="nv">PROJECT_NAME</span><span class="si">}</span>.slam SHARED
+      foo3.cpp
+      bar3.cpp
+  <span class="p">)</span>
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">add_executable()</code>用于将指定的源文件编译成可执行文件，常用命令格式如下：</p>
+
+    <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">add_executable</span><span class="p">(</span>&lt;name&gt;
+                &lt;source1&gt; [source2 ...]<span class="p">)</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">add_dependencies()</code>用于指定顶层编译目标（top-level targets）之间的依赖关系，常用命令格式如下：</p>
+
+    <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">add_dependencies</span><span class="p">(</span>&lt;target&gt;
+                  &lt;dependency1&gt; [dependency2 ...]<span class="p">)</span>
+</code></pre></div>    </div>
+
+    <ul>
+      <li>顶层编译目标是由<code class="language-plaintext highlighter-rouge">add_library()</code>、<code class="language-plaintext highlighter-rouge">add_executable()</code>、<code class="language-plaintext highlighter-rouge">add_custom_target()</code>命令创建的编译目标，不包括<code class="language-plaintext highlighter-rouge">install()</code>命令生成的编译目标；</li>
+      <li>当定义的顶层编译目标依赖其他顶层编译目标时，需要使用<code class="language-plaintext highlighter-rouge">add_dependencies()</code>指定依赖关系，保证在构建本目标之前，本目标依赖的其他目标已构建完成；</li>
+      <li>常用于<code class="language-plaintext highlighter-rouge">target_link_libraries()</code>之前；</li>
+    </ul>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">target_link_libraries()</code>用于指定编译目标需要链接的依赖库，常用命令格式如下：</p>
+
+    <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">target_link_libraries</span><span class="p">(</span>&lt;target&gt;
+                       &lt;item1&gt; [item2 ...]<span class="p">)</span>
+</code></pre></div>    </div>
+
+    <ul>
+      <li>编译目标由<code class="language-plaintext highlighter-rouge">add_executable()</code>、<code class="language-plaintext highlighter-rouge">add_library()</code>命令创建；</li>
+      <li>建议在使用<code class="language-plaintext highlighter-rouge">find_package()</code>找到依赖库后使用<code class="language-plaintext highlighter-rouge">${XXX_LIBRARIES}</code>的形式链接相关库文件；</li>
+      <li>可以使用<code class="language-plaintext highlighter-rouge">-lfoo</code>或<code class="language-plaintext highlighter-rouge">foo.lib</code>的形式指定库文件名，会搜索并链接库文件<code class="language-plaintext highlighter-rouge">libfoo.so</code>，常用于处理<code class="language-plaintext highlighter-rouge">libfoo.so</code>作为依赖库的依赖库时出现的未定义符号问题，一般情况下不建议使用；</li>
+    </ul>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">target_include_directories()</code>用于指定编译目标需要包含的头文件目录，常用命令格式如下：</p>
+
+    <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">target_include_directories</span><span class="p">(</span>&lt;target&gt;
+                            &lt;PRIVATE | INTERFACE | PUBLIC&gt;
+                            &lt;item1&gt; [item2 ...]
+ <span class="p">)</span>
+</code></pre></div>    </div>
+
+    <ul>
+      <li>编译目标由<code class="language-plaintext highlighter-rouge">add_executable()</code>、<code class="language-plaintext highlighter-rouge">add_library()</code>命令创建；</li>
+      <li>
+        <p>参数说明：</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th style="text-align: left">参数</th>
+              <th style="text-align: left">说明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="text-align: left"><code class="language-plaintext highlighter-rouge">PRIVATE</code></td>
+              <td style="text-align: left">私有，仅在编译目标内部使用，外部无法通过编译目标使用</td>
+            </tr>
+            <tr>
+              <td style="text-align: left"><code class="language-plaintext highlighter-rouge">INTERFACE</code></td>
+              <td style="text-align: left">接口，编译目标内部不使用，外部通过编译目标使用</td>
+            </tr>
+            <tr>
+              <td style="text-align: left"><code class="language-plaintext highlighter-rouge">PUBLIC</code></td>
+              <td style="text-align: left">公开，编译目标内部使用，外部通过编译目标使用，<code class="language-plaintext highlighter-rouge">PUBLIC = PRIVATE + INTERFACE</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+      <li>如果使用相对路径，认为其相对于<code class="language-plaintext highlighter-rouge">CMAKE_CURRENT_SOURCE_DIR</code>；</li>
+      <li><code class="language-plaintext highlighter-rouge">include_directories()</code>包含的头文件目录可以被工程中的所有文件访问，但是<code class="language-plaintext highlighter-rouge">target_include_directories()</code>只能被指定的编译目标访问；</li>
+      <li>如果工程中存在不同目录下的同名头文件，为了避免混淆，建议使用<code class="language-plaintext highlighter-rouge">target_include_directories()</code>；</li>
+    </ul>
+  </li>
+</ol>
+
+<h4 id="辅助函数">辅助函数</h4>
+
+<ol>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">option()</code>用于设置编译选项，常用语法如下：</p>
+
+    <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">option</span><span class="p">(</span>&lt;variable&gt; <span class="s2">"help string describing option"</span>
+        [value]<span class="p">)</span>
+</code></pre></div>    </div>
+
+    <ul>
+      <li>编译选项是布尔值，分为<code class="language-plaintext highlighter-rouge">ON</code>和<code class="language-plaintext highlighter-rouge">OFF</code>；</li>
+      <li>如果未显式指定编译选项的值，默认为<code class="language-plaintext highlighter-rouge">OFF</code>；</li>
+    </ul>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">message()</code>用于输出消息，常用语法如下：</p>
+
+    <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">message</span><span class="p">(</span>[mode] <span class="s2">"message to display"</span> ...<span class="p">)</span>
+</code></pre></div>    </div>
+
+    <ul>
+      <li>
+        <p>消息类型说明：</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th style="text-align: left">消息类型</th>
+              <th style="text-align: left">说明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="text-align: left"><code class="language-plaintext highlighter-rouge">FATAL_ERROR</code></td>
+              <td style="text-align: left">CMake错误，停止处理和生成</td>
+            </tr>
+            <tr>
+              <td style="text-align: left"><code class="language-plaintext highlighter-rouge">SEND_ERROR</code></td>
+              <td style="text-align: left">CMake错误，继续处理但跳过生成</td>
+            </tr>
+            <tr>
+              <td style="text-align: left"><code class="language-plaintext highlighter-rouge">WARNING</code></td>
+              <td style="text-align: left">CMake警告，继续处理</td>
+            </tr>
+            <tr>
+              <td style="text-align: left"><code class="language-plaintext highlighter-rouge">AUTHOR_WARNING</code></td>
+              <td style="text-align: left">CMake开发者警告，继续处理</td>
+            </tr>
+            <tr>
+              <td style="text-align: left"><code class="language-plaintext highlighter-rouge">DEPRECATION</code></td>
+              <td style="text-align: left">如果定义了<code class="language-plaintext highlighter-rouge">CMAKE_ERROR_DEPRECATED</code>或<code class="language-plaintext highlighter-rouge">CMAKE_WARN_DEPRECATED</code>，则输出CMake弃用错误或警告，否则无消息输出</td>
+            </tr>
+            <tr>
+              <td style="text-align: left"><code class="language-plaintext highlighter-rouge">NOTICE</code>或未显式指定</td>
+              <td style="text-align: left">打印到<code class="language-plaintext highlighter-rouge">stderr</code>的重要消息</td>
+            </tr>
+            <tr>
+              <td style="text-align: left"><code class="language-plaintext highlighter-rouge">STATUS</code></td>
+              <td style="text-align: left">一行以内的简明信息，供项目用户使用</td>
+            </tr>
+            <tr>
+              <td style="text-align: left"><code class="language-plaintext highlighter-rouge">VERBOSE</code></td>
+              <td style="text-align: left">详细信息，供项目用户使用</td>
+            </tr>
+            <tr>
+              <td style="text-align: left"><code class="language-plaintext highlighter-rouge">DEBUG</code></td>
+              <td style="text-align: left">详细信息，供项目开发者使用</td>
+            </tr>
+            <tr>
+              <td style="text-align: left"><code class="language-plaintext highlighter-rouge">TRACE</code></td>
+              <td style="text-align: left">细粒度信息，包含底层实现细节，临时使用，在项目发布、打包时删除</td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">add_definitions()</code>用于为编译指令添加<code class="language-plaintext highlighter-rouge">-D</code>开头的定义，常用语法如下：</p>
+
+    <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">add_definitions</span><span class="p">(</span>-DFOO -DBAR ...<span class="p">)</span>
+</code></pre></div>    </div>
+
+    <ul>
+      <li>
+        <p>常用于定义宏，实现条件编译：</p>
+
+        <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nb">option</span><span class="p">(</span>USE_FLAG_A <span class="s2">"Use Flag A"</span> ON<span class="p">)</span>
+  <span class="nb">option</span><span class="p">(</span>USE_FLAG_B <span class="s2">"Use Flag B"</span> OFF<span class="p">)</span>
+  <span class="nb">if</span><span class="p">(</span>USE_FLAG_A<span class="p">)</span>
+      <span class="nb">message</span><span class="p">(</span><span class="s2">"USING_FLAG_A"</span><span class="p">)</span>
+      <span class="nb">add_definitions</span><span class="p">(</span>-DFLAG_A<span class="p">)</span>   <span class="c1"># 定义了名为FLAG_A的宏</span>
+  <span class="nb">elseif</span><span class="p">(</span>USE_FLAG_B<span class="p">)</span>
+      <span class="nb">message</span><span class="p">(</span><span class="s2">"USING_FLAG_B"</span><span class="p">)</span>
+      <span class="nb">add_definitions</span><span class="p">(</span>-DFLAG_B<span class="p">)</span>   <span class="c1"># 定义了名为FLAG_B的宏</span>
+  <span class="nb">else</span><span class="p">()</span>
+      <span class="nb">message</span><span class="p">(</span><span class="s2">"DEFAULT"</span><span class="p">)</span>
+  <span class="nb">endif</span><span class="p">()</span>
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>条件编译示例：</p>
+
+        <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="cp">#ifdef FLAG_A
+</span>      <span class="c1">// do something</span>
+  <span class="cp">#elif FLAG_B
+</span>      <span class="c1">// do something</span>
+  <span class="cp">#else
+</span>      <span class="c1">// do something</span>
+  <span class="cp">#endif
+</span></code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">add_subdirectory()</code>用于添加子目录到工程中进行构建，常用语法如下：</p>
+
+    <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">add_subdirectory</span><span class="p">(</span>&lt;directory&gt;<span class="p">)</span>
+</code></pre></div>    </div>
+
+    <ul>
+      <li>添加的子目录中需要存在<code class="language-plaintext highlighter-rouge">CMakeLists.txt</code>文件；</li>
+      <li>如果使用相对路径，认为其相对于<code class="language-plaintext highlighter-rouge">CMAKE_CURRENT_SOURCE_DIR</code>；</li>
+    </ul>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">aux_source_directory()</code>用于将指定目录中的源文件列表保存到变量中，常用语法如下：</p>
+
+    <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">aux_source_directory</span><span class="p">(</span>&lt;directory&gt; &lt;variable&gt;<span class="p">)</span>
+</code></pre></div>    </div>
+
+    <ul>
+      <li>如果使用相对路径，认为其相对于<code class="language-plaintext highlighter-rouge">CMAKE_CURRENT_SOURCE_DIR</code>；</li>
+      <li>
+        <p>常用于构建源文件列表：</p>
+
+        <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nb">aux_source_directory</span><span class="p">(</span><span class="si">${</span><span class="nv">PROJECT_NAME</span><span class="si">}</span>/test TEST_SOURCES<span class="p">)</span>
+</code></pre></div>        </div>
+
+        <ul>
+          <li>需要注意的是，源文件列表不会随着目录中的源文件增加而自动更新，需要手动重新运行CMake来更新源文件列表；</li>
+        </ul>
+      </li>
+      <li>
+        <p>也可以使用<code class="language-plaintext highlighter-rouge">set()</code>构建源文件列表：</p>
+
+        <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nb">set</span><span class="p">(</span>TEST_SOURCES
+      <span class="si">${</span><span class="nv">PROJECT_NAME</span><span class="si">}</span>/test/test_algorithm.cpp
+      <span class="c1"># ${PROJECT_NAME}/test/test_common.cpp</span>
+      <span class="si">${</span><span class="nv">PROJECT_NAME</span><span class="si">}</span>/test/test_slam.cpp
+  <span class="p">)</span>
+</code></pre></div>        </div>
+
+        <ul>
+          <li>可以直观看出源文件列表的内容，并且可以控制添加到源文件列表中的源文件；</li>
+          <li>修改<code class="language-plaintext highlighter-rouge">CMakeLists.txt</code>文件后必须重新运行CMake，可以保证源文件列表的及时更新；</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">add_compile_options()</code>用于设置编译选项，常用语法如下：</p>
+
+    <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">add_compile_options</span><span class="p">(</span>&lt;option1&gt; [option2 ...]<span class="p">)</span>
+</code></pre></div>    </div>
+
+    <ul>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">add_compile_options()</code>和<code class="language-plaintext highlighter-rouge">add_definitions()</code>针对所有编译器（包括C和C++），应慎重使用：</p>
+
+        <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nb">add_compile_options</span><span class="p">(</span>-std=c++11 -Wall -pthread -fexceptions<span class="p">)</span>     <span class="c1"># 不推荐</span>
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>常用于屏蔽编译器警告，一般情况下只对于第三方依赖库使用，对于内部代码建议修复编译警告：</p>
+
+        <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  -w          <span class="c1"># 屏蔽所有警告</span>
+  -Wxxx       <span class="c1"># 启用特定警告</span>
+  -Wno-xxx    <span class="c1"># 屏蔽特定警告</span>
+  <span class="c1"># 示例</span>
+  -Wall       <span class="c1"># 启用所有标准警告</span>
+  -Wno-all    <span class="c1"># 屏蔽所有标准警告</span>
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">install()</code>用于定义安装规则，包括编译目标、文件、目录等；</p>
+
+    <ul>
+      <li>
+        <p>安装编译目标的常用语法如下：</p>
+
+        <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nb">install</span><span class="p">(</span>TARGETS &lt;target1&gt; [target2 ...]
+          &lt;ARCHIVE | LIBRARY | RUNTIME&gt; DESTINATION &lt;directory&gt;
+  <span class="p">)</span>
+</code></pre></div>        </div>
+
+        <ul>
+          <li>编译目标由<code class="language-plaintext highlighter-rouge">add_executable()</code>、<code class="language-plaintext highlighter-rouge">add_library()</code>命令创建；</li>
+          <li>
+            <p>参数说明：</p>
+
+            <table>
+              <thead>
+                <tr>
+                  <th style="text-align: left">参数</th>
+                  <th style="text-align: left">说明</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="text-align: left"><code class="language-plaintext highlighter-rouge">ARCHIVE</code></td>
+                  <td style="text-align: left"><code class="language-plaintext highlighter-rouge">STATIC</code>类型的库</td>
+                </tr>
+                <tr>
+                  <td style="text-align: left"><code class="language-plaintext highlighter-rouge">LIBRARY</code></td>
+                  <td style="text-align: left"><code class="language-plaintext highlighter-rouge">SHARED</code>和<code class="language-plaintext highlighter-rouge">MODULE</code>类型的库</td>
+                </tr>
+                <tr>
+                  <td style="text-align: left"><code class="language-plaintext highlighter-rouge">RUNTIME</code></td>
+                  <td style="text-align: left">可执行文件</td>
+                </tr>
+              </tbody>
+            </table>
+          </li>
+          <li>
+            <p>如果使用相对路径，认为其相对于<code class="language-plaintext highlighter-rouge">CMAKE_INSTALL_PREFIX</code>：</p>
+
+            <ul>
+              <li>在Unix系统中，<code class="language-plaintext highlighter-rouge">CMAKE_INSTALL_PREFIX</code>默认值为<code class="language-plaintext highlighter-rouge">/usr/local</code>；</li>
+              <li>在Windows系统中，<code class="language-plaintext highlighter-rouge">CMAKE_INSTALL_PREFIX</code>默认值为<code class="language-plaintext highlighter-rouge">C:/Program Files/${PROJECT_NAME}</code>；</li>
+            </ul>
+          </li>
+          <li>
+            <p>示例：</p>
+
+            <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nb">install</span><span class="p">(</span>TARGETS <span class="si">${</span><span class="nv">PROJECT_NAME</span><span class="si">}</span>.algorithm
+          LIBRARY DESTINATION lib
+          ARCHIVE DESTINATION lib
+          RUNTIME DESTINATION bin
+  <span class="p">)</span>
+  <span class="nb">install</span><span class="p">(</span>TARGETS <span class="si">${</span><span class="nv">PROJECT_NAME</span><span class="si">}</span>.common
+          LIBRARY DESTINATION lib
+          ARCHIVE DESTINATION lib
+          RUNTIME DESTINATION bin
+  <span class="p">)</span>
+  <span class="nb">install</span><span class="p">(</span>TARGETS <span class="si">${</span><span class="nv">PROJECT_NAME</span><span class="si">}</span>.slam
+          LIBRARY DESTINATION lib
+          ARCHIVE DESTINATION lib
+          RUNTIME DESTINATION bin
+  <span class="p">)</span>
+</code></pre></div>            </div>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p>安装文件的常用语法如下：</p>
+
+        <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nb">install</span><span class="p">(</span>&lt;FILES | PROGRAMS&gt; &lt;file1&gt; [file2 ...]
+          DESTINATION &lt;directory&gt;
+  <span class="p">)</span>
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>安装目录的常用语法如下：</p>
+
+        <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nb">install</span><span class="p">(</span>DIRECTORY &lt;directory1&gt; [directory2 ...]
+          DESTINATION &lt;directory3&gt;
+          [FILES_MATCHING [PATTERN &lt;pattern&gt; | REGEX &lt;regex&gt;]]
+  <span class="p">)</span>
+</code></pre></div>        </div>
+
+        <ul>
+          <li>可以使用模糊匹配或正则表达式查找指定的文件名；</li>
+          <li>
+            <p>示例：</p>
+
+            <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nb">install</span><span class="p">(</span>DIRECTORY <span class="s2">"</span><span class="si">${</span><span class="nv">CMAKE_CURRENT_SOURCE_DIR</span><span class="si">}</span><span class="s2">/third_party/Sophus/"</span>
+          DESTINATION <span class="s2">"include/Sophus"</span>
+          FILES_MATCHING
+          PATTERN <span class="s2">"*.h"</span>
+          PATTERN <span class="s2">"*.hpp"</span>
+  <span class="p">)</span>
+</code></pre></div>            </div>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">enable_testing()</code>用于启用当前目录下的所有测试，供<code class="language-plaintext highlighter-rouge">CTest</code>模块使用，常用语法如下：</p>
+
+    <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">enable_testing</span><span class="p">()</span>
+</code></pre></div>    </div>
+
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">CTest</code>模块希望在工程编译目录下找到测试文件，因此本命令应位于工程顶层<code class="language-plaintext highlighter-rouge">CMakeLists.txt</code>文件中；</li>
+      <li>
+        <p>如果已经在<code class="language-plaintext highlighter-rouge">CMakeLists.txt</code>文件中包含<code class="language-plaintext highlighter-rouge">CTest</code>模块，则<code class="language-plaintext highlighter-rouge">enable_testing()</code>命令会被自动调用：</p>
+
+        <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nb">include</span><span class="p">(</span>CTest<span class="p">)</span>
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">add_test()</code>用于生成测试文件，供<code class="language-plaintext highlighter-rouge">CTest</code>模块使用，常用语法如下：</p>
+
+    <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">add_test</span><span class="p">(</span>NAME &lt;name&gt;
+          COMMAND &lt;command&gt; [&lt;arg&gt; ...]
+ <span class="p">)</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h4 id="条件判断">条件判断</h4>
+
+<h5 id="常用语法">常用语法</h5>
+
+<p><code class="language-plaintext highlighter-rouge">if()</code>用于根据条件判断执行不同的命令，常用语法如下：</p>
+
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">if</span><span class="p">(</span>&lt;condition&gt;<span class="p">)</span>
+    &lt;command&gt;
+<span class="nb">elseif</span><span class="p">(</span>&lt;condition&gt;<span class="p">)</span>     <span class="c1"># optional block, can be repeated</span>
+    &lt;command&gt;
+<span class="nb">else</span><span class="p">()</span>                  <span class="c1"># optional block</span>
+    &lt;command&gt;
+<span class="nb">endif</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h5 id="表达式优先级">表达式优先级</h5>
+
+<ol>
+  <li>括号<code class="language-plaintext highlighter-rouge">()</code>;</li>
+  <li>
+    <p>一元测试（unary test）：</p>
+
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">EXISTS</code>：文件或目录是否存在；</li>
+      <li><code class="language-plaintext highlighter-rouge">COMMAND</code>：是否为可调用的命令、宏、函数；</li>
+      <li><code class="language-plaintext highlighter-rouge">DEFINED</code>：变量是否定义；</li>
+    </ul>
+  </li>
+  <li>
+    <p>二元测试（binary test）：</p>
+
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">EQUAL</code>：等于；</li>
+      <li><code class="language-plaintext highlighter-rouge">LESS</code>：小于；</li>
+      <li><code class="language-plaintext highlighter-rouge">LESS_EQUAL</code>：小于等于；</li>
+      <li><code class="language-plaintext highlighter-rouge">GREATER</code>：大于；</li>
+      <li><code class="language-plaintext highlighter-rouge">GREATER_EQUAL</code>：大于等于；</li>
+      <li><code class="language-plaintext highlighter-rouge">STREQUAL</code>：字符串等于；</li>
+      <li><code class="language-plaintext highlighter-rouge">STRLESS</code>：字符串小于；</li>
+      <li><code class="language-plaintext highlighter-rouge">STRLESS_EQUAL</code>：字符串小于等于；</li>
+      <li><code class="language-plaintext highlighter-rouge">STRGREATER</code>：字符串大于；</li>
+      <li><code class="language-plaintext highlighter-rouge">STRGREATER_EQUAL</code>：字符串大于等于；</li>
+      <li><code class="language-plaintext highlighter-rouge">VERSION_EQUAL</code>：版本等于；</li>
+      <li><code class="language-plaintext highlighter-rouge">VERSION_LESS</code>：版本小于；</li>
+      <li><code class="language-plaintext highlighter-rouge">VERSION_LESS_EQUAL</code>：版本小于等于；</li>
+      <li><code class="language-plaintext highlighter-rouge">VERSION_GREATER</code>：版本大于；</li>
+      <li><code class="language-plaintext highlighter-rouge">VERSION_GREATER_EQUAL</code>：版本大于等于；</li>
+      <li><code class="language-plaintext highlighter-rouge">PATH_EQUAL</code>：路径等于；</li>
+      <li><code class="language-plaintext highlighter-rouge">MATCHES</code>：匹配正则表达式结果；</li>
+    </ul>
+  </li>
+  <li>
+    <p>一元逻辑运算符（unary logical operator）：</p>
+
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">NOT</code>：逻辑非；</li>
+    </ul>
+  </li>
+  <li>
+    <p>二元逻辑运算符（binary logical operator），从左到右，无短路现象：</p>
+
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">AND</code>：逻辑与；</li>
+      <li><code class="language-plaintext highlighter-rouge">OR</code>：逻辑或；</li>
+    </ul>
+  </li>
+</ol>
+
+<h5 id="表达式类型说明">表达式类型说明</h5>
+
+<ol>
+  <li>
+    <p>常量：</p>
+
+    <ul>
+      <li>返回真：<code class="language-plaintext highlighter-rouge">1</code>、<code class="language-plaintext highlighter-rouge">ON</code>、<code class="language-plaintext highlighter-rouge">YES</code>、<code class="language-plaintext highlighter-rouge">TRUE</code>、<code class="language-plaintext highlighter-rouge">Y</code>、非零数（包括浮点数）；</li>
+      <li>返回假：<code class="language-plaintext highlighter-rouge">0</code>、<code class="language-plaintext highlighter-rouge">OFF</code>、<code class="language-plaintext highlighter-rouge">NO</code>、<code class="language-plaintext highlighter-rouge">FALSE</code>、<code class="language-plaintext highlighter-rouge">N</code>、<code class="language-plaintext highlighter-rouge">IGNORE</code>、<code class="language-plaintext highlighter-rouge">NOTFOUND</code>、空字符串、后缀为<code class="language-plaintext highlighter-rouge">-NOTFOUND</code>；</li>
+    </ul>
+  </li>
+  <li>
+    <p>变量：</p>
+
+    <ul>
+      <li>返回真：<strong>变量值</strong>为真常量；</li>
+      <li>返回假：<strong>变量值</strong>为假常量，或者变量未被定义；</li>
+      <li>宏定义和环境变量不是变量，会返回假；</li>
+    </ul>
+  </li>
+  <li>
+    <p>字符串：</p>
+
+    <ul>
+      <li>带引号的字符串始终返回假，除非字符串的值是真常量；</li>
+    </ul>
+  </li>
+</ol>
+
+<h4 id="循环遍历">循环遍历</h4>
+
+<ol>
+  <li>循环体中的命令在循环中会被记录，在循环结束后一起执行；</li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">foreach()</code>用于对列表中的每一个值执行相同的命令，常用语法如下：</p>
+
+    <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">foreach</span><span class="p">(</span>&lt;loop_variable&gt; &lt;variable_list&gt;<span class="p">)</span>
+     &lt;command&gt;
+ <span class="nb">endforeach</span><span class="p">(</span>[loop_variable]<span class="p">)</span>
+</code></pre></div>    </div>
+
+    <ul>
+      <li>
+        <p>示例：</p>
+
+        <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nb">foreach</span><span class="p">(</span>test_src <span class="si">${</span><span class="nv">TEST_SOURCES</span><span class="si">}</span><span class="p">)</span>
+      <span class="nb">add_executable</span><span class="p">(</span><span class="si">${</span><span class="nv">test_src</span><span class="si">}</span> <span class="si">${</span><span class="nv">test_src</span><span class="si">}</span>.cpp<span class="p">)</span>
+      <span class="nb">target_link_libraries</span><span class="p">(</span><span class="si">${</span><span class="nv">test_src</span><span class="si">}</span>
+          <span class="si">${</span><span class="nv">PROJECT_NAME</span><span class="si">}</span>.algorithm
+          <span class="si">${</span><span class="nv">PROJECT_NAME</span><span class="si">}</span>.common
+          <span class="si">${</span><span class="nv">PROJECT_NAME</span><span class="si">}</span>.slam
+      <span class="p">)</span>
+      <span class="nb">add_test</span><span class="p">(</span><span class="si">${</span><span class="nv">test_src</span><span class="si">}</span> <span class="si">${</span><span class="nv">test_src</span><span class="si">}</span><span class="p">)</span>
+  <span class="nb">endforeach</span><span class="p">(</span>test_src<span class="p">)</span>
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">while()</code>用于在表达式的值为真时执行相同的命令，常用语法如下：</p>
+
+    <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">while</span><span class="p">(</span>&lt;condition&gt;<span class="p">)</span>
+     &lt;command&gt;
+ <span class="nb">endwhile</span><span class="p">(</span>[condition]<span class="p">)</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h2 id="资料">资料</h2>
+
+<h3 id="网站">网站</h3>
+
+<ol>
+  <li><a href="https://cmake.org/cmake/help/latest/index.html">CMake Reference Documentation</a></li>
+  <li><a href="https://cmake.org/cmake/help/latest/guide/tutorial/index.html">CMake Tutorial</a></li>
+  <li><a href="https://gcc.gnu.org/onlinedocs/">GCC online documentation</a></li>
+  <li><a href="https://runebook.dev/zh-CN/docs/cmake/-index-">CMake 3.25 中文-Runebooks.dev</a></li>
+  <li><a href="https://www.bookstack.cn/books/CMake-Cookbook">CMake菜谱（CMake Cookbook中文版）</a></li>
+  <li><a href="https://juejin.cn/post/6844903557183832078">cmake使用教程</a></li>
+  <li><a href="https://www.bilibili.com/video/BV1fy4y1b7TC">基于VSCode和CMake实现C/C++开发丨Linux篇</a></li>
+  <li><a href="https://www.bilibili.com/video/BV17J411m7o1">Cmake的应用与实践</a></li>
+</ol>
+
+<h3 id="github">GitHub</h3>
+
+<ol>
+  <li><a href="https://github.com/ttroy50/cmake-examples">ttroy50/cmake-examples</a></li>
+  <li><a href="https://gist.github.com/mbinna/c61dbb39bca0e4fb7d1f73b0d66a4fd1">mbinna/effective_modern_cmake.md</a></li>
+  <li><a href="https://github.com/TheLartians/ModernCppStarter">TheLartians/ModernCppStarter</a></li>
+  <li><a href="https://github.com/cpp-best-practices/gui_starter_template">cpp-best-practices/gui_starter_template</a></li>
+  <li><a href="https://github.com/dev-cafe/cmake-cookbook">dev-cafe/cmake-cookbook</a></li>
+  <li><a href="https://github.com/filipdutescu/modern-cpp-template">filipdutescu/modern-cpp-template</a></li>
+  <li><a href="https://github.com/xiaoweiChen/CMake-Cookbook">xiaoweiChen/CMake-Cookbook</a></li>
+  <li><a href="https://github.com/pr0g/cmake-examples">pr0g/cmake-examples</a></li>
+  <li><a href="https://github.com/BrightXiaoHan/CMakeTutorial">BrightXiaoHan/CMakeTutorial</a></li>
+  <li><a href="https://github.com/pabloariasal/modern-cmake-sample">pabloariasal/modern-cmake-sample</a></li>
+  <li><a href="https://github.com/district10/cmake-templates">district10/cmake-templates</a></li>
+  <li><a href="https://github.com/Modern-CMake-CN/Modern-CMake-zh_CN">Modern-CMake-CN/Modern-CMake-zh_CN</a></li>
+  <li><a href="https://github.com/PacktPublishing/CMake-Cookbook">PacktPublishing/CMake-Cookbook</a></li>
+  <li><a href="https://github.com/mortennobel/CMake-Cheatsheet">mortennobel/CMake-Cheatsheet</a></li>
+  <li><a href="https://github.com/mariokonrad/cmake-cheatsheet">mariokonrad/cmake-cheatsheet</a></li>
+  <li><a href="https://github.com/nikolausmayer/cmake-templates">nikolausmayer/cmake-templates</a></li>
+</ol>
+
+<h3 id="书籍">书籍</h3>
+
+<ol>
+  <li><a href="http://cliutils.gitlab.io/modern-cmake/modern-cmake.pdf">Modern CMake</a></li>
+  <li><a href="https://riptutorial.com/Download/cmake.pdf">Learning CMake</a></li>
+  <li><a href="http://file.ncnynl.com/ros/CMake%20Practice.pdf">CMake Practice</a></li>
+</ol>
+
+<h2 id="参考">参考</h2>
+
+<ol>
+  <li><a href="https://cmake.org">CMake</a></li>
+  <li><a href="https://gcc.gnu.org">GCC</a></li>
+  <li><a href="https://blog.csdn.net/sandalphon4869/article/details/100589747">内部构建和外部构建-CSDN博客</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/490318618">简单理解：CPU物理数，核心数，线程数，进程，线程，协程，并发，并行的概念-不是罗罗的文章-知乎</a></li>
+  <li><a href="https://github.com/gaoxiang12/faster-lio">gaoxiang12/faster-lio</a></li>
+  <li><a href="https://www.zhihu.com/question/8622503673/answer/72070024144">c++的.h和cpp，放在相同目录下好，还是顶层就用include,src分开好？-icon-meh的回答-知乎</a></li>
+  <li><a href="https://www.zhihu.com/question/8622503673/answer/71362286271">c++的.h和cpp，放在相同目录下好，还是顶层就用include,src分开好？-柳翔天的回答-知乎</a></li>
+  <li><a href="https://blog.csdn.net/sinat_28752257/article/details/82758546">Ceres CMakeLists-CSDN博客</a></li>
+  <li><a href="https://www.jianshu.com/p/95c744a5c6f1">CMakeLists-简书</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/21403075327">配置优化器：Debug与Release版本-FrankDellaert的文章-知乎</a></li>
+  <li><a href="https://stackoverflow.com/questions/42834844/how-to-get-cmake-to-pass-either-std-c14-c1y-or-c17-c1z-based-on-gcc-vers">指定C++编译标准1-Stack Overflow</a></li>
+  <li><a href="https://crascit.com/2015/03/28/enabling-cxx11-in-cmake/">指定C++编译标准2-Crascit</a></li>
+  <li><a href="https://cloud.tencent.com/developer/article/1741243">指定C++编译标准3-腾讯云</a></li>
+  <li><a href="https://azmddy.github.io/article/IT%E5%9F%BA%E7%A1%80/%E6%9E%84%E5%BB%BA/CMake/cmake-day-2.html">指定C++编译标准4-azmddy</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/349413376">Eigen内存对齐-卷儿的文章-知乎</a></li>
+  <li><a href="http://wiki.ros.org/catkin/CMakeLists.txt">catkin/CMakeLists.txt-ROS Wiki</a></li>
+  <li><a href="https://www.zhihu.com/question/553199862/answer/2672914532">SLAＭ算法开发中，Ｃ++编程+多节点，如何调试和优化算法比较方便呢？正确的调试方法是什么？-半闲居士的回答-知乎</a></li>
+  <li><a href="https://cmake.org/cmake/help/latest/manual/cmake-developer.7.html">cmake-developer</a></li>
+  <li><a href="https://www.cnblogs.com/narjaja/p/9533174.html">变量1-博客园</a></li>
+  <li><a href="https://juejin.cn/post/6998055558741753893">变量2-掘金</a></li>
+  <li><a href="https://blog.csdn.net/juluwangriyue/article/details/123494008">变量3-CSDN博客</a></li>
+  <li><a href="https://blog.csdn.net/wzj_110/article/details/116674655">变量4-CSDN博客</a></li>
+  <li><a href="https://www.jianshu.com/p/1827cd86d576">变量5-简书</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/97369704">Cmake之深入理解find_package()的用法-希葛格的韩少君的文章-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/50829542">cmake find_package路径详解-豌豆的文章-知乎</a></li>
+  <li><a href="https://blog.csdn.net/zhanghm1995/article/details/105466372">find_package()1-CSDN博客</a></li>
+  <li><a href="https://blog.csdn.net/qq_41035283/article/details/122469466">find_package()2-CSDN博客</a></li>
+  <li><a href="https://blog.csdn.net/qq_15642411/article/details/83656855">Ceres_DIR1-CSDN博客</a></li>
+  <li><a href="https://blog.csdn.net/DumpDoctorWang/article/details/84587331">Ceres_DIR2-CSDN博客</a></li>
+  <li><a href="https://blog.csdn.net/zkp_987/article/details/119913049">OpenCV_DIR-CSDN博客</a></li>
+  <li><a href="https://www.cnblogs.com/sunsky303/p/7731911.html">静态库、动态库、共享库的区别-博客园</a></li>
+  <li><a href="https://blog.csdn.net/KingOfMyHeart/article/details/112983922">add_dependencies()1-CSDN博客</a></li>
+  <li><a href="https://blog.csdn.net/zhizhengguan/article/details/118381772">add_dependencies()2-CSDN博客</a></li>
+  <li><a href="https://blog.csdn.net/new9232/article/details/125831009">add_dependencies()3-CSDN博客</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/82244559">cmake：target_**中的PUBLIC，PRIVATE，INTERFACE-大川搬砖的文章-知乎</a></li>
+  <li><a href="https://blog.csdn.net/qq_33726635/article/details/121896441">target_link_directories()1-CSDN博客</a></li>
+  <li><a href="https://blog.csdn.net/zhizhengguan/article/details/115331314">target_link_directories()2-CSDN博客</a></li>
+  <li><a href="https://blog.csdn.net/fb_941219/article/details/107376017">add_definitions()-CSDN博客</a></li>
+  <li><a href="https://blog.csdn.net/10km/article/details/51731959">编译选项设置区别-CSDN博客</a></li>
+  <li><a href="https://blog.csdn.net/sexyluna/article/details/134770233">编译器警告-CSDN博客</a></li>
+  <li><a href="https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html">Options to Request or Suppress Warnings-GCC</a></li>
+  <li><a href="https://www.zhihu.com/question/58949190/answer/999701073">CMake如何入门？-0xCCCCCCCC的回答-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/205324774">CMake和Modern CMake相关资料（不定期补充）-迦非喵的文章-知乎</a></li>
+</ol>
+
+  </div>
+
+  
+  
+<script src="https://utteranc.es/client.js"
+        repo="zxl19/zxl19.github.io"
+        issue-term="title"
+        label="comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
+
+  
+</article>
+
+<div class="pagination">
+  
+    <span class="prev" >
+      <a href="http://localhost:4000/HomePage/vscode-cpp/">
+        ← 上一篇
+      </a>
+    </span>
+  
+  
+    <span class="next" >
+      <a href="http://localhost:4000/HomePage/latex-note/">
+        下一篇 →
+      </a>
+    </span>
+  
+</div>
+      </div>
+    </div>
+
+    
+
+  </body>
+
+  
+  <script>
+    document.getElementById("main").classList.add("withtoc");
+  </script>
+  
+
+  <div class="wrapper-footer-mobile">
+    <footer class="footer">
+      <!-- Refer to https://codepen.io/ruandre/pen/howFi -->
+<ul class="svg-icon">
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li><a href="https://github.com/zxl19" class="icon-13 github" title="GitHub"><svg viewBox="0 0 512 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg><!--[if lt IE 9]><em>GitHub</em><![endif]--></a></li>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</ul>
+
+
+
+<p>Copyright © 2020-2025 zxl19. All Rights Reserved.</p>
+
+    </footer>
+
+
+</html>

@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>C++学习资料存档 – Pepper小辣椒 – 一个工程师的存档点</title>
+
+      <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="C++学习资料存档。
+
+" />
+    <meta property="og:description" content="C++学习资料存档。
+
+" />
+    
+    <meta name="author" content="Pepper小辣椒" />
+
+    
+    <meta property="og:title" content="C++学习资料存档" />
+    <meta property="twitter:title" content="C++学习资料存档" />
+    
+  <!-- Async font loading -->
+<script>
+  window.WebFontConfig = {
+      custom: {
+          families: ['Spoqa Han Sans:100,300,400,700'],
+          urls: ['https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css']
+      },
+      timeout: 60000
+  };
+  (function(d) {
+      var wf = d.createElement('script'), s = d.scripts[0];
+      wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js';
+      s.parentNode.insertBefore(wf, s);
+  })(document);
+</script>
+
+<!--adobe fonts-->
+<script>
+    (function(d) {
+      var config = {
+        kitId: 'vbt3gjx',
+        scriptTimeout: 3000,
+        async: true
+      },
+      h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+    })(document);
+</script> 
+
+  <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link rel="stylesheet" type="text/css" href="/HomePage/style.css" />
+  <link rel="alternate" type="application/rss+xml" title="Pepper小辣椒 - 一个工程师的存档点" href="/HomePage/feed.xml" />
+  <link rel="shortcut icon" href="https://raw.githubusercontent.com/zxl19/zxl19.github.io/master/images/icon.png">
+  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+  <script src="https://unpkg.com/feather-icons"></script>
+  <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        inlineMath: [['$','$']]
+      }
+    });
+  </script>
+
+  <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+
+</head>
+
+  <body>
+    <div class="wrapper-sidebar">
+  <header class="sidebar clearfix">
+    <div class="site-info">
+      
+        <a href="/HomePage/" class="site-avatar"><img src="https://raw.githubusercontent.com/zxl19/zxl19.github.io/master/images/avatar.jpg" /></a>
+       
+      <h1 class="site-name"><a href="/HomePage/">Pepper小辣椒</a></h1>
+      <p class="site-description">一个工程师的存档点</p>
+    </div>
+  </header>
+
+  <div class="navlist">
+    <nav>
+      
+      
+      <a href="/HomePage/">首页</a>
+      
+      
+      
+      <a href="/HomePage/about">关于</a>
+      
+      
+      
+      <a href="/HomePage/archive">归档</a>
+      
+      
+      
+      <a href="/HomePage/tags">标签</a>
+      
+      
+    </nav>
+  </div>
+
+  <div class="wrapper-footer-desktop">
+    <footer class="footer">
+      <!-- Refer to https://codepen.io/ruandre/pen/howFi -->
+<ul class="svg-icon">
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li><a href="https://github.com/zxl19" class="icon-13 github" title="GitHub"><svg viewBox="0 0 512 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg><!--[if lt IE 9]><em>GitHub</em><![endif]--></a></li>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</ul>
+
+
+
+<p>Copyright © 2020-2025 zxl19. All Rights Reserved.</p>
+
+    </footer>
+  </div>
+</div>
+
+    
+      <aside class="toc">
+        <ul>
+  <li><a href="#">C++学习资料存档</a>
+    <ul>
+      <li><a href="#b站">B站</a></li>
+      <li><a href="#github">GitHub</a>
+        <ul>
+          <li><a href="#速查表">速查表</a></li>
+          <li><a href="#教程">教程</a></li>
+          <li><a href="#常用算法实现">常用算法实现</a></li>
+          <li><a href="#新特性">新特性</a></li>
+          <li><a href="#并发">并发</a></li>
+          <li><a href="#代码规范">代码规范</a></li>
+          <li><a href="#设计模式">设计模式</a></li>
+        </ul>
+      </li>
+      <li><a href="#网站">网站</a>
+        <ul>
+          <li><a href="#教程-1">教程</a></li>
+          <li><a href="#语法查询">语法查询</a></li>
+          <li><a href="#代码规范-1">代码规范</a></li>
+          <li><a href="#在线工具">在线工具</a>
+            <ul>
+              <li><a href="#编译运行">编译运行</a></li>
+              <li><a href="#分析调试">分析调试</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><a href="#书籍">书籍</a></li>
+      <li><a href="#参考">参考</a></li>
+    </ul>
+  </li>
+</ul>
+      </aside>
+    
+
+    <div id="main" role="main" class="wrapper-content">
+      <div class="container">
+        <article class="posts">
+  <h1>C++学习资料存档</h1>
+
+  <div clsss="meta">
+    <span class="author">
+      zxl19
+    </span>
+
+    <span class="date">
+      2021-05-22
+    </span>
+
+    <ul class="tag">
+      
+      <li>
+        <a href="http://localhost:4000/HomePage/tags#C++">
+          C++
+        </a>
+      </li>
+      
+      <li>
+        <a href="http://localhost:4000/HomePage/tags#Archive">
+          Archive
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+
+  <div class="entry">
+    <p>C++学习资料存档。</p>
+
+<!-- more -->
+
+<h2 id="b站">B站</h2>
+
+<ol>
+  <li><a href="https://www.bilibili.com/video/BV1fy4y1b7TC">基于VSCode和CMake实现C/C++开发丨Linux篇</a></li>
+  <li><a href="https://www.bilibili.com/video/BV1sW411v7VZ">使用VS Code搭建轻量美观的C/C++开发环境</a></li>
+  <li><a href="https://www.bilibili.com/video/BV1et411b73Z">黑马程序员匠心之作丨C++教程从0到1入门编程,学习编程不再难</a></li>
+  <li><a href="https://www.bilibili.com/video/BV1VJ411M7WR">最好的C++教程</a></li>
+</ol>
+
+<h2 id="github">GitHub</h2>
+
+<h3 id="速查表">速查表</h3>
+
+<ol>
+  <li><a href="https://github.com/gibsjose/cpp-cheat-sheet">gibsjose/cpp-cheat-sheet</a></li>
+  <li><a href="https://github.com/mortennobel/cpp-cheatsheet">mortennobel/cpp-cheatsheet</a></li>
+  <li><a href="https://github.com/ufoym/cpp-core-guidelines-cheatsheet">ufoym/cpp-core-guidelines-cheatsheet</a></li>
+  <li><a href="https://github.com/karansaxena/STL_Cheat_Sheets">karansaxena/STL_Cheat_Sheets</a></li>
+  <li><a href="https://github.com/muqsitnawaz/modern-cpp-cheatsheet">muqsitnawaz/modern-cpp-cheatsheet</a></li>
+  <li><a href="https://github.com/crazyguitar/cppcheatsheet">crazyguitar/cppcheatsheet</a></li>
+</ol>
+
+<h3 id="教程">教程</h3>
+
+<ol>
+  <li><a href="https://github.com/Light-City/CPlusPlusThings">Light-City/CPlusPlusThings</a></li>
+  <li><a href="https://github.com/wuye9036/CppTemplateTutorial">wuye9036/CppTemplateTutorial</a></li>
+  <li><a href="https://github.com/applenob/Cpp_Primer_Practice">applenob/Cpp_Primer_Practice</a></li>
+  <li><a href="https://github.com/balloonwj/CppGuide">balloonwj/CppGuide</a></li>
+  <li><a href="https://github.com/ZachL1/Bilibili-plus">ZachL1/Bilibili-plus</a></li>
+  <li><a href="https://github.com/AnkerLeng/Cpp-0-1-Resource">AnkerLeng/Cpp-0-1-Resource</a></li>
+  <li><a href="https://github.com/Ewenwan/ShiYanLou">Ewenwan/ShiYanLou</a></li>
+  <li><a href="https://github.com/steveLauwh/SGI-STL">steveLauwh/SGI-STL</a></li>
+  <li><a href="https://github.com/youngyangyang04/TechCPP">youngyangyang04/TechCPP</a></li>
+  <li><a href="https://github.com/dendisuhubdy/cpp_exercises">dendisuhubdy/cpp_exercises</a></li>
+</ol>
+
+<h3 id="常用算法实现">常用算法实现</h3>
+
+<ol>
+  <li><a href="https://github.com/TheAlgorithms/C-Plus-Plus">TheAlgorithms/C-Plus-Plus</a></li>
+  <li><a href="https://github.com/TheAlgorithms/C">TheAlgorithms/C</a></li>
+  <li><a href="https://github.com/AllAlgorithms/cpp">AllAlgorithms/cpp</a></li>
+  <li><a href="https://github.com/AllAlgorithms/c">AllAlgorithms/c</a></li>
+</ol>
+
+<h3 id="新特性">新特性</h3>
+
+<ol>
+  <li><a href="https://github.com/Cpp-Club/Cxx_HOPL4_zh">Cpp-Club/Cxx_HOPL4_zh</a></li>
+  <li><a href="https://github.com/changkun/modern-cpp-tutorial">changkun/modern-cpp-tutorial</a></li>
+  <li><a href="https://github.com/AnthonyCalandra/modern-cpp-features">AnthonyCalandra/modern-cpp-features</a></li>
+  <li><a href="https://github.com/rigtorp/awesome-modern-cpp">rigtorp/awesome-modern-cpp</a></li>
+  <li><a href="https://github.com/federico-busato/Modern-CPP-Programming">federico-busato/Modern-CPP-Programming</a></li>
+  <li><a href="https://github.com/CnTransGroup/EffectiveModernCppChinese">CnTransGroup/EffectiveModernCppChinese</a></li>
+  <li><a href="https://github.com/0voice/cpp_new_features">0voice/cpp_new_features</a></li>
+  <li><a href="https://github.com/tip-of-the-week/cpp">tip-of-the-week/cpp</a></li>
+  <li><a href="https://github.com/netcan/advanced-cpp20-programming">netcan/advanced-cpp20-programming</a></li>
+</ol>
+
+<h3 id="并发">并发</h3>
+
+<ol>
+  <li><a href="https://github.com/xiaoweiChen/Cpp_Concurrency_In_Action">xiaoweiChen/Cpp_Concurrency_In_Action</a></li>
+  <li><a href="https://github.com/xiaoweiChen/CPP-Concurrency-In-Action-2ed-2019">xiaoweiChen/CPP-Concurrency-In-Action-2ed-2019</a></li>
+  <li><a href="https://github.com/downdemo/Cpp-Concurrency-in-Action-2ed">downdemo/Cpp-Concurrency-in-Action-2ed</a></li>
+  <li><a href="https://github.com/anthonywilliams/ccia_code_samples">anthonywilliams/ccia_code_samples</a></li>
+  <li><a href="https://github.com/xiaoweiChen/Concurrency-with-Modern-Cpp">xiaoweiChen/Concurrency-with-Modern-Cpp</a></li>
+</ol>
+
+<h3 id="代码规范">代码规范</h3>
+
+<ol>
+  <li><a href="https://github.com/isocpp/CppCoreGuidelines">isocpp/CppCoreGuidelines</a></li>
+  <li><a href="https://github.com/lynnboy/CppCoreGuidelines-zh-CN">lynnboy/CppCoreGuidelines-zh-CN</a></li>
+  <li><a href="https://github.com/cpp-best-practices/cppbestpractices">cpp-best-practices/cppbestpractices</a></li>
+  <li><a href="https://github.com/Tencent/secguide">Tencent/secguide</a></li>
+  <li><a href="https://github.com/JuanCrg90/Clean-Code-Notes">JuanCrg90/Clean-Code-Notes</a></li>
+  <li><a href="https://github.com/trekhleb/state-of-the-art-shitcode">trekhleb/state-of-the-art-shitcode</a></li>
+  <li><a href="https://github.com/Qihoo360/safe-rules">Qihoo360/safe-rules</a></li>
+  <li><a href="https://github.com/facontidavide/CPP_Optimizations_Diary">facontidavide/CPP_Optimizations_Diary</a></li>
+  <li><a href="https://github.com/FengJungle/DesignPattern">FengJungle/DesignPattern</a></li>
+  <li><a href="https://github.com/igl42/cpp_software_design">igl42/cpp_software_design</a></li>
+  <li><a href="https://github.com/PickNikRobotics/roscpp_code_format">PickNikRobotics/roscpp_code_format</a></li>
+  <li><a href="https://github.com/igl42/oreilly">igl42/oreilly</a></li>
+  <li><a href="https://github.com/XiaotaoGuo/Effective-Cpp-Reading-Note">XiaotaoGuo/Effective-Cpp-Reading-Note</a></li>
+</ol>
+
+<h3 id="设计模式">设计模式</h3>
+
+<ol>
+  <li><a href="https://github.com/kamranahmedse/design-patterns-for-humans">kamranahmedse/design-patterns-for-humans</a></li>
+  <li><a href="https://github.com/DovAmir/awesome-design-patterns">DovAmir/awesome-design-patterns</a></li>
+  <li><a href="https://github.com/clpsz/Book-HFDP-Code">clpsz/Book-HFDP-Code</a></li>
+  <li><a href="https://github.com/mrlegowatch/HeadFirstDesignPatternsCpp">mrlegowatch/HeadFirstDesignPatternsCpp</a></li>
+  <li><a href="https://github.com/yaocoder/DesignPattern">yaocoder/DesignPattern</a></li>
+  <li><a href="https://github.com/fsaadatmand/Head-First-Design-Pattern-CPP-Examples">fsaadatmand/Head-First-Design-Pattern-CPP-Examples</a></li>
+</ol>
+
+<h2 id="网站">网站</h2>
+
+<h3 id="教程-1">教程</h3>
+
+<ol>
+  <li><a href="https://www.stroustrup.com/C++.html">Stroustrup: C++</a></li>
+  <li><a href="https://www.runoob.com/cplusplus/cpp-tutorial.html">C++教程-菜鸟教程</a></li>
+  <li><a href="http://c.biancheng.net">C语言中文网</a></li>
+  <li><a href="https://www.w3schools.com/cpp/default.asp">C++ Tutorial-W3Schools</a></li>
+</ol>
+
+<h3 id="语法查询">语法查询</h3>
+
+<ol>
+  <li><a href="http://www.cplusplus.com">cplusplus</a></li>
+  <li><a href="https://en.cppreference.com/w/">cppreference</a></li>
+  <li><a href="https://www.cppcheatsheet.com">C/C++ Cheat Sheet</a></li>
+  <li><a href="https://c-faq.com">comp.lang.c Frequently Asked Questions</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/336299759">超好C++ cheatsheet-枕月的文章-知乎</a></li>
+  <li><a href="https://hackingcpp.com">hacking C++</a></li>
+</ol>
+
+<h3 id="代码规范-1">代码规范</h3>
+
+<ol>
+  <li><a href="https://google.github.io/styleguide/cppguide.html">Google C++ Style Guide</a></li>
+  <li><a href="https://zh-google-styleguide.readthedocs.io/en/latest/google-cpp-styleguide/contents/">Google开源项目风格指南-C++</a></li>
+  <li><a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines.html">C++ Core Guidelines</a></li>
+  <li><a href="http://wiki.ros.org/CppStyleGuide">ROS C++ Style Guide-ROS Wiki</a></li>
+</ol>
+
+<h3 id="在线工具">在线工具</h3>
+
+<h4 id="编译运行">编译运行</h4>
+
+<ol>
+  <li><a href="https://www.online-cpp.com">Online C/C++ Compiler</a></li>
+  <li><a href="https://cpp.sh">C++ Shell</a></li>
+  <li><a href="https://www.onlinegdb.com">GDB online Debugger</a></li>
+  <li><a href="https://ide.geeksforgeeks.org">GeeksforGeeks</a></li>
+  <li><a href="https://www.codechef.com/ide">CodeChef</a></li>
+  <li><a href="https://wandbox.org">Wandbox</a></li>
+</ol>
+
+<h4 id="分析调试">分析调试</h4>
+
+<ol>
+  <li><a href="https://cppinsights.io">C++ Insights</a></li>
+  <li><a href="https://compiler-explorer.com">Compiler Explorer</a></li>
+  <li><a href="https://quick-bench.com">Quick C++ Benchmarks</a></li>
+</ol>
+
+<h2 id="书籍">书籍</h2>
+
+<ol>
+  <li>《C++语言程序设计》</li>
+  <li>《C++ Primer》</li>
+  <li>《Effective C++》</li>
+  <li>《Effective Modern C++》</li>
+  <li>《C++ Core Guidelines解析》</li>
+  <li>《C++实战：核心技术与最佳实践》</li>
+</ol>
+
+<h2 id="参考">参考</h2>
+
+<ol>
+  <li><a href="https://www.zhihu.com/question/47567490/answer/1866897272">如何塑造一个拿的出手的GitHub账号？-吴师兄学算法的回答-知乎</a></li>
+  <li><a href="https://www.zhihu.com/question/20410487/answer/15055637">学习C++，应该循序渐进的看哪些书？-嘉炜的回答-知乎</a></li>
+  <li><a href="https://www.zhihu.com/question/23153437/answer/1962068242">有什么高质量的现代C++风格的开源代码?-夏天的回答-知乎</a></li>
+  <li><a href="https://www.zhihu.com/question/43621151/answer/85045768298">C和C++中有哪些容易被坑的undefined behaviour？-南山烟雨珠江潮的回答-知乎</a></li>
+  <li><a href="https://www.zhihu.com/question/639724149/answer/3374083013">可以使用C++的哪些库或函数来简化任务？-南山烟雨珠江潮的回答-知乎</a></li>
+  <li><a href="https://clang.llvm.org/docs/ClangFormatStyleOptions.html">ClangFormatStyleOptions</a></li>
+  <li><a href="https://blog.csdn.net/cool99781/article/details/104516581">推荐10款C++在线编译器-CSDN博客</a></li>
+  <li><a href="https://github.com/melpon/wandbox">melpon/wandbox</a></li>
+  <li><a href="https://github.com/andreasfertig/cppinsights">andreasfertig/cppinsights</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/14044433366">《C++实战：核心技术与最佳实践》——与吴咏炜老师一起走进C++的实战世界-人民邮电出版社的文章-知乎</a></li>
+</ol>
+
+  </div>
+
+  
+  
+<script src="https://utteranc.es/client.js"
+        repo="zxl19/zxl19.github.io"
+        issue-term="title"
+        label="comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
+
+  
+</article>
+
+<div class="pagination">
+  
+    <span class="prev" >
+      <a href="http://localhost:4000/HomePage/latex-note/">
+        ← 上一篇
+      </a>
+    </span>
+  
+  
+    <span class="next" >
+      <a href="http://localhost:4000/HomePage/slam-interview/">
+        下一篇 →
+      </a>
+    </span>
+  
+</div>
+      </div>
+    </div>
+
+    
+
+  </body>
+
+  
+  <script>
+    document.getElementById("main").classList.add("withtoc");
+  </script>
+  
+
+  <div class="wrapper-footer-mobile">
+    <footer class="footer">
+      <!-- Refer to https://codepen.io/ruandre/pen/howFi -->
+<ul class="svg-icon">
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li><a href="https://github.com/zxl19" class="icon-13 github" title="GitHub"><svg viewBox="0 0 512 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg><!--[if lt IE 9]><em>GitHub</em><![endif]--></a></li>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</ul>
+
+
+
+<p>Copyright © 2020-2025 zxl19. All Rights Reserved.</p>
+
+    </footer>
+
+
+</html>

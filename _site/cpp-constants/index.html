@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>C++数学常数使用笔记 – Pepper小辣椒 – 一个工程师的存档点</title>
+
+      <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="我的C++数学常数使用笔记。
+
+" />
+    <meta property="og:description" content="我的C++数学常数使用笔记。
+
+" />
+    
+    <meta name="author" content="Pepper小辣椒" />
+
+    
+    <meta property="og:title" content="C++数学常数使用笔记" />
+    <meta property="twitter:title" content="C++数学常数使用笔记" />
+    
+  <!-- Async font loading -->
+<script>
+  window.WebFontConfig = {
+      custom: {
+          families: ['Spoqa Han Sans:100,300,400,700'],
+          urls: ['https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css']
+      },
+      timeout: 60000
+  };
+  (function(d) {
+      var wf = d.createElement('script'), s = d.scripts[0];
+      wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js';
+      s.parentNode.insertBefore(wf, s);
+  })(document);
+</script>
+
+<!--adobe fonts-->
+<script>
+    (function(d) {
+      var config = {
+        kitId: 'vbt3gjx',
+        scriptTimeout: 3000,
+        async: true
+      },
+      h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+    })(document);
+</script> 
+
+  <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link rel="stylesheet" type="text/css" href="/HomePage/style.css" />
+  <link rel="alternate" type="application/rss+xml" title="Pepper小辣椒 - 一个工程师的存档点" href="/HomePage/feed.xml" />
+  <link rel="shortcut icon" href="https://raw.githubusercontent.com/zxl19/zxl19.github.io/master/images/icon.png">
+  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+  <script src="https://unpkg.com/feather-icons"></script>
+  <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        inlineMath: [['$','$']]
+      }
+    });
+  </script>
+
+  <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+
+</head>
+
+  <body>
+    <div class="wrapper-sidebar">
+  <header class="sidebar clearfix">
+    <div class="site-info">
+      
+        <a href="/HomePage/" class="site-avatar"><img src="https://raw.githubusercontent.com/zxl19/zxl19.github.io/master/images/avatar.jpg" /></a>
+       
+      <h1 class="site-name"><a href="/HomePage/">Pepper小辣椒</a></h1>
+      <p class="site-description">一个工程师的存档点</p>
+    </div>
+  </header>
+
+  <div class="navlist">
+    <nav>
+      
+      
+      <a href="/HomePage/">首页</a>
+      
+      
+      
+      <a href="/HomePage/about">关于</a>
+      
+      
+      
+      <a href="/HomePage/archive">归档</a>
+      
+      
+      
+      <a href="/HomePage/tags">标签</a>
+      
+      
+    </nav>
+  </div>
+
+  <div class="wrapper-footer-desktop">
+    <footer class="footer">
+      <!-- Refer to https://codepen.io/ruandre/pen/howFi -->
+<ul class="svg-icon">
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li><a href="https://github.com/zxl19" class="icon-13 github" title="GitHub"><svg viewBox="0 0 512 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg><!--[if lt IE 9]><em>GitHub</em><![endif]--></a></li>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</ul>
+
+
+
+<p>Copyright © 2020-2025 zxl19. All Rights Reserved.</p>
+
+    </footer>
+  </div>
+</div>
+
+    
+      <aside class="toc">
+        <ul>
+  <li><a href="#">C++数学常数使用笔记</a>
+    <ul>
+      <li><a href="#数学常数">数学常数</a>
+        <ul>
+          <li><a href="#使用模板类">使用模板类</a></li>
+          <li><a href="#使用宏定义">使用宏定义</a></li>
+        </ul>
+      </li>
+      <li><a href="#参考">参考</a></li>
+    </ul>
+  </li>
+</ul>
+      </aside>
+    
+
+    <div id="main" role="main" class="wrapper-content">
+      <div class="container">
+        <article class="posts">
+  <h1>C++数学常数使用笔记</h1>
+
+  <div clsss="meta">
+    <span class="author">
+      zxl19
+    </span>
+
+    <span class="date">
+      2024-04-06
+    </span>
+
+    <ul class="tag">
+      
+      <li>
+        <a href="http://localhost:4000/HomePage/tags#C++">
+          C++
+        </a>
+      </li>
+      
+      <li>
+        <a href="http://localhost:4000/HomePage/tags#Note">
+          Note
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+
+  <div class="entry">
+    <p>我的C++数学常数使用笔记。</p>
+
+<!-- more -->
+
+<h2 id="数学常数">数学常数</h2>
+
+<h3 id="使用模板类">使用模板类</h3>
+
+<ol>
+  <li>
+    <p>C++20引入，使用时需要包含头文件：</p>
+
+    <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="cp">#include</span> <span class="cpf">&lt;numbers&gt;</span><span class="cp">
+</span></code></pre></div>    </div>
+  </li>
+  <li>
+    <p>定义的数学常数均在<code class="language-plaintext highlighter-rouge">numbers</code>子命名空间中，为了使表示形式简便，本文默认使用<code class="language-plaintext highlighter-rouge">std::numbers</code>命名空间：</p>
+
+    <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="o">::</span><span class="n">numbers</span><span class="p">;</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>原型声明：</p>
+
+    <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="k">namespace</span> <span class="n">std</span><span class="o">::</span><span class="n">numbers</span> <span class="p">{</span>
+ <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">&gt;</span>
+ <span class="kr">inline</span> <span class="k">constexpr</span> <span class="n">T</span> <span class="n">e_v</span> <span class="o">=</span> <span class="cm">/* unspecified */</span><span class="p">;</span>
+ <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">&gt;</span>
+ <span class="kr">inline</span> <span class="k">constexpr</span> <span class="n">T</span> <span class="n">log2e_v</span> <span class="o">=</span> <span class="cm">/* unspecified */</span><span class="p">;</span>
+ <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">&gt;</span>
+ <span class="kr">inline</span> <span class="k">constexpr</span> <span class="n">T</span> <span class="n">log10e_v</span> <span class="o">=</span> <span class="cm">/* unspecified */</span><span class="p">;</span>
+ <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">&gt;</span>
+ <span class="kr">inline</span> <span class="k">constexpr</span> <span class="n">T</span> <span class="n">pi_v</span> <span class="o">=</span> <span class="cm">/* unspecified */</span><span class="p">;</span>
+ <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">&gt;</span>
+ <span class="kr">inline</span> <span class="k">constexpr</span> <span class="n">T</span> <span class="n">inv_pi_v</span> <span class="o">=</span> <span class="cm">/* unspecified */</span><span class="p">;</span>
+ <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">&gt;</span>
+ <span class="kr">inline</span> <span class="k">constexpr</span> <span class="n">T</span> <span class="n">inv_sqrtpi_v</span> <span class="o">=</span> <span class="cm">/* unspecified */</span><span class="p">;</span>
+ <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">&gt;</span>
+ <span class="kr">inline</span> <span class="k">constexpr</span> <span class="n">T</span> <span class="n">ln2_v</span> <span class="o">=</span> <span class="cm">/* unspecified */</span><span class="p">;</span>
+ <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">&gt;</span>
+ <span class="kr">inline</span> <span class="k">constexpr</span> <span class="n">T</span> <span class="n">ln10_v</span> <span class="o">=</span> <span class="cm">/* unspecified */</span><span class="p">;</span>
+ <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">&gt;</span>
+ <span class="kr">inline</span> <span class="k">constexpr</span> <span class="n">T</span> <span class="n">sqrt2_v</span> <span class="o">=</span> <span class="cm">/* unspecified */</span><span class="p">;</span>
+ <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">&gt;</span>
+ <span class="kr">inline</span> <span class="k">constexpr</span> <span class="n">T</span> <span class="n">sqrt3_v</span> <span class="o">=</span> <span class="cm">/* unspecified */</span><span class="p">;</span>
+ <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">&gt;</span>
+ <span class="kr">inline</span> <span class="k">constexpr</span> <span class="n">T</span> <span class="n">inv_sqrt3_v</span> <span class="o">=</span> <span class="cm">/* unspecified */</span><span class="p">;</span>
+ <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">&gt;</span>
+ <span class="kr">inline</span> <span class="k">constexpr</span> <span class="n">T</span> <span class="n">egamma_v</span> <span class="o">=</span> <span class="cm">/* unspecified */</span><span class="p">;</span>
+ <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">&gt;</span>
+ <span class="kr">inline</span> <span class="k">constexpr</span> <span class="n">T</span> <span class="n">phi_v</span> <span class="o">=</span> <span class="cm">/* unspecified */</span><span class="p">;</span>
+
+ <span class="k">template</span> <span class="o">&lt;</span><span class="n">floating_point</span> <span class="n">T</span><span class="p">&gt;</span>
+ <span class="kr">inline</span> <span class="k">constexpr</span> <span class="n">T</span> <span class="n">e_v</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="cm">/* see description */</span><span class="p">;</span>
+ <span class="k">template</span> <span class="o">&lt;</span><span class="n">floating_point</span> <span class="n">T</span><span class="p">&gt;</span>
+ <span class="kr">inline</span> <span class="k">constexpr</span> <span class="n">T</span> <span class="n">log2e_v</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="cm">/* see description */</span><span class="p">;</span>
+ <span class="k">template</span> <span class="o">&lt;</span><span class="n">floating_point</span> <span class="n">T</span><span class="p">&gt;</span>
+ <span class="kr">inline</span> <span class="k">constexpr</span> <span class="n">T</span> <span class="n">log10e_v</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="cm">/* see description */</span><span class="p">;</span>
+ <span class="k">template</span> <span class="o">&lt;</span><span class="n">floating_point</span> <span class="n">T</span><span class="p">&gt;</span>
+ <span class="kr">inline</span> <span class="k">constexpr</span> <span class="n">T</span> <span class="n">pi_v</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="cm">/* see description */</span><span class="p">;</span>
+ <span class="k">template</span> <span class="o">&lt;</span><span class="n">floating_point</span> <span class="n">T</span><span class="p">&gt;</span>
+ <span class="kr">inline</span> <span class="k">constexpr</span> <span class="n">T</span> <span class="n">inv_pi_v</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="cm">/* see description */</span><span class="p">;</span>
+ <span class="k">template</span> <span class="o">&lt;</span><span class="n">floating_point</span> <span class="n">T</span><span class="p">&gt;</span>
+ <span class="kr">inline</span> <span class="k">constexpr</span> <span class="n">T</span> <span class="n">inv_sqrtpi_v</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="cm">/* see description */</span><span class="p">;</span>
+ <span class="k">template</span> <span class="o">&lt;</span><span class="n">floating_point</span> <span class="n">T</span><span class="p">&gt;</span>
+ <span class="kr">inline</span> <span class="k">constexpr</span> <span class="n">T</span> <span class="n">ln2_v</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="cm">/* see description */</span><span class="p">;</span>
+ <span class="k">template</span> <span class="o">&lt;</span><span class="n">floating_point</span> <span class="n">T</span><span class="p">&gt;</span>
+ <span class="kr">inline</span> <span class="k">constexpr</span> <span class="n">T</span> <span class="n">ln10_v</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="cm">/* see description */</span><span class="p">;</span>
+ <span class="k">template</span> <span class="o">&lt;</span><span class="n">floating_point</span> <span class="n">T</span><span class="p">&gt;</span>
+ <span class="kr">inline</span> <span class="k">constexpr</span> <span class="n">T</span> <span class="n">sqrt2_v</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="cm">/* see description */</span><span class="p">;</span>
+ <span class="k">template</span> <span class="o">&lt;</span><span class="n">floating_point</span> <span class="n">T</span><span class="p">&gt;</span>
+ <span class="kr">inline</span> <span class="k">constexpr</span> <span class="n">T</span> <span class="n">sqrt3_v</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="cm">/* see description */</span><span class="p">;</span>
+ <span class="k">template</span> <span class="o">&lt;</span><span class="n">floating_point</span> <span class="n">T</span><span class="p">&gt;</span>
+ <span class="kr">inline</span> <span class="k">constexpr</span> <span class="n">T</span> <span class="n">inv_sqrt3_v</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="cm">/* see description */</span><span class="p">;</span>
+ <span class="k">template</span> <span class="o">&lt;</span><span class="n">floating_point</span> <span class="n">T</span><span class="p">&gt;</span>
+ <span class="kr">inline</span> <span class="k">constexpr</span> <span class="n">T</span> <span class="n">egamma_v</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="cm">/* see description */</span><span class="p">;</span>
+ <span class="k">template</span> <span class="o">&lt;</span><span class="n">floating_point</span> <span class="n">T</span><span class="p">&gt;</span>
+ <span class="kr">inline</span> <span class="k">constexpr</span> <span class="n">T</span> <span class="n">phi_v</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="cm">/* see description */</span><span class="p">;</span>
+
+ <span class="kr">inline</span> <span class="k">constexpr</span> <span class="kt">double</span> <span class="n">e</span> <span class="o">=</span> <span class="n">e_v</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">;</span>
+ <span class="kr">inline</span> <span class="k">constexpr</span> <span class="kt">double</span> <span class="n">log2e</span> <span class="o">=</span> <span class="n">log2e_v</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">;</span>
+ <span class="kr">inline</span> <span class="k">constexpr</span> <span class="kt">double</span> <span class="n">log10e</span> <span class="o">=</span> <span class="n">log10e_v</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">;</span>
+ <span class="kr">inline</span> <span class="k">constexpr</span> <span class="kt">double</span> <span class="n">pi</span> <span class="o">=</span> <span class="n">pi_v</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">;</span>
+ <span class="kr">inline</span> <span class="k">constexpr</span> <span class="kt">double</span> <span class="n">inv_pi</span> <span class="o">=</span> <span class="n">inv_pi_v</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">;</span>
+ <span class="kr">inline</span> <span class="k">constexpr</span> <span class="kt">double</span> <span class="n">inv_sqrtpi</span> <span class="o">=</span> <span class="n">inv_sqrtpi_v</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">;</span>
+ <span class="kr">inline</span> <span class="k">constexpr</span> <span class="kt">double</span> <span class="n">ln2</span> <span class="o">=</span> <span class="n">ln2_v</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">;</span>
+ <span class="kr">inline</span> <span class="k">constexpr</span> <span class="kt">double</span> <span class="n">ln10</span> <span class="o">=</span> <span class="n">ln10_v</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">;</span>
+ <span class="kr">inline</span> <span class="k">constexpr</span> <span class="kt">double</span> <span class="n">sqrt2</span> <span class="o">=</span> <span class="n">sqrt2_v</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">;</span>
+ <span class="kr">inline</span> <span class="k">constexpr</span> <span class="kt">double</span> <span class="n">sqrt3</span> <span class="o">=</span> <span class="n">sqrt3_v</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">;</span>
+ <span class="kr">inline</span> <span class="k">constexpr</span> <span class="kt">double</span> <span class="n">inv_sqrt3</span> <span class="o">=</span> <span class="n">inv_sqrt3_v</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">;</span>
+ <span class="kr">inline</span> <span class="k">constexpr</span> <span class="kt">double</span> <span class="n">egamma</span> <span class="o">=</span> <span class="n">egamma_v</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">;</span>
+ <span class="kr">inline</span> <span class="k">constexpr</span> <span class="kt">double</span> <span class="n">phi</span> <span class="o">=</span> <span class="n">phi_v</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">;</span>
+ <span class="p">}</span>  <span class="c1">// namespace std::numbers</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h3 id="使用宏定义">使用宏定义</h3>
+
+<ol>
+  <li>
+    <p>使用时需要包含头文件：</p>
+
+    <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="cp">#include</span> <span class="cpf">&lt;cmath&gt;</span><span class="cp">
+</span></code></pre></div>    </div>
+  </li>
+  <li>
+    <p>原型声明：</p>
+
+    <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="cp">#if defined __USE_MISC || defined __USE_XOPEN
+</span> <span class="cp">#define M_E 2.7182818284590452354         </span><span class="cm">/* e */</span><span class="cp">
+</span> <span class="cp">#define M_LOG2E 1.4426950408889634074     </span><span class="cm">/* log_2 e */</span><span class="cp">
+</span> <span class="cp">#define M_LOG10E 0.43429448190325182765   </span><span class="cm">/* log_10 e */</span><span class="cp">
+</span> <span class="cp">#define M_LN2 0.69314718055994530942      </span><span class="cm">/* log_e 2 */</span><span class="cp">
+</span> <span class="cp">#define M_LN10 2.30258509299404568402     </span><span class="cm">/* log_e 10 */</span><span class="cp">
+</span> <span class="cp">#define M_PI 3.14159265358979323846       </span><span class="cm">/* pi */</span><span class="cp">
+</span> <span class="cp">#define M_PI_2 1.57079632679489661923     </span><span class="cm">/* pi/2 */</span><span class="cp">
+</span> <span class="cp">#define M_PI_4 0.78539816339744830962     </span><span class="cm">/* pi/4 */</span><span class="cp">
+</span> <span class="cp">#define M_1_PI 0.31830988618379067154     </span><span class="cm">/* 1/pi */</span><span class="cp">
+</span> <span class="cp">#define M_2_PI 0.63661977236758134308     </span><span class="cm">/* 2/pi */</span><span class="cp">
+</span> <span class="cp">#define M_2_SQRTPI 1.12837916709551257390 </span><span class="cm">/* 2/sqrt(pi) */</span><span class="cp">
+</span> <span class="cp">#define M_SQRT2 1.41421356237309504880    </span><span class="cm">/* sqrt(2) */</span><span class="cp">
+</span> <span class="cp">#define M_SQRT1_2 0.70710678118654752440  </span><span class="cm">/* 1/sqrt(2) */</span><span class="cp">
+</span> <span class="cp">#endif
+</span></code></pre></div>    </div>
+  </li>
+</ol>
+
+<h2 id="参考">参考</h2>
+
+<ol>
+  <li><a href="https://en.cppreference.com/w/">cppreference</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/cpp/c-runtime-library/math-constants?view=msvc-170">Math Constants-Microsoft Learn</a></li>
+</ol>
+
+  </div>
+
+  
+  
+<script src="https://utteranc.es/client.js"
+        repo="zxl19/zxl19.github.io"
+        issue-term="title"
+        label="comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
+
+  
+</article>
+
+<div class="pagination">
+  
+    <span class="prev" >
+      <a href="http://localhost:4000/HomePage/ide-archive/">
+        ← 上一篇
+      </a>
+    </span>
+  
+  
+    <span class="next" >
+      <a href="http://localhost:4000/HomePage/cpp-limits/">
+        下一篇 →
+      </a>
+    </span>
+  
+</div>
+      </div>
+    </div>
+
+    
+
+  </body>
+
+  
+  <script>
+    document.getElementById("main").classList.add("withtoc");
+  </script>
+  
+
+  <div class="wrapper-footer-mobile">
+    <footer class="footer">
+      <!-- Refer to https://codepen.io/ruandre/pen/howFi -->
+<ul class="svg-icon">
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li><a href="https://github.com/zxl19" class="icon-13 github" title="GitHub"><svg viewBox="0 0 512 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg><!--[if lt IE 9]><em>GitHub</em><![endif]--></a></li>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</ul>
+
+
+
+<p>Copyright © 2020-2025 zxl19. All Rights Reserved.</p>
+
+    </footer>
+
+
+</html>

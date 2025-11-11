@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>C++计算程序运行时间 – Pepper小辣椒 – 一个工程师的存档点</title>
+
+      <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="几种C++计算程序运行时间的方法，包括针对代码段的高、低精度计时方法以及对于程序整体的计时方法。
+
+" />
+    <meta property="og:description" content="几种C++计算程序运行时间的方法，包括针对代码段的高、低精度计时方法以及对于程序整体的计时方法。
+
+" />
+    
+    <meta name="author" content="Pepper小辣椒" />
+
+    
+    <meta property="og:title" content="C++计算程序运行时间" />
+    <meta property="twitter:title" content="C++计算程序运行时间" />
+    
+  <!-- Async font loading -->
+<script>
+  window.WebFontConfig = {
+      custom: {
+          families: ['Spoqa Han Sans:100,300,400,700'],
+          urls: ['https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css']
+      },
+      timeout: 60000
+  };
+  (function(d) {
+      var wf = d.createElement('script'), s = d.scripts[0];
+      wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js';
+      s.parentNode.insertBefore(wf, s);
+  })(document);
+</script>
+
+<!--adobe fonts-->
+<script>
+    (function(d) {
+      var config = {
+        kitId: 'vbt3gjx',
+        scriptTimeout: 3000,
+        async: true
+      },
+      h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+    })(document);
+</script> 
+
+  <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link rel="stylesheet" type="text/css" href="/HomePage/style.css" />
+  <link rel="alternate" type="application/rss+xml" title="Pepper小辣椒 - 一个工程师的存档点" href="/HomePage/feed.xml" />
+  <link rel="shortcut icon" href="https://raw.githubusercontent.com/zxl19/zxl19.github.io/master/images/icon.png">
+  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+  <script src="https://unpkg.com/feather-icons"></script>
+  <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        inlineMath: [['$','$']]
+      }
+    });
+  </script>
+
+  <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+
+</head>
+
+  <body>
+    <div class="wrapper-sidebar">
+  <header class="sidebar clearfix">
+    <div class="site-info">
+      
+        <a href="/HomePage/" class="site-avatar"><img src="https://raw.githubusercontent.com/zxl19/zxl19.github.io/master/images/avatar.jpg" /></a>
+       
+      <h1 class="site-name"><a href="/HomePage/">Pepper小辣椒</a></h1>
+      <p class="site-description">一个工程师的存档点</p>
+    </div>
+  </header>
+
+  <div class="navlist">
+    <nav>
+      
+      
+      <a href="/HomePage/">首页</a>
+      
+      
+      
+      <a href="/HomePage/about">关于</a>
+      
+      
+      
+      <a href="/HomePage/archive">归档</a>
+      
+      
+      
+      <a href="/HomePage/tags">标签</a>
+      
+      
+    </nav>
+  </div>
+
+  <div class="wrapper-footer-desktop">
+    <footer class="footer">
+      <!-- Refer to https://codepen.io/ruandre/pen/howFi -->
+<ul class="svg-icon">
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li><a href="https://github.com/zxl19" class="icon-13 github" title="GitHub"><svg viewBox="0 0 512 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg><!--[if lt IE 9]><em>GitHub</em><![endif]--></a></li>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</ul>
+
+
+
+<p>Copyright © 2020-2025 zxl19. All Rights Reserved.</p>
+
+    </footer>
+  </div>
+</div>
+
+    
+      <aside class="toc">
+        <ul>
+  <li><a href="#">C++计算程序运行时间</a>
+    <ul>
+      <li><a href="#代码段运行时间">代码段运行时间</a>
+        <ul>
+          <li><a href="#高精度">高精度</a>
+            <ul>
+              <li><a href="#持续时间">持续时间</a></li>
+              <li><a href="#时间点">时间点</a></li>
+              <li><a href="#时钟">时钟</a></li>
+              <li><a href="#计算程序耗时">计算程序耗时</a></li>
+            </ul>
+          </li>
+          <li><a href="#低精度">低精度</a>
+            <ul>
+              <li><a href="#计算程序耗时-1">计算程序耗时</a></li>
+              <li><a href="#格式化时间戳">格式化时间戳</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><a href="#程序整体运行时间">程序整体运行时间</a></li>
+      <li><a href="#参考">参考</a></li>
+    </ul>
+  </li>
+</ul>
+      </aside>
+    
+
+    <div id="main" role="main" class="wrapper-content">
+      <div class="container">
+        <article class="posts">
+  <h1>C++计算程序运行时间</h1>
+
+  <div clsss="meta">
+    <span class="author">
+      zxl19
+    </span>
+
+    <span class="date">
+      2021-06-02
+    </span>
+
+    <ul class="tag">
+      
+      <li>
+        <a href="http://localhost:4000/HomePage/tags#C++">
+          C++
+        </a>
+      </li>
+      
+      <li>
+        <a href="http://localhost:4000/HomePage/tags#Note">
+          Note
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+
+  <div class="entry">
+    <p>几种C++计算程序运行时间的方法，包括针对代码段的高、低精度计时方法以及对于程序整体的计时方法。</p>
+
+<!-- more -->
+
+<h2 id="代码段运行时间">代码段运行时间</h2>
+
+<h3 id="高精度">高精度</h3>
+
+<ol>
+  <li>
+    <p>C++11引入chrono库，用于精确计算程序运行时间，使用时需要包含头文件：</p>
+
+    <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="cp">#include</span> <span class="cpf">&lt;chrono&gt;</span><span class="cp">
+</span></code></pre></div>    </div>
+  </li>
+  <li>
+    <p>chrono库定义的类、函数、常量等均在<code class="language-plaintext highlighter-rouge">chrono</code>子命名空间中，为了使表示形式简便，本文默认使用<code class="language-plaintext highlighter-rouge">std::chrono</code>命名空间：</p>
+
+    <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="p">;</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>chrono库定义了三个重要概念：</p>
+
+    <ul>
+      <li>持续时间（durations）：提供<code class="language-plaintext highlighter-rouge">duration</code>模板类将周期计数和周期精度耦合，用于测量时间跨度；</li>
+      <li>时间点（time points）：提供<code class="language-plaintext highlighter-rouge">time_point</code>模板类表示相对于时钟纪元（epoch）的持续时间，用于表示时刻；</li>
+      <li>时钟（clocks）：提供<code class="language-plaintext highlighter-rouge">system_clock</code>、<code class="language-plaintext highlighter-rouge">steady_clock</code>、<code class="language-plaintext highlighter-rouge">high_resolution_clock</code>模板类表示不同计时特性的时钟，用于在时间点与实际物理时间之间建立联系；</li>
+    </ul>
+  </li>
+</ol>
+
+<h4 id="持续时间">持续时间</h4>
+
+<p>原型声明：</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">Representation</span><span class="p">,</span>     <span class="c1">// 算数类型，用于表示周期计数</span>
+          <span class="k">class</span> <span class="nc">Period</span> <span class="o">=</span> <span class="n">ratio</span><span class="o">&lt;</span><span class="mi">1</span><span class="p">&gt;</span>   <span class="c1">// 分数表示的有理数，用于表示周期精度，默认为1秒</span>
+          <span class="o">&gt;</span>
+<span class="k">class</span> <span class="nc">duration</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>常用成员函数原型声明：</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">constexpr</span> <span class="n">rep</span> <span class="n">count</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>        <span class="c1">// 返回周期计数</span>
+<span class="k">static</span> <span class="k">constexpr</span> <span class="n">duration</span> <span class="nf">zero</span><span class="p">();</span>   <span class="c1">// 返回为零的持续时间</span>
+<span class="k">static</span> <span class="k">constexpr</span> <span class="n">duration</span> <span class="nf">min</span><span class="p">();</span>    <span class="c1">// 返回持续时间能够表示的最小值</span>
+<span class="k">static</span> <span class="k">constexpr</span> <span class="n">duration</span> <span class="nf">max</span><span class="p">();</span>    <span class="c1">// 返回持续时间能够表示的最大值</span>
+</code></pre></div></div>
+
+<p>chrono库对于实例化的<code class="language-plaintext highlighter-rouge">duration</code>模板类定义了别名，用于表示常用的时间类型：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">持续时间类型</th>
+      <th style="text-align: left"><code class="language-plaintext highlighter-rouge">Representation</code></th>
+      <th style="text-align: left"><code class="language-plaintext highlighter-rouge">Period</code></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">hours</code></td>
+      <td style="text-align: left">至少23位有符号整型</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">std::ratio&lt;3600, 1&gt;</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">minutes</code></td>
+      <td style="text-align: left">至少29位有符号整型</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">std::ratio&lt;60, 1&gt;</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">seconds</code></td>
+      <td style="text-align: left">至少35位有符号整型</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">std::ratio&lt;1, 1&gt;</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">milliseconds</code></td>
+      <td style="text-align: left">至少45位有符号整型</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">std::ratio&lt;1, 1000&gt;</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">microseconds</code></td>
+      <td style="text-align: left">至少55位有符号整型</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">std::ratio&lt;1, 1000000&gt;</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">nanoseconds</code></td>
+      <td style="text-align: left">至少64位有符号整型</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">std::ratio&lt;1, 1000000000&gt;</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>不同持续时间类型之间可以使用<code class="language-plaintext highlighter-rouge">duration_cast</code>模板函数相互转换，原型声明：</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">ToDuration</span><span class="p">,</span> <span class="k">class</span> <span class="nc">Rep</span><span class="p">,</span> <span class="k">class</span> <span class="nc">Period</span><span class="p">&gt;</span>
+<span class="k">constexpr</span> <span class="n">ToDuration</span> <span class="nf">duration_cast</span><span class="p">(</span><span class="k">const</span> <span class="n">duration</span><span class="o">&lt;</span><span class="n">Rep</span><span class="p">,</span> <span class="n">Period</span><span class="o">&gt;&amp;</span> <span class="n">dtn</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h4 id="时间点">时间点</h4>
+
+<p>原型声明：</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">Clock</span><span class="p">,</span> <span class="k">class</span> <span class="nc">Duration</span> <span class="o">=</span> <span class="k">typename</span> <span class="nc">Clock</span><span class="o">::</span><span class="n">duration</span><span class="p">&gt;</span>
+<span class="k">class</span> <span class="nc">time_point</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>常用成员函数原型声明：</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">duration</span> <span class="n">time_since_epoch</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>  <span class="c1">// 返回相对于时钟纪元的持续时间</span>
+<span class="k">static</span> <span class="k">constexpr</span> <span class="n">time_point</span> <span class="nf">min</span><span class="p">();</span>  <span class="c1">// 返回时间点能够表示的最小值</span>
+<span class="k">static</span> <span class="k">constexpr</span> <span class="n">time_point</span> <span class="nf">max</span><span class="p">();</span>  <span class="c1">// 返回时间点能够表示的最大值</span>
+</code></pre></div></div>
+
+<h4 id="时钟">时钟</h4>
+
+<p>chrono库提供了三种时钟类型：</p>
+
+<ol>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">system_clock</code>：系统时钟；</p>
+
+    <ul>
+      <li>实时（realtime），表示真实时间，可以转换为日历时间，日历时间是一个整数，表示协调世界时（Universal Coordinated Time，UTC）1970年1月1日00:00起经过的秒数，Unix时间就采用了这种表示方式；</li>
+      <li>有符号（signed count），可以用负值表示新纪元时间（epoch time）之前的时间，新纪元时间指的是即1970年1月1日00:00 UTC；</li>
+      <li>系统范围（system-wide），系统中运行的所有进程可以获得相同的时间；</li>
+    </ul>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">steady_clock</code>：稳定时钟，专门用于计算时间间隔；</p>
+
+    <ul>
+      <li>单调性（monotonic），返回的时间是单调递增的，每次调用<code class="language-plaintext highlighter-rouge">now()</code>成员函数返回的时间总是比之前返回的时间大；</li>
+      <li>稳定性（steady）：每次时钟走时对应的实际时间是相同的；</li>
+    </ul>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">high_resolution_clock</code>：高精度时钟；</p>
+
+    <ul>
+      <li>最高精度（highest precision），是精度最高的时钟类型，时钟走时周期最小；</li>
+      <li>在不同的标准库中实现不一致，通常是<code class="language-plaintext highlighter-rouge">system_clock</code>或<code class="language-plaintext highlighter-rouge">steady_clock</code>的别名，具体实现取决于标准库和系统配置，因此不建议使用；</li>
+    </ul>
+  </li>
+</ol>
+
+<p>常用成员函数原型声明：</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">static</span> <span class="n">time_point</span> <span class="n">now</span><span class="p">()</span> <span class="k">noexcept</span><span class="p">;</span>
+<span class="k">static</span> <span class="kt">time_t</span> <span class="n">to_time_t</span> <span class="p">(</span><span class="k">const</span> <span class="n">time_point</span><span class="o">&amp;</span> <span class="n">tp</span><span class="p">)</span> <span class="k">noexcept</span><span class="p">;</span>
+<span class="k">static</span> <span class="n">time_point</span> <span class="n">from_time_t</span> <span class="p">(</span><span class="kt">time_t</span> <span class="n">t</span><span class="p">)</span> <span class="k">noexcept</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h4 id="计算程序耗时">计算程序耗时</h4>
+
+<p>以<code class="language-plaintext highlighter-rouge">steady_clock</code>为例：</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;chrono&gt;</span><span class="cp">
+</span>
+<span class="n">steady_clock</span><span class="o">::</span><span class="n">time_point</span> <span class="n">start</span> <span class="o">=</span> <span class="n">steady_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>   <span class="c1">// 开始时间</span>
+<span class="c1">// do something</span>
+<span class="n">steady_clock</span><span class="o">::</span><span class="n">time_point</span> <span class="n">end</span> <span class="o">=</span> <span class="n">steady_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>     <span class="c1">// 结束时间</span>
+<span class="n">milliseconds</span> <span class="n">duration</span> <span class="o">=</span>
+    <span class="n">duration_cast</span><span class="o">&lt;</span><span class="n">milliseconds</span><span class="o">&gt;</span><span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">);</span>           <span class="c1">// 计算开始时间和结束时间之间用milliseconds表示的持续时间</span>
+<span class="kt">double</span> <span class="n">period_count</span> <span class="o">=</span> <span class="n">duration</span><span class="p">.</span><span class="n">count</span><span class="p">();</span>                 <span class="c1">// 计算用milliseconds表示的持续时间中有多少个周期</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Spent "</span> <span class="o">&lt;&lt;</span> <span class="n">period_count</span> <span class="o">*</span> <span class="n">milliseconds</span><span class="o">::</span><span class="n">period</span><span class="o">::</span><span class="n">num</span> <span class="o">/</span> <span class="n">milliseconds</span><span class="o">::</span><span class="n">period</span><span class="o">::</span><span class="n">den</span> <span class="o">&lt;&lt;</span> <span class="s">" seconds."</span>
+          <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>                                 <span class="c1">// 使用周期数量和每个周期对应的时间计算运行时间（单位：s）</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Spent "</span> <span class="o">&lt;&lt;</span> <span class="n">period_count</span> <span class="o">&lt;&lt;</span> <span class="s">" milliseconds."</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span> <span class="c1">// 使用周期数量直接输出时间（单位：ms）</span>
+
+<span class="kt">double</span> <span class="n">system_stamp</span> <span class="o">=</span> <span class="n">duration</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">{</span><span class="n">steady_clock</span><span class="o">::</span><span class="n">now</span><span class="p">().</span><span class="n">time_since_epoch</span><span class="p">()}.</span><span class="n">count</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p>具体工程实现参考<a href="https://github.com/gaoxiang12/faster-lio">gaoxiang12/faster-lio</a>。</p>
+
+<h3 id="低精度">低精度</h3>
+
+<ol>
+  <li>
+    <p>ctime库用于获取和操作与日期和时间相关的信息，使用时需要包含头文件：</p>
+
+    <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="cp">#include</span> <span class="cpf">&lt;ctime&gt;</span><span class="cp">
+</span></code></pre></div>    </div>
+  </li>
+  <li>
+    <p>ctime库定义了三个表示时间的数据类型：</p>
+
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">clock_t</code>：表示时钟滴答（clock tick）计数的基础数据类型；</li>
+      <li><code class="language-plaintext highlighter-rouge">time_t</code>：表示日历时间（calendar time）的基础数据类型；</li>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">tm</code>：表示日历时间的结构体类型：</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th style="text-align: left">数据成员</th>
+              <th style="text-align: left">类型</th>
+              <th style="text-align: left">含义</th>
+              <th style="text-align: left">范围</th>
+              <th style="text-align: left">备注</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="text-align: left"><code class="language-plaintext highlighter-rouge">tm_sec</code></td>
+              <td style="text-align: left"><code class="language-plaintext highlighter-rouge">int</code></td>
+              <td style="text-align: left">秒</td>
+              <td style="text-align: left">0-60</td>
+              <td style="text-align: left">60表示闰秒</td>
+            </tr>
+            <tr>
+              <td style="text-align: left"><code class="language-plaintext highlighter-rouge">tm_min</code></td>
+              <td style="text-align: left"><code class="language-plaintext highlighter-rouge">int</code></td>
+              <td style="text-align: left">分</td>
+              <td style="text-align: left">0-59</td>
+              <td style="text-align: left"> </td>
+            </tr>
+            <tr>
+              <td style="text-align: left"><code class="language-plaintext highlighter-rouge">tm_hour</code></td>
+              <td style="text-align: left"><code class="language-plaintext highlighter-rouge">int</code></td>
+              <td style="text-align: left">时</td>
+              <td style="text-align: left">0-23</td>
+              <td style="text-align: left"> </td>
+            </tr>
+            <tr>
+              <td style="text-align: left"><code class="language-plaintext highlighter-rouge">tm_mday</code></td>
+              <td style="text-align: left"><code class="language-plaintext highlighter-rouge">int</code></td>
+              <td style="text-align: left">日</td>
+              <td style="text-align: left">1-31</td>
+              <td style="text-align: left"> </td>
+            </tr>
+            <tr>
+              <td style="text-align: left"><code class="language-plaintext highlighter-rouge">tm_mon</code></td>
+              <td style="text-align: left"><code class="language-plaintext highlighter-rouge">int</code></td>
+              <td style="text-align: left">月</td>
+              <td style="text-align: left">0-11</td>
+              <td style="text-align: left"> </td>
+            </tr>
+            <tr>
+              <td style="text-align: left"><code class="language-plaintext highlighter-rouge">tm_year</code></td>
+              <td style="text-align: left"><code class="language-plaintext highlighter-rouge">int</code></td>
+              <td style="text-align: left">年</td>
+              <td style="text-align: left"> </td>
+              <td style="text-align: left">从1900年开始</td>
+            </tr>
+            <tr>
+              <td style="text-align: left"><code class="language-plaintext highlighter-rouge">tm_wday</code></td>
+              <td style="text-align: left"><code class="language-plaintext highlighter-rouge">int</code></td>
+              <td style="text-align: left">星期</td>
+              <td style="text-align: left">0-6</td>
+              <td style="text-align: left"> </td>
+            </tr>
+            <tr>
+              <td style="text-align: left"><code class="language-plaintext highlighter-rouge">tm_yday</code></td>
+              <td style="text-align: left"><code class="language-plaintext highlighter-rouge">int</code></td>
+              <td style="text-align: left">天数</td>
+              <td style="text-align: left">0-365</td>
+              <td style="text-align: left"> </td>
+            </tr>
+            <tr>
+              <td style="text-align: left"><code class="language-plaintext highlighter-rouge">tm_isdst</code></td>
+              <td style="text-align: left"><code class="language-plaintext highlighter-rouge">int</code></td>
+              <td style="text-align: left">是否使用夏令时</td>
+              <td style="text-align: left"> </td>
+              <td style="text-align: left">正值为是，负值为否</td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<h4 id="计算程序耗时-1">计算程序耗时</h4>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;ctime&gt;</span><span class="cp">
+</span>
+<span class="kt">clock_t</span> <span class="n">start</span> <span class="o">=</span> <span class="n">clock</span><span class="p">();</span>    <span class="c1">// 开始时间</span>
+<span class="c1">// do something</span>
+<span class="kt">clock_t</span> <span class="n">end</span> <span class="o">=</span> <span class="n">clock</span><span class="p">();</span>      <span class="c1">// 结束时间</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Spent "</span> <span class="o">&lt;&lt;</span> <span class="kt">double</span><span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span> <span class="o">/</span> <span class="n">CLOCKS_PER_SEC</span>   <span class="c1">// 宏定义，表示每秒中的时钟滴答数</span>
+          <span class="o">&lt;&lt;</span> <span class="s">" seconds."</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>                          <span class="c1">// 输出时间（单位：s）</span>
+</code></pre></div></div>
+
+<h4 id="格式化时间戳">格式化时间戳</h4>
+
+<p>常用成员函数原型声明：</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span><span class="o">*</span> <span class="nf">asctime</span><span class="p">(</span><span class="k">const</span> <span class="k">struct</span> <span class="nc">tm</span><span class="o">*</span> <span class="n">timeptr</span><span class="p">);</span>    <span class="c1">// 将tm类型转换为字符串，格式为“星期 月 日 时:分:秒 年”</span>
+<span class="kt">char</span><span class="o">*</span> <span class="nf">ctime</span><span class="p">(</span><span class="k">const</span> <span class="kt">time_t</span><span class="o">*</span> <span class="n">timer</span><span class="p">);</span>           <span class="c1">// 将time_t类型转换为字符串，相当于asctime(localtime(timer))</span>
+<span class="k">struct</span> <span class="nc">tm</span><span class="o">*</span> <span class="nf">gmtime</span><span class="p">(</span><span class="k">const</span> <span class="kt">time_t</span><span class="o">*</span> <span class="n">timer</span><span class="p">);</span>     <span class="c1">// 将time_t类型转换为tm类型的UTC时间</span>
+<span class="k">struct</span> <span class="nc">tm</span><span class="o">*</span> <span class="nf">localtime</span><span class="p">(</span><span class="k">const</span> <span class="kt">time_t</span><span class="o">*</span> <span class="n">timer</span><span class="p">);</span>  <span class="c1">// 将time_t类型转换为tm类型的本地时间</span>
+<span class="kt">size_t</span> <span class="nf">strftime</span><span class="p">(</span><span class="kt">char</span><span class="o">*</span> <span class="n">ptr</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">maxsize</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">format</span><span class="p">,</span>
+                <span class="k">const</span> <span class="k">struct</span> <span class="nc">tm</span><span class="o">*</span> <span class="n">timeptr</span><span class="p">);</span>  <span class="c1">// 将tm类型转换为字符串，支持自定义格式</span>
+</code></pre></div></div>
+
+<p>与时间相关的格式化输出符号：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">格式化输出符号</th>
+      <th style="text-align: left">含义</th>
+      <th style="text-align: left">备注</th>
+      <th style="text-align: left">范围</th>
+      <th style="text-align: left">示例</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">%a</code></td>
+      <td style="text-align: left">星期缩写</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">Thu</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">%A</code></td>
+      <td style="text-align: left">星期全称</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">Thursday</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">%b</code></td>
+      <td style="text-align: left">月份缩写</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">Aug</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">%B</code></td>
+      <td style="text-align: left">月份全称</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">August</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">%c</code></td>
+      <td style="text-align: left">日期和时间表示</td>
+      <td style="text-align: left">格式为“星期 月 日 时:分:秒 年”</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">Thu Aug 23 14:55:02 2001</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">%C</code></td>
+      <td style="text-align: left">年份除以100并截断为整数</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">00-99</td>
+      <td style="text-align: left">20</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">%d</code></td>
+      <td style="text-align: left">月中的某一天</td>
+      <td style="text-align: left">两位，不足两位前面补零</td>
+      <td style="text-align: left">01-31</td>
+      <td style="text-align: left">23</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">%D</code></td>
+      <td style="text-align: left">短日期</td>
+      <td style="text-align: left">格式为“月/日/年”，相当于<code class="language-plaintext highlighter-rouge">%m/%d/%y</code></td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">08/23/01</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">%e</code></td>
+      <td style="text-align: left">月中的某一天</td>
+      <td style="text-align: left">两位，不足两位前面补空格</td>
+      <td style="text-align: left">1-31</td>
+      <td style="text-align: left">23</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">%F</code></td>
+      <td style="text-align: left">短日期</td>
+      <td style="text-align: left">格式为“年-月-日”，相当于<code class="language-plaintext highlighter-rouge">%Y-%m-%d</code></td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">2001-08-23</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">%g</code></td>
+      <td style="text-align: left">基于周的年份（week-based year）后两位</td>
+      <td style="text-align: left">基于周的年份从最接近1月1日的第一个星期一开始</td>
+      <td style="text-align: left">00-99</td>
+      <td style="text-align: left">01</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">%G</code></td>
+      <td style="text-align: left">基于周的年份</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">2001</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">%h</code></td>
+      <td style="text-align: left">月份缩写</td>
+      <td style="text-align: left">相当于<code class="language-plaintext highlighter-rouge">%b</code></td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">Aug</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">%H</code></td>
+      <td style="text-align: left">24小时制的小时数</td>
+      <td style="text-align: left">两位，不足两位前面补零</td>
+      <td style="text-align: left">00-23</td>
+      <td style="text-align: left">14</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">%I</code></td>
+      <td style="text-align: left">12小时制的小时数</td>
+      <td style="text-align: left">两位，不足两位前面补零</td>
+      <td style="text-align: left">01-12</td>
+      <td style="text-align: left">02</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">%j</code></td>
+      <td style="text-align: left">年中的某一天</td>
+      <td style="text-align: left">三位，不足三位前面补零</td>
+      <td style="text-align: left">001-366</td>
+      <td style="text-align: left">235</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">%m</code></td>
+      <td style="text-align: left">月份</td>
+      <td style="text-align: left">两位，不足两位前面补零</td>
+      <td style="text-align: left">01-12</td>
+      <td style="text-align: left">08</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">%M</code></td>
+      <td style="text-align: left">分钟数</td>
+      <td style="text-align: left">两位，不足两位前面补零</td>
+      <td style="text-align: left">00-59</td>
+      <td style="text-align: left">55</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">%n</code></td>
+      <td style="text-align: left">换行符</td>
+      <td style="text-align: left">相当于<code class="language-plaintext highlighter-rouge">\n</code></td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">%p</code></td>
+      <td style="text-align: left">上午或下午</td>
+      <td style="text-align: left">使用AM或PM表示</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">PM</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">%r</code></td>
+      <td style="text-align: left">12小时制表示的时间</td>
+      <td style="text-align: left">格式为“时:分:秒 上午或下午”</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">02:55:02 pm</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">%R</code></td>
+      <td style="text-align: left">24小时制表示的时间</td>
+      <td style="text-align: left">格式为“时:分”，相当于<code class="language-plaintext highlighter-rouge">%H:%M</code></td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">14:55</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">%S</code></td>
+      <td style="text-align: left">秒数</td>
+      <td style="text-align: left">两位，不足两位前面补零</td>
+      <td style="text-align: left">00-61</td>
+      <td style="text-align: left">02</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">%t</code></td>
+      <td style="text-align: left">水平制表符</td>
+      <td style="text-align: left">相当于<code class="language-plaintext highlighter-rouge">\t</code></td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">%T</code></td>
+      <td style="text-align: left">ISO 8601标准规定的时间</td>
+      <td style="text-align: left">格式为“时:分:秒”，相当于<code class="language-plaintext highlighter-rouge">%H:%M:%S</code></td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">14:55:02</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">%u</code></td>
+      <td style="text-align: left">ISO 8601标准规定的星期</td>
+      <td style="text-align: left">星期一为1，之后依次递增</td>
+      <td style="text-align: left">1-7</td>
+      <td style="text-align: left">4</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">%U</code></td>
+      <td style="text-align: left">年中的某一周</td>
+      <td style="text-align: left">以第1个星期日为第1周的第1天</td>
+      <td style="text-align: left">00-53</td>
+      <td style="text-align: left">33</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">%V</code></td>
+      <td style="text-align: left">ISO 8601标准规定的周</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">01-53</td>
+      <td style="text-align: left">33</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">%w</code></td>
+      <td style="text-align: left">星期</td>
+      <td style="text-align: left">星期日为0，之后依次递增</td>
+      <td style="text-align: left">0-6</td>
+      <td style="text-align: left">4</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">%W</code></td>
+      <td style="text-align: left">年中的某一周</td>
+      <td style="text-align: left">以第1个星期一为第1周的第1天</td>
+      <td style="text-align: left">00-53</td>
+      <td style="text-align: left">34</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">%x</code></td>
+      <td style="text-align: left">日期表示</td>
+      <td style="text-align: left">格式为“月/日/年”</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">08/23/01</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">%X</code></td>
+      <td style="text-align: left">时间表示</td>
+      <td style="text-align: left">格式为“时:分:秒”</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">14:55:02</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">%y</code></td>
+      <td style="text-align: left">年份后两位</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">00-99</td>
+      <td style="text-align: left">01</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">%Y</code></td>
+      <td style="text-align: left">年份</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">2001</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">%z</code></td>
+      <td style="text-align: left">ISO 8601标准规定的当前时区相对于UTC的偏移量</td>
+      <td style="text-align: left">1分钟为1，1小时为100，如果无法确定时区，则输出空字符串</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">+100</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">%Z</code></td>
+      <td style="text-align: left">时区名称或缩写</td>
+      <td style="text-align: left">如果无法确定时区，则输出空字符串</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">CDT</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">%%</code></td>
+      <td style="text-align: left">百分号</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">%</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>示例：</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;ctime&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;iomanip&gt;</span><span class="c1">  // std::put_time()</span><span class="cp">
+#include</span> <span class="cpf">&lt;sstream&gt;</span><span class="c1">  // std::ostringstream</span><span class="cp">
+</span>
+<span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="nf">ConvertUnixStampToString</span><span class="p">(</span><span class="kt">double</span> <span class="n">unix_stamp</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// 将double类型的时间戳转换为time_t类型</span>
+  <span class="n">std</span><span class="o">::</span><span class="kt">time_t</span> <span class="n">time</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="kt">time_t</span><span class="o">&gt;</span><span class="p">(</span><span class="n">unix_stamp</span><span class="p">);</span>
+
+  <span class="c1">// 将time_t类型的时间戳转换为tm类型的本地时间</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">tm</span> <span class="n">local_time</span> <span class="o">=</span> <span class="o">*</span><span class="n">std</span><span class="o">::</span><span class="n">localtime</span><span class="p">(</span><span class="o">&amp;</span><span class="n">time</span><span class="p">);</span>
+
+  <span class="c1">// 将tm类型的本地时间格式化为字符串，格式为“年-月-日 时:分:秒”</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">ostringstream</span> <span class="n">oss</span><span class="p">;</span>
+  <span class="n">oss</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">put_time</span><span class="p">(</span><span class="o">&amp;</span><span class="n">local_time</span><span class="p">,</span> <span class="s">"%Y-%m-%d %H:%M:%S"</span><span class="p">);</span>
+
+  <span class="c1">// 返回字符串</span>
+  <span class="k">return</span> <span class="n">oss</span><span class="p">.</span><span class="n">str</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="程序整体运行时间">程序整体运行时间</h2>
+
+<p>在Linux系统中使用<code class="language-plaintext highlighter-rouge">time</code>命令计算可执行文件的运行时间：</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">time</span> ./a.out
+</code></pre></div></div>
+
+<h2 id="参考">参考</h2>
+
+<ol>
+  <li><a href="http://www.cplusplus.com">cplusplus</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/1892632711019073793">Chrono：C++里的时间和日期-吴咏炜的文章-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/194231797">C++11——chrono库开发高精度计！我们可能学的不是同一门语言~-C语言编程俱乐部的文章-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/432564292">C++11的chrono库-小武的文章-知乎</a></li>
+  <li><a href="https://blog.csdn.net/oncealong/article/details/28599655">chrono1-CSDN博客</a></li>
+  <li><a href="https://blog.csdn.net/u013390476/article/details/50209603">chrono2-CSDN博客</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/54665895">C++下四种常用的程序运行时间的计时方法总结-阿贵的文章-知乎</a></li>
+  <li><a href="https://github.com/gaoxiang12/faster-lio">gaoxiang12/faster-lio</a></li>
+  <li><a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO 8601 Date and time format-ISO</a></li>
+  <li><a href="https://www.runoob.com/linux/linux-comm-time.html">Linux time命令-菜鸟教程</a></li>
+</ol>
+
+  </div>
+
+  
+  
+<script src="https://utteranc.es/client.js"
+        repo="zxl19/zxl19.github.io"
+        issue-term="title"
+        label="comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
+
+  
+</article>
+
+<div class="pagination">
+  
+    <span class="prev" >
+      <a href="http://localhost:4000/HomePage/cpp-library/">
+        ← 上一篇
+      </a>
+    </span>
+  
+  
+    <span class="next" >
+      <a href="http://localhost:4000/HomePage/ros-logging/">
+        下一篇 →
+      </a>
+    </span>
+  
+</div>
+      </div>
+    </div>
+
+    
+
+  </body>
+
+  
+  <script>
+    document.getElementById("main").classList.add("withtoc");
+  </script>
+  
+
+  <div class="wrapper-footer-mobile">
+    <footer class="footer">
+      <!-- Refer to https://codepen.io/ruandre/pen/howFi -->
+<ul class="svg-icon">
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li><a href="https://github.com/zxl19" class="icon-13 github" title="GitHub"><svg viewBox="0 0 512 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg><!--[if lt IE 9]><em>GitHub</em><![endif]--></a></li>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</ul>
+
+
+
+<p>Copyright © 2020-2025 zxl19. All Rights Reserved.</p>
+
+    </footer>
+
+
+</html>

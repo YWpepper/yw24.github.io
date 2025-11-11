@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>VS Code配置 – Pepper小辣椒 – 一个工程师的存档点</title>
+
+      <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="简单记录一下目前我的VS Code配置，主要包括编辑器配置和扩展配置。
+
+" />
+    <meta property="og:description" content="简单记录一下目前我的VS Code配置，主要包括编辑器配置和扩展配置。
+
+" />
+    
+    <meta name="author" content="Pepper小辣椒" />
+
+    
+    <meta property="og:title" content="VS Code配置" />
+    <meta property="twitter:title" content="VS Code配置" />
+    
+  <!-- Async font loading -->
+<script>
+  window.WebFontConfig = {
+      custom: {
+          families: ['Spoqa Han Sans:100,300,400,700'],
+          urls: ['https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css']
+      },
+      timeout: 60000
+  };
+  (function(d) {
+      var wf = d.createElement('script'), s = d.scripts[0];
+      wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js';
+      s.parentNode.insertBefore(wf, s);
+  })(document);
+</script>
+
+<!--adobe fonts-->
+<script>
+    (function(d) {
+      var config = {
+        kitId: 'vbt3gjx',
+        scriptTimeout: 3000,
+        async: true
+      },
+      h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+    })(document);
+</script> 
+
+  <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link rel="stylesheet" type="text/css" href="/HomePage/style.css" />
+  <link rel="alternate" type="application/rss+xml" title="Pepper小辣椒 - 一个工程师的存档点" href="/HomePage/feed.xml" />
+  <link rel="shortcut icon" href="https://raw.githubusercontent.com/zxl19/zxl19.github.io/master/images/icon.png">
+  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+  <script src="https://unpkg.com/feather-icons"></script>
+  <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        inlineMath: [['$','$']]
+      }
+    });
+  </script>
+
+  <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+
+</head>
+
+  <body>
+    <div class="wrapper-sidebar">
+  <header class="sidebar clearfix">
+    <div class="site-info">
+      
+        <a href="/HomePage/" class="site-avatar"><img src="https://raw.githubusercontent.com/zxl19/zxl19.github.io/master/images/avatar.jpg" /></a>
+       
+      <h1 class="site-name"><a href="/HomePage/">Pepper小辣椒</a></h1>
+      <p class="site-description">一个工程师的存档点</p>
+    </div>
+  </header>
+
+  <div class="navlist">
+    <nav>
+      
+      
+      <a href="/HomePage/">首页</a>
+      
+      
+      
+      <a href="/HomePage/about">关于</a>
+      
+      
+      
+      <a href="/HomePage/archive">归档</a>
+      
+      
+      
+      <a href="/HomePage/tags">标签</a>
+      
+      
+    </nav>
+  </div>
+
+  <div class="wrapper-footer-desktop">
+    <footer class="footer">
+      <!-- Refer to https://codepen.io/ruandre/pen/howFi -->
+<ul class="svg-icon">
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li><a href="https://github.com/zxl19" class="icon-13 github" title="GitHub"><svg viewBox="0 0 512 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg><!--[if lt IE 9]><em>GitHub</em><![endif]--></a></li>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</ul>
+
+
+
+<p>Copyright © 2020-2025 zxl19. All Rights Reserved.</p>
+
+    </footer>
+  </div>
+</div>
+
+    
+      <aside class="toc">
+        <ul>
+  <li><a href="#">VS Code配置</a>
+    <ul>
+      <li><a href="#编辑器配置">编辑器配置</a></li>
+      <li><a href="#扩展配置">扩展配置</a>
+        <ul>
+          <li><a href="#emojisense">:emojisense:</a></li>
+          <li><a href="#ai-toolkit-for-visual-studio-code">AI Toolkit for Visual Studio Code</a></li>
+          <li><a href="#asciidoc">AsciiDoc</a></li>
+          <li><a href="#better-comments">Better Comments</a></li>
+          <li><a href="#bookmarks">Bookmarks</a></li>
+          <li><a href="#bracket-pair-colorizer-2">Bracket Pair Colorizer 2</a></li>
+          <li><a href="#cc">C/C++</a></li>
+          <li><a href="#chatgpt-easycode">ChatGPT-EasyCode</a></li>
+          <li><a href="#chinese-simplified-language-pack-for-visual-studio-code">Chinese (Simplified) Language Pack for Visual Studio Code</a></li>
+          <li><a href="#clangd">clangd</a></li>
+          <li><a href="#cmake">CMake</a></li>
+          <li><a href="#cmake-tools">CMake Tools</a></li>
+          <li><a href="#cmake-format">cmake-format</a></li>
+          <li><a href="#code-runner">Code Runner</a></li>
+          <li><a href="#code-spell-checker">Code Spell Checker</a></li>
+          <li><a href="#codegeex-ai-code-autocomplete-chat-auto-comment">CodeGeeX: AI Code AutoComplete, Chat, Auto Comment</a></li>
+          <li><a href="#compare-folders">Compare Folders</a></li>
+          <li><a href="#crypto-tools">Crypto Tools</a></li>
+          <li><a href="#doxygen-documentation-generator">Doxygen Documentation Generator</a></li>
+          <li><a href="#drawio-integration">Draw.io Integration</a></li>
+          <li><a href="#foam">Foam</a></li>
+          <li><a href="#gitattributes">gitattributes</a></li>
+          <li><a href="#github-pull-requests-and-issues">GitHub Pull Requests and Issues</a></li>
+          <li><a href="#gitignore">gitignore</a></li>
+          <li><a href="#gitlensgit-supercharged">GitLens——Git supercharged</a></li>
+          <li><a href="#image-preview">Image Preview</a></li>
+          <li><a href="#indent-rainbow">indent-rainbow</a></li>
+          <li><a href="#intellicode">IntelliCode</a></li>
+          <li><a href="#korofileheader">koroFileHeader</a></li>
+          <li><a href="#latex-workshop">LaTeX Workshop</a></li>
+          <li><a href="#leetcode">LeetCode</a></li>
+          <li><a href="#luna-paintimage-editor">Luna Paint——Image Editor</a></li>
+          <li><a href="#markdown-all-in-one">Markdown All in One</a></li>
+          <li><a href="#markdown-checkboxes">Markdown Checkboxes</a></li>
+          <li><a href="#markdown-pdf">Markdown PDF</a></li>
+          <li><a href="#markdown-preview-enhanced">Markdown Preview Enhanced</a></li>
+          <li><a href="#markdownlint">markdownlint</a></li>
+          <li><a href="#matlab">Matlab</a></li>
+          <li><a href="#meld-diff">Meld Diff</a></li>
+          <li><a href="#one-dark-pro">One Dark Pro</a></li>
+          <li><a href="#path-intellisense">Path Intellisense</a></li>
+          <li><a href="#peacock">Peacock</a></li>
+          <li><a href="#polacode">Polacode</a></li>
+          <li><a href="#pomodoro">Pomodoro</a></li>
+          <li><a href="#power-mode">Power Mode</a></li>
+          <li><a href="#project-manager">Project Manager</a></li>
+          <li><a href="#python">Python</a></li>
+          <li><a href="#python-environments">Python Environments</a></li>
+          <li><a href="#rainbow-fart">Rainbow Fart</a></li>
+          <li><a href="#ros">ROS</a></li>
+          <li><a href="#shell-format">shell-format</a></li>
+          <li><a href="#shellcheck">ShellCheck</a></li>
+          <li><a href="#shellman">shellman</a></li>
+          <li><a href="#todo-tree">Todo Tree</a></li>
+          <li><a href="#toggle-zen-mode">Toggle Zen Mode</a></li>
+          <li><a href="#trailing-spaces">Trailing Spaces</a></li>
+          <li><a href="#typora">Typora</a></li>
+          <li><a href="#typst-lsp">Typst LSP</a></li>
+          <li><a href="#vs-code-speech">VS Code Speech</a></li>
+          <li><a href="#vscode-icons">vscode-icons</a></li>
+          <li><a href="#vscode-mindmap">vscode-mindmap</a></li>
+          <li><a href="#vscode-pets">vscode-pets</a></li>
+          <li><a href="#vscode-proto3">vscode-proto3</a></li>
+          <li><a href="#yaml">YAML</a></li>
+          <li><a href="#小霸王">小霸王</a></li>
+        </ul>
+      </li>
+      <li><a href="#常见问题及解决方法">常见问题及解决方法</a>
+        <ul>
+          <li><a href="#配置文件查看和修改">配置文件查看和修改</a></li>
+          <li><a href="#工作区中的最大文件数量">工作区中的最大文件数量</a></li>
+        </ul>
+      </li>
+      <li><a href="#快捷键速查表">快捷键速查表</a></li>
+      <li><a href="#参考">参考</a></li>
+    </ul>
+  </li>
+</ul>
+      </aside>
+    
+
+    <div id="main" role="main" class="wrapper-content">
+      <div class="container">
+        <article class="posts">
+  <h1>VS Code配置</h1>
+
+  <div clsss="meta">
+    <span class="author">
+      zxl19
+    </span>
+
+    <span class="date">
+      2020-06-03
+    </span>
+
+    <ul class="tag">
+      
+      <li>
+        <a href="http://localhost:4000/HomePage/tags#VS Code">
+          VS Code
+        </a>
+      </li>
+      
+      <li>
+        <a href="http://localhost:4000/HomePage/tags#Note">
+          Note
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+
+  <div class="entry">
+    <p>简单记录一下目前我的VS Code配置，主要包括编辑器配置和扩展配置。</p>
+
+<!-- more -->
+
+<h2 id="编辑器配置">编辑器配置</h2>
+
+<ol>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Editor: Font Family</code>：设置字体，默认使用等宽字体，对于代码中空格的宽度和命令行中的命令显示更加美观：</p>
+
+    <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 'Droid Sans Mono', 'monospace', monospace
+</code></pre></div>    </div>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">Editor: Word Wrap</code>：设置超过窗口宽度后是否自动换行，默认关闭，对于Markdown默认开启，在设置中开启可以避免显示范围遮挡代码；</li>
+  <li><code class="language-plaintext highlighter-rouge">Diff Editor: Ignore Trim Whitespace</code>：设置在显示代码差异时是否忽略头部和尾部的空白字符，默认开启，在设置中关闭可以突出显示代码中的空白字符差异；</li>
+  <li><code class="language-plaintext highlighter-rouge">Window: Title Bar Style</code>，设置窗口标题栏的外观，选择<code class="language-plaintext highlighter-rouge">custom</code>可以避免顶部标题栏产生白边；</li>
+  <li><code class="language-plaintext highlighter-rouge">Explorer</code>-&gt;<code class="language-plaintext highlighter-rouge">右键</code>-&gt;勾选<code class="language-plaintext highlighter-rouge">Open Editors</code>；</li>
+  <li>双击侧边栏和编辑区边界可以自动调整宽度；</li>
+</ol>
+
+<h2 id="扩展配置">扩展配置</h2>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Occam's razor: entities should not be multiplied beyond necessity.
+奥卡姆剃刀原理：如无必要，勿增实体。
+</code></pre></div></div>
+
+<p>扩展配置（按照字母顺序排序），如果在VS Code中安装失败，可以在扩展商店中下载<code class="language-plaintext highlighter-rouge">.vsix</code>格式的安装包手动安装。</p>
+
+<h3 id="emojisense">:emojisense:</h3>
+
+<p>在输入emoji时自动补全，emoji格式为<code class="language-plaintext highlighter-rouge">:emoji:</code>，输入<code class="language-plaintext highlighter-rouge">::</code>触发提示。</p>
+
+<p>示例：</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:smile:
+:dog:
+</code></pre></div></div>
+
+<h3 id="ai-toolkit-for-visual-studio-code">AI Toolkit for Visual Studio Code</h3>
+
+<p>测试生成式AI模型。</p>
+
+<h3 id="asciidoc">AsciiDoc</h3>
+
+<p>AsciiDoc语言扩展。</p>
+
+<h3 id="better-comments">Better Comments</h3>
+
+<p>根据注释类型生成不同样式的注释，类似的扩展还有Colorful Comments。</p>
+
+<p>示例：</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// ! Alerts             警告类语句（红色）
+// ? Queries            疑问类语句（蓝色）
+// TODO TODOs           待办类语句（橙色）
+// * Highlights         高亮类语句（绿色）
+// // Commented out     删除线语句（深灰色）
+</code></pre></div></div>
+
+<p>注：在C/C++代码中要谨慎使用高亮类语句。</p>
+
+<h3 id="bookmarks">Bookmarks</h3>
+
+<p>选定行生成书签，可以在书签之间进行跳转。</p>
+
+<p>鼠标右键菜单内操作。</p>
+
+<h3 id="bracket-pair-colorizer-2">Bracket Pair Colorizer 2</h3>
+
+<p>括号自动配对着色，第二版在匹配速度上有了提升。</p>
+
+<p><strong>2021年12月：VS Code已包含括号对着色功能，需手动在设置中开启，此扩展已停止维护。</strong></p>
+
+<h3 id="cc">C/C++</h3>
+
+<p>C/C++语言扩展。</p>
+
+<p>可以在扩展中指定<code class="language-plaintext highlighter-rouge">clang-format</code>可执行文件的路径，如果未指定，则会优先使用环境变量中<code class="language-plaintext highlighter-rouge">clang-format</code>可执行文件的路径；如果未在环境变量中找到，则会使用扩展自带的<code class="language-plaintext highlighter-rouge">clang-format</code>可执行文件。</p>
+
+<h3 id="chatgpt-easycode">ChatGPT-EasyCode</h3>
+
+<p>使用ChatGPT，类似的扩展还有Super ChatGPT。</p>
+
+<h3 id="chinese-simplified-language-pack-for-visual-studio-code">Chinese (Simplified) Language Pack for Visual Studio Code</h3>
+
+<p>VS Code中文汉化。</p>
+
+<h3 id="clangd">clangd</h3>
+
+<p>C/C++语言自动补全、跳转、函数提示等功能。</p>
+
+<ol>
+  <li>按照提示关闭C/C++扩展自带的自动补全；</li>
+  <li>按照提示安装或更新clangd；</li>
+  <li>
+    <p>生成<code class="language-plaintext highlighter-rouge">compile_commands.json</code>文件，供扩展解析；</p>
+
+    <ul>
+      <li>
+        <p>在<code class="language-plaintext highlighter-rouge">CMakeLists.txt</code>文件中指定：</p>
+
+        <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nb">set</span><span class="p">(</span>CMAKE_EXPORT_COMPILE_COMMANDS ON<span class="p">)</span>
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>在编译时指定：</p>
+
+        <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  cmake .. <span class="nt">-DCMAKE_EXPORT_COMPILE_COMMANDS</span><span class="o">=</span>1
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>建议将生成的<code class="language-plaintext highlighter-rouge">compile_commands.json</code>文件放到工程顶层目录或者<code class="language-plaintext highlighter-rouge">build</code>文件夹中；</p>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="cmake">CMake</h3>
+
+<p>CMake语法支持。</p>
+
+<h3 id="cmake-tools">CMake Tools</h3>
+
+<p>CMake扩展。</p>
+
+<h3 id="cmake-format">cmake-format</h3>
+
+<p>格式化<code class="language-plaintext highlighter-rouge">CMakeLists.txt</code>文件。</p>
+
+<ol>
+  <li>
+    <p>安装<code class="language-plaintext highlighter-rouge">cmakelang</code>格式化工具：</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> python3 <span class="nt">-m</span> pip <span class="nb">install </span>cmakelang
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>在<code class="language-plaintext highlighter-rouge">CMakeLists.txt</code>文件中<code class="language-plaintext highlighter-rouge">右键</code>-&gt;<code class="language-plaintext highlighter-rouge">Format Document</code>；</p>
+  </li>
+</ol>
+
+<h3 id="code-runner">Code Runner</h3>
+
+<p>运行各种语言的代码。</p>
+
+<h3 id="code-spell-checker">Code Spell Checker</h3>
+
+<p>拼写检查。</p>
+
+<h3 id="codegeex-ai-code-autocomplete-chat-auto-comment">CodeGeeX: AI Code AutoComplete, Chat, Auto Comment</h3>
+
+<p>基于大模型的智能编程助手，提供代码自动生成和补全、代码翻译、自动添加注释、智能问答等功能，类似的扩展还有GitHub Copilot、GitHub Copilot Chat、Cline、Tabnine AI Autocomplete、Cody AI、Kite。</p>
+
+<p><strong>2022年11月：Kite已停止维护。</strong></p>
+
+<h3 id="compare-folders">Compare Folders</h3>
+
+<p>按照内容比较文件夹，并排显示文件夹中的文件内容差异。可以用于代替Beyond Compare和CC Compare的功能。</p>
+
+<h3 id="crypto-tools">Crypto Tools</h3>
+
+<p>提供一系列编码/解码、加密/解密工具，例如base32、SHA512等。目前base64加密中文存在bug，会出现乱码。</p>
+
+<p>鼠标右键菜单内操作。</p>
+
+<h3 id="doxygen-documentation-generator">Doxygen Documentation Generator</h3>
+
+<p>按照Doxygen格式生成C++文件注释和函数注释。</p>
+
+<ol>
+  <li>在设置中设置作者姓名和作者电子邮箱；</li>
+  <li>输入<code class="language-plaintext highlighter-rouge">/**</code>后回车自动生成注释；</li>
+</ol>
+
+<h3 id="drawio-integration">Draw.io Integration</h3>
+
+<p>集成Draw.io功能，绘制流程图。</p>
+
+<p>在设置中将主题设置为<code class="language-plaintext highlighter-rouge">Kennedy</code>可以获得更好的显示效果。</p>
+
+<h3 id="foam">Foam</h3>
+
+<p>知识库管理扩展，提供基于Markdown语法的双向链接。可以用于代替Obsidian的功能。</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">Ctrl</code>+<code class="language-plaintext highlighter-rouge">Shift</code>+<code class="language-plaintext highlighter-rouge">P</code>，输入<code class="language-plaintext highlighter-rouge">Foam: Show Graph</code>显示知识图谱；</li>
+  <li>
+    <p>双向链接语法说明：</p>
+
+    <ul>
+      <li>双向链接格式为<code class="language-plaintext highlighter-rouge">[[wikilink]]</code>，输入<code class="language-plaintext highlighter-rouge">[[</code>触发提示；</li>
+      <li>扩展自动生成的<code class="language-plaintext highlighter-rouge">wikilink</code>默认为文件名，可以在设置中更改；</li>
+      <li>使用<code class="language-plaintext highlighter-rouge">[[wikilink#section]]</code>链接到具体的章节；</li>
+      <li>使用<code class="language-plaintext highlighter-rouge">[[wikilink|alias]]</code>设置预览时显示的别名；</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="gitattributes">gitattributes</h3>
+
+<p>从<a href="https://github.com/gitattributes/gitattributes">gitattributes/gitattributes</a>仓库中拉取<code class="language-plaintext highlighter-rouge">.gitattributes</code>文件模板。</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">Ctrl</code>+<code class="language-plaintext highlighter-rouge">Shift</code>+<code class="language-plaintext highlighter-rouge">P</code>，输入<code class="language-plaintext highlighter-rouge">Add gitattributes</code>；</li>
+  <li>选择语言，在工程根目录下创建<code class="language-plaintext highlighter-rouge">.gitattributes</code>文件；</li>
+</ol>
+
+<h3 id="github-pull-requests-and-issues">GitHub Pull Requests and Issues</h3>
+
+<p>为VS Code提供GitHub支持。</p>
+
+<h3 id="gitignore">gitignore</h3>
+
+<p>从<a href="https://github.com/github/gitignore">github/gitignore</a>仓库中拉取<code class="language-plaintext highlighter-rouge">.gitignore</code>文件模板。</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">Ctrl</code>+<code class="language-plaintext highlighter-rouge">Shift</code>+<code class="language-plaintext highlighter-rouge">P</code>，输入<code class="language-plaintext highlighter-rouge">Add gitignore</code>；</li>
+  <li>选择语言，在工程根目录下创建<code class="language-plaintext highlighter-rouge">.gitignore</code>文件；</li>
+</ol>
+
+<h3 id="gitlensgit-supercharged">GitLens——Git supercharged</h3>
+
+<p>增强VS Code内置Git的功能，例如对比修改、查看历史记录和显示代码作者，类似的扩展还有Git History、Git Graph。</p>
+
+<h3 id="image-preview">Image Preview</h3>
+
+<p>代码中引用图片预览。</p>
+
+<h3 id="indent-rainbow">indent-rainbow</h3>
+
+<p>用不同颜色标识缩进。</p>
+
+<h3 id="intellicode">IntelliCode</h3>
+
+<p>为Python、TypeScript/JavaScript、Java语言提供基于上下文和机器学习的自动补全，安装IntelliCode API Usage Examples、IntelliCode Completions扩展可以查看GitHub中的用法示例并提高使用体验，类似的扩展还有Sourcery。</p>
+
+<h3 id="korofileheader">koroFileHeader</h3>
+
+<p>生成文件头部注释和函数注释，类似的扩展还有vscode-fileheader、autoDocstring。</p>
+
+<p>详细配置选项说明参考<a href="https://github.com/OBKoro1/koro1FileHeader/wiki">Wiki</a>。</p>
+
+<ol>
+  <li>
+    <p>文件头部注释：</p>
+
+    <ul>
+      <li>
+        <p>配置<code class="language-plaintext highlighter-rouge">fileheader.configObj</code>关闭自动添加文件头部注释，示例：</p>
+
+        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">  </span><span class="nl">"fileheader.customMade"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"autoAdd"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre></div>        </div>
+      </li>
+      <li>
+        <p>配置<code class="language-plaintext highlighter-rouge">fileheader.customMade</code>指定文件头部注释格式，示例：</p>
+
+        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">  </span><span class="nl">"fileheader.customMade"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"Author"</span><span class="p">:</span><span class="w"> </span><span class="s2">"git config user.name &amp;&amp; git config user.email"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"Date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Do not edit"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"Description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"custom_string_obkoro1_copyright"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Copyright (c) ${now_year} by git config user.name &amp;&amp; git config user.email, All Rights Reserved."</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre></div>        </div>
+      </li>
+      <li>
+        <p>快捷键：<code class="language-plaintext highlighter-rouge">Ctrl</code>+<code class="language-plaintext highlighter-rouge">Super</code>+<code class="language-plaintext highlighter-rouge">T</code>；</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>函数注释：</p>
+
+    <ul>
+      <li>
+        <p>配置<code class="language-plaintext highlighter-rouge">fileheader.cursorMode</code>指定函数注释格式，示例：</p>
+
+        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">  </span><span class="nl">"fileheader.cursorMode"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"param"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"return"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre></div>        </div>
+      </li>
+      <li>
+        <p>快捷键：<code class="language-plaintext highlighter-rouge">Ctrl</code>+<code class="language-plaintext highlighter-rouge">Super</code>+<code class="language-plaintext highlighter-rouge">I</code>；</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>注释图案：</p>
+
+    <ul>
+      <li>选择注释图案：<code class="language-plaintext highlighter-rouge">Ctrl</code>+<code class="language-plaintext highlighter-rouge">Shift</code>+<code class="language-plaintext highlighter-rouge">P</code>，输入<code class="language-plaintext highlighter-rouge">codeDesign</code>进行选择；</li>
+      <li>快捷键：<code class="language-plaintext highlighter-rouge">Ctrl</code>+<code class="language-plaintext highlighter-rouge">Super</code>+<code class="language-plaintext highlighter-rouge">J</code>；</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="latex-workshop">LaTeX Workshop</h3>
+
+<p>LaTeX语言扩展，提供LaTeX排版所需的核心功能，安装LaTeX Utilities扩展可以提高使用体验。</p>
+
+<ol>
+  <li>提供代码格式化功能，类似的扩展还有LaTeX、latex-formatter；</li>
+  <li>
+    <p>配置<code class="language-plaintext highlighter-rouge">latex-workshop.latex.tools</code>、<code class="language-plaintext highlighter-rouge">latex-workshop.latex.recipes</code>后可以编译文档并预览：</p>
+
+    <ul>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">latex-workshop.latex.tools</code>指定了单条编译命令的参数，示例：</p>
+
+        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">  </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xelatexmk"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"latexmk"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"-synctex=1"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"-interaction=nonstopmode"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"-file-line-error"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"-xelatex"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"-outdir=%OUTDIR%"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"%DOC%"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nl">"env"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre></div>        </div>
+      </li>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">latex-workshop.latex.recipes</code>指定了多条编译命令的执行顺序，示例：</p>
+
+        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">  </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xelatex ➞ biber ➞ xelatex × 2"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"tools"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"xelatexmk"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"biber"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"xelatexmk"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"xelatexmk"</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="leetcode">LeetCode</h3>
+
+<p>算法刷题扩展，类似的扩展还有LeetCode with labuladong、牛客、Pintia。</p>
+
+<ol>
+  <li>
+    <p>安装Node.js，安装完成后需要重启VS Code：</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">sudo </span>apt <span class="nb">install </span>nodejs
+</code></pre></div>    </div>
+  </li>
+  <li>在设置中选择默认编程语言为<code class="language-plaintext highlighter-rouge">cpp</code>；</li>
+  <li>在设置中选择LeetCode站点为<code class="language-plaintext highlighter-rouge">leetcode-cn</code>；</li>
+  <li>使用用户名和密码登录LeetCode账号；</li>
+  <li>题目默认保存在<code class="language-plaintext highlighter-rouge">~/.leetcode</code>文件夹中；</li>
+</ol>
+
+<h3 id="luna-paintimage-editor">Luna Paint——Image Editor</h3>
+
+<p>图片编辑扩展，支持多种图片格式。</p>
+
+<h3 id="markdown-all-in-one">Markdown All in One</h3>
+
+<p>Markdown语言扩展。</p>
+
+<ol>
+  <li>
+    <p>快捷键：</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="text-align: left">功能</th>
+          <th style="text-align: left">快捷键</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="text-align: left">切换粗体</td>
+          <td style="text-align: left"><code class="language-plaintext highlighter-rouge">Ctrl</code>+<code class="language-plaintext highlighter-rouge">B</code></td>
+        </tr>
+        <tr>
+          <td style="text-align: left">切换斜体</td>
+          <td style="text-align: left"><code class="language-plaintext highlighter-rouge">Ctrl</code>+<code class="language-plaintext highlighter-rouge">I</code></td>
+        </tr>
+        <tr>
+          <td style="text-align: left">切换删除线</td>
+          <td style="text-align: left"><code class="language-plaintext highlighter-rouge">Alt</code>+<code class="language-plaintext highlighter-rouge">S</code></td>
+        </tr>
+        <tr>
+          <td style="text-align: left">标题升级</td>
+          <td style="text-align: left"><code class="language-plaintext highlighter-rouge">Ctrl</code>+<code class="language-plaintext highlighter-rouge">Shift</code>+<code class="language-plaintext highlighter-rouge">]</code></td>
+        </tr>
+        <tr>
+          <td style="text-align: left">标题降级</td>
+          <td style="text-align: left"><code class="language-plaintext highlighter-rouge">Ctrl</code>+<code class="language-plaintext highlighter-rouge">Shift</code>+<code class="language-plaintext highlighter-rouge">[</code></td>
+        </tr>
+        <tr>
+          <td style="text-align: left">切换数学环境</td>
+          <td style="text-align: left"><code class="language-plaintext highlighter-rouge">Ctrl</code>+<code class="language-plaintext highlighter-rouge">M</code></td>
+        </tr>
+        <tr>
+          <td style="text-align: left">切换勾选</td>
+          <td style="text-align: left"><code class="language-plaintext highlighter-rouge">Alt</code>+<code class="language-plaintext highlighter-rouge">C</code></td>
+        </tr>
+        <tr>
+          <td style="text-align: left">预览</td>
+          <td style="text-align: left"><code class="language-plaintext highlighter-rouge">Ctrl</code>+<code class="language-plaintext highlighter-rouge">Shift</code>+<code class="language-plaintext highlighter-rouge">V</code></td>
+        </tr>
+        <tr>
+          <td style="text-align: left">侧边预览</td>
+          <td style="text-align: left"><code class="language-plaintext highlighter-rouge">Ctrl</code>+<code class="language-plaintext highlighter-rouge">K</code>+<code class="language-plaintext highlighter-rouge">V</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p>生成目录：</p>
+
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">Ctrl</code>+<code class="language-plaintext highlighter-rouge">Shift</code>+<code class="language-plaintext highlighter-rouge">P</code>，输入<code class="language-plaintext highlighter-rouge">Markdown All in One: Create Table of Contents</code>；</li>
+      <li>目录在文件保存时自动更新；</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="markdown-checkboxes">Markdown Checkboxes</h3>
+
+<p>在Markdown文档预览中直接调整任务列表中的复选框。</p>
+
+<h3 id="markdown-pdf">Markdown PDF</h3>
+
+<p>Markdown文档转PDF文档。</p>
+
+<p>在设置中关闭页眉页脚、选择样式为<code class="language-plaintext highlighter-rouge">github.css</code>可以获得更好的显示效果。</p>
+
+<h3 id="markdown-preview-enhanced">Markdown Preview Enhanced</h3>
+
+<p>预览、导出Markdown文档。</p>
+
+<h3 id="markdownlint">markdownlint</h3>
+
+<p>Markdown语法检查。</p>
+
+<h3 id="matlab">Matlab</h3>
+
+<p>MATLAB语言扩展。</p>
+
+<h3 id="meld-diff">Meld Diff</h3>
+
+<p>在VS Code中使用Meld、WinMerge、Beyond Compare等软件比较文件差异。</p>
+
+<h3 id="one-dark-pro">One Dark Pro</h3>
+
+<p>Atom的深色主题，类似的主题还有City Lights theme、Material Theme（会同时安装Community Material Theme和Material Theme Icons）。</p>
+
+<p>在VS Code中通过<code class="language-plaintext highlighter-rouge">Ctrl</code>+<code class="language-plaintext highlighter-rouge">K</code>+<code class="language-plaintext highlighter-rouge">Ctrl</code>+<code class="language-plaintext highlighter-rouge">T</code>快捷键选择主题。</p>
+
+<p>在设置中打开粗体、关闭斜体可以改善中文注释的显示效果。</p>
+
+<h3 id="path-intellisense">Path Intellisense</h3>
+
+<p>文件路径自动补全，类似的扩展还有Path Autocomplete。</p>
+
+<h3 id="peacock">Peacock</h3>
+
+<p>修改左侧侧边栏以及底部状态栏颜色，类似的扩展还有Window Colors。</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">Ctrl</code>+<code class="language-plaintext highlighter-rouge">Shift</code>+<code class="language-plaintext highlighter-rouge">P</code>，输入<code class="language-plaintext highlighter-rouge">Peacock</code>进行设置；</li>
+  <li>颜色设置保存在<code class="language-plaintext highlighter-rouge">.vscode/settings.json</code>文件中；</li>
+</ol>
+
+<h3 id="polacode">Polacode</h3>
+
+<p>代码截图。</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">Ctrl</code>+<code class="language-plaintext highlighter-rouge">Shift</code>+<code class="language-plaintext highlighter-rouge">P</code>，输入<code class="language-plaintext highlighter-rouge">Polacode</code>；</li>
+  <li>选中要截图的代码；</li>
+</ol>
+
+<p><strong>目前Polacode使用存在一定问题，可以使用CodeSnap或者Polacode-2022作为代替，使用方法同上。</strong></p>
+
+<h3 id="pomodoro">Pomodoro</h3>
+
+<p>番茄工作法。</p>
+
+<h3 id="power-mode">Power Mode</h3>
+
+<p>在输入时添加炫酷的特效。</p>
+
+<ol>
+  <li>在设置中开启扩展；</li>
+  <li>在设置中关闭振动特效，可以获得更好的显示效果。</li>
+</ol>
+
+<h3 id="project-manager">Project Manager</h3>
+
+<p>管理项目工程，实现快速切换。</p>
+
+<ol>
+  <li>
+    <p>打开需要管理的项目工程，并将其保存到收藏夹中：</p>
+
+    <ul>
+      <li>方法一：<code class="language-plaintext highlighter-rouge">Ctrl</code>+<code class="language-plaintext highlighter-rouge">Shift</code>+<code class="language-plaintext highlighter-rouge">P</code>，输入<code class="language-plaintext highlighter-rouge">Project Manager: Save Project</code>；</li>
+      <li>方法二：在侧边栏中点击保存图标；</li>
+    </ul>
+  </li>
+  <li>
+    <p>修改<code class="language-plaintext highlighter-rouge">projects.json</code>文件，添加标签：</p>
+
+    <ul>
+      <li>方法一：<code class="language-plaintext highlighter-rouge">Ctrl</code>+<code class="language-plaintext highlighter-rouge">Shift</code>+<code class="language-plaintext highlighter-rouge">P</code>，输入<code class="language-plaintext highlighter-rouge">Project Manager: Edit Projects</code>；</li>
+      <li>方法二：在侧边栏中点击编辑图标；</li>
+    </ul>
+
+    <p>示例：</p>
+
+    <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="p">{</span><span class="w">
+     </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"zxl19.github.io"</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"rootPath"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/home/zxl19.github.io"</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"paths"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+     </span><span class="nl">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+         </span><span class="s2">"zxl19"</span><span class="w">
+     </span><span class="p">],</span><span class="w">
+     </span><span class="nl">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+ </span><span class="p">}</span><span class="w">
+</span></code></pre></div>    </div>
+  </li>
+</ol>
+
+<h3 id="python">Python</h3>
+
+<p>Python语言扩展，安装Pylance、Pylint、Black Formatter、isort、Jupyter（包括Jupyter Cell Tags、Jupyter Keymap、Jupyter Notebook Renderers、Jupyter Slide Show）等扩展可以使用增强功能并提高使用体验。</p>
+
+<h3 id="python-environments">Python Environments</h3>
+
+<p>管理Python环境和包，类似的扩展还有Pip Manager、Python Environment Manager。</p>
+
+<p><strong>2025年1月：Python Environment Manager已停止维护。</strong></p>
+
+<h3 id="rainbow-fart">Rainbow Fart</h3>
+
+<p>彩虹屁扩展。</p>
+
+<h3 id="ros">ROS</h3>
+
+<p>机器人操作系统（Robot Operating System, ROS）扩展。</p>
+
+<h3 id="shell-format">shell-format</h3>
+
+<p>格式化shell脚本、Dockerfile、<code class="language-plaintext highlighter-rouge">.gitignore</code>文件等，类似的扩展还有Bash Beautify。</p>
+
+<h3 id="shellcheck">ShellCheck</h3>
+
+<p>对于shell脚本进行静态语法分析。</p>
+
+<h3 id="shellman">shellman</h3>
+
+<p>对于shell脚本进行自动补全。</p>
+
+<h3 id="todo-tree">Todo Tree</h3>
+
+<p>高亮注释中的标签并且以树的形式显示，类似的扩展还有TODO Highlight。</p>
+
+<p>在设置中打开使用配色方案可以获得更好的显示效果。</p>
+
+<p>示例：</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>BUG     a known bug that should be corrected.   存在的BUG（红色）
+HACK    a workaround.                           应变方法、变通方法（橙色）
+FIXME   should be corrected.                    待修复内容（黄色）
+TODO    something to be done.                   待办内容（绿色）
+XXX     warn other programmers of problematic   警告需要改进的代码（蓝色）
+        or misguiding code, "dirty code" that
+        needs improving.
+[ ]     an uncompleted task                     未完成任务（紫色）
+[x]     a completed task                        已完成任务（粉色）
+</code></pre></div></div>
+
+<h3 id="toggle-zen-mode">Toggle Zen Mode</h3>
+
+<p>添加进入禅模式（zen mode）的按钮。</p>
+
+<ol>
+  <li>禅模式快捷键：<code class="language-plaintext highlighter-rouge">Ctrl</code>+<code class="language-plaintext highlighter-rouge">K</code>+<code class="language-plaintext highlighter-rouge">Z</code>；</li>
+  <li>全屏快捷键：<code class="language-plaintext highlighter-rouge">F11</code>；</li>
+</ol>
+
+<h3 id="trailing-spaces">Trailing Spaces</h3>
+
+<p>显示尾部跟随空格。</p>
+
+<h3 id="typora">Typora</h3>
+
+<p>原名为vscode-office，支持预览PDF、Excel等格式的办公文档，并提供所见即所得（What You See Is What You Get，WYSIWYG）的Markdown编辑器功能。</p>
+
+<h3 id="typst-lsp">Typst LSP</h3>
+
+<p>Typst语言扩展。</p>
+
+<h3 id="vs-code-speech">VS Code Speech</h3>
+
+<p>语音转文字，无需联网，目前支持26种语言。</p>
+
+<h3 id="vscode-icons">vscode-icons</h3>
+
+<p>文件图标主题，类似的主题还有Material Icon Theme和Material Theme Icons。</p>
+
+<h3 id="vscode-mindmap">vscode-mindmap</h3>
+
+<p>绘制思维导图，类似的扩展还有Markmap。</p>
+
+<h3 id="vscode-pets">vscode-pets</h3>
+
+<p>电子宠物扩展。</p>
+
+<h3 id="vscode-proto3">vscode-proto3</h3>
+
+<p>Protocol Buffers语法支持，仅支持3.x版本：</p>
+
+<div class="language-protobuf highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">syntax</span> <span class="o">=</span> <span class="s">"proto3"</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="yaml">YAML</h3>
+
+<p>YAML语法支持。</p>
+
+<h3 id="小霸王">小霸王</h3>
+
+<p>游戏扩展，类似的扩展还有4399 on VSCode、红白机。</p>
+
+<h2 id="常见问题及解决方法">常见问题及解决方法</h2>
+
+<h3 id="配置文件查看和修改">配置文件查看和修改</h3>
+
+<ol>
+  <li>对于编辑器和扩展的设置都会保存在<code class="language-plaintext highlighter-rouge">settings.json</code>配置文件中；</li>
+  <li><code class="language-plaintext highlighter-rouge">Ctrl</code>+<code class="language-plaintext highlighter-rouge">Shift</code>+<code class="language-plaintext highlighter-rouge">P</code>，输入<code class="language-plaintext highlighter-rouge">Preferences: Open User Settings (JSON)</code>进行查看和修改；</li>
+  <li>删除<code class="language-plaintext highlighter-rouge">settings.json</code>配置文件中大括号<code class="language-plaintext highlighter-rouge">{}</code>内部的内容可以将VS Code恢复默认设置；</li>
+</ol>
+
+<h3 id="工作区中的最大文件数量">工作区中的最大文件数量</h3>
+
+<ol>
+  <li>当工作区中的文件数量过多时会报错<code class="language-plaintext highlighter-rouge">Visual Studio Code is unable to watch for file changes in this large workspace</code>；</li>
+  <li>
+    <p>查看最大文件数量：</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">cat</span> /proc/sys/fs/inotify/max_user_watches
+</code></pre></div>    </div>
+
+    <p>默认为8192；</p>
+  </li>
+  <li>
+    <p>修改最大文件数量：</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">sudo </span>gedit /etc/sysctl.conf
+</code></pre></div>    </div>
+
+    <p>在最后一行添加：</p>
+
+    <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code> fs.inotify.max_user_watches=524288
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>应用最大文件数量设置：</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">sudo </span>sysctl <span class="nt">-p</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h2 id="快捷键速查表">快捷键速查表</h2>
+
+<ol>
+  <li><a href="https://code.visualstudio.com/shortcuts/keyboard-shortcuts-windows.pdf">Windows</a></li>
+  <li><a href="https://code.visualstudio.com/shortcuts/keyboard-shortcuts-linux.pdf">Linux</a></li>
+  <li><a href="https://code.visualstudio.com/shortcuts/keyboard-shortcuts-macos.pdf">macOS</a></li>
+</ol>
+
+<h2 id="参考">参考</h2>
+
+<ol>
+  <li><a href="https://zhuanlan.zhihu.com/p/36918101">10款最佳编程字体-分院帽的文章-知乎</a></li>
+  <li><a href="https://bbs.csdn.net/topics/392557784">如何设置VSCode空格宽度-CSDN社区</a></li>
+  <li><a href="https://www.zhihu.com/question/405683316/answer/1326244998">vscode顶部菜单栏变成白色了，怎么设置深色呢？-shuhari的回答-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/56719281">VSCode必装的10个高效开发插件-慕课网的文章-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/99462672">如何让VS Code更好用10倍？这里有一份VS Code新手指南-麻瓜编程的文章-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/62913725">第一次使用VS Code时你应该知道的一切配置-千古壹号的文章-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/89693351">自用VSCode优质插件推荐-HanwGeek的文章-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/112016680">vscode必备插件，美化、炫酷、实用-留着防丢-双木珑的文章-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/29553584">一些非常有用的VSCode扩展-Helperhaps的文章-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/73452541">工具篇-vscode效率提升插件-鲲China的文章-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/136428397">VSCode插件大全｜VSCode高级玩家之第二篇-三钻的文章-知乎</a></li>
+  <li><a href="https://www.zhihu.com/question/311803609/answer/2387914071">vscode有哪些让人眼前一亮的插件?-韦易笑的回答-知乎</a></li>
+  <li><a href="https://www.zhihu.com/question/30315894/answer/1574277687">Visual Studio Code如何编写运行C、C++程序？-程序员柠檬的回答-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/441608260">vscode实用插件推荐-很酷的程序员的文章-知乎</a></li>
+  <li><a href="https://www.zhihu.com/question/441992533/answer/2430995843">vscode有没有性能优化插件？-秃头披风侠cc的回答-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/125773296">那些你应该考虑卸载的VSCode扩展-余腾靖的文章-知乎</a></li>
+  <li><a href="https://www.zhihu.com/question/365629693/answer/2127925726">当你上班可以摸鱼的时候可以做些什么？-程序员阿德的回答-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/58302580">装上这几个VSCode插件后，上班划水摸鱼不是梦-GitHub Daily的文章-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/408767088">炸裂！VSCode 摸鱼神器！！！-YYds的文章-知乎</a></li>
+  <li><a href="https://www.zhihu.com/question/277139137/answer/1657100889">Visual Studio会被VS Code及各种插件取代吗？-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/145430576">使用clangd替代c/c++配置vscode c++项目-smallsunsun的文章-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/364518020">最终，我看向了clangd-小钻风的文章-知乎</a></li>
+  <li><a href="https://www.zhihu.com/question/353722203/answer/2564104885">如何优雅的用VScode编写C++大型项目？-惘客的回答-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/15806278946">免费使用最强编程插件Cline-雷哥AI工程化的文章-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/18941487363">探索Cline：Cursor平替工具的功能与使用感受-大瑜聊AI的文章-知乎</a></li>
+  <li><a href="https://www.kite.com/blog/product/kite-is-saying-farewell/">Kite is saying farewell</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/109212146">实时可视化Debug：VS Code开源新工具，一键解析代码结构</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/140895359">太赞了，VSCode上也能画流程图了！-GitHub Daily的文章-知乎</a></li>
+  <li><a href="https://github.com/OBKoro1/koro1FileHeader">OBKoro1/koro1FileHeader</a></li>
+  <li><a href="https://github.com/LeetCode-OpenSource/vscode-leetcode">LeetCode-OpenSource/vscode-leetcode</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/354386295">如何将宇宙最强vscode打造为刷题神器-ACM算法日常的文章-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/548041527">Pintia(拼题A)刷题插件on VS Code-金志超的文章-知乎</a></li>
+  <li><a href="https://developer.aliyun.com/article/760687">如何在Ubuntu 20.04上安装Node.js和npm</a></li>
+  <li><a href="https://www.jianshu.com/p/4856a78b96b6">Markdown完美转PDF-简书</a></li>
+  <li><a href="https://github.com/cxasm/cc-compare">cxasm/cc-compare</a></li>
+  <li><a href="https://github.com/YKB2333/Beyond-Compare">YKB2333/Beyond-Compare</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/154108630">微软再出神器，这次终于对Python下手了！-Jackpop的文章-知乎</a></li>
+  <li><a href="https://www.zhihu.com/question/311803609/answer/1296896019">vscode有哪些让人眼前一亮的插件?-量子位的回答-知乎</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/61790645">超越鼓励师for VS Code，写代码不再孤单，有杨超越与你同在-韩骏的文章-知乎</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Comment_(computer_programming)">Comment (computer programming)-Wikipedia</a></li>
+  <li><a href="https://github.com/typst/typst">typst/typst</a></li>
+  <li><a href="https://github.com/nvarner/typst-lsp">nvarner/typst-lsp</a></li>
+  <li><a href="https://www.bilibili.com/video/BV12B4y1479v">VS CODE恢复出厂设置-bilibili</a></li>
+  <li><a href="https://code.visualstudio.com/docs/setup/linux#_common-questions">Visual Studio Code on Linux-Common questions</a></li>
+</ol>
+
+  </div>
+
+  
+  
+<script src="https://utteranc.es/client.js"
+        repo="zxl19/zxl19.github.io"
+        issue-term="title"
+        label="comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
+
+  
+</article>
+
+<div class="pagination">
+  
+    <span class="prev" >
+      <a href="http://localhost:4000/HomePage/markdown-note/">
+        ← 上一篇
+      </a>
+    </span>
+  
+  
+    <span class="next" >
+      <a href="http://localhost:4000/HomePage/markdown-editor/">
+        下一篇 →
+      </a>
+    </span>
+  
+</div>
+      </div>
+    </div>
+
+    
+
+  </body>
+
+  
+  <script>
+    document.getElementById("main").classList.add("withtoc");
+  </script>
+  
+
+  <div class="wrapper-footer-mobile">
+    <footer class="footer">
+      <!-- Refer to https://codepen.io/ruandre/pen/howFi -->
+<ul class="svg-icon">
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li><a href="https://github.com/zxl19" class="icon-13 github" title="GitHub"><svg viewBox="0 0 512 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg><!--[if lt IE 9]><em>GitHub</em><![endif]--></a></li>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</ul>
+
+
+
+<p>Copyright © 2020-2025 zxl19. All Rights Reserved.</p>
+
+    </footer>
+
+
+</html>

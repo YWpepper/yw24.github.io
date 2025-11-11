@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Python包管理器pip使用笔记 – Pepper小辣椒 – 一个工程师的存档点</title>
+
+      <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="我的Python包管理器pip使用笔记。
+
+" />
+    <meta property="og:description" content="我的Python包管理器pip使用笔记。
+
+" />
+    
+    <meta name="author" content="Pepper小辣椒" />
+
+    
+    <meta property="og:title" content="Python包管理器pip使用笔记" />
+    <meta property="twitter:title" content="Python包管理器pip使用笔记" />
+    
+  <!-- Async font loading -->
+<script>
+  window.WebFontConfig = {
+      custom: {
+          families: ['Spoqa Han Sans:100,300,400,700'],
+          urls: ['https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css']
+      },
+      timeout: 60000
+  };
+  (function(d) {
+      var wf = d.createElement('script'), s = d.scripts[0];
+      wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js';
+      s.parentNode.insertBefore(wf, s);
+  })(document);
+</script>
+
+<!--adobe fonts-->
+<script>
+    (function(d) {
+      var config = {
+        kitId: 'vbt3gjx',
+        scriptTimeout: 3000,
+        async: true
+      },
+      h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+    })(document);
+</script> 
+
+  <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link rel="stylesheet" type="text/css" href="/HomePage/style.css" />
+  <link rel="alternate" type="application/rss+xml" title="Pepper小辣椒 - 一个工程师的存档点" href="/HomePage/feed.xml" />
+  <link rel="shortcut icon" href="https://raw.githubusercontent.com/zxl19/zxl19.github.io/master/images/icon.png">
+  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+  <script src="https://unpkg.com/feather-icons"></script>
+  <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        inlineMath: [['$','$']]
+      }
+    });
+  </script>
+
+  <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+
+</head>
+
+  <body>
+    <div class="wrapper-sidebar">
+  <header class="sidebar clearfix">
+    <div class="site-info">
+      
+        <a href="/HomePage/" class="site-avatar"><img src="https://raw.githubusercontent.com/zxl19/zxl19.github.io/master/images/avatar.jpg" /></a>
+       
+      <h1 class="site-name"><a href="/HomePage/">Pepper小辣椒</a></h1>
+      <p class="site-description">一个工程师的存档点</p>
+    </div>
+  </header>
+
+  <div class="navlist">
+    <nav>
+      
+      
+      <a href="/HomePage/">首页</a>
+      
+      
+      
+      <a href="/HomePage/about">关于</a>
+      
+      
+      
+      <a href="/HomePage/archive">归档</a>
+      
+      
+      
+      <a href="/HomePage/tags">标签</a>
+      
+      
+    </nav>
+  </div>
+
+  <div class="wrapper-footer-desktop">
+    <footer class="footer">
+      <!-- Refer to https://codepen.io/ruandre/pen/howFi -->
+<ul class="svg-icon">
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li><a href="https://github.com/zxl19" class="icon-13 github" title="GitHub"><svg viewBox="0 0 512 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg><!--[if lt IE 9]><em>GitHub</em><![endif]--></a></li>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</ul>
+
+
+
+<p>Copyright © 2020-2025 zxl19. All Rights Reserved.</p>
+
+    </footer>
+  </div>
+</div>
+
+    
+      <aside class="toc">
+        <ul>
+  <li><a href="#">Python包管理器pip使用笔记</a>
+    <ul>
+      <li><a href="#安装">安装</a></li>
+      <li><a href="#常用命令">常用命令</a></li>
+      <li><a href="#使用国内镜像加速">使用国内镜像加速</a>
+        <ul>
+          <li><a href="#临时使用">临时使用</a></li>
+          <li><a href="#永久修改">永久修改</a>
+            <ul>
+              <li><a href="#方法一">方法一</a></li>
+              <li><a href="#方法二">方法二</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><a href="#参考">参考</a></li>
+    </ul>
+  </li>
+</ul>
+      </aside>
+    
+
+    <div id="main" role="main" class="wrapper-content">
+      <div class="container">
+        <article class="posts">
+  <h1>Python包管理器pip使用笔记</h1>
+
+  <div clsss="meta">
+    <span class="author">
+      zxl19
+    </span>
+
+    <span class="date">
+      2022-07-27
+    </span>
+
+    <ul class="tag">
+      
+      <li>
+        <a href="http://localhost:4000/HomePage/tags#Python">
+          Python
+        </a>
+      </li>
+      
+      <li>
+        <a href="http://localhost:4000/HomePage/tags#Note">
+          Note
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+
+  <div class="entry">
+    <p>我的Python包管理器pip使用笔记。</p>
+
+<!-- more -->
+
+<h2 id="安装">安装</h2>
+
+<p>安装Python版本对应的包管理器pip：</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt <span class="nb">install </span>python3-pip    <span class="c"># Python 3</span>
+<span class="nb">sudo </span>apt <span class="nb">install </span>python-pip     <span class="c"># Python 2</span>
+</code></pre></div></div>
+
+<h2 id="常用命令">常用命令</h2>
+
+<ol>
+  <li>
+    <p>为避免多个Python版本冲突，建议使用以下方式调用：</p>
+
+    <ul>
+      <li>
+        <p>在Linux系统中：</p>
+
+        <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  python3 <span class="nt">-m</span> pip ...          <span class="c"># Python 3</span>
+  python <span class="nt">-m</span> pip ...           <span class="c"># Python 2</span>
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>在Windows系统中：</p>
+
+        <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  pip3 ...                    <span class="c"># Python 3</span>
+  pip ...                     <span class="c"># Python 2</span>
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>使用<code class="language-plaintext highlighter-rouge">==</code>、<code class="language-plaintext highlighter-rouge">&gt;=</code>、<code class="language-plaintext highlighter-rouge">&lt;=</code>、<code class="language-plaintext highlighter-rouge">&gt;</code>、<code class="language-plaintext highlighter-rouge">&lt;</code>指定安装包版本，不写则默认最新版；</p>
+  </li>
+</ol>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">功能</th>
+      <th style="text-align: left">命令</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">显示版本和路径</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">pip --version</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">获取帮助</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">pip --help</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">升级</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">pip install -U pip</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">安装包</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">pip install &lt;package&gt;</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">升级包</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">pip install --upgrade &lt;package&gt;</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">卸载包</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">pip uninstall &lt;package&gt;</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">搜索包</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">pip search &lt;package&gt;</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">显示安装包信息</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">pip show</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">查看指定包的详细信息</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">pip show -f &lt;package&gt;</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">列出已安装的包</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">pip list</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">查看可升级的包</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">pip list -o</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">获取已安装列表</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">pip freeze</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">保存已安装列表</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">pip freeze &gt; requirements.txt</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">批量卸载</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">pip uninstall -r requirements.txt</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">批量安装</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">pip install -r requirements.txt</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="使用国内镜像加速">使用国内镜像加速</h2>
+
+<p>以清华源为例进行说明。</p>
+
+<h3 id="临时使用">临时使用</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip <span class="nb">install</span> <span class="nt">-i</span> https://pypi.tuna.tsinghua.edu.cn/simple &lt;package&gt;
+</code></pre></div></div>
+
+<h3 id="永久修改">永久修改</h3>
+
+<h4 id="方法一">方法一</h4>
+
+<p>在命令行中设置默认镜像：</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip config <span class="nb">set </span>global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+</code></pre></div></div>
+
+<p>在命令行中查看默认镜像：</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip config get global.index-url
+</code></pre></div></div>
+
+<h4 id="方法二">方法二</h4>
+
+<p>修改配置文件，Linux系统中位于<code class="language-plaintext highlighter-rouge">~/.pip/pip.conf</code>（使用<code class="language-plaintext highlighter-rouge">Ctrl</code>+<code class="language-plaintext highlighter-rouge">H</code>查看隐藏文件夹），Windows系统中位于<code class="language-plaintext highlighter-rouge">C:\Users\XXX\pip\pip.ini</code>，在配置文件中添加以下内容：</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[global]
+index-url = https://pypi.tuna.tsinghua.edu.cn/simple
+
+[install]
+trusted-host = pypi.tuna.tsinghua.edu.cn
+</code></pre></div></div>
+
+<h2 id="参考">参考</h2>
+
+<ol>
+  <li><a href="https://www.runoob.com/w3cnote/python-pip-install-usage.html">Python pip安装与使用-菜鸟教程</a></li>
+  <li><a href="https://blog.csdn.net/weixin_43169720/article/details/85718645">pip批量安装和卸载-CSDN博客</a></li>
+  <li><a href="https://www.shuzhiduo.com/A/kvJ3yqLQdg/">Pip批量安装/卸载包-术之多</a></li>
+  <li><a href="https://www.runoob.com/w3cnote/pip-cn-mirror.html">pip使用国内镜像源-菜鸟教程</a></li>
+  <li><a href="https://mirrors.tuna.tsinghua.edu.cn/help/pypi/">PyPI镜像使用帮助-TUNA</a></li>
+  <li><a href="https://developer.aliyun.com/mirror/pypi?spm=a2c6h.13651102.0.0.3e221b11fayCV5">PyPI镜像-阿里云</a></li>
+  <li><a href="https://blog.csdn.net/pz520zw/article/details/122641355">pip国内镜像（windows）-CSDN博客</a></li>
+</ol>
+
+  </div>
+
+  
+  
+<script src="https://utteranc.es/client.js"
+        repo="zxl19/zxl19.github.io"
+        issue-term="title"
+        label="comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
+
+  
+</article>
+
+<div class="pagination">
+  
+    <span class="prev" >
+      <a href="http://localhost:4000/HomePage/tikz-note/">
+        ← 上一篇
+      </a>
+    </span>
+  
+  
+    <span class="next" >
+      <a href="http://localhost:4000/HomePage/reference-management/">
+        下一篇 →
+      </a>
+    </span>
+  
+</div>
+      </div>
+    </div>
+
+    
+
+  </body>
+
+  
+  <script>
+    document.getElementById("main").classList.add("withtoc");
+  </script>
+  
+
+  <div class="wrapper-footer-mobile">
+    <footer class="footer">
+      <!-- Refer to https://codepen.io/ruandre/pen/howFi -->
+<ul class="svg-icon">
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li><a href="https://github.com/zxl19" class="icon-13 github" title="GitHub"><svg viewBox="0 0 512 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg><!--[if lt IE 9]><em>GitHub</em><![endif]--></a></li>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</ul>
+
+
+
+<p>Copyright © 2020-2025 zxl19. All Rights Reserved.</p>
+
+    </footer>
+
+
+</html>

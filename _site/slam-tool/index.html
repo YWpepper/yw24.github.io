@@ -1,0 +1,1553 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>SLAM实用工具存档 – Pepper小辣椒 – 一个工程师的存档点</title>
+
+      <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="一些在SLAM研究过程中发现的实用工具存档，包括传感器标定、rosbag处理、数据标注、SLAM算法相关内容。
+
+" />
+    <meta property="og:description" content="一些在SLAM研究过程中发现的实用工具存档，包括传感器标定、rosbag处理、数据标注、SLAM算法相关内容。
+
+" />
+    
+    <meta name="author" content="Pepper小辣椒" />
+
+    
+    <meta property="og:title" content="SLAM实用工具存档" />
+    <meta property="twitter:title" content="SLAM实用工具存档" />
+    
+  <!-- Async font loading -->
+<script>
+  window.WebFontConfig = {
+      custom: {
+          families: ['Spoqa Han Sans:100,300,400,700'],
+          urls: ['https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css']
+      },
+      timeout: 60000
+  };
+  (function(d) {
+      var wf = d.createElement('script'), s = d.scripts[0];
+      wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js';
+      s.parentNode.insertBefore(wf, s);
+  })(document);
+</script>
+
+<!--adobe fonts-->
+<script>
+    (function(d) {
+      var config = {
+        kitId: 'vbt3gjx',
+        scriptTimeout: 3000,
+        async: true
+      },
+      h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+    })(document);
+</script> 
+
+  <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link rel="stylesheet" type="text/css" href="/HomePage/style.css" />
+  <link rel="alternate" type="application/rss+xml" title="Pepper小辣椒 - 一个工程师的存档点" href="/HomePage/feed.xml" />
+  <link rel="shortcut icon" href="https://raw.githubusercontent.com/zxl19/zxl19.github.io/master/images/icon.png">
+  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+  <script src="https://unpkg.com/feather-icons"></script>
+  <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        inlineMath: [['$','$']]
+      }
+    });
+  </script>
+
+  <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+
+</head>
+
+  <body>
+    <div class="wrapper-sidebar">
+  <header class="sidebar clearfix">
+    <div class="site-info">
+      
+        <a href="/HomePage/" class="site-avatar"><img src="https://raw.githubusercontent.com/zxl19/zxl19.github.io/master/images/avatar.jpg" /></a>
+       
+      <h1 class="site-name"><a href="/HomePage/">Pepper小辣椒</a></h1>
+      <p class="site-description">一个工程师的存档点</p>
+    </div>
+  </header>
+
+  <div class="navlist">
+    <nav>
+      
+      
+      <a href="/HomePage/">首页</a>
+      
+      
+      
+      <a href="/HomePage/about">关于</a>
+      
+      
+      
+      <a href="/HomePage/archive">归档</a>
+      
+      
+      
+      <a href="/HomePage/tags">标签</a>
+      
+      
+    </nav>
+  </div>
+
+  <div class="wrapper-footer-desktop">
+    <footer class="footer">
+      <!-- Refer to https://codepen.io/ruandre/pen/howFi -->
+<ul class="svg-icon">
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li><a href="https://github.com/zxl19" class="icon-13 github" title="GitHub"><svg viewBox="0 0 512 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg><!--[if lt IE 9]><em>GitHub</em><![endif]--></a></li>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</ul>
+
+
+
+<p>Copyright © 2020-2025 zxl19. All Rights Reserved.</p>
+
+    </footer>
+  </div>
+</div>
+
+    
+      <aside class="toc">
+        <ul>
+  <li><a href="#">SLAM实用工具存档</a>
+    <ul>
+      <li><a href="#传感器相关">传感器相关</a>
+        <ul>
+          <li><a href="#激光雷达数据生成">激光雷达数据生成</a></li>
+          <li><a href="#激光雷达内参标定">激光雷达内参标定</a></li>
+          <li><a href="#相机内参标定">相机内参标定</a></li>
+          <li><a href="#imu噪声评估">IMU噪声评估</a></li>
+          <li><a href="#激光雷达-相机标定">激光雷达-相机标定</a>
+            <ul>
+              <li><a href="#基于matlab">基于MATLAB</a></li>
+              <li><a href="#依赖项较多">依赖项较多</a></li>
+            </ul>
+          </li>
+          <li><a href="#激光雷达-imu标定">激光雷达-IMU标定</a></li>
+          <li><a href="#相机-imu标定">相机-IMU标定</a></li>
+          <li><a href="#二维激光雷达-相机-轮速计标定">二维激光雷达-相机-轮速计标定</a></li>
+          <li><a href="#多激光雷达标定">多激光雷达标定</a></li>
+          <li><a href="#多相机标定">多相机标定</a></li>
+          <li><a href="#多传感器联合标定">多传感器联合标定</a></li>
+          <li><a href="#手眼标定">手眼标定</a></li>
+          <li><a href="#基准标记">基准标记</a></li>
+        </ul>
+      </li>
+      <li><a href="#ros相关">ROS相关</a>
+        <ul>
+          <li><a href="#系统状态监控">系统状态监控</a></li>
+          <li><a href="#rviz可视化">Rviz可视化</a></li>
+          <li><a href="#rosbag相关">rosbag相关</a>
+            <ul>
+              <li><a href="#命令行操作">命令行操作</a></li>
+              <li><a href="#制作">制作</a></li>
+              <li><a href="#内容修改">内容修改</a></li>
+              <li><a href="#数据提取">数据提取</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><a href="#数据标注">数据标注</a>
+        <ul>
+          <li><a href="#多类型信息多任务">多类型信息多任务</a></li>
+          <li><a href="#点云">点云</a></li>
+          <li><a href="#图像">图像</a></li>
+          <li><a href="#4d标注">4D标注</a></li>
+        </ul>
+      </li>
+      <li><a href="#slam相关">SLAM相关</a>
+        <ul>
+          <li><a href="#数据集">数据集</a>
+            <ul>
+              <li><a href="#激光里程计">激光里程计</a></li>
+              <li><a href="#多传感器融合">多传感器融合</a></li>
+              <li><a href="#点云匹配">点云匹配</a></li>
+              <li><a href="#组合导航">组合导航</a></li>
+              <li><a href="#地面分割">地面分割</a></li>
+              <li><a href="#特殊场景">特殊场景</a></li>
+              <li><a href="#车道线重建">车道线重建</a></li>
+            </ul>
+          </li>
+          <li><a href="#位姿表示">位姿表示</a></li>
+          <li><a href="#样条曲线">样条曲线</a>
+            <ul>
+              <li><a href="#b样条曲线">B样条曲线</a></li>
+              <li><a href="#贝塞尔曲线">贝塞尔曲线</a></li>
+            </ul>
+          </li>
+          <li><a href="#优化库">优化库</a>
+            <ul>
+              <li><a href="#非线性优化">非线性优化</a></li>
+              <li><a href="#图优化">图优化</a></li>
+              <li><a href="#优化算法教程">优化算法教程</a></li>
+            </ul>
+          </li>
+          <li><a href="#模块化框架">模块化框架</a>
+            <ul>
+              <li><a href="#建图">建图</a>
+                <ul>
+                  <li><a href="#二维">二维</a></li>
+                  <li><a href="#三维">三维</a></li>
+                </ul>
+              </li>
+              <li><a href="#建图后处理">建图后处理</a></li>
+            </ul>
+          </li>
+          <li><a href="#机器人学算法库">机器人学算法库</a></li>
+          <li><a href="#点云处理">点云处理</a>
+            <ul>
+              <li><a href="#点云处理库">点云处理库</a></li>
+              <li><a href="#点云数据结构">点云数据结构</a>
+                <ul>
+                  <li><a href="#栅格">栅格</a></li>
+                  <li><a href="#树状">树状</a>
+                    <ul>
+                      <li><a href="#kd树">KD树</a></li>
+                      <li><a href="#八叉树">八叉树</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="#网格">网格</a></li>
+                </ul>
+              </li>
+              <li><a href="#点云去畸变">点云去畸变</a></li>
+              <li><a href="#点云地面分割">点云地面分割</a></li>
+              <li><a href="#点云线特征提取">点云线特征提取</a></li>
+              <li><a href="#点云目标检测">点云目标检测</a></li>
+            </ul>
+          </li>
+          <li><a href="#数据关联">数据关联</a></li>
+          <li><a href="#点云匹配算法">点云匹配算法</a>
+            <ul>
+              <li><a href="#基于几何特征">基于几何特征</a></li>
+              <li><a href="#基于概率分布">基于概率分布</a></li>
+              <li><a href="#基于特征描述子">基于特征描述子</a></li>
+              <li><a href="#基于深度学习">基于深度学习</a></li>
+            </ul>
+          </li>
+          <li><a href="#回环检测">回环检测</a></li>
+          <li><a href="#动态物体去除">动态物体去除</a>
+            <ul>
+              <li><a href="#基于变化检测">基于变化检测</a></li>
+              <li><a href="#基于深度学习-1">基于深度学习</a></li>
+            </ul>
+          </li>
+          <li><a href="#图像处理">图像处理</a></li>
+          <li><a href="#视觉特征提取关联">视觉特征提取关联</a></li>
+          <li><a href="#视觉里程计">视觉里程计</a>
+            <ul>
+              <li><a href="#基于多视图几何">基于多视图几何</a></li>
+              <li><a href="#基于深度学习-2">基于深度学习</a></li>
+            </ul>
+          </li>
+          <li><a href="#光流">光流</a></li>
+          <li><a href="#视觉重建">视觉重建</a>
+            <ul>
+              <li><a href="#基于多视图几何-1">基于多视图几何</a></li>
+              <li><a href="#基于深度学习-3">基于深度学习</a></li>
+            </ul>
+          </li>
+          <li><a href="#毫米波雷达里程计">毫米波雷达里程计</a></li>
+          <li><a href="#可视化">可视化</a>
+            <ul>
+              <li><a href="#可视化界面">可视化界面</a></li>
+              <li><a href="#点云可视化">点云可视化</a></li>
+              <li><a href="#时序数据可视化">时序数据可视化</a></li>
+              <li><a href="#数据集可视化">数据集可视化</a></li>
+            </ul>
+          </li>
+          <li><a href="#精度评估">精度评估</a></li>
+          <li><a href="#地理坐标系">地理坐标系</a></li>
+          <li><a href="#地图匹配定位">地图匹配定位</a>
+            <ul>
+              <li><a href="#激光雷达">激光雷达</a></li>
+              <li><a href="#相机">相机</a></li>
+            </ul>
+          </li>
+          <li><a href="#里程计定位">里程计定位</a></li>
+          <li><a href="#基于路标定位">基于路标定位</a></li>
+          <li><a href="#gnss数据处理">GNSS数据处理</a></li>
+          <li><a href="#协同slam">协同SLAM</a></li>
+          <li><a href="#avp">AVP</a></li>
+        </ul>
+      </li>
+      <li><a href="#仿真环境">仿真环境</a></li>
+      <li><a href="#可通行区域">可通行区域</a></li>
+      <li><a href="#轨迹规划">轨迹规划</a></li>
+      <li><a href="#控制">控制</a></li>
+    </ul>
+  </li>
+</ul>
+      </aside>
+    
+
+    <div id="main" role="main" class="wrapper-content">
+      <div class="container">
+        <article class="posts">
+  <h1>SLAM实用工具存档</h1>
+
+  <div clsss="meta">
+    <span class="author">
+      zxl19
+    </span>
+
+    <span class="date">
+      2021-05-25
+    </span>
+
+    <ul class="tag">
+      
+      <li>
+        <a href="http://localhost:4000/HomePage/tags#SLAM">
+          SLAM
+        </a>
+      </li>
+      
+      <li>
+        <a href="http://localhost:4000/HomePage/tags#Archive">
+          Archive
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+
+  <div class="entry">
+    <p>一些在SLAM研究过程中发现的实用工具存档，包括传感器标定、rosbag处理、数据标注、SLAM算法相关内容。</p>
+
+<!-- more -->
+
+<h2 id="传感器相关">传感器相关</h2>
+
+<h3 id="激光雷达数据生成">激光雷达数据生成</h3>
+
+<ol>
+  <li><a href="https://github.com/hku-mars/MARSIM">hku-mars/MARSIM</a></li>
+  <li><a href="https://github.com/MartinHahner/LiDAR_fog_sim">MartinHahner/LiDAR_fog_sim</a></li>
+  <li><a href="https://github.com/SysCV/LiDAR_snow_sim">SysCV/LiDAR_snow_sim</a></li>
+  <li><a href="https://github.com/PJLab-ADG/LiDARSimLib-and-Placement-Evaluation">PJLab-ADG/LiDARSimLib-and-Placement-Evaluation</a></li>
+  <li><a href="https://github.com/xiaoaoran/SynLiDAR">xiaoaoran/SynLiDAR</a></li>
+  <li><a href="https://github.com/ntnu-arl/lidar_simulator">ntnu-arl/lidar_simulator</a></li>
+  <li><a href="https://github.com/trripy/CARLA_ROS_SLAM">trripy/CARLA_ROS_SLAM</a></li>
+  <li><a href="https://github.com/UMich-BipedLab/lidar_simulator">UMich-BipedLab/lidar_simulator</a></li>
+</ol>
+
+<h3 id="激光雷达内参标定">激光雷达内参标定</h3>
+
+<ol>
+  <li><a href="https://github.com/UMich-BipedLab/LiDAR_intrinsic_calibration">UMich-BipedLab/LiDAR_intrinsic_calibration</a></li>
+</ol>
+
+<h3 id="相机内参标定">相机内参标定</h3>
+
+<ol>
+  <li><a href="https://github.com/zhiyuanyou/Calibration-ZhangZhengyou-Method">zhiyuanyou/Calibration-ZhangZhengyou-Method</a></li>
+  <li><a href="https://github.com/kushalvyas/CameraCalibration">kushalvyas/CameraCalibration</a></li>
+  <li><a href="https://github.com/yxlao/camtools">yxlao/camtools</a></li>
+  <li><a href="https://github.com/GREAT-WHU/gv_tools">GREAT-WHU/gv_tools</a></li>
+</ol>
+
+<h3 id="imu噪声评估">IMU噪声评估</h3>
+
+<ol>
+  <li><a href="https://github.com/gaowenliang/imu_utils">gaowenliang/imu_utils</a></li>
+  <li><a href="https://github.com/ccny-ros-pkg/imu_tools">ccny-ros-pkg/imu_tools</a></li>
+  <li><a href="https://github.com/rpng/kalibr_allan">rpng/kalibr_allan</a></li>
+  <li><a href="https://github.com/Kyle-ak/imu_tk">Kyle-ak/imu_tk</a></li>
+  <li><a href="https://github.com/XinLiGH/GyroAllan">XinLiGH/GyroAllan</a></li>
+  <li><a href="https://github.com/LiquidCGS/FastIMU">LiquidCGS/FastIMU</a></li>
+  <li><a href="https://github.com/pcdangio/ros-calibration_imu">pcdangio/ros-calibration_imu</a></li>
+</ol>
+
+<h3 id="激光雷达-相机标定">激光雷达-相机标定</h3>
+
+<p>此类项目较多，搜索<code class="language-plaintext highlighter-rouge">LiDAR</code>+<code class="language-plaintext highlighter-rouge">camera</code>+<code class="language-plaintext highlighter-rouge">calibration</code>即可。</p>
+
+<h4 id="基于matlab">基于MATLAB</h4>
+
+<ol>
+  <li><a href="https://github.com/UMich-BipedLab/extrinsic_lidar_camera_calibration">UMich-BipedLab/extrinsic_lidar_camera_calibration</a></li>
+  <li><a href="https://github.com/zhixy/Laser-Camera-Calibration-Toolbox">zhixy/Laser-Camera-Calibration-Toolbox</a></li>
+  <li><a href="https://github.com/Aaron20127/Camera-lidar-joint-calibration">Aaron20127/Camera-lidar-joint-calibration</a></li>
+  <li><a href="https://github.com/ccyinlu/multimodal_data_studio">ccyinlu/multimodal_data_studio</a></li>
+  <li><a href="https://github.com/UMich-BipedLab/automatic_lidar_camera_calibration">UMich-BipedLab/automatic_lidar_camera_calibration</a></li>
+  <li>MATLAB Lidar Camera Calibrator</li>
+</ol>
+
+<h4 id="依赖项较多">依赖项较多</h4>
+
+<ol>
+  <li><a href="https://github.com/ankitdhall/lidar_camera_calibration">ankitdhall/lidar_camera_calibration</a></li>
+  <li><a href="https://github.com/hku-mars/livox_camera_calib">hku-mars/livox_camera_calib</a></li>
+  <li><a href="https://github.com/koide3/direct_visual_lidar_calibration">koide3/direct_visual_lidar_calibration</a></li>
+  <li><a href="https://github.com/beltransen/velo2cam_calibration">beltransen/velo2cam_calibration</a></li>
+  <li><a href="https://github.com/heethesh/lidar_camera_calibration">heethesh/lidar_camera_calibration</a></li>
+  <li><a href="https://github.com/Livox-SDK/livox_camera_lidar_calibration">Livox-SDK/livox_camera_lidar_calibration</a></li>
+  <li><a href="https://github.com/hku-mars/mlcc">hku-mars/mlcc</a></li>
+  <li><a href="https://github.com/acfr/cam_lidar_calibration">acfr/cam_lidar_calibration</a></li>
+  <li><a href="https://github.com/mfxox/ILCC">mfxox/ILCC</a></li>
+  <li><a href="https://github.com/XidianLemon/calibration_camera_lidar">XidianLemon/calibration_camera_lidar</a></li>
+  <li><a href="https://github.com/HViktorTsoi/ACSC">HViktorTsoi/ACSC</a></li>
+  <li><a href="https://github.com/hku-mars/joint-lidar-camera-calib">hku-mars/joint-lidar-camera-calib</a></li>
+  <li><a href="https://github.com/SubMishMar/cam_lidar_calib">SubMishMar/cam_lidar_calib</a></li>
+  <li><a href="https://github.com/HITSZ-NRSL/lidar_camera_calibrator">HITSZ-NRSL/lidar_camera_calibrator</a></li>
+  <li><a href="https://github.com/OpenCalib/JointCalib">OpenCalib/JointCalib</a></li>
+  <li><a href="https://github.com/Clothooo/lvt2calib">Clothooo/lvt2calib</a></li>
+  <li><a href="https://github.com/ram-lab/plycal">ram-lab/plycal</a></li>
+  <li><a href="https://github.com/swyphcosmo/ros-camera-lidar-calibration">swyphcosmo/ros-camera-lidar-calibration</a></li>
+  <li><a href="https://github.com/xmba15/automatic_lidar_camera_calibration">xmba15/automatic_lidar_camera_calibration</a></li>
+  <li><a href="https://github.com/AbangLZU/cam_lidar_calibration">AbangLZU/cam_lidar_calibration</a></li>
+</ol>
+
+<h3 id="激光雷达-imu标定">激光雷达-IMU标定</h3>
+
+<ol>
+  <li><a href="https://github.com/ethz-asl/lidar_align">ethz-asl/lidar_align</a></li>
+  <li><a href="https://github.com/APRIL-ZJU/lidar_IMU_calib">APRIL-ZJU/lidar_IMU_calib</a></li>
+  <li><a href="https://github.com/chennuo0125-HIT/lidar_imu_calib">chennuo0125-HIT/lidar_imu_calib</a></li>
+  <li><a href="https://github.com/hku-mars/LiDAR_IMU_Init">hku-mars/LiDAR_IMU_Init</a></li>
+  <li><a href="https://github.com/FENGChenxi0823/SensorCalibration">FENGChenxi0823/SensorCalibration</a></li>
+  <li><a href="https://github.com/unmannedlab/imu_lidar_calibration">unmannedlab/imu_lidar_calibration</a></li>
+  <li><a href="https://github.com/APRIL-ZJU/OA-LICalib">APRIL-ZJU/OA-LICalib</a></li>
+  <li><a href="https://github.com/OpenCalib/LiDAR2INS">OpenCalib/LiDAR2INS</a></li>
+  <li><a href="https://github.com/liyang-whu/lidar_rtk_calibration">liyang-whu/lidar_rtk_calibration</a></li>
+  <li><a href="https://github.com/Taeyoung96/GRIL-Calib">Taeyoung96/GRIL-Calib</a></li>
+  <li><a href="https://github.com/chengwei0427/calib_lidar_imu">chengwei0427/calib_lidar_imu</a></li>
+  <li><a href="https://github.com/BohemianRhapsodyz/lidar_imu_calib">BohemianRhapsodyz/lidar_imu_calib</a></li>
+</ol>
+
+<h3 id="相机-imu标定">相机-IMU标定</h3>
+
+<ol>
+  <li><a href="https://github.com/ethz-asl/kalibr">ethz-asl/kalibr</a></li>
+  <li><a href="https://github.com/hovren/crisp">hovren/crisp</a></li>
+  <li><a href="https://github.com/urbste/OpenImuCameraCalibrator">urbste/OpenImuCameraCalibrator</a></li>
+  <li><a href="https://github.com/unmannedlab/camera_imu_calibration">unmannedlab/camera_imu_calibration</a></li>
+</ol>
+
+<h3 id="二维激光雷达-相机-轮速计标定">二维激光雷达-相机-轮速计标定</h3>
+
+<ol>
+  <li><a href="https://github.com/MegviiRobot/CamLaserCalibraTool">MegviiRobot/CamLaserCalibraTool</a></li>
+  <li><a href="https://github.com/MegviiRobot/OdomLaserCalibraTool">MegviiRobot/OdomLaserCalibraTool</a></li>
+  <li><a href="https://github.com/MegviiRobot/CamOdomCalibraTool">MegviiRobot/CamOdomCalibraTool</a></li>
+</ol>
+
+<h3 id="多激光雷达标定">多激光雷达标定</h3>
+
+<ol>
+  <li><a href="https://github.com/Livox-SDK/Livox_automatic_calibration">Livox-SDK/Livox_automatic_calibration</a></li>
+  <li><a href="https://github.com/AbangLZU/multi_lidar_calibration">AbangLZU/multi_lidar_calibration</a></li>
+</ol>
+
+<h3 id="多相机标定">多相机标定</h3>
+
+<ol>
+  <li><a href="https://github.com/hengli/camodocal">hengli/camodocal</a></li>
+  <li><a href="https://github.com/neozhaoliang/surround-view-system-introduction">neozhaoliang/surround-view-system-introduction</a></li>
+  <li><a href="https://github.com/dyfcalid/CameraCalibration">dyfcalid/CameraCalibration</a></li>
+  <li><a href="https://github.com/rameau-fr/MC-Calib">rameau-fr/MC-Calib</a></li>
+  <li><a href="https://github.com/idiap/multicamera-calibration">idiap/multicamera-calibration</a></li>
+  <li><a href="https://github.com/lwangvaleo/click_calib">lwangvaleo/click_calib</a></li>
+  <li><a href="https://github.com/hjoonpark/MultiCamCalib">hjoonpark/MultiCamCalib</a></li>
+</ol>
+
+<h3 id="多传感器联合标定">多传感器联合标定</h3>
+
+<ol>
+  <li><a href="https://github.com/PJLab-ADG/SensorsCalibration">PJLab-ADG/SensorsCalibration</a></li>
+  <li><a href="https://github.com/tudelft-iv/multi_sensor_calibration">tudelft-iv/multi_sensor_calibration</a></li>
+  <li><a href="https://github.com/zhixy/multical">zhixy/multical</a></li>
+  <li><a href="https://github.com/PRBonn/extrinsic_calibration">PRBonn/extrinsic_calibration</a></li>
+  <li><a href="https://github.com/plumewind/online_calibration">plumewind/online_calibration</a></li>
+  <li><a href="https://github.com/peterWon/LVI-ExC">peterWon/LVI-ExC</a></li>
+  <li><a href="https://github.com/unmannedlab/camera_imu_lidar_calibration">unmannedlab/camera_imu_lidar_calibration</a></li>
+  <li><a href="https://github.com/zxl19/Hand_Eye_Extrinsic_Calibration">zxl19/Hand_Eye_Extrinsic_Calibration</a></li>
+</ol>
+
+<h3 id="手眼标定">手眼标定</h3>
+
+<ol>
+  <li><a href="https://github.com/IFL-CAMP/easy_handeye">IFL-CAMP/easy_handeye</a></li>
+  <li><a href="https://github.com/utiasSTARS/certifiable-calibration">utiasSTARS/certifiable-calibration</a></li>
+  <li><a href="https://github.com/zarathustr/SHERWCIC">zarathustr/SHERWCIC</a></li>
+</ol>
+
+<h3 id="基准标记">基准标记</h3>
+
+<ol>
+  <li><a href="https://github.com/AprilRobotics/apriltag">AprilRobotics/apriltag</a></li>
+  <li><a href="https://github.com/pal-robotics/aruco_ros">pal-robotics/aruco_ros</a></li>
+  <li><a href="https://github.com/okalachev/arucogen">okalachev/arucogen</a></li>
+  <li><a href="https://github.com/AprilRobotics/apriltag-imgs">AprilRobotics/apriltag-imgs</a></li>
+  <li><a href="https://github.com/AprilRobotics/apriltag_ros">AprilRobotics/apriltag_ros</a></li>
+  <li><a href="https://github.com/alicevision/CCTag">alicevision/CCTag</a></li>
+  <li><a href="https://github.com/UMich-BipedLab/LiDARTag">UMich-BipedLab/LiDARTag</a></li>
+  <li><a href="https://github.com/fdcl-gwu/aruco-markers">fdcl-gwu/aruco-markers</a></li>
+  <li><a href="https://github.com/bbenligiray/stag">bbenligiray/stag</a></li>
+  <li><a href="https://github.com/tentone/aruco">tentone/aruco</a></li>
+  <li><a href="https://github.com/chili-epfl/chilitags">chili-epfl/chilitags</a></li>
+  <li><a href="https://github.com/swatbotics/apriltags-cpp">swatbotics/apriltags-cpp</a></li>
+  <li><a href="https://github.com/artursg/RUNEtag">artursg/RUNEtag</a></li>
+  <li><a href="https://github.com/mziccard/RuneTagDrawer">mziccard/RuneTagDrawer</a></li>
+</ol>
+
+<h2 id="ros相关">ROS相关</h2>
+
+<h3 id="系统状态监控">系统状态监控</h3>
+
+<ol>
+  <li><a href="https://github.com/uzh-rpg/rpg_vikit">uzh-rpg/rpg_vikit</a></li>
+  <li><a href="https://github.com/ethz-asl/ros-system-monitor">ethz-asl/ros-system-monitor</a></li>
+  <li><a href="https://github.com/ethz-asl/linter">ethz-asl/linter</a></li>
+  <li><a href="https://github.com/ethz-asl/config_utilities">ethz-asl/config_utilities</a></li>
+  <li><a href="https://github.com/koide3/points_inspector">koide3/points_inspector</a></li>
+  <li><a href="https://github.com/Tompson11/SLAM_interface">Tompson11/SLAM_interface</a></li>
+</ol>
+
+<h3 id="rviz可视化">Rviz可视化</h3>
+
+<ol>
+  <li><a href="https://github.com/ros-visualization/rviz">ros-visualization/rviz</a></li>
+  <li><a href="https://github.com/PickNikRobotics/rviz_visual_tools">PickNikRobotics/rviz_visual_tools</a></li>
+  <li><a href="https://github.com/nobleo/rviz_satellite">nobleo/rviz_satellite</a></li>
+  <li><a href="https://github.com/naturerobots/mesh_tools">naturerobots/mesh_tools</a></li>
+  <li><a href="https://github.com/OctoMap/octomap_rviz_plugins">OctoMap/octomap_rviz_plugins</a></li>
+  <li><a href="https://github.com/chengwei0427/simple_gnss_localizer">chengwei0427/simple_gnss_localizer</a></li>
+  <li><a href="https://github.com/koide3/rviz_factor_graph_plugins">koide3/rviz_factor_graph_plugins</a></li>
+  <li><a href="https://github.com/ros-visualization/interactive_markers">ros-visualization/interactive_markers</a></li>
+  <li><a href="https://github.com/MohitShridhar/rviz_textured_quads">MohitShridhar/rviz_textured_quads</a></li>
+</ol>
+
+<h3 id="rosbag相关">rosbag相关</h3>
+
+<h4 id="命令行操作">命令行操作</h4>
+
+<ol>
+  <li><a href="https://github.com/xqms/rosbag_fancy">xqms/rosbag_fancy</a></li>
+</ol>
+
+<h4 id="制作">制作</h4>
+
+<ol>
+  <li><a href="https://github.com/tomas789/kitti2bag">tomas789/kitti2bag</a></li>
+  <li><a href="https://github.com/AbnerCSZ/lidar2rosbag_KITTI">AbnerCSZ/lidar2rosbag_KITTI</a></li>
+  <li><a href="https://github.com/ethz-asl/kitti_to_rosbag">ethz-asl/kitti_to_rosbag</a></li>
+  <li><a href="https://github.com/clynamen/nuscenes2bag">clynamen/nuscenes2bag</a></li>
+  <li><a href="https://github.com/irapkaist/file_player_mulran">irapkaist/file_player_mulran</a></li>
+</ol>
+
+<h4 id="内容修改">内容修改</h4>
+
+<ol>
+  <li><a href="https://github.com/facontidavide/rosbag_editor">facontidavide/rosbag_editor</a></li>
+  <li><a href="https://github.com/AtsushiSakai/rosbag_filter_gui">AtsushiSakai/rosbag_filter_gui</a></li>
+  <li><a href="https://github.com/tier4/ros2bag_extensions">tier4/ros2bag_extensions</a></li>
+</ol>
+
+<h4 id="数据提取">数据提取</h4>
+
+<ol>
+  <li><a href="https://github.com/AtsushiSakai/rosbag_to_csv">AtsushiSakai/rosbag_to_csv</a></li>
+  <li><a href="https://github.com/leofansq/Tools_RosBag2KITTI">leofansq/Tools_RosBag2KITTI</a></li>
+  <li><a href="https://github.com/amc-nu/rosbag_image_pcd_exporter">amc-nu/rosbag_image_pcd_exporter</a></li>
+  <li><a href="https://github.com/zxl19/LiDAR_Camera_Calibration_Preprocess">zxl19/LiDAR_Camera_Calibration_Preprocess</a></li>
+  <li><a href="https://github.com/liuxiao916/rosbag_extract">liuxiao916/rosbag_extract</a></li>
+  <li><a href="https://github.com/tiralonghipol/matlab_ws">tiralonghipol/matlab_ws</a></li>
+</ol>
+
+<h2 id="数据标注">数据标注</h2>
+
+<h3 id="多类型信息多任务">多类型信息多任务</h3>
+
+<ol>
+  <li><a href="https://github.com/HumanSignal/label-studio">HumanSignal/label-studio</a></li>
+  <li><a href="https://github.com/doccano/doccano">doccano/doccano</a></li>
+  <li><a href="https://github.com/UniversalDataTool/universal-data-tool">UniversalDataTool/universal-data-tool</a></li>
+  <li><a href="https://github.com/xtreme1-io/xtreme1">xtreme1-io/xtreme1</a></li>
+</ol>
+
+<h3 id="点云">点云</h3>
+
+<p>主要针对语义分割标注。</p>
+
+<ol>
+  <li><a href="https://github.com/Hitachi-Automotive-And-Industry-Lab/semantic-segmentation-editor">Hitachi-Automotive-And-Industry-Lab/semantic-segmentation-editor</a></li>
+  <li><a href="https://github.com/jbehley/point_labeler">jbehley/point_labeler</a></li>
+  <li><a href="https://github.com/ch-sa/labelCloud">ch-sa/labelCloud</a></li>
+  <li><a href="https://github.com/springzfx/point-cloud-annotation-tool">springzfx/point-cloud-annotation-tool</a></li>
+  <li><a href="https://github.com/halostorm/PCAT_open_source">halostorm/PCAT_open_source</a></li>
+  <li><a href="https://github.com/bernwang/latte">bernwang/latte</a></li>
+  <li><a href="https://github.com/yzrobot/cloud_annotation_tool">yzrobot/cloud_annotation_tool</a></li>
+  <li><a href="https://github.com/RMonica/rviz_cloud_annotation">RMonica/rviz_cloud_annotation</a></li>
+  <li><a href="https://github.com/jbehley/voxelizer">jbehley/voxelizer</a></li>
+  <li><a href="https://github.com/hasanari/sane">hasanari/sane</a></li>
+</ol>
+
+<h3 id="图像">图像</h3>
+
+<p>主要针对目标检测标注。</p>
+
+<ol>
+  <li><a href="https://github.com/tzutalin/labelImg">tzutalin/labelImg</a></li>
+  <li><a href="https://github.com/wkentaro/labelme">wkentaro/labelme</a></li>
+  <li><a href="https://github.com/AlexeyAB/Yolo_mark">AlexeyAB/Yolo_mark</a></li>
+  <li><a href="https://github.com/CVHub520/X-AnyLabeling">CVHub520/X-AnyLabeling</a></li>
+  <li><a href="https://github.com/abreheret/PixelAnnotationTool">abreheret/PixelAnnotationTool</a></li>
+  <li><a href="https://github.com/Cartucho/OpenLabeling">Cartucho/OpenLabeling</a></li>
+  <li><a href="https://github.com/developer0hye/Yolo_Label">developer0hye/Yolo_Label</a></li>
+  <li><a href="https://github.com/PaddleCV-SIG/EISeg">PaddleCV-SIG/EISeg</a></li>
+  <li>MATLAB Image Labeler</li>
+</ol>
+
+<h3 id="4d标注">4D标注</h3>
+
+<ol>
+  <li><a href="https://tools.tier4.jp/feature/vector_map_builder_ll2/">Vector Map Builder-Autoware Tools</a></li>
+  <li><a href="https://github.com/facebookresearch/segment-anything">facebookresearch/segment-anything</a></li>
+  <li><a href="https://github.com/IDEA-Research/GroundingDINO">IDEA-Research/GroundingDINO</a></li>
+  <li><a href="https://github.com/tusen-ai/SST">tusen-ai/SST</a></li>
+  <li><a href="https://github.com/hustvl/VMA">hustvl/VMA</a></li>
+</ol>
+
+<h2 id="slam相关">SLAM相关</h2>
+
+<h3 id="数据集">数据集</h3>
+
+<h4 id="激光里程计">激光里程计</h4>
+
+<ol>
+  <li><a href="http://www.cvlibs.net/datasets/kitti/eval_odometry.php">KITTI Odometry</a></li>
+  <li><a href="https://github.com/NeBula-Autonomy/nebula-odometry-dataset">NeBula-Autonomy/nebula-odometry-dataset</a></li>
+  <li><a href="https://github.com/TixiaoShan/Stevens-VLP16-Dataset">TixiaoShan/Stevens-VLP16-Dataset</a></li>
+  <li><a href="https://github.com/RobustFieldAutonomyLab/jackal_dataset_20170608">RobustFieldAutonomyLab/jackal_dataset_20170608</a></li>
+</ol>
+
+<h4 id="多传感器融合">多传感器融合</h4>
+
+<ol>
+  <li><a href="https://github.com/SJTU-ViSYS/M2DGR">SJTU-ViSYS/M2DGR</a></li>
+  <li><a href="https://github.com/weisongwen/UrbanNavDataset">weisongwen/UrbanNavDataset</a></li>
+  <li><a href="https://github.com/weisongwen/UrbanLoco">weisongwen/UrbanLoco</a></li>
+  <li><a href="https://github.com/IPNL-POLYU/UrbanNavDataset">IPNL-POLYU/UrbanNavDataset</a></li>
+  <li><a href="https://github.com/Ford/AVData">Ford/AVData</a></li>
+  <li><a href="https://github.com/epan-utbm/utbm_robocar_dataset">epan-utbm/utbm_robocar_dataset</a></li>
+  <li><a href="https://github.com/TIERS/tiers-lidars-dataset">TIERS/tiers-lidars-dataset</a></li>
+  <li><a href="https://github.com/HKUST-Aerial-Robotics/GVINS-Dataset">HKUST-Aerial-Robotics/GVINS-Dataset</a></li>
+  <li><a href="https://github.com/PengYu-Team/S3E">PengYu-Team/S3E</a></li>
+  <li><a href="https://github.com/MIT-SPARK/Kimera-Multi-Data">MIT-SPARK/Kimera-Multi-Data</a></li>
+  <li><a href="https://github.com/junzhang2016/NTU4DRadLM">junzhang2016/NTU4DRadLM</a></li>
+  <li><a href="https://github.com/MetaSLAM/ALITA">MetaSLAM/ALITA</a></li>
+  <li><a href="https://github.com/sjtuyinjie/SJTU_GVI">sjtuyinjie/SJTU_GVI</a></li>
+  <li><a href="https://github.com/SJTU-ViSYS/M2DGR-plus">SJTU-ViSYS/M2DGR-plus</a></li>
+  <li><a href="https://github.com/chichengcn/gici-open-dataset">chichengcn/gici-open-dataset</a></li>
+  <li><a href="https://github.com/ARTI-Robots/mapping_dataset_styria">ARTI-Robots/mapping_dataset_styria</a></li>
+  <li><a href="https://github.com/JinyongJeong/KAIST_URBAN_DATASET">JinyongJeong/KAIST_URBAN_DATASET</a></li>
+  <li><a href="https://github.com/dhchung/pohang_canal_dataset">dhchung/pohang_canal_dataset</a></li>
+  <li><a href="https://github.com/Yaepiii/M2UD">Yaepiii/M2UD</a></li>
+  <li><a href="https://github.com/niuwengang/SimpleBevParkingSlam">niuwengang/SimpleBevParkingSlam</a></li>
+</ol>
+
+<h4 id="点云匹配">点云匹配</h4>
+
+<ol>
+  <li><a href="http://3s.whu.edu.cn/ybs/en/benchmark.htm">WHU-TLS BENCHMARK</a></li>
+  <li><a href="https://prs.igp.ethz.ch/research/completed_projects/automatic_registration_of_point_clouds.html">ETH PRS</a></li>
+  <li><a href="https://projects.asl.ethz.ch/datasets/">ETH ASL Datasets Repository</a></li>
+  <li><a href="http://kos.informatik.uni-osnabrueck.de/3Dscans/">Robotic 3D Scan Repository</a></li>
+  <li><a href="https://3d.bk.tudelft.nl/liangliang/publications/2019/plade/resso.html">RESSO</a></li>
+  <li><a href="https://graphics.stanford.edu/data/3Dscanrep/">The Stanford 3D Scanning Repository</a></li>
+</ol>
+
+<h4 id="组合导航">组合导航</h4>
+
+<ol>
+  <li><a href="https://github.com/i2Nav-WHU/awesome-gins-datasets">i2Nav-WHU/awesome-gins-datasets</a></li>
+</ol>
+
+<h4 id="地面分割">地面分割</h4>
+
+<ol>
+  <li><a href="https://github.com/url-kaist/Ground-Segmentation-Benchmark">url-kaist/Ground-Segmentation-Benchmark</a></li>
+</ol>
+
+<h4 id="特殊场景">特殊场景</h4>
+
+<ol>
+  <li><a href="https://github.com/KTH-RPL/DynamicMap_Benchmark">KTH-RPL/DynamicMap_Benchmark</a></li>
+  <li><a href="https://github.com/ntnu-arl/lidar_degeneracy_datasets">ntnu-arl/lidar_degeneracy_datasets</a></li>
+  <li><a href="https://github.com/sanduan168/lifelong-SLAM-dataset">sanduan168/lifelong-SLAM-dataset</a></li>
+  <li><a href="https://github.com/Viky397/TorWICDataset">Viky397/TorWICDataset</a></li>
+</ol>
+
+<h4 id="车道线重建">车道线重建</h4>
+
+<ol>
+  <li><a href="https://github.com/OpenDriveLab/OpenLane">OpenDriveLab/OpenLane</a></li>
+  <li><a href="https://github.com/OpenDriveLab/OpenLane-V2">OpenDriveLab/OpenLane-V2</a></li>
+</ol>
+
+<h3 id="位姿表示">位姿表示</h3>
+
+<ol>
+  <li><a href="http://eigen.tuxfamily.org">Eigen</a></li>
+  <li><a href="https://github.com/strasdat/Sophus">strasdat/Sophus</a></li>
+  <li><a href="https://github.com/artivis/manif">artivis/manif</a></li>
+  <li><a href="https://github.com/pypose/pypose">pypose/pypose</a></li>
+  <li><a href="https://github.com/EricLengyel/Terathon-Math-Library">EricLengyel/Terathon-Math-Library</a></li>
+  <li><a href="https://github.com/orocos/orocos_kinematics_dynamics">orocos/orocos_kinematics_dynamics</a></li>
+  <li><a href="https://github.com/brentyi/jaxlie">brentyi/jaxlie</a></li>
+  <li><a href="https://github.com/petercorke/spatialmath-matlab">petercorke/spatialmath-matlab</a></li>
+  <li><a href="https://github.com/ethz-asl/minkindr">ethz-asl/minkindr</a></li>
+</ol>
+
+<h3 id="样条曲线">样条曲线</h3>
+
+<h4 id="b样条曲线">B样条曲线</h4>
+
+<ol>
+  <li><a href="https://github.com/orbingol/NURBS-Python">orbingol/NURBS-Python</a></li>
+  <li><a href="https://github.com/bgrimstad/splinter">bgrimstad/splinter</a></li>
+  <li><a href="https://github.com/polatory/polatory">polatory/polatory</a></li>
+  <li><a href="https://github.com/QianZheng/BSplineFitting">QianZheng/BSplineFitting</a></li>
+  <li><a href="https://github.com/ddemidov/mba">ddemidov/mba</a></li>
+  <li><a href="https://github.com/ethz-asl/aslam_splines">ethz-asl/aslam_splines</a></li>
+</ol>
+
+<h4 id="贝塞尔曲线">贝塞尔曲线</h4>
+
+<ol>
+  <li><a href="https://github.com/oysteinmyrmo/bezier">oysteinmyrmo/bezier</a></li>
+  <li><a href="https://github.com/chen0040/cpp-spline">chen0040/cpp-spline</a></li>
+  <li><a href="https://github.com/blurstudio/TwistSpline">blurstudio/TwistSpline</a></li>
+  <li><a href="https://github.com/romb-technologies/Bezier">romb-technologies/Bezier</a></li>
+  <li><a href="https://github.com/andresbejarano/BezierCurves2D">andresbejarano/BezierCurves2D</a></li>
+</ol>
+
+<h3 id="优化库">优化库</h3>
+
+<h4 id="非线性优化">非线性优化</h4>
+
+<ol>
+  <li><a href="https://github.com/ceres-solver/ceres-solver">ceres-solver/ceres-solver</a></li>
+  <li><a href="https://github.com/stevengj/nlopt">stevengj/nlopt</a></li>
+  <li><a href="https://github.com/facebookresearch/theseus">facebookresearch/theseus</a></li>
+  <li><a href="https://github.com/symforce-org/symforce">symforce-org/symforce</a></li>
+  <li><a href="https://github.com/PatWie/CppNumericalSolvers">PatWie/CppNumericalSolvers</a></li>
+  <li><a href="https://github.com/ethz-adrl/ifopt">ethz-adrl/ifopt</a></li>
+  <li><a href="https://github.com/yixuan/LBFGSpp">yixuan/LBFGSpp</a></li>
+  <li><a href="https://github.com/ZJU-FAST-Lab/LBFGS-Lite">ZJU-FAST-Lab/LBFGS-Lite</a></li>
+  <li><a href="https://github.com/bbopt/nomad">bbopt/nomad</a></li>
+</ol>
+
+<h4 id="图优化">图优化</h4>
+
+<ol>
+  <li><a href="https://github.com/RainerKuemmerle/g2o">RainerKuemmerle/g2o</a></li>
+  <li><a href="https://github.com/borglab/gtsam">borglab/gtsam</a></li>
+  <li><a href="https://github.com/baidu/ICE-BA">baidu/ICE-BA</a></li>
+  <li><a href="https://github.com/hku-mars/BALM">hku-mars/BALM</a></li>
+  <li><a href="https://github.com/dongjing3309/minisam">dongjing3309/minisam</a></li>
+  <li><a href="https://github.com/MIT-SPARK/Kimera-RPGO">MIT-SPARK/Kimera-RPGO</a></li>
+  <li><a href="https://github.com/MegviiRobot/MegBA">MegviiRobot/MegBA</a></li>
+  <li><a href="https://github.com/hku-mars/HBA">hku-mars/HBA</a></li>
+  <li><a href="https://github.com/APRIL-ZJU/clins">APRIL-ZJU/clins</a></li>
+  <li><a href="https://github.com/xipengwang/AprilSAM">xipengwang/AprilSAM</a></li>
+  <li><a href="https://github.com/cvg/pyceres">cvg/pyceres</a></li>
+  <li><a href="https://github.com/zlthinker/STBA">zlthinker/STBA</a></li>
+  <li><a href="https://github.com/mit-acl/dpgo">mit-acl/dpgo</a></li>
+  <li><a href="https://github.com/APRIL-ZJU/clic">APRIL-ZJU/clic</a></li>
+  <li><a href="https://github.com/MarineRoboticsGroup/dcsam">MarineRoboticsGroup/dcsam</a></li>
+  <li><a href="https://github.com/srrg-sapienza/srrg2_solver">srrg-sapienza/srrg2_solver</a></li>
+  <li><a href="https://github.com/shaolinbit/minisam_lib">shaolinbit/minisam_lib</a></li>
+  <li><a href="https://github.com/zju3dv/CoLi-BA">zju3dv/CoLi-BA</a></li>
+  <li><a href="https://github.com/ori-drs/isam">ori-drs/isam</a></li>
+  <li><a href="https://github.com/utiasASRL/steam">utiasASRL/steam</a></li>
+  <li><a href="https://github.com/furo-org/p2o">furo-org/p2o</a></li>
+  <li><a href="https://github.com/helmayer/RPBA">helmayer/RPBA</a></li>
+  <li><a href="https://github.com/mit-acl/dpgo_ros">mit-acl/dpgo_ros</a></li>
+  <li><a href="https://github.com/ICRA-2019/MH-iSAM2_lib">ICRA-2019/MH-iSAM2_lib</a></li>
+</ol>
+
+<h4 id="优化算法教程">优化算法教程</h4>
+
+<ol>
+  <li><a href="https://github.com/dongjing3309/gtsam-examples">dongjing3309/gtsam-examples</a></li>
+  <li><a href="https://github.com/izhengfan/ba_demo_ceres">izhengfan/ba_demo_ceres</a></li>
+  <li><a href="https://github.com/UditSinghParihar/g2o_tutorial">UditSinghParihar/g2o_tutorial</a></li>
+  <li><a href="https://github.com/ydsf16/LevenbergMarquardt">ydsf16/LevenbergMarquardt</a></li>
+  <li><a href="https://github.com/rosskidson/g2o_tutorial">rosskidson/g2o_tutorial</a></li>
+  <li><a href="https://github.com/MarineRoboticsGroup/dcsam-examples">MarineRoboticsGroup/dcsam-examples</a></li>
+</ol>
+
+<h3 id="模块化框架">模块化框架</h3>
+
+<h4 id="建图">建图</h4>
+
+<h5 id="二维">二维</h5>
+
+<ol>
+  <li><a href="https://github.com/cartographer-project/cartographer">cartographer-project/cartographer</a></li>
+  <li><a href="https://github.com/cartographer-project/cartographer_ros">cartographer-project/cartographer_ros</a></li>
+  <li><a href="https://github.com/SteveMacenski/slam_toolbox">SteveMacenski/slam_toolbox</a></li>
+  <li><a href="https://github.com/MigVega/Ogm2Pgbm">MigVega/Ogm2Pgbm</a></li>
+</ol>
+
+<h5 id="三维">三维</h5>
+
+<ol>
+  <li><a href="https://github.com/ethz-asl/maplab">ethz-asl/maplab</a></li>
+  <li><a href="https://github.com/koide3/hdl_graph_slam">koide3/hdl_graph_slam</a></li>
+  <li><a href="https://github.com/ethz-asl/ethzasl_msf">ethz-asl/ethzasl_msf</a></li>
+  <li><a href="https://github.com/Little-Potato-1990/localization_in_auto_driving">Little-Potato-1990/localization_in_auto_driving</a></li>
+  <li><a href="https://github.com/koide3/glim">koide3/glim</a></li>
+  <li><a href="https://github.com/MOLAorg/mola">MOLAorg/mola</a></li>
+  <li><a href="https://github.com/w111liang222/lidar-slam-detection">w111liang222/lidar-slam-detection</a></li>
+  <li><a href="https://github.com/zm0612/funny_lidar_slam">zm0612/funny_lidar_slam</a></li>
+  <li><a href="https://github.com/gisbi-kim/lt-mapper">gisbi-kim/lt-mapper</a></li>
+  <li><a href="https://github.com/Yixin-F/better_fastlio2">Yixin-F/better_fastlio2</a></li>
+  <li><a href="https://github.com/leggedrobotics/graph_msf">leggedrobotics/graph_msf</a></li>
+  <li><a href="https://github.com/VIS4ROB-lab/HyperSLAM">VIS4ROB-lab/HyperSLAM</a></li>
+  <li><a href="https://github.com/CogRob/omnimapper">CogRob/omnimapper</a></li>
+  <li><a href="https://github.com/symao/viola">symao/viola</a></li>
+  <li><a href="https://github.com/dfki-ric/slam3d">dfki-ric/slam3d</a></li>
+</ol>
+
+<h4 id="建图后处理">建图后处理</h4>
+
+<ol>
+  <li><a href="https://github.com/koide3/interactive_slam">koide3/interactive_slam</a></li>
+  <li><a href="https://github.com/MetaSLAM/AutoMerge_Docker">MetaSLAM/AutoMerge_Docker</a></li>
+  <li><a href="https://github.com/JokerJohn/MS-Mapping">JokerJohn/MS-Mapping</a></li>
+  <li><a href="https://github.com/hku-mars/LAMM">hku-mars/LAMM</a></li>
+</ol>
+
+<h3 id="机器人学算法库">机器人学算法库</h3>
+
+<ol>
+  <li><a href="https://github.com/onlytailei/CppRobotics">onlytailei/CppRobotics</a></li>
+  <li><a href="https://github.com/roboticslibrary/rl">roboticslibrary/rl</a></li>
+  <li><a href="https://github.com/ANYbotics/kindr">ANYbotics/kindr</a></li>
+  <li><a href="https://github.com/PX4/PX4-ECL">PX4/PX4-ECL</a></li>
+  <li><a href="https://github.com/giacomo-b/CppRobotics">giacomo-b/CppRobotics</a></li>
+  <li><a href="https://github.com/TUC-ProAut/libRSF">TUC-ProAut/libRSF</a></li>
+  <li><a href="https://github.com/ydsf16/TinyGrapeKit">ydsf16/TinyGrapeKit</a></li>
+  <li><a href="https://github.com/zhujun98/sensor-fusion">zhujun98/sensor-fusion</a></li>
+  <li><a href="https://github.com/MRPT/mrpt">MRPT/mrpt</a></li>
+  <li><a href="https://github.com/AtsushiSakai/PythonRobotics">AtsushiSakai/PythonRobotics</a></li>
+  <li><a href="https://github.com/facebookresearch/pyrobot">facebookresearch/pyrobot</a></li>
+  <li><a href="https://github.com/petercorke/robotics-toolbox-python">petercorke/robotics-toolbox-python</a></li>
+  <li><a href="https://github.com/AtsushiSakai/MATLABRobotics">AtsushiSakai/MATLABRobotics</a></li>
+  <li><a href="https://github.com/JanuszBedkowski/gpu_computing_in_robotics">JanuszBedkowski/gpu_computing_in_robotics</a></li>
+  <li><a href="https://github.com/Le0nX/ModernRoboticsCpp">Le0nX/ModernRoboticsCpp</a></li>
+  <li><a href="https://github.com/luigifreda/slamplay">luigifreda/slamplay</a></li>
+  <li><a href="https://github.com/openxrlab/xrslam">openxrlab/xrslam</a></li>
+  <li><a href="https://github.com/CHH3213/chhRobotics_CPP">CHH3213/chhRobotics_CPP</a></li>
+  <li><a href="https://github.com/CHH3213/chhRobotics">CHH3213/chhRobotics</a></li>
+  <li><a href="https://github.com/joansola/slamtb">joansola/slamtb</a></li>
+  <li><a href="https://github.com/jpl-x/x">jpl-x/x</a></li>
+  <li><a href="https://github.com/rsasaki0109/PoseOptimizationSLAM3D">rsasaki0109/PoseOptimizationSLAM3D</a></li>
+  <li><a href="https://github.com/MobileRoboticsSkoltech/mrob">MobileRoboticsSkoltech/mrob</a></li>
+  <li><a href="https://github.com/DreamWaterFound/Codes">DreamWaterFound/Codes</a></li>
+</ol>
+
+<h3 id="点云处理">点云处理</h3>
+
+<h4 id="点云处理库">点云处理库</h4>
+
+<ol>
+  <li><a href="https://github.com/PointCloudLibrary/pcl">PointCloudLibrary/pcl</a></li>
+  <li><a href="https://github.com/isl-org/Open3D">isl-org/Open3D</a></li>
+  <li><a href="https://github.com/">facebookresearch/pytorch3d</a></li>
+  <li><a href="https://github.com/LiangliangNan/Easy3D">LiangliangNan/Easy3D</a></li>
+  <li><a href="https://github.com/PDAL/PDAL">PDAL/PDAL</a></li>
+  <li><a href="https://github.com/kzampog/cilantro">kzampog/cilantro</a></li>
+  <li><a href="https://github.com/laspy/laspy">laspy/laspy</a></li>
+  <li><a href="https://github.com/nmwsharp/happly">nmwsharp/happly</a></li>
+  <li><a href="https://github.com/dimatura/pypcd">dimatura/pypcd</a></li>
+  <li><a href="https://github.com/CloudCompare/CCCoreLib">CloudCompare/CCCoreLib</a></li>
+</ol>
+
+<h4 id="点云数据结构">点云数据结构</h4>
+
+<h5 id="栅格">栅格</h5>
+
+<ol>
+  <li><a href="https://github.com/guillaumechereau/goxel">guillaumechereau/goxel</a></li>
+  <li><a href="https://github.com/ANYbotics/grid_map">ANYbotics/grid_map</a></li>
+  <li><a href="https://github.com/AcademySoftwareFoundation/openvdb">AcademySoftwareFoundation/openvdb</a></li>
+  <li><a href="https://github.com/ethz-asl/voxblox">ethz-asl/voxblox</a></li>
+  <li><a href="https://github.com/ethz-asl/segmap">ethz-asl/segmap</a></li>
+  <li><a href="https://github.com/facontidavide/Bonxai">facontidavide/Bonxai</a></li>
+  <li><a href="https://github.com/SteveMacenski/spatio_temporal_voxel_layer">SteveMacenski/spatio_temporal_voxel_layer</a></li>
+  <li><a href="https://github.com/tum-vision/fastfusion">tum-vision/fastfusion</a></li>
+  <li><a href="https://github.com/ethz-asl/wavemap">ethz-asl/wavemap</a></li>
+  <li><a href="https://github.com/ethz-asl/voxblox-plusplus">ethz-asl/voxblox-plusplus</a></li>
+  <li><a href="https://github.com/hku-mars/D-Map">hku-mars/D-Map</a></li>
+  <li><a href="https://github.com/ethz-asl/panoptic_mapping">ethz-asl/panoptic_mapping</a></li>
+  <li><a href="https://github.com/uestc-icsp/VoxelMapPlus_Public">uestc-icsp/VoxelMapPlus_Public</a></li>
+  <li><a href="https://github.com/VIS4ROB-lab/voxfield">VIS4ROB-lab/voxfield</a></li>
+  <li><a href="https://github.com/ethz-asl/volumetric_mapping">ethz-asl/volumetric_mapping</a></li>
+  <li><a href="https://github.com/VIS4ROB-lab/voxfield-panmap">VIS4ROB-lab/voxfield-panmap</a></li>
+</ol>
+
+<h5 id="树状">树状</h5>
+
+<h6 id="kd树">KD树</h6>
+
+<ol>
+  <li><a href="https://github.com/flann-lib/flann">flann-lib/flann</a></li>
+  <li><a href="https://github.com/jlblancoc/nanoflann">jlblancoc/nanoflann</a></li>
+  <li><a href="https://github.com/hku-mars/ikd-Tree">hku-mars/ikd-Tree</a></li>
+  <li><a href="https://github.com/norlab-ulaval/libnabo">norlab-ulaval/libnabo</a></li>
+  <li><a href="https://github.com/storpipfugl/pykdtree">storpipfugl/pykdtree</a></li>
+</ol>
+
+<h6 id="八叉树">八叉树</h6>
+
+<ol>
+  <li><a href="https://github.com/OctoMap/octomap">OctoMap/octomap</a></li>
+  <li><a href="https://github.com/jbehley/octree">jbehley/octree</a></li>
+  <li><a href="https://github.com/zhujun3753/i-octee">zhujun3753/i-octee</a></li>
+  <li><a href="https://github.com/gaoxiang12/octomap_tutor">gaoxiang12/octomap_tutor</a></li>
+</ol>
+
+<h5 id="网格">网格</h5>
+
+<ol>
+  <li><a href="https://github.com/MIT-SPARK/Kimera-VIO">MIT-SPARK/Kimera-VIO</a></li>
+  <li><a href="https://github.com/MIT-SPARK/Hydra">MIT-SPARK/Hydra</a></li>
+  <li><a href="https://github.com/hku-mars/ImMesh">hku-mars/ImMesh</a></li>
+  <li><a href="https://github.com/lab-sun/SLAMesh">lab-sun/SLAMesh</a></li>
+  <li><a href="https://github.com/RuanJY/SLAMesh">RuanJY/SLAMesh</a></li>
+  <li><a href="https://github.com/uos/lvr2">uos/lvr2</a></li>
+  <li><a href="https://github.com/Yaepiii/CAD-Mesher">Yaepiii/CAD-Mesher</a></li>
+</ol>
+
+<h4 id="点云去畸变">点云去畸变</h4>
+
+<ol>
+  <li><a href="https://github.com/ethz-asl/lidar_undistortion">ethz-asl/lidar_undistortion</a></li>
+  <li><a href="https://github.com/rsasaki0109/lidar_undistortion">rsasaki0109/lidar_undistortion</a></li>
+</ol>
+
+<h4 id="点云地面分割">点云地面分割</h4>
+
+<ol>
+  <li><a href="https://github.com/lorenwel/linefit_ground_segmentation">lorenwel/linefit_ground_segmentation</a></li>
+  <li><a href="https://github.com/LimHyungTae/patchwork">LimHyungTae/patchwork</a></li>
+  <li><a href="https://github.com/url-kaist/patchwork-plusplus">url-kaist/patchwork-plusplus</a></li>
+  <li><a href="https://github.com/VincentCheungM/Run_based_segmentation">VincentCheungM/Run_based_segmentation</a></li>
+  <li><a href="https://github.com/YuePanEdward/RoadMarkingExtraction">YuePanEdward/RoadMarkingExtraction</a></li>
+  <li><a href="https://github.com/url-kaist/TRAVEL">url-kaist/TRAVEL</a></li>
+  <li><a href="https://github.com/jianzhuozhuTHU/putn">jianzhuozhuTHU/putn</a></li>
+  <li><a href="https://github.com/KennyWGH/efficient_online_segmentation">KennyWGH/efficient_online_segmentation</a></li>
+  <li><a href="https://github.com/ai4ce/peac">ai4ce/peac</a></li>
+  <li><a href="https://github.com/victor-amblard/OrientedPointSampling">victor-amblard/OrientedPointSampling</a></li>
+</ol>
+
+<h4 id="点云线特征提取">点云线特征提取</h4>
+
+<ol>
+  <li><a href="https://github.com/xiaohulugo/3DLineDetection">xiaohulugo/3DLineDetection</a></li>
+  <li><a href="https://github.com/denabazazian/Edge_Extraction">denabazazian/Edge_Extraction</a></li>
+</ol>
+
+<h4 id="点云目标检测">点云目标检测</h4>
+
+<ol>
+  <li><a href="https://github.com/PRBonn/depth_clustering">PRBonn/depth_clustering</a></li>
+  <li><a href="https://github.com/yzrobot/adaptive_clustering">yzrobot/adaptive_clustering</a></li>
+  <li><a href="https://github.com/enginBozkurt/LidarObstacleDetection">enginBozkurt/LidarObstacleDetection</a></li>
+  <li><a href="https://github.com/wangx1996/Lidar-Segementation">wangx1996/Lidar-Segementation</a></li>
+  <li><a href="https://github.com/SS47816/lidar_obstacle_detector">SS47816/lidar_obstacle_detector</a></li>
+  <li><a href="https://github.com/SiddhantNadkarni/Sensor-Fusion-Lidar-Object-Detection">SiddhantNadkarni/Sensor-Fusion-Lidar-Object-Detection</a></li>
+</ol>
+
+<h3 id="数据关联">数据关联</h3>
+
+<ol>
+  <li><a href="https://github.com/mcximing/hungarian-algorithm-cpp">mcximing/hungarian-algorithm-cpp</a></li>
+  <li><a href="https://github.com/mit-acl/clipper">mit-acl/clipper</a></li>
+  <li><a href="https://github.com/saebyn/munkres-cpp">saebyn/munkres-cpp</a></li>
+</ol>
+
+<h3 id="点云匹配算法">点云匹配算法</h3>
+
+<p>搜索<code class="language-plaintext highlighter-rouge">point cloud registration</code>或者<code class="language-plaintext highlighter-rouge">iterative closest point</code>。</p>
+
+<h4 id="基于几何特征">基于几何特征</h4>
+
+<ol>
+  <li><a href="https://github.com/MIT-SPARK/TEASER-plusplus">MIT-SPARK/TEASER-plusplus</a></li>
+  <li><a href="https://github.com/ethz-asl/libpointmatcher">ethz-asl/libpointmatcher</a></li>
+  <li><a href="https://github.com/PRBonn/kiss-icp">PRBonn/kiss-icp</a></li>
+  <li><a href="https://github.com/SMRT-AIST/fast_gicp">SMRT-AIST/fast_gicp</a></li>
+  <li><a href="https://github.com/jedeschaud/ct_icp">jedeschaud/ct_icp</a></li>
+  <li><a href="https://github.com/engcang/SLAM-application">engcang/SLAM-application</a></li>
+  <li><a href="https://github.com/YuePanEdward/MULLS">YuePanEdward/MULLS</a></li>
+  <li><a href="https://github.com/ethz-asl/robust_point_cloud_registration">ethz-asl/robust_point_cloud_registration</a></li>
+  <li><a href="https://github.com/gisbi-kim/PyICP-SLAM">gisbi-kim/PyICP-SLAM</a></li>
+  <li><a href="https://github.com/koide3/small_gicp">koide3/small_gicp</a></li>
+  <li><a href="https://github.com/YuePanEdward/GH-ICP">YuePanEdward/GH-ICP</a></li>
+  <li><a href="https://github.com/yorsh87/nicp">yorsh87/nicp</a></li>
+  <li><a href="https://github.com/url-kaist/Quatro">url-kaist/Quatro</a></li>
+  <li><a href="https://github.com/Kitware/pyLiDAR-SLAM">Kitware/pyLiDAR-SLAM</a></li>
+  <li><a href="https://github.com/avsegal/gicp">avsegal/gicp</a></li>
+  <li><a href="https://github.com/utiasASRL/steam_icp">utiasASRL/steam_icp</a></li>
+  <li><a href="https://github.com/StephLin/KCP">StephLin/KCP</a></li>
+  <li><a href="https://github.com/HKUST-Aerial-Robotics/Pagor">HKUST-Aerial-Robotics/Pagor</a></li>
+  <li><a href="https://github.com/Pamphlett/Segregator">Pamphlett/Segregator</a></li>
+  <li><a href="https://github.com/zm0612/optimized_ICP">zm0612/optimized_ICP</a></li>
+  <li><a href="https://github.com/zarathustr/FA3R">zarathustr/FA3R</a></li>
+  <li><a href="https://github.com/G3tupup/ctlo">G3tupup/ctlo</a></li>
+  <li><a href="https://github.com/lizimo061/PyLOAM">lizimo061/PyLOAM</a></li>
+</ol>
+
+<h4 id="基于概率分布">基于概率分布</h4>
+
+<ol>
+  <li><a href="https://github.com/neka-nat/probreg">neka-nat/probreg</a></li>
+  <li><a href="https://github.com/koide3/ndt_omp">koide3/ndt_omp</a></li>
+  <li><a href="https://github.com/Kin-Zhang/simple_ndt_slam">Kin-Zhang/simple_ndt_slam</a></li>
+</ol>
+
+<h4 id="基于特征描述子">基于特征描述子</h4>
+
+<ol>
+  <li><a href="https://github.com/nmellado/Super4PCS">nmellado/Super4PCS</a></li>
+  <li><a href="https://github.com/STORM-IRIT/OpenGR">STORM-IRIT/OpenGR</a></li>
+  <li><a href="https://github.com/thoschm/IRON">thoschm/IRON</a></li>
+  <li><a href="https://github.com/WPC-WHU/GROR">WPC-WHU/GROR</a></li>
+  <li><a href="https://github.com/chsl/PLADE">chsl/PLADE</a></li>
+</ol>
+
+<h4 id="基于深度学习">基于深度学习</h4>
+
+<ol>
+  <li><a href="https://github.com/zgojcic/3DSmoothNet">zgojcic/3DSmoothNet</a></li>
+  <li><a href="https://github.com/chrischoy/DeepGlobalRegistration">chrischoy/DeepGlobalRegistration</a></li>
+  <li><a href="https://github.com/prs-eth/OverlapPredator">prs-eth/OverlapPredator</a></li>
+  <li><a href="https://github.com/zgojcic/3D_multiview_reg">zgojcic/3D_multiview_reg</a></li>
+  <li><a href="https://github.com/XuyangBai/PointDSC">XuyangBai/PointDSC</a></li>
+  <li><a href="https://github.com/ai4ce/DeepMapping">ai4ce/DeepMapping</a></li>
+  <li><a href="https://github.com/ai4ce/DeepMapping2">ai4ce/DeepMapping2</a></li>
+  <li><a href="https://github.com/jac99/MinkLoc3D">jac99/MinkLoc3D</a></li>
+  <li><a href="https://github.com/csiro-robotics/LoGG3D-Net">csiro-robotics/LoGG3D-Net</a></li>
+  <li><a href="https://github.com/leggedrobotics/L3E">leggedrobotics/L3E</a></li>
+  <li><a href="https://github.com/jac99/MinkLoc3Dv2">jac99/MinkLoc3Dv2</a></li>
+</ol>
+
+<h3 id="回环检测">回环检测</h3>
+
+<ol>
+  <li><a href="https://github.com/gisbi-kim/scancontext_tro">gisbi-kim/scancontext_tro</a></li>
+  <li><a href="https://github.com/hku-mars/STD">hku-mars/STD</a></li>
+  <li><a href="https://github.com/rmsalinas/fbow">rmsalinas/fbow</a></li>
+  <li><a href="https://github.com/TixiaoShan/imaging_lidar_place_recognition">TixiaoShan/imaging_lidar_place_recognition</a></li>
+  <li><a href="https://github.com/YungeCui/BoW3D">YungeCui/BoW3D</a></li>
+  <li><a href="https://github.com/hku-mars/btc_descriptor">hku-mars/btc_descriptor</a></li>
+  <li><a href="https://github.com/lewisjiang/contour-context">lewisjiang/contour-context</a></li>
+  <li><a href="https://github.com/emiliofidalgo/ibow-lcd">emiliofidalgo/ibow-lcd</a></li>
+  <li><a href="https://github.com/SlamCabbage/NDTMC">SlamCabbage/NDTMC</a></li>
+  <li><a href="https://github.com/JoestarK/LiDAR-Iris">JoestarK/LiDAR-Iris</a></li>
+  <li><a href="https://github.com/BigMoWangying/LiDAR-Iris">BigMoWangying/LiDAR-Iris</a></li>
+  <li><a href="https://github.com/wh200720041/SRLCD">wh200720041/SRLCD</a></li>
+  <li><a href="https://github.com/YungeCui/LinK3D">YungeCui/LinK3D</a></li>
+  <li><a href="https://github.com/lhanaf/MILD">lhanaf/MILD</a></li>
+</ol>
+
+<h3 id="动态物体去除">动态物体去除</h3>
+
+<h4 id="基于变化检测">基于变化检测</h4>
+
+<ol>
+  <li><a href="https://github.com/irapkaist/removert">irapkaist/removert</a></li>
+  <li><a href="https://github.com/ethz-asl/dynablox">ethz-asl/dynablox</a></li>
+  <li><a href="https://github.com/LimHyungTae/ERASOR">LimHyungTae/ERASOR</a></li>
+  <li><a href="https://github.com/hku-mars/M-detector">hku-mars/M-detector</a></li>
+  <li><a href="https://github.com/Yaepiii/C-LOAM">Yaepiii/C-LOAM</a></li>
+  <li><a href="https://github.com/Yaepiii/TRLO">Yaepiii/TRLO</a></li>
+  <li><a href="https://github.com/YZH-bot/RH-Map">YZH-bot/RH-Map</a></li>
+</ol>
+
+<h4 id="基于深度学习-1">基于深度学习</h4>
+
+<ol>
+  <li><a href="https://github.com/PRBonn/LiDAR-MOS">PRBonn/LiDAR-MOS</a></li>
+  <li><a href="https://github.com/haomo-ai/MotionSeg3D">haomo-ai/MotionSeg3D</a></li>
+  <li><a href="https://github.com/MKJia/BeautyMap">MKJia/BeautyMap</a></li>
+  <li><a href="https://github.com/MetaSLAM/AutoMemory_Docker">MetaSLAM/AutoMemory_Docker</a></li>
+</ol>
+
+<h3 id="图像处理">图像处理</h3>
+
+<ol>
+  <li><a href="https://github.com/opencv/opencv">opencv/opencv</a></li>
+  <li><a href="https://github.com/kmhofmann/selene">kmhofmann/selene</a></li>
+  <li><a href="https://github.com/ethz-asl/aslam_cv2">ethz-asl/aslam_cv2</a></li>
+  <li><a href="https://github.com/boostorg/gil">boostorg/gil</a></li>
+  <li><a href="https://github.com/FlowCV-org/FlowCV">FlowCV-org/FlowCV</a></li>
+</ol>
+
+<h3 id="视觉特征提取关联">视觉特征提取关联</h3>
+
+<ol>
+  <li><a href="https://github.com/magicleap/SuperGluePretrainedNetwork">magicleap/SuperGluePretrainedNetwork</a></li>
+  <li><a href="https://github.com/magicleap/SuperPointPretrainedNetwork">magicleap/SuperPointPretrainedNetwork</a></li>
+  <li><a href="https://github.com/cvg/LightGlue">cvg/LightGlue</a></li>
+</ol>
+
+<h3 id="视觉里程计">视觉里程计</h3>
+
+<h4 id="基于多视图几何">基于多视图几何</h4>
+
+<ol>
+  <li><a href="https://github.com/UZ-SLAMLab/ORB_SLAM3">UZ-SLAMLab/ORB_SLAM3</a></li>
+  <li><a href="https://github.com/raulmur/ORB_SLAM2">raulmur/ORB_SLAM2</a></li>
+  <li><a href="https://github.com/raulmur/ORB_SLAM">raulmur/ORB_SLAM</a></li>
+  <li><a href="https://github.com/tum-vision/lsd_slam">tum-vision/lsd_slam</a></li>
+  <li><a href="https://github.com/JakobEngel/dso">JakobEngel/dso</a></li>
+  <li><a href="https://github.com/rubengooj/pl-slam">rubengooj/pl-slam</a></li>
+  <li><a href="https://github.com/jzubizarreta/dsm">jzubizarreta/dsm</a></li>
+  <li><a href="https://github.com/versatran01/dsol">versatran01/dsol</a></li>
+  <li><a href="https://github.com/srv/viso2">srv/viso2</a></li>
+  <li><a href="https://github.com/nkwangyh/CubemapSLAM">nkwangyh/CubemapSLAM</a></li>
+</ol>
+
+<h4 id="基于深度学习-2">基于深度学习</h4>
+
+<ol>
+  <li><a href="https://github.com/Huangying-Zhan/DF-VO">Huangying-Zhan/DF-VO</a></li>
+  <li><a href="https://github.com/Huangying-Zhan/Depth-VO-Feat">Huangying-Zhan/Depth-VO-Feat</a></li>
+  <li><a href="https://github.com/princeton-vl/DPVO">princeton-vl/DPVO</a></li>
+  <li><a href="https://github.com/ChiWeiHsiao/DeepVO-pytorch">ChiWeiHsiao/DeepVO-pytorch</a></li>
+</ol>
+
+<h3 id="光流">光流</h3>
+
+<ol>
+  <li><a href="https://github.com/NVIDIA/flownet2-pytorch">NVIDIA/flownet2-pytorch</a></li>
+  <li><a href="https://github.com/open-mmlab/mmflow">open-mmlab/mmflow</a></li>
+</ol>
+
+<h3 id="视觉重建">视觉重建</h3>
+
+<h4 id="基于多视图几何-1">基于多视图几何</h4>
+
+<ol>
+  <li><a href="http://ccwu.me/vsfm/index.html">VisualSFM</a></li>
+  <li><a href="https://bundler.io">Bundler</a></li>
+  <li><a href="https://github.com/colmap/colmap">colmap/colmap</a></li>
+  <li><a href="https://github.com/openMVG/openMVG">openMVG/openMVG</a></li>
+  <li><a href="https://github.com/autonomousvision/sdfstudio">autonomousvision/sdfstudio</a></li>
+  <li><a href="https://github.com/colmap/glomap">colmap/glomap</a></li>
+  <li><a href="https://github.com/sweeneychris/TheiaSfM">sweeneychris/TheiaSfM</a></li>
+  <li><a href="https://github.com/vlarsson/PoseLib">vlarsson/PoseLib</a></li>
+  <li><a href="https://github.com/cvg/limap">cvg/limap</a></li>
+  <li><a href="https://github.com/borglab/gtsfm">borglab/gtsfm</a></li>
+  <li><a href="https://github.com/Xbbei/super-colmap">Xbbei/super-colmap</a></li>
+  <li><a href="https://github.com/HKUST-Aerial-Robotics/MonoLaneMapping">HKUST-Aerial-Robotics/MonoLaneMapping</a></li>
+</ol>
+
+<h4 id="基于深度学习-3">基于深度学习</h4>
+
+<ol>
+  <li><a href="https://github.com/tinghuiz/SfMLearner">tinghuiz/SfMLearner</a></li>
+  <li><a href="https://github.com/YoYo000/MVSNet">YoYo000/MVSNet</a></li>
+  <li><a href="https://github.com/hustvl/MapTR">hustvl/MapTR</a></li>
+  <li><a href="https://github.com/Tsinghua-MARS-Lab/HDMapNet">Tsinghua-MARS-Lab/HDMapNet</a></li>
+  <li><a href="https://github.com/PJLab-ADG/neuralsim">PJLab-ADG/neuralsim</a></li>
+  <li><a href="https://github.com/Mrmoore98/VectorMapNet_code">Mrmoore98/VectorMapNet_code</a></li>
+  <li><a href="https://github.com/haomo-ai/SuperFusion">haomo-ai/SuperFusion</a></li>
+  <li><a href="https://github.com/OpenDriveLab/LaneSegNet">OpenDriveLab/LaneSegNet</a></li>
+  <li><a href="https://github.com/DRosemei/RoMe">DRosemei/RoMe</a></li>
+  <li><a href="https://github.com/ZiYang-xie/MV-Map">ZiYang-xie/MV-Map</a></li>
+  <li><a href="https://github.com/Tsinghua-MARS-Lab/vectormapnet">Tsinghua-MARS-Lab/vectormapnet</a></li>
+</ol>
+
+<h3 id="毫米波雷达里程计">毫米波雷达里程计</h3>
+
+<ol>
+  <li><a href="https://github.com/christopherdoer/rio">christopherdoer/rio</a></li>
+  <li><a href="https://github.com/url-kaist/outlier-robust-radar-odometry">url-kaist/outlier-robust-radar-odometry</a></li>
+  <li><a href="https://github.com/gisbi-kim/navtech-radar-slam">gisbi-kim/navtech-radar-slam</a></li>
+  <li><a href="https://github.com/aevainc/Doppler-ICP">aevainc/Doppler-ICP</a></li>
+  <li><a href="https://github.com/zhuge2333/4DRadarSLAM">zhuge2333/4DRadarSLAM</a></li>
+  <li><a href="https://github.com/keenan-burnett/yeti_radar_odometry">keenan-burnett/yeti_radar_odometry</a></li>
+</ol>
+
+<h3 id="可视化">可视化</h3>
+
+<h4 id="可视化界面">可视化界面</h4>
+
+<ol>
+  <li><a href="https://github.com/stevenlovegrove/Pangolin">stevenlovegrove/Pangolin</a></li>
+  <li><a href="https://github.com/koide3/iridescence">koide3/iridescence</a></li>
+  <li><a href="https://github.com/yuntianli91/pangolin_tutorial">yuntianli91/pangolin_tutorial</a></li>
+  <li><a href="https://github.com/Tompson11/SLAM_interface">Tompson11/SLAM_interface</a></li>
+</ol>
+
+<h4 id="点云可视化">点云可视化</h4>
+
+<ol>
+  <li><a href="https://github.com/CloudCompare/CloudCompare">CloudCompare/CloudCompare</a></li>
+  <li><a href="https://github.com/nmwsharp/polyscope">nmwsharp/polyscope</a></li>
+  <li><a href="https://github.com/sxyu/meshview">sxyu/meshview</a></li>
+</ol>
+
+<h4 id="时序数据可视化">时序数据可视化</h4>
+
+<ol>
+  <li><a href="https://github.com/facontidavide/PlotJuggler">facontidavide/PlotJuggler</a></li>
+</ol>
+
+<h4 id="数据集可视化">数据集可视化</h4>
+
+<ol>
+  <li><a href="https://github.com/ori-mrg/robotcar-dataset-sdk">ori-mrg/robotcar-dataset-sdk</a></li>
+  <li><a href="https://github.com/MarkMuth/QtKittiVisualizer">MarkMuth/QtKittiVisualizer</a></li>
+  <li><a href="https://github.com/orsalmon/KittiDatasetGPS-INSViewer">orsalmon/KittiDatasetGPS-INSViewer</a></li>
+  <li><a href="https://github.com/irapkaist/file_player">irapkaist/file_player</a></li>
+</ol>
+
+<h3 id="精度评估">精度评估</h3>
+
+<ol>
+  <li><a href="https://github.com/MichaelGrupp/evo">MichaelGrupp/evo</a></li>
+  <li><a href="https://github.com/pamela-project/slambench">pamela-project/slambench</a></li>
+  <li><a href="https://github.com/pamela-project/slambench1">pamela-project/slambench1</a></li>
+  <li><a href="https://github.com/JokerJohn/Cloud_Map_Evaluation">JokerJohn/Cloud_Map_Evaluation</a></li>
+  <li><a href="https://github.com/JokerJohn/PALoc">JokerJohn/PALoc</a></li>
+  <li><a href="https://github.com/JokerJohn/SLAMTools">JokerJohn/SLAMTools</a></li>
+  <li><a href="https://github.com/MapIV/localization_evaluation_toolkit">MapIV/localization_evaluation_toolkit</a></li>
+  <li><a href="https://github.com/PetWorm/sim3_evaluate_tool">PetWorm/sim3_evaluate_tool</a></li>
+  <li><a href="https://github.com/MobileRoboticsSkoltech/map-metrics">MobileRoboticsSkoltech/map-metrics</a></li>
+  <li><a href="https://github.com/anastasiia-kornilova/mom-tools">anastasiia-kornilova/mom-tools</a></li>
+</ol>
+
+<h3 id="地理坐标系">地理坐标系</h3>
+
+<ol>
+  <li><a href="https://geographiclib.sourceforge.io/">GeographicLib</a></li>
+  <li><a href="https://github.com/ethz-asl/geodetic_utils">ethz-asl/geodetic_utils</a></li>
+  <li><a href="https://github.com/OSGeo/gdal">OSGeo/gdal</a></li>
+  <li><a href="https://github.com/wandergis/coordTransform_py">wandergis/coordTransform_py</a></li>
+  <li><a href="https://github.com/ue4plugins/UEGeoCoordinates">ue4plugins/UEGeoCoordinates</a></li>
+  <li><a href="https://github.com/hobuinc/mgrs">hobuinc/mgrs</a></li>
+  <li><a href="https://github.com/Stellacore/peridetic">Stellacore/peridetic</a></li>
+  <li><a href="https://github.com/chachi/GeoCon">chachi/GeoCon</a></li>
+</ol>
+
+<h3 id="地图匹配定位">地图匹配定位</h3>
+
+<h4 id="激光雷达">激光雷达</h4>
+
+<ol>
+  <li><a href="https://github.com/koide3/hdl_localization">koide3/hdl_localization</a></li>
+  <li><a href="https://github.com/HViktorTsoi/FAST_LIO_LOCALIZATION">HViktorTsoi/FAST_LIO_LOCALIZATION</a></li>
+  <li><a href="https://github.com/at-wat/mcl_3dl">at-wat/mcl_3dl</a></li>
+  <li><a href="https://github.com/AbangLZU/ndt_localizer">AbangLZU/ndt_localizer</a></li>
+  <li><a href="https://github.com/rsasaki0109/lidar_localization_ros2">rsasaki0109/lidar_localization_ros2</a></li>
+  <li><a href="https://github.com/leggedrobotics/icp_localization">leggedrobotics/icp_localization</a></li>
+  <li><a href="https://github.com/chengwei0427/Lidar_IMU_Localization">chengwei0427/Lidar_IMU_Localization</a></li>
+  <li><a href="https://github.com/KOKIAOKI/3d_bbs">KOKIAOKI/3d_bbs</a></li>
+  <li><a href="https://github.com/Yixin-F/LiLoc">Yixin-F/LiLoc</a></li>
+  <li><a href="https://github.com/catec/amcl3d">catec/amcl3d</a></li>
+  <li><a href="https://github.com/robotics-upo/dll">robotics-upo/dll</a></li>
+  <li><a href="https://github.com/rsasaki0109/lidar_localizer">rsasaki0109/lidar_localizer</a></li>
+  <li><a href="https://github.com/uos/rmcl">uos/rmcl</a></li>
+  <li><a href="https://github.com/MapIV/iris">MapIV/iris</a></li>
+  <li><a href="https://github.com/Livox-SDK/livox_relocalization">Livox-SDK/livox_relocalization</a></li>
+  <li><a href="https://github.com/FAIRSpace-AdMaLL/ndt_localizer">FAIRSpace-AdMaLL/ndt_localizer</a></li>
+  <li><a href="https://github.com/uos/tsdf_localization">uos/tsdf_localization</a></li>
+</ol>
+
+<h4 id="相机">相机</h4>
+
+<ol>
+  <li><a href="https://github.com/ethz-asl/hfnet">ethz-asl/hfnet</a></li>
+  <li><a href="https://github.com/XiaoBaiiiiii/colmap-pcd">XiaoBaiiiiii/colmap-pcd</a></li>
+  <li><a href="https://github.com/MIT-SPARK/Loc-NeRF">MIT-SPARK/Loc-NeRF</a></li>
+  <li><a href="https://github.com/lijx10/DeepI2P">lijx10/DeepI2P</a></li>
+  <li><a href="https://github.com/TencentYoutuResearch/NeRF-Loc">TencentYoutuResearch/NeRF-Loc</a></li>
+</ol>
+
+<h3 id="里程计定位">里程计定位</h3>
+
+<ol>
+  <li><a href="https://github.com/cggos/imu_x_fusion">cggos/imu_x_fusion</a></li>
+  <li><a href="https://github.com/2013fangwentao/Multi_Sensor_Fusion">2013fangwentao/Multi_Sensor_Fusion</a></li>
+  <li><a href="https://github.com/MapIV/eagleye">MapIV/eagleye</a></li>
+  <li><a href="https://github.com/i2Nav-WHU/KF-GINS">i2Nav-WHU/KF-GINS</a></li>
+  <li><a href="https://github.com/karanchawla/GPS_IMU_Kalman_Filter">karanchawla/GPS_IMU_Kalman_Filter</a></li>
+  <li><a href="https://github.com/zm0612/eskf-gps-imu-fusion">zm0612/eskf-gps-imu-fusion</a></li>
+  <li><a href="https://github.com/ydsf16/imu_gps_localization">ydsf16/imu_gps_localization</a></li>
+  <li><a href="https://github.com/i2Nav-WHU/OB_GINS">i2Nav-WHU/OB_GINS</a></li>
+  <li><a href="https://github.com/i2Nav-WHU/IC-GVINS">i2Nav-WHU/IC-GVINS</a></li>
+  <li><a href="https://github.com/RossHartley/invariant-ekf">RossHartley/invariant-ekf</a></li>
+  <li><a href="https://github.com/libing64/pose_ekf">libing64/pose_ekf</a></li>
+  <li><a href="https://github.com/udacity/robot_pose_ekf">udacity/robot_pose_ekf</a></li>
+  <li><a href="https://github.com/i2Nav-WHU/Wheel-INS">i2Nav-WHU/Wheel-INS</a></li>
+  <li><a href="https://github.com/ros-planning/robot_pose_ekf">ros-planning/robot_pose_ekf</a></li>
+  <li><a href="https://github.com/rsasaki0109/kalman_filter_localization">rsasaki0109/kalman_filter_localization</a></li>
+  <li><a href="https://github.com/ethz-asl/odom_predictor">ethz-asl/odom_predictor</a></li>
+  <li><a href="https://github.com/EliaTarasov/ESKF">EliaTarasov/ESKF</a></li>
+  <li><a href="https://github.com/Guo-ziwei/fusion">Guo-ziwei/fusion</a></li>
+  <li><a href="https://github.com/ChangwuLiu/InGVIO">ChangwuLiu/InGVIO</a></li>
+  <li><a href="https://github.com/i2Nav-WHU/FF-LINS">i2Nav-WHU/FF-LINS</a></li>
+  <li><a href="https://github.com/nadiawangberg/imu_to_odom">nadiawangberg/imu_to_odom</a></li>
+  <li><a href="https://github.com/Shelfcol/gps_imu_fusion">Shelfcol/gps_imu_fusion</a></li>
+  <li><a href="https://github.com/Fixit-Davide/imu_zupt">Fixit-Davide/imu_zupt</a></li>
+  <li><a href="https://github.com/Arcanain/eskf_localization">Arcanain/eskf_localization</a></li>
+  <li><a href="https://github.com/chennuo0125-HIT/imu_gps_fusion">chennuo0125-HIT/imu_gps_fusion</a></li>
+  <li><a href="https://github.com/weihsinc/robot_localization">weihsinc/robot_localization</a></li>
+  <li><a href="https://github.com/MapIV/hawkeye">MapIV/hawkeye</a></li>
+  <li><a href="https://github.com/LimHaeryong/eskf-gnss-imu-localization">LimHaeryong/eskf-gnss-imu-localization</a></li>
+</ol>
+
+<h3 id="基于路标定位">基于路标定位</h3>
+
+<ol>
+  <li><a href="https://github.com/berndpfrommer/tagslam">berndpfrommer/tagslam</a></li>
+  <li><a href="https://github.com/ydsf16/aruco_ekf_slam">ydsf16/aruco_ekf_slam</a></li>
+  <li><a href="https://github.com/UbiquityRobotics/fiducials">UbiquityRobotics/fiducials</a></li>
+</ol>
+
+<h3 id="gnss数据处理">GNSS数据处理</h3>
+
+<ol>
+  <li><a href="https://github.com/qgis/QGIS">qgis/QGIS</a></li>
+  <li><a href="https://github.com/tomojitakasu/RTKLIB">tomojitakasu/RTKLIB</a></li>
+  <li><a href="https://github.com/rtklibexplorer/RTKLIB">rtklibexplorer/RTKLIB</a></li>
+  <li><a href="https://github.com/weisongwen/GraphGNSSLib">weisongwen/GraphGNSSLib</a></li>
+  <li><a href="https://github.com/Erensu/ignav">Erensu/ignav</a></li>
+  <li><a href="https://github.com/chichengcn/gici-open">chichengcn/gici-open</a></li>
+  <li><a href="https://github.com/rtklibexplorer/rtklib-py">rtklibexplorer/rtklib-py</a></li>
+  <li><a href="https://github.com/HKUST-Aerial-Robotics/gnss_comm">HKUST-Aerial-Robotics/gnss_comm</a></li>
+  <li><a href="https://github.com/sgl-ut/gnsstk">sgl-ut/gnsstk</a></li>
+  <li><a href="https://github.com/Stanford-NavLab/gnss_lib_py">Stanford-NavLab/gnss_lib_py</a></li>
+  <li><a href="https://github.com/sgl-ut/gnsstk-apps">sgl-ut/gnsstk-apps</a></li>
+  <li><a href="https://github.com/eagletrt/gpslib">eagletrt/gpslib</a></li>
+</ol>
+
+<h3 id="协同slam">协同SLAM</h3>
+
+<ol>
+  <li><a href="https://github.com/MISTLab/Swarm-SLAM">MISTLab/Swarm-SLAM</a></li>
+  <li><a href="https://github.com/VIS4ROB-lab/covins">VIS4ROB-lab/covins</a></li>
+  <li><a href="https://github.com/hrnr/m-explore">hrnr/m-explore</a></li>
+  <li><a href="https://github.com/NeBula-Autonomy/LAMP">NeBula-Autonomy/LAMP</a></li>
+  <li><a href="https://github.com/MaverickPeter/MR_SLAM">MaverickPeter/MR_SLAM</a></li>
+  <li><a href="https://github.com/RobustFieldAutonomyLab/DiSCo-SLAM">RobustFieldAutonomyLab/DiSCo-SLAM</a></li>
+  <li><a href="https://github.com/PengYu-Team/DCL-SLAM">PengYu-Team/DCL-SLAM</a></li>
+  <li><a href="https://github.com/CogRob/distributed-mapper">CogRob/distributed-mapper</a></li>
+  <li><a href="https://github.com/hku-mars/Swarm-LIO2">hku-mars/Swarm-LIO2</a></li>
+  <li><a href="https://github.com/jpl-x/x_multi_agent">jpl-x/x_multi_agent</a></li>
+  <li><a href="https://github.com/csiro-robotics/Forest_Localisation">csiro-robotics/Forest_Localisation</a></li>
+  <li><a href="https://github.com/gingineer95/Multi-Robot-Exploration-and-Map-Merging">gingineer95/Multi-Robot-Exploration-and-Map-Merging</a></li>
+</ol>
+
+<h3 id="avp">AVP</h3>
+
+<ol>
+  <li><a href="https://github.com/liuguitao/AVP-SLAM-PLUS">liuguitao/AVP-SLAM-PLUS</a></li>
+  <li><a href="https://github.com/TurtleZhong/AVP-SLAM-SIM">TurtleZhong/AVP-SLAM-SIM</a></li>
+  <li><a href="https://github.com/JokerEyeAdas/AdasSourrondView">JokerEyeAdas/AdasSourrondView</a></li>
+</ol>
+
+<h2 id="仿真环境">仿真环境</h2>
+
+<ol>
+  <li><a href="https://github.com/microsoft/AirSim">microsoft/AirSim</a></li>
+  <li><a href="https://github.com/carla-simulator/carla">carla-simulator/carla</a></li>
+  <li><a href="https://github.com/eclipse/sumo">eclipse/sumo</a></li>
+  <li><a href="https://github.com/ucla-mobility/OpenCDA">ucla-mobility/OpenCDA</a></li>
+  <li><a href="https://github.com/MRPT/mvsim">MRPT/mvsim</a></li>
+  <li><a href="https://github.com/SimX-Research/Simx-Simulator">SimX-Research/Simx-Simulator</a></li>
+</ol>
+
+<h2 id="可通行区域">可通行区域</h2>
+
+<ol>
+  <li><a href="https://github.com/leggedrobotics/traversability_estimation">leggedrobotics/traversability_estimation</a></li>
+  <li><a href="https://github.com/TixiaoShan/traversability_mapping">TixiaoShan/traversability_mapping</a></li>
+  <li><a href="https://github.com/suchetanrs/traversability_mapping">suchetanrs/traversability_mapping</a></li>
+</ol>
+
+<h2 id="轨迹规划">轨迹规划</h2>
+
+<ol>
+  <li><a href="https://github.com/mit-acl/faster">mit-acl/faster</a></li>
+  <li><a href="https://github.com/sikang/mpl_ros">sikang/mpl_ros</a></li>
+  <li><a href="https://github.com/HKUST-Aerial-Robotics/EPSILON">HKUST-Aerial-Robotics/EPSILON</a></li>
+  <li><a href="https://github.com/LiJiangnanBit/path_optimizer">LiJiangnanBit/path_optimizer</a></li>
+  <li><a href="https://github.com/sikang/motion_primitive_library">sikang/motion_primitive_library</a></li>
+  <li><a href="https://github.com/LiJiangnanBit/path_optimizer_2">LiJiangnanBit/path_optimizer_2</a></li>
+  <li><a href="https://github.com/LiJiangnanBit/path_optimizer_ilqr">LiJiangnanBit/path_optimizer_ilqr</a></li>
+  <li><a href="https://github.com/naturerobots/mesh_navigation">naturerobots/mesh_navigation</a></li>
+  <li><a href="https://github.com/mit-acl/mader">mit-acl/mader</a></li>
+  <li><a href="https://github.com/KailinTong/Motion-Planning-for-Mobile-Robots">KailinTong/Motion-Planning-for-Mobile-Robots</a></li>
+  <li><a href="https://github.com/leggedrobotics/se2_navigation">leggedrobotics/se2_navigation</a></li>
+  <li><a href="https://github.com/tesseract-robotics/trajopt">tesseract-robotics/trajopt</a></li>
+  <li><a href="https://github.com/ethz-asl/nbvplanner">ethz-asl/nbvplanner</a></li>
+  <li><a href="https://github.com/ZJU-FAST-Lab/Dftpav">ZJU-FAST-Lab/Dftpav</a></li>
+  <li><a href="https://github.com/ArghyaChatterjee/gps-waypoint-based-autonomous-navigation-in-ros">ArghyaChatterjee/gps-waypoint-based-autonomous-navigation-in-ros</a></li>
+  <li><a href="https://github.com/libai1943/CartesianPlanner">libai1943/CartesianPlanner</a></li>
+  <li><a href="https://github.com/LIJUNCHENG001/multi_robot_traj_planner">LIJUNCHENG001/multi_robot_traj_planner</a></li>
+  <li><a href="https://github.com/zm0612/Minimum-Snap">zm0612/Minimum-Snap</a></li>
+  <li><a href="https://github.com/SS47816/fiss_planner">SS47816/fiss_planner</a></li>
+  <li><a href="https://github.com/qwerty35/swarm_simulator">qwerty35/swarm_simulator</a></li>
+  <li><a href="https://github.com/aeksiri/forklift">aeksiri/forklift</a></li>
+</ol>
+
+<h2 id="控制">控制</h2>
+
+<ol>
+  <li><a href="https://github.com/ethz-adrl/control-toolbox">ethz-adrl/control-toolbox</a></li>
+  <li><a href="https://github.com/loco-3d/crocoddyl">loco-3d/crocoddyl</a></li>
+  <li><a href="https://github.com/pettni/smooth_feedback">pettni/smooth_feedback</a></li>
+</ol>
+
+  </div>
+
+  
+  
+<script src="https://utteranc.es/client.js"
+        repo="zxl19/zxl19.github.io"
+        issue-term="title"
+        label="comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
+
+  
+</article>
+
+<div class="pagination">
+  
+    <span class="prev" >
+      <a href="http://localhost:4000/HomePage/figure-plot/">
+        ← 上一篇
+      </a>
+    </span>
+  
+  
+    <span class="next" >
+      <a href="http://localhost:4000/HomePage/awesome-list/">
+        下一篇 →
+      </a>
+    </span>
+  
+</div>
+      </div>
+    </div>
+
+    
+
+  </body>
+
+  
+  <script>
+    document.getElementById("main").classList.add("withtoc");
+  </script>
+  
+
+  <div class="wrapper-footer-mobile">
+    <footer class="footer">
+      <!-- Refer to https://codepen.io/ruandre/pen/howFi -->
+<ul class="svg-icon">
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li><a href="https://github.com/zxl19" class="icon-13 github" title="GitHub"><svg viewBox="0 0 512 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg><!--[if lt IE 9]><em>GitHub</em><![endif]--></a></li>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</ul>
+
+
+
+<p>Copyright © 2020-2025 zxl19. All Rights Reserved.</p>
+
+    </footer>
+
+
+</html>
