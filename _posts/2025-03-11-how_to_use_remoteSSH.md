@@ -1,5 +1,5 @@
 ---
-title: 'how_to_use_remoteSSH'
+title: '如何使用远程SSH连接'
 lang: zh-CN
 date: 2025-03-11
 author: pepper
@@ -7,80 +7,124 @@ permalink: /posts/2025/03/how_to_use_remoteSSH/
 pinned: false
 toc: true
 tags:
-  - ssh
-  - sever
+   - ssh
+   - server
 ---
-这篇博客介绍了如何在Ubuntu系统和路由器的局域网连接中，配置路由器的端口转发服务。
+
+这篇博客介绍了如何在Ubuntu系统和路由器的局域网连接中，配置路由器的端口转发服务，实现远程SSH访问。
+
 <!-- more -->
 
 ## 1. 配置路由器的端口转发服务
 
-1. 首先ubuntu和路由器有一个局域的连接，路由器是大的，ubuntu电脑插到路由器上面，大的路由器会分配一个小的ip给到ubuntu，一般开头都是`192.168.xx.xx`,如果我在实验室里，因为全部都是在路由器的局域网下面，所以可以通过`192.168`来访问，但是由于学校又是一个再大一点的局域网，下面包裹着我的路由器，所以我在图书馆访问的时候就要访问路由器的`58.xx`开头的那个ip。
-2. 打开 华为路由的ip：`http://192.168.3.1/` 这个应该每个人都一样，输入的密码就是wifi密码
+### 1.1 网络拓扑说明
+
+Ubuntu电脑通过路由器连接到局域网,路由器会分配一个内网IP(通常是`192.168.xx.xx`)。
+
+- **实验室内访问**: 同一路由器局域网下,可直接使用内网IP(`192.168.xx.xx`)访问
+- **校园网访问**: 路由器本身也在学校更大的局域网中,需要使用路由器的公网IP(`58.xx.xx.xx`)访问
+
+### 1.2 配置步骤
+
+1. **登录路由器管理页面**
+    - 访问华为路由器管理地址: `http://192.168.3.1/`
+    - 使用WiFi密码登录
+
+    <p align="center">
+       <img src="https://virginia-pepper.oss-cn-guangzhou.aliyuncs.com/img/blog/202503111029348.png" style="zoom:23%;" />
+    </p>
+
+2. **查看终端信息**
+
+    查看连接到路由器的设备及其内网IP地址(支持有线和WiFi设备)
+
+    <p align="center">
+       <img src="https://virginia-pepper.oss-cn-guangzhou.aliyuncs.com/img/blog/202503111029748.png" alt="终端信息" style="zoom:30%;" />
+    </p>
+
+3. **配置端口转发**
+
+    端口转发的作用是将路由器下某个设备的指定端口映射到路由器的公网端口,使得外网可以访问内网设备。
+
+    <p align="center">
+       <img src="https://virginia-pepper.oss-cn-guangzhou.aliyuncs.com/img/blog/202503111031263.png" alt="端口映射" width="400" style="display: inline-block; margin-right: 10px;">
+       <img src="https://virginia-pepper.oss-cn-guangzhou.aliyuncs.com/img/blog/202503111031402.png" alt="端口触发" width="500" style="display: inline-block;">
+    </p>
+
+4. **配置详细信息**
+
+    **重要提示**:
+    - 需要在Ubuntu防火墙中开放SSH端口(22)或远程桌面端口(3389)
+    - 否则会导致连接失败
+
+    <p align="center">
+       <img src="https://virginia-pepper.oss-cn-guangzhou.aliyuncs.com/img/blog/202503111031182.png" alt="端口配置" style="zoom:20%;" />
+    </p>
+
+### 1.3 端口开放实例: TensorBoard可视化
+
+在模型训练时,TensorBoard默认运行在`localhost:6006`,需要通过以下方式远程访问:
+
+**方法1: 局域网内访问**
+
+在同一路由器WiFi下,使用命令开放端口:
+
+```bash
+tensorboard --logdir libcity/ --host 0.0.0.0
+```
+
+然后通过内网IP(`192.168.xx.xx:6006`)访问
 
 <p align="center">
-  <img src="https://virginia-pepper.oss-cn-guangzhou.aliyuncs.com/img/blog/202503111029348.png" style="zoom:23%;" />
+   <img src="https://virginia-pepper.oss-cn-guangzhou.aliyuncs.com/img/blog/202503122135974.png" alt="局域网访问" style="zoom:35%;" />
 </p>
 
-   3. 查看自己的终端信息：此处展示的只是有线连接，其实可以看到wifi连接的设备
+**方法2: 校园网访问**
 
-      <p align="center">
-       <img src="https://virginia-pepper.oss-cn-guangzhou.aliyuncs.com/img/blog/202503111029748.png" alt="image-20250311102945687" style="zoom:30%;" />
-      </p>
+在路由器管理页面配置端口映射,将内网6006端口映射到路由器公网端口,然后通过路由器公网IP(`59.xx.xx.xx:6006`)访问
 
-   4. 在这里可以设置端口转发服务，我的理解是，把路由器下设备1的端口1，暴露出来作为路由器本身的端口2来访问，因为设备1无法在学校wifi下检索到，但是路由器归属学校wifi管理。我也不是很懂这里有端口映射和端口触发，反正我是全部配置了一下。
+<p align="center">
+   <img src="https://virginia-pepper.oss-cn-guangzhou.aliyuncs.com/img/blog/202503122128505.png" alt="校园网访问" style="zoom: 25%;" />
+</p>
 
-   <p align="center">
-     <img src="https://virginia-pepper.oss-cn-guangzhou.aliyuncs.com/img/blog/202503111031263.png" alt="image-20250311103113189" alt="Image 1" width="400" style="display: inline-block; margin-right: 10px;">
-     <img src="https://virginia-pepper.oss-cn-guangzhou.aliyuncs.com/img/blog/202503111031402.png" alt="image-20250311103124337"  alt="Image 2" width="500" style="display: inline-block;">
-   </p>
+## 2. VSCode远程SSH配置
 
-   5. 详细编辑信息如下
+### 2.1 权限配置
 
-    `注意打开自己电脑的3389端口或者22端口
-   `
+确保远程用户具有足够的读写权限,否则无法编辑文件。
 
-   `主要是ubuntu需要在防火墙打开这个端口，不然一直报错都不知道是什么原因`
+### 2.2 配置步骤
 
-   <img src="https://virginia-pepper.oss-cn-guangzhou.aliyuncs.com/img/blog/202503111031182.png" alt="image-20250311103153133" style="zoom:20%;" />
+1. **安装插件**
 
-### 1.1 有趣的端口开放
+    在VSCode中安装`Remote - SSH`插件
 
-- 模型训练的时候为了查看tensorboard的可视化效果，由于ubuntu打开的是localhost:6006
+2. **编辑SSH配置文件**
 
-  - 方法1 ： 如果只是同一个路由器的wifi下面，我可以直接使用命令行：
+    编辑`~/.ssh/config`文件(注意是config文件,不是config.txt):
 
-     ​  `tensorboard --logdir libcity/ --host 0.0.0.0`
+    ```bash
+    touch config  # 创建文件
+    vim config    # 编辑文件
+    ```
 
-      此处访问192.168.xxx即可
+    配置内容示例:
 
-     <p align="center">
-     <img src="https://virginia-pepper.oss-cn-guangzhou.aliyuncs.com/img/blog/202503122135974.png" alt="image-20250312213516786" style="zoom:35%;" />
-     </p>
+    ```
+    Host 59.xx.xx.xx
+          HostName 59.xx.xx.xx
+          User root
+          Port 8001
+    ```
 
-  - 方法2: 如果我在图书馆，即我只是在学校的大wifi下面，我还是需要在路由器上面映射端口6006出来
+    **参数说明**:
+    - `Host`: 连接别名
+    - `HostName`: 路由器公网IP
+    - `User`: 远程用户名
+    - `Port`: 映射后的路由器端口
 
-     此处我就可以访问 59.xxx开头的ip进行访问啦！
-
-     <p align="center">
-        <img src="https://virginia-pepper.oss-cn-guangzhou.aliyuncs.com/img/blog/202503122128505.png" alt="image-20250312212834388" style="zoom: 25%;" />
-     </p>
-
-## 2. vscode里面远程仓库环境
-
-1. 需要注意远程用户的读写权利，不然尽管远程了都没办法写入文件。
-
-2. Vscode 下载插件remote-ssh服务，然后需要先将远程环境的信息写入config文件中：
-   1. 在 SSH 配置文件 (~/.ssh/config) 中添加端口信息
-      - 这里需要注意就是config文件，不是config.txt也不是config文件夹，直接用`touch config` 或者`vim config` 。 其中下面的hostname是电脑ip，user是登陆名字，这里注意权限问题就好。因为我是局域网暴露了路由器下的用户端口，所以需要额外指定为路由器的端口，比如8001、8002。
-
-        ```shell
-        Host 59.xx.xx.xx
-                HostName 59.xx.xx.xxx
-                User root
-                Port xxxx                    
-        ```
-
-<img src="https://virginia-pepper.oss-cn-guangzhou.aliyuncs.com/img/blog/202503111032822.png" alt="image" style="display: block; margin: 0 auto; zoom:30%;" />
+    <p align="center">
+       <img src="https://virginia-pepper.oss-cn-guangzhou.aliyuncs.com/img/blog/202503111032822.png" alt="SSH配置" style="zoom:30%;" />
+    </p>
 
 ---
