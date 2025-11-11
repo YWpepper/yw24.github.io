@@ -120,6 +120,13 @@ kramdown:
 sass:
   style: :expanded # You might prefer to minify using :compressed
 
+# Include .tex files as part of the site
+include:
+  - _posts/*.tex
+
+# Markdown extensions - allow .tex files to be processed
+markdown_ext: "markdown,mkdown,mkdn,mkd,md,tex"
+
 # Use the following plug-ins
 plugins:
   - jekyll-sitemap # Create a sitemap using the official Jekyll sitemap gem

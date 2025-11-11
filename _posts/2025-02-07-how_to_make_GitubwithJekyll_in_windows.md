@@ -36,25 +36,25 @@ Ruby类似脚本语言，而Jekyll，作为Ruby的明星项目之一，是一款
 
 2. Ruby 版本稳定后，就可以安裝 Jekyll 了
   
-    ```plain&#x20;text
+    ```bash
     gem install jekyll 
     ```
 
 3. 安装bundler
 
-    ```plain&#x20;text
+    ```bash
     gem install bundler
     ```
 
 4. 安装配置文件的需要
 
-    ```plain&#x20;text
+    ```bash
      bundle install
     ```
 
 5. 直接运行
 
-    ```plain&#x20;text
+    ```bash
     bundle exec jekyll server
     ```
 
@@ -74,26 +74,26 @@ Ruby类似脚本语言，而Jekyll，作为Ruby的明星项目之一，是一款
 
 * 更新 Ruby 和 Bundler
 
-    ```plain&#x20;text
+    ```bash
     gem update --system
     gem install bundle
     ```
 
 * 清除 Bundler 缓存
 
-    ```plain&#x20;text
+    ```bash
     bundle clean --force
     ```
 
 * 查看 Jekyll 日志
 
-    ```plain&#x20;text
+    ```bash
     jekyll build --trace
     ```
 
 * 检查 Gemfile 和 Gemfile.lock
 
-    ```plain&#x20;text
+    ```bash
     ## 确保 Gemfile 和 Gemfile.lock 文件没有冲突。
     ## 如果需要，可以尝试删除 Gemfile.lock 并重新运行 bundle install：
     rm Gemfile.lock
@@ -102,14 +102,14 @@ Ruby类似脚本语言，而Jekyll，作为Ruby的明星项目之一，是一款
 
 * 强制删除下载失败的安装包，需要打开cmd的管理员模式
 
-    ```plain&#x20;text
+    ```bash
     # 自己更换路径
     rd /s /q E:\Ruby31\lib\ruby\gems\3.1.0\gems\nokogiri-1.18.2
     ```
 
 * 修改编译器标志
 
-      ```plain&#x20;text
+      ```bash
       ## 有时，编译器标志可能会导致这些问题。
       ## 您可以尝试在安装 gem 时添加编译器标志来忽略某些警告。例如：
       gem install wdm -- --with-cflags="-Wno-error=implicit-function-declaration"
@@ -117,7 +117,7 @@ Ruby类似脚本语言，而Jekyll，作为Ruby的明星项目之一，是一款
 
 * 启动Ruby安装程序
 
-      ```plain&#x20;text
+      ```bash
       # 似乎可以用来更新某些安装包        
       ridk install
       ```
@@ -150,7 +150,7 @@ Ruby类似脚本语言，而Jekyll，作为Ruby的明星项目之一，是一款
 
 修改后的配置文件:
 
-``` plain&#x20;text
+``` bash
     source "https://rubygems.org"
     gem 'tzinfo'
     gem 'tzinfo-data'
@@ -171,7 +171,7 @@ Ruby类似脚本语言，而Jekyll，作为Ruby的明星项目之一，是一款
 
 ruby镜像地址：<https://index.ruby-china.com/>
 
-```plain&#x20;text
+```bash
 bundle config mirror.https://rubygems.org https://gems.ruby-china.com/
 ## 或者清华镜像
 bundle config mirror.https://rubygems.org https://mirrors.tuna.tsinghua.edu.cn/rubygems/
@@ -179,7 +179,7 @@ bundle config mirror.https://rubygems.org https://mirrors.tuna.tsinghua.edu.cn/r
 
 设置完成后，可以运行以下命令来验证是否已成功更改镜像源：
 
-``` plain&#x20;text
+``` bash
 bundle config
 ```
 

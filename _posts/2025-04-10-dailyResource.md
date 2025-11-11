@@ -11,7 +11,7 @@ tags:
 <!-- more -->
 ---
 
-##### 常见的日常积累小技巧
+## 1 常见的日常积累小技巧
 
 1. mac 电脑外接显示屏
   对于屏幕分辨率的问题，其中较好的一个仓库软件叫做betterdisaplay，可以用来调整刷新赫兹以及分辨率，但是要注意下载符合mac的系统版本的软件；
@@ -56,7 +56,7 @@ function ConnectButton(){
 setInterval(ConnectButton,60000);
 ```
 
-#### 2. 后台进程管理方案
+## 2. 后台进程管理方案
 
 - 使用nohup持久运行
 `nohup python -u run_script.py > script.log 2>&1 &`
