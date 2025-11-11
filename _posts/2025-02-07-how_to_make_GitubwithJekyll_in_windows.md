@@ -30,7 +30,7 @@ Ruby类似脚本语言，而Jekyll，作为Ruby的明星项目之一，是一款
 
   4. **开源项目展示**：利用Jekyll的插件系统，集成GitHub等开源平台，展示开源项目和个人贡献。
 
-## **上手步骤**
+## 上手步骤
 
 1. 下载ruby+devkit
 
@@ -58,7 +58,7 @@ Ruby类似脚本语言，而Jekyll，作为Ruby的明星项目之一，是一款
     bundle exec jekyll server
     ```
 
-## **官网资源**
+## 官网资源
 
   1. 下载Ruby [官网link](https://rubyinstaller.org/) [下载link](https://rubyinstaller.org/downloads/) DevKit 是一个为 Windows 平台提供编译功能的工具集
 
@@ -70,7 +70,7 @@ Ruby类似脚本语言，而Jekyll，作为Ruby的明星项目之一，是一款
 
   2. Ruby的函数打包下载器叫做 Gem,类似python和conda中的pip，或者一些叫做npm，apt-get等等。 <https://rubygems.org/> 以及镜像 <https://index.ruby-china.com/>
 
-## **常见命令**
+## 常见命令
 
 * 更新 Ruby 和 Bundler
 
