@@ -21,6 +21,8 @@ pinned: false
 | Video-Text as Game Players: Hierarchical Banzhaf Interaction for Cross-Modal Representation Learning ([代码](https://github.com/jpthu17/HBI), [论文](https://arxiv.org/pdf/2303.14369)) | 提出了基于多变量合作博弈论和 Banzhaf 交互的 HBI 模型。核心是对比学习（Contrastive Learning）和网络架构设计（Token 合并模块），以及博弈论概念的应用。对比学习属于自监督学习范畴。 | 2023 CVPR |
 | Cross-Modal Causal Relational Reasoning for Event-Level Visual Question Answering ([代码](https://github.com/HCPLab-SYSU/CMCIR), [论文](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10146482)) | 通过引入因果推断（Causal Inference）的机制，来解决现有视觉问答（VQA）模型在事件级（Event-Level）任务中存在的跨模态虚假相关性（spurious correlations）和对事件动态理解不足的问题，从而实现更鲁棒、更具因果意识的推理 | 2023-IEEE |
 | Discovering the Real Association: Multimodal Causal Reasoning in Video Question Answering | 它超越了传统视频问答（VideoQA）的统计关联范式，将因果推理（Causal Reasoning）引入多模态领域。通过提出一个基于因果表示的框架，该方法能够显式地发现视频和文本模态之间真正的、稳定的因果关联（Real Association），从而有效地消除数据中普遍存在的视觉冗余和文本局部性的虚假相关性（Spurious Correlations）。 | 2023 CVPR |
+
+
 ## 起源
 
 ### 交通事件认知与推理
@@ -32,7 +34,7 @@ pinned: false
 项目页面：[https://github.com/SUTDCV/SUTD-TrafficQA](https://github.com/SUTDCV/SUTD-TrafficQA)
 
 ## 其他模型-可精读
-### FinRpt
+### FinRpt模型
 FinRpt:Dataset, Evaluation System and LLM-based Multi-agent Framework for Equity Research Report Generation  
 [论文](https://arxiv.org/pdf/2511.07322) [代码](https://github.com/jinsong8/FinRpt) 
 
