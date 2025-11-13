@@ -12,29 +12,27 @@ pinned: false
 这篇博客介绍了交通隐患大模型的研究。
 
 ## 参考仓库
+## 参考仓库
+
 | **论文** | **概述** | **年份** |
-| --- | --- | --- |
-| SUTD-TrafficQA: A Question Answering Benchmark and an Efficient Network for Video Reasoning over Traffic Events<br/><br/>该论文[被引用的列表](https://scholar.google.com/scholar?start=0&hl=zh-CN&as_sdt=2005&sciodt=0,5&cites=13846762936798544230&scipsc=) | <font style="color:rgb(27, 28, 29);">一个视频问答数据集和一个名为 Eclipse 的高效一瞥网络（Efficient glimpse network）侧重于因果推理和事件理解模型（主要是监督学习和网络架构设计）。</font> | 2021 |
-| MAPLM: A Real-World Large-ScaleVision-Language Benchmark forMap and Traffic Scene Understanding   [代码](http://github.com/LLVM-AD/MAPLM) | <font style="color:rgb(27, 28, 29);">一个用于自动驾驶和 HD 地图的多模态视觉-语言基准，侧重于数据构建和使用 CLIP/LLaMA-2 等进行视觉指令微调（visual instruction-tuning），这是一种监督或自监督学习范式。</font> | 2024 CVPR |
-| <font style="color:rgb(27, 28, 29);">Video-Text as Game Players: Hierarchical Banzhaf Interaction for Cross-Modal Representation Learning</font><br/>[代码](https://github.com/jpthu17/HBI) [论文](https://arxiv.org/pdf/2303.14369) | <font style="color:rgb(27, 28, 29);">提出了基于多变量合作博弈论和 Banzhaf 交互的 HBI 模型。核心是对比学习（Contrastive Learning）和网络架构设计（Token 合并模块），以及博弈论概念的应用。对比学习属于自监督学习范畴。</font> | 2023 CVPR |
-| <font style="color:rgb(27, 28, 29);">Cross-Modal Causal Relational Reasoning for Event-Level Visual Question Answering</font>         [代码](https://github.com/HCPLab-SYSU/CMCIR) [论文](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10146482)  | <font style="color:rgb(27, 28, 29);">通过引入因果推断（Causal Inference）的机制，来解决现有视觉问答（VQA）模型在事件级（Event-Level）任务中存在的跨模态虚假相关性（spurious correlations）和对事件动态理解不足的问题，从而实现更鲁棒、更具因果意识的推理</font> | 2023-IEEE |
-| Discovering the Real Association: Multimodal Causal Reasoning in Video Question Answering   | <font style="color:rgb(27, 28, 29);">它超越了传统视频问答（VideoQA）的统计关联范式，将因果推理（Causal Reasoning）引入多模态领域通过提出一个基于因果表示的框架，该方法能够显式地发现视频和文本模态之间真正的、稳定的因果关联（Real Association），从而有效地消除数据中普遍存在的视觉冗余（如无关物体）和文本局部性（如忽略全局语义）的虚假相关性（Spurious Correlations）。</font> | 2023 CVPR |
-|  |  | - |
-|  |  | - |
-| **因果表示的论文** | | |
-|  |  | - |
+|----------|----------|----------|
+| [SUTD-TrafficQA: A Question Answering Benchmark and an Efficient Network for Video Reasoning over Traffic Events](https://scholar.google.com/scholar?start=0&hl=zh-CN&as_sdt=2005&sciodt=0,5&cites=13846762936798544230&scipsc=) | 一个视频问答数据集和一个名为 Eclipse 的高效一瞥网络（Efficient glimpse network）侧重于因果推理和事件理解模型（主要是监督学习和网络架构设计）。 | 2021 |
+| MAPLM: A Real-World Large-Scale Vision-Language Benchmark for Map and Traffic Scene Understanding ([代码](http://github.com/LLVM-AD/MAPLM)) | 一个用于自动驾驶和 HD 地图的多模态视觉-语言基准，侧重于数据构建和使用 CLIP/LLaMA-2 等进行视觉指令微调（visual instruction-tuning），这是一种监督或自监督学习范式。 | 2024 CVPR |
+| Video-Text as Game Players: Hierarchical Banzhaf Interaction for Cross-Modal Representation Learning ([代码](https://github.com/jpthu17/HBI), [论文](https://arxiv.org/pdf/2303.14369)) | 提出了基于多变量合作博弈论和 Banzhaf 交互的 HBI 模型。核心是对比学习（Contrastive Learning）和网络架构设计（Token 合并模块），以及博弈论概念的应用。对比学习属于自监督学习范畴。 | 2023 CVPR |
+| Cross-Modal Causal Relational Reasoning for Event-Level Visual Question Answering ([代码](https://github.com/HCPLab-SYSU/CMCIR), [论文](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10146482)) | 通过引入因果推断（Causal Inference）的机制，来解决现有视觉问答（VQA）模型在事件级（Event-Level）任务中存在的跨模态虚假相关性（spurious correlations）和对事件动态理解不足的问题，从而实现更鲁棒、更具因果意识的推理 | 2023-IEEE |
+| Discovering the Real Association: Multimodal Causal Reasoning in Video Question Answering | 它超越了传统视频问答（VideoQA）的统计关联范式，将因果推理（Causal Reasoning）引入多模态领域。通过提出一个基于因果表示的框架，该方法能够显式地发现视频和文本模态之间真正的、稳定的因果关联（Real Association），从而有效地消除数据中普遍存在的视觉冗余和文本局部性的虚假相关性（Spurious Correlations）。 | 2023 CVPR |
 
 
 ## 起源
+
 ### 🚘 交通事件认知与推理
-视频中的**交通事件认知与推理**是一项重要的任务，在智能交通、辅助驾驶和自动驾驶等领域有着广泛的应用。在本文中，我们创建了一个新颖的数据集 **SUTD-TrafficQA (Traffic Question Answering)**，该数据集以**视频问答（Video QA）****的形式呈现，基于收集到的 ****10,080 个真实场景（in-the-wild）视频****和注释的 ****62,535 个问答对****，旨在衡量复杂交通场景中****因果推理**和**事件理解**模型的认知能力。
+视频中的**交通事件认知与推理**是一项重要的任务，在智能交通、辅助驾驶和自动驾驶等领域有着广泛的应用。在本文中，我们创建了一个新颖的数据集 **SUTD-TrafficQA (Traffic Question Answering)**，该数据集以**视频问答（Video QA）**的形式呈现，基于收集到的 **10,080 个真实场景（in-the-wild）视频**和注释的 **62,535 个问答对**，旨在衡量复杂交通场景中**因果推理**和**事件理解**模型的认知能力。
 
 + **具体而言**，我们提出了 **6 个具有挑战性的推理任务**，对应不同的交通场景，从而评估模型对各种复杂而实用的交通事件的推理能力。
 + **此外**，我们提出了 **Eclipse**，一个新颖的**通过动态推理实现的有效一瞥网络（Efficient glimpse network via dynamic inference）**，旨在实现计算高效且可靠的视频推理。
 
 项目页面：[https://github.com/SUTDCV/SUTD-TrafficQA](https://github.com/SUTDCV/SUTD-TrafficQA)
 
----
 
 
 ## 其他模型-可精读
