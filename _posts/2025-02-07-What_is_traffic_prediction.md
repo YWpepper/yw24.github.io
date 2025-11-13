@@ -1,5 +1,5 @@
 ---
-title: 'What_is_traffic_prediction'
+title: 'What_is_trafficPrediction'
 lang: zh-CN
 date: 2025-02-07
 author: pepper

@@ -1,5 +1,5 @@
 ---
-title: 'how_to_make_GitubwithJekyll_in_windows'
+title: 'how_to_make_GitubwithJekyllInWindows'
 lang: zh-CN
 date: 2025-02-07
 author: pepper

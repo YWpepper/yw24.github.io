@@ -1,5 +1,5 @@
 ---
-title: 'how_to_ScatterPlots_onMap'
+title: 'how_to_ScatterPlotsOnMap'
 date: 2025-02-28
 author: pepper
 permalink: /posts/2025/02/how_to_ScatterPlots_onMap/

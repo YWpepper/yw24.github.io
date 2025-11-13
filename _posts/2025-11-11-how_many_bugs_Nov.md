@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 'how_many_bugs_Nov'
+title: 'how_many_bugs_nov'
 date: 2025-11-11
 author: pepper
 tags: [Windows, Note]
