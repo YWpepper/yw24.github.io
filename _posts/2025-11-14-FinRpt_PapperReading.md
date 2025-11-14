@@ -171,7 +171,7 @@ $ J_{DAPO}(\theta) \approx \mathbb{E}_{h} \min \left[ r(\theta) \hat{A}, \text{c
 ### Evaluation 评估系统 
 为了全面评估生成的 ERR（股票研究报告），我们设计了一个综合评估系统，它与我们之前构建的 FinRpt 数据集一起，形成了一个完整的基准 (benchmark)。
 
-##### <font style="background-color:#FBF5CB;">Basic Metrics 基本指标 </font>
+##### Basic Metrics 基本指标
 基本指标用于从**文本相似性**和**预测准确性**的角度评估生成的 ERR：
 
 + (1) 完成率 (Completion Rate)： 揭示了该方法成功生成符合所需格式的 ERR 的案例比例。
