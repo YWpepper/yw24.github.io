@@ -18,9 +18,8 @@ pinned: false
 ### Methods
 本工作首次正式定义了 ERR（Equity Research Report，股票研究报告）生成任务。给定一家公司的股票代码 $ s $ 和研究日期 $ t $，**系统自动收集和结构化最近的相关信息**，然后利用这些信息生成一份 ERR $ R $。这种设置复刻了现实世界中研究分析师起草 ERR 的工作流程。在本文中，输入信息源 $ S = [O, F, A, N, P, M] $ 包括公司信息（Company Information）$ O $、财务指标（Financial Indicators）$ F $、公司公告（Company Announcements）$ A $、公司相关新闻（Company-related News）$ N $、历史股价（Historical Stock Prices）$ P $ 和历史市场指数（Historical Market Indices）$ M $。为了定义输出 ERR 的格式，我们总结了尽管各证券公司格式不一，一份理想的公司 ERR 至少应包含 6 个关键部分：财务分析（Financial Analysis）$ R_{fin} $、新闻分析（News Analysis）$ R_{news} $、管理与发展分析（Management and Development Analysis）$ R_{manage} $、风险分析（Risks Analysis）$ R_{risk} $、投资潜力评估（Investment Potential Assessment）$ R_{invest} $ 和建议评级（Recommendation Rating）$ R_{rec} $（建议买入评级或卖出评级）。我们在附录图 6 中展示了一个生成的 ERR 案例。
 
-<div style="text-align: center;">
     <img src="https://images.weserv.nl/?url=cdn.nlark.com/yuque/0/2025/png/40742019/1763087961164-921b6ad2-182c-46bf-8252-1037298ed8ba.png" width="70%" alt="FinRpt Framework Diagram" />
-</div>
+
 
 
 #### Data Collection Module 数据采集模块
@@ -38,7 +37,7 @@ pinned: false
 
 
 
-####  Dataset Construction Pipeline   数据集构建流程  
+#### Dataset Construction Pipeline 数据集构建流程  
 为弥补 ERR 生成任务中数据稀疏性的不足，我们构建了一个 ERR 数据集，该数据集涵盖了中国市场 CSI800（中证 800）指数中的 800 支股票。这些对应的公司通常具有较高的市值，从而确保媒体上存在大量信息。数据范围从 2024 年 9 月 3 日到 2024 年 11 月 5 日，分析日期间隔为一周，每只股票共计有 10 个分析日期。最终，数据集包含 6,825 个数据样本（每个样本包括输入源信息和对应的 ERR）。
 
 **1. 初始数据采集与过滤**
@@ -70,9 +69,8 @@ pinned: false
 + 详细的行业分布统计如图 2 所示。
 
 
-<div style="text-align: center;">
     <img src="https://images.weserv.nl/?url=cdn.nlark.com/yuque/0/2025/png/40742019/1763088808278-6046aeac-df99-4f02-ae3f-3c940f022868.png" width="70%" alt="Industry Distribution Chart" />
-</div>
+
 
 
 图 2：FinRpt 数据集中不同行业报告的比例。
@@ -87,11 +85,10 @@ pinned: false
 ### FinRpt-Gen 框架
 ERR（股票研究报告）生成任务要求模型具备广泛的**金融知识**、**标准化的报告**撰写风格以及出色的逻辑分析和预测能力。在这项工作中，我们提出了 FinRpt-Gen，如图 3 所示，这是首个专门为 ERR 生成任务设计的**多智能体框架**。鉴于已构建的数据集 FinRpt，FinRpt-Gen 包含三个模块：信息**提取**模块 (Information **Extraction** Module)、**分析模**块 (**Analysis** Module) 和**预**测模块 (**Prediction** Module)，共涉及扮演不同角色的九个智能体 (agent)。我们在附录中展示了每个智能体的提示示例。
 
-<div style="text-align: center;">
     <img src="https://images.weserv.nl/?url=cdn.nlark.com/yuque/0/2025/png/40742019/1763088943088-3b33d7c0-9733-4bf2-858e-3ffeea824ae0.png" width="70%" alt="FinRpt-Gen Framework Diagram" />
-</div>
 
-```cpp
+
+```text
 ● 数据采集: 股票代码：600519.SS，分析日期：2024-11-05
 ● 信息提取模块 (Info. Extraction Module)
   ○ 新闻提取智能体 (News Extraction Agent)
@@ -138,7 +135,7 @@ ERR（股票研究报告）生成任务要求模型具备广泛的**金融知识
 
 
 
-###  SFT   监督微调  
+### SFT 监督微调  
 在 FinRpt-Gen 框架内，我们专注于微调**四个最关键的智能体**：财务分析智能体 (Finance Analysis Agent)、新闻分析智能体 (News Analysis Agent)、状态分析智能体 (Status Analysis Agent) 和预测智能体 (Prediction Agent)。这些智能体负责处理生成深入、专业见解的最复杂任务。
 
 我们使用来自 FinRpt 数据集相应部分的示例样本 (demonstration samples)。例如，给定一个数据样本 $ (s, t, S, R) $，对于财务分析智能体，输入是来自收入提取智能体、资产负债提取智能体和现金流提取智能体生成的内容。输出是 $ R $ 中的**财务分析 (**$ R_{fin} $**) 部分**。
@@ -157,14 +154,20 @@ $ \max_{\Delta\theta} \sum_{(X,Y) \in D_{demo}} \log P(Y | X; \theta_0 + \Delta\
 ###### Reward Function 奖励函数 
 首先，我们设计了一个奖励函数 $ Reward(Y, Y^*) $，用于整体评估生成的响应 $ Y = [R_{invest}, R_{rec}] $ 及其基本事实 $ Y^* = [R_{invest}^*, R_{rec}^*] $。该奖励是建议评级 ($ R_{rec} $) 准确性和通过** ROUGE** (Lin 2004) 衡量的投资分析 ($ R_{invest} $) 质量的加权组合。具体定义如下：
 
-$ Reward(Y, Y^*) = \alpha \cdot ACC(R_{rec}, R_{rec}^*) + \beta \cdot \text{ROUGE-1}(R_{invest}, R_{invest}^*) + \gamma \cdot \text{ROUGE-L}(R_{invest}, R_{invest}^*) $
+$$
+Reward(Y, Y^*) = \alpha \cdot ACC(R_{rec}, R_{rec}^*)
+  + \beta \cdot \text{ROUGE-1}(R_{invest}, R_{invest}^*)
+  + \gamma \cdot \text{ROUGE-L}(R_{invest}, R_{invest}^*)
+$$
 
 其中，$ \alpha $、$ \beta $ 和 $ \gamma $ 是平衡每个组成部分重要性的超参数。在我们的配置中，我们将这些参数设置为 $ \alpha = 0.6 $、$ \beta = 0.2 $ 和 $ \gamma = 0.2 $。这种设置旨在优先考虑建议准确性，同时也兼顾分析内容的质量。
 
 ###### DAPO 优化目标
 随后，<u><font style="background-color:#FBF5CB;">DAPO 算法通过最大化裁剪替代目标 (clipped surrogate objective) </font></u>来优化策略 $ \pi_\theta $，这是从<u><font style="background-color:#FBF5CB;">PPO (Proximal Policy Optimization) (Schulman et al. 2017) </font></u><u><font style="background-color:#FBF5CB;">继承</font></u>的原则，以确保训练稳定。该目标可以概念性地表达为：
 
-$ J_{DAPO}(\theta) \approx \mathbb{E}_{h} \min \left[ r(\theta) \hat{A}, \text{clip}(r(\theta), 1 - \epsilon_l, 1 + \epsilon_h) \hat{A} \right] $
+$$
+J_{DAPO}(\theta) \approx \mathbb{E}_{h} \min \left[ r(\theta) \hat{A}, \text{clip}(r(\theta), 1 - \epsilon_l, 1 + \epsilon_h) \hat{A} \right]
+$$
 
 这里，$ r(\theta) $ 是新旧策略之间的概率比率，$ \hat{A} $ 代表生成序列的标准化优势 (standardized advantage)。该目标鼓励提高奖励的更新，同时惩罚较大的策略偏移。完整、详细的公式在附录中提供。
 
@@ -216,9 +219,10 @@ $ \text{Adjusted Win Rate} = \frac{\text{Win Counts} + 0.5 \cdot \text{Tie Count
 #### Basic Metrics 基本指标的主要结果
 我们将 FinRpt-Gen 的性能与强大的基线进行比较，结果如表 1 所示，从中可以得出以下结论：
 
-<div style="text-align: center;">
-    <img src="https://images.weserv.nl/?url=cdn.nlark.com/yuque/0/2025/png/40742019/1763090342595-0bf241b9-6d16-4f19-a253-d5b03dc72be4.png" width="70%" alt="Basic Metrics Results Table" />
-</div>
+  <img src="https://images.weserv.nl/?url=cdn.nlark.com/yuque/0/2025/png/40742019/1763090342595-0bf241b9-6d16-4f19-a253-d5b03dc72be4.png"
+       alt="Basic Metrics Results Table"
+       style="width:70%; height:auto;" />
+
 
 1. <u>多智能体框架 FinRpt-Gen 的性能显著优于单个 LLM</u>，这突出了我们多智能体框架的有效性。
 2. 在**没有 SFT 和 RL** 的情况下，闭源模型 **Gemini-2.5-Pro 和 GPT-4o** 的性能明显优于所选的开源模型。这是一个预期的结果，因为 Gemini-2.5-Pro 和 GPT-4o 被广泛认为是该领域的领先模型。
@@ -228,11 +232,10 @@ $ \text{Adjusted Win Rate} = \frac{\text{Win Counts} + 0.5 \cdot \text{Tie Count
 #### LLM 评估的主要结果 
 基于前面详述的 LLM 评估指标，我们从金融专业性的角度比较了模型的性能。结果如图 4 所示。详细的定量结果可在附录表 5 中找到。
 
-<div style="text-align: center;">
   <img src="https://images.weserv.nl/?url=cdn.nlark.com/yuque/0/2025/png/40742019/1763090552045-16530f29-7b27-4bc9-98e6-f0cc225b61dc.png"
        alt="LLM Evaluation Radar Chart"
        style="width:70%; height:auto;" />
-</div>
+
 
 + 这个雷达图表明，我们训练后的模型取得了与 GPT-4o 相媲美的优异性能，并超越了所有其他强大的基线。
 + 值得注意的是，我们的训练模型在 CMI（公司、市场与行业）、新闻 (News) 和 FN（财务数值） 指标上甚至优于 FinRpt-Gen (GPT-4o)。
@@ -242,8 +245,7 @@ $ \text{Adjusted Win Rate} = \frac{\text{Win Counts} + 0.5 \cdot \text{Tie Count
 #### Resource Requirements Analysis资源需求分析 
 该框架的资源需求极少。从数据抓取 (data crawling) 到报告创建的整个 ERR 生成过程大约在 3 到 4 分钟内完成。有关资源需求的详细分解，包括处理时间和 API 成本，请参阅附录。
 
-<div style="text-align: center;">
     <img src="https://images.weserv.nl/?url=cdn.nlark.com/yuque/0/2025/png/40742019/1763090647063-5da1a9c7-ebc8-4b63-bfee-6533770ae208.png" width="70%" alt="FinRpt-Gen Framework Diagram" />
-</div>
+
 
 ---
