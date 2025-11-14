@@ -229,7 +229,9 @@ $ \text{Adjusted Win Rate} = \frac{\text{Win Counts} + 0.5 \cdot \text{Tie Count
 基于前面详述的 LLM 评估指标，我们从金融专业性的角度比较了模型的性能。结果如图 4 所示。详细的定量结果可在附录表 5 中找到。
 
 <div style="text-align: center;">
-    <img src="https://images.weserv.nl/?url=cdn.nlark.com/yuque/0/2025/png/40742019/1763090552045-16530f29-7b27-4bc9-98e6-f0cc225b61dc.png" width="70%" alt="LLM Evaluation Radar Chart" />
+  <img src="https://images.weserv.nl/?url=cdn.nlark.com/yuque/0/2025/png/40742019/1763090552045-16530f29-7b27-4bc9-98e6-f0cc225b61dc.png"
+       alt="LLM Evaluation Radar Chart"
+       style="width:70%; height:auto;" />
 </div>
 
 + 这个雷达图表明，我们训练后的模型取得了与 GPT-4o 相媲美的优异性能，并超越了所有其他强大的基线。
@@ -240,12 +242,8 @@ $ \text{Adjusted Win Rate} = \frac{\text{Win Counts} + 0.5 \cdot \text{Tie Count
 #### Resource Requirements Analysis资源需求分析 
 该框架的资源需求极少。从数据抓取 (data crawling) 到报告创建的整个 ERR 生成过程大约在 3 到 4 分钟内完成。有关资源需求的详细分解，包括处理时间和 API 成本，请参阅附录。
 
-
 <div style="text-align: center;">
-    <img src="https://images.weserv.nl/?url=cdn.nlark.com/yuque/0/2025/png/40742019/1763090647063-5da1a9c7-ebc8-4b63-bfee-6533770ae208.png" width="70%" alt="Results Comparison Table" />
+    <img src="https://images.weserv.nl/?url=cdn.nlark.com/yuque/0/2025/png/40742019/1763090647063-5da1a9c7-ebc8-4b63-bfee-6533770ae208.png" width="70%" alt="FinRpt-Gen Framework Diagram" />
 </div>
-
-
-
 
 ---
