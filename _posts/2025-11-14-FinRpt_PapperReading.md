@@ -108,31 +108,33 @@ ERR（股票研究报告）生成任务要求模型具备广泛的**金融知识
 
 
 
-##### Information Extraction Module 信息提取模块 
-信息提取模块从给定的输入数据$(s, t, S)$中提取相关信息。该模块涉及四个不同的智能体：
+##### Information Extraction Module 信息提取模块
 
-+ (1) 新闻提取智能体 (News Extraction Agent)： 根据新闻对股票$s$的影响对所提供的新闻文章$N$进行排名，<u>并输出最有可能影响股价的前 10 条新闻</u>。
-+ (2) 收入提取智能体 (Income Extraction Agent)： 给定财务指标$F$中的利润表 (income statement)，<u>提取关键财务指标</u>，例如收入 (revenue)、净利润 (net income)、每股收益 (earnings per share) 等。
-+ (3) 资产负债提取智能体 (Balance Extraction Agent)： 给定财务指标$F$中的资产负债表 (balance sheet)，重点关注资产 (assets)、负债 (liabilities) 和股本 (equity) 等关键<u>财务指标</u>。
-+ (4) 现金流提取智能体 (Cash Extraction Agent)： 给定财务指标$F$中的现金流量表 (cash flow statement)，重点关注来自经营活动、投资活动和融资活动的现金流。
+信息提取模块从给定的输入数据 $ (s, t, S) $ 中提取相关信息。该模块涉及四个不同的智能体：
+
+- (1) 新闻提取智能体 (News Extraction Agent)： 根据新闻对股票 $ s $ 的影响对所提供的新闻文章 $ N $ 进行排名，<u>并输出最有可能影响股价的前 10 条新闻</u>。代码路径: `finrpt/module/NewsAnalyzer.py`
+- (2) 收入提取智能体 (Income Extraction Agent)： 给定财务指标 $ F $ 中的利润表 (income statement)，<u>提取关键财务指标</u>，例如收入 (revenue)、净利润 (net income)、每股收益 (earnings per share) 等。
+- (3) 资产负债提取智能体 (Balance Extraction Agent)： 给定财务指标 $ F $ 中的资产负债表 (balance sheet)，重点关注资产 (assets)、负债 (liabilities) 和股本 (equity) 等关键<u>财务指标</u>。
+- (4) 现金流提取智能体 (Cash Extraction Agent)： 给定财务指标 $ F $ 中的现金流量表 (cash flow statement)，重点关注来自经营活动、投资活动和融资活动的现金流。
+  - 上述三个财务相关智能体的代码路径: `finrpt/module/FinancialsAnalyzer.py`
 
 基于精心设计的提示和 LLM（大型语言模型）的**表格理解能力** (Sui et al. 2024)，这些智能体可以有效地**提取关键的财务指标和新闻**，以进行进一步的分析。
 
-根据先前定义的 ERR 格式，我们设计了以下分析模块和预测模块，以系统地完成 ERR 的六个特定部分$R = [R_{fin}, R_{news}, R_{manage}, R_{risk}, R_{invest}, R_{rec}]$。
+根据先前定义的 ERR 格式，我们设计了以下分析模块和预测模块，以系统地完成 ERR 的六个特定部分 $ R = [R_{fin}, R_{news}, R_{manage}, R_{risk}, R_{invest}, R_{rec}] $。
 
-##### Information Analysis Module 信息分析模块 
-+ (1) 财务分析智能体 (Finance Analysis Agent)： 根据收入、资产负债和现金流分析智能体的输出，该智能体<u>总结</u>公司的财务健康状况、盈利能力和现金流状况，生成财务分析 ($R_{fin}$)。
-+ (2) 新闻分析智能体 (News Analysis Agent)： 根据新闻分析智能体的输出，该智能体强调所选新闻将如何影响未来的股票表现，然后生成新闻分析 ($R_{news}$)。
-+ (3) 状态分析智能体 (Status Analysis Agent)： 根据最新的公司公告 (Company Announcements)$A$导出管理与发展分析 ($R_{manage}$)。
-+ (4) 风险分析智能体 (Risk Analysis Agent)： 整合上述分析智能体提供的财务、新闻、管理和发展分析内容，分析应关注的关键风险 ($R_{risk}$)。
+
+##### Information Analysis Module 信息分析模块
+
+- (1) 财务分析智能体 (Finance Analysis Agent)： 根据收入、资产负债和现金流分析智能体的输出，该智能体<u>总结</u>公司的财务健康状况、盈利能力和现金流状况，生成财务分析 ($ R_{fin} $)。`代码路径: finrpt/module/FinRpt_analyst_finance.py`
+- (2) 新闻分析智能体 (News Analysis Agent)： 根据新闻分析智能体的输出，该智能体强调所选新闻将如何影响未来的股票表现，然后生成新闻分析 ($ R_{news} $)。`代码路径: finrpt/module/FinRpt_analyst_news.py`
+- (3) 状态分析智能体 (Status Analysis Agent)： 根据最新的公司公告 (Company Announcements) $ A $ 导出管理与发展分析 ($ R_{manage} $)。`代码路径: finrpt/module/Advisor.py`
+- (4) 风险分析智能体 (Risk Analysis Agent)： 整合上述分析智能体提供的财务、新闻、管理和发展分析内容，分析应关注的关键风险 ($ R_{risk} $)。`代码路径: finrpt/module/RiskAssessor.py`
+
 
 ##### Prediction Module 预测模块 
-预测模块中的预测智能体 (Prediction Agent) 收集$R_{fin}$、$R_{news}$、$R_{manage}$和$R_{risk}$的分析内容，以及<u>历史股价 </u>$P$和<u>历史市场指数 </u>$M$，然后<u>预测投资潜力评估 (</u>$R_{invest}$<u>) 和建议评级 (</u>$R_{rec}$<u>)</u>。
+预测模块中的预测智能体 (Prediction Agent) 收集 $ R_{fin} $、$ R*{news} $、$ R*{manage} $ 和 $ R*{risk} $ 的分析内容，以及<u>历史股价 </u>$ P $ 和<u>历史市场指数 </u>$ M $，然后<u>预测投资潜力评估 (</u>$ R*{invest} $<u>) 和建议评级 (</u>$ R*{rec} $<u>)</u>。`代码路径: finrpt/module/Predictor.py`
 
-建议评级 ($R_{rec}$) 指对一项投资进行的评估或判断，反映了分析师对其表现潜力的意见或建议，通常分为“买入 (buy)” 或“卖出 (sell)”。
-
-
-
+建议评级 ($ R\_{rec} $) 指对一项投资进行的评估或判断，反映了分析师对其表现潜力的意见或建议，通常分为“买入 (buy)” 或“卖出 (sell)”。
 
 
 ### SFT 监督微调  
@@ -145,6 +147,59 @@ ERR（股票研究报告）生成任务要求模型具备广泛的**金融知识
 $$\max_{\Delta\theta} \sum_{(X,Y) \in D_{demo}} \log P(Y | X; \theta_0 + \Delta\theta)$$
 
 其中，$D_{demo}$是相应智能体的示例数据集，$\theta_0$代表预训练模型的原始参数，$\Delta\theta$是通过 LoRA 学习到的低秩更新参数。
+
+
+训练框架与入口（LoRA 实现与训练管线）
+```bash
+finetune/LLaMA-Factory/
+这是项目内嵌的训练框架，承担 LoRA 微调的核心实现与训练入口。
+相关入口与示例：
+  finetune/LLaMA-Factory/train_lora/（LoRA 训练脚本目录）
+  finetune/LLaMA-Factory/examples/train_lora/（LoRA 训练示例与参考）
+  finetune/LLaMA-Factory/README.md、README_zh.md（使用说明）
+训练时使用的模型/数据/超参均通过 YAML 配置文件指定。
+四个智能体的 SFT 配置（按智能体/任务分类）
+
+财务分析智能体（Finance Analysis Agent）
+  finetune/LLaMA-Factory/inference/llama3_lora_sft_finance.yaml
+  finetune/LLaMA-Factory/merge_lora/llama3_lora_sft_finance.yaml
+  finetune/LLaMA-Factory/merge_lora/qwen2.5_lora_sft_finance.yaml
+  finetune/LLaMA-Factory/merge_lora/glm4_lora_sft_finance.yaml
+新闻分析智能体（News Analysis Agent）
+  finetune/LLaMA-Factory/inference/llama3_lora_sft_news.yaml
+  finetune/LLaMA-Factory/merge_lora/llama3_lora_sft_news.yaml
+  finetune/LLaMA-Factory/merge_lora/qwen2.5_lora_sft_news.yaml
+  finetune/LLaMA-Factory/merge_lora/glm4_lora_sft_news.yaml
+报告/状态（Report/Status，与你笔记中的“状态分析/报告生成”对应）
+  finetune/LLaMA-Factory/inference/llama3_lora_sft_report.yaml
+  finetune/LLaMA-Factory/merge_lora/llama3_lora_sft_report.yaml
+  finetune/LLaMA-Factory/merge_lora/qwen2.5_lora_sft_report.yaml
+  finetune/LLaMA-Factory/merge_lora/glm4_lora_sft_report.yaml
+趋势/预测（Trend/Prediction，对应预测智能体）
+  finetune/LLaMA-Factory/inference/llama3_lora_sft_trend.yaml
+  finetune/LLaMA-Factory/merge_lora/llama3_lora_sft_trend.yaml
+  finetune/LLaMA-Factory/merge_lora/qwen2.5_lora_sft_trend.yaml
+  finetune/LLaMA-Factory/merge_lora/glm4_lora_sft_trend.yaml
+
+
+说明：
+  inference/ 下的 YAML 常用于推理/验证配置；
+  merge_lora/ 下的 YAML 常用于合并 LoRA 权重或产线部署版本；
+  实际训练脚本位于 train_lora/ 与 examples/train_lora/，通过 CLI 或脚本读取上述 YAML 执行训练。
+```
+
+训练框架与入口（LoRA 实现与训练管线）
+```bash
+数据/样本构建与处理（用于“示例样本”D_demo）
+  dataset/alignment_research_report.py（研究报告对齐/样本构建）
+  dataset/report_generate.py（生成报告相关的数据流）
+  dataset/report_processing.py（报告清洗与整理）
+  dataset/get_humman_data.py（人工数据采集/整理）
+  dataset/statistics.py（数据统计与分析）
+  dataset/filter_report.py（样本过滤）
+  dataset/translate.py（必要的文本翻译处理）
+这些脚本协同产出各智能体对应的“demonstration samples”，即你笔记里提到的demo，供 LLaMA-Factory 的 LoRA-SFT 使用。
+```
 
 
 
