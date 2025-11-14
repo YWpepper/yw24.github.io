@@ -152,7 +152,7 @@ $$\max_{\Delta\theta} \sum_{(X,Y) \in D_{demo}} \log P(Y | X; \theta_0 + \Delta\
 为了进一步增强预测智能体 (Prediction Agent)，我们在 SFT 之后引入了强化学习阶段。此阶段超越了模仿模式，旨在优化智能体的输出以实现现实世界的投资目标。我们采用<u><font style="background-color:#FBF5CB;"> DAPO (Yu et al. 2025)</font></u>**，这是一种源自 <u><font style="background-color:#FBF5CB;">GRPO</font></u><u><font style="background-color:#FBF5CB;"> (Shao et al. 2024) 的</font></u>**<u><font style="background-color:#FBF5CB;">高级策略梯度算法</font></u>，用于将智能体的生成与准确性和理由质量的关键指标对齐。
 
 ###### Reward Function 奖励函数 
-首先，我们设计了一个奖励函数$Reward(Y, Y^*)$，用于整体评估生成的响应$Y = [R_{invest}, R_{rec}]$及其基本事实$Y^* = [R_{invest}^*, R_{rec}^*]$。该奖励是建议评级 ($R_{rec}$) 准确性和通过** ROUGE** (Lin 2004) 衡量的投资分析 ($R_{invest}$) 质量的加权组合。具体定义如下：
+首先，我们设计了一个奖励函数 Reward$(Y, Y^*)$，用于整体评估生成的响应$$Y = [R_{invest}, R_{rec}]$$ 及其基本事实 $$Y^* = [R_{invest}^*, R_{rec}^*]$$ 该奖励是建议评级 ($R_{rec}$) 准确性和通过ROUGE (Lin 2004) 衡量的投资分析 ($R_{invest}$) 质量的加权组合。具体定义如下：
 
 $$
 Reward(Y, Y^*) = \alpha \cdot ACC(R_{rec}, R_{rec}^*) + \beta \cdot \text{ROUGE-1}(R_{invest}, R_{invest}^*) + \gamma \cdot \text{ROUGE-L}(R_{invest}, R_{invest}^*)
