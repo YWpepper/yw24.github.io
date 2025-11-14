@@ -198,7 +198,7 @@ finetune/LLaMA-Factory/
   dataset/statistics.py（数据统计与分析）
   dataset/filter_report.py（样本过滤）
   dataset/translate.py（必要的文本翻译处理）
-这些脚本协同产出各智能体对应的“demonstration samples”，即你笔记里提到的demo，供 LLaMA-Factory 的 LoRA-SFT 使用。
+这些脚本协同产出各智能体对应的“demonstration samples”，即笔记里提到的demo，供 LLaMA-Factory 的 LoRA-SFT 使用。
 ```
 
 
