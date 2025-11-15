@@ -58,4 +58,12 @@ pinned: false
 <img src="https://images.weserv.nl/?url=cdn.nlark.com/yuque/0/2025/png/40742019/1763192246006-8ce1b00a-ca27-4166-b657-28644537bc24.png" width="100%" alt="FinRpt Framework Diagram"/>
 
 
+
+
+### ubuntu 部分命令积累
+
+1. 进入其他人的文件夹
+```bash 
+    sudo -iu root
+```
 ---
