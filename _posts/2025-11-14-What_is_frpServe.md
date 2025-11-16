@@ -22,28 +22,28 @@ pinned: false
     #直接使用weget命令，使用github加速镜像
     wget https://ghfast.top/https://github.com/fatedier/frp/releases/download/v0.48.0/frp_0.48.0_linux_amd64.tar.gz
     ```
-    <img src="https://images.weserv.nl/?url=cdn.nlark.com/yuque/0/2025/png/40742019/1763220029393-aee9343c-ee15-4ae6-b9dd-b857a5773f8b.png" width="80%" alt="FinRpt Framework Diagram"/>
+    <img src="https://images.weserv.nl/?url=cdn.nlark.com/yuque/0/2025/png/40742019/1763220029393-aee9343c-ee15-4ae6-b9dd-b857a5773f8b.png" width="100%" alt="FinRpt Framework Diagram"/>
 
 2. 将文件上传至服务器
     
     将下载的frp的.tar.gz文件传到服务器中(建议使用xftp)
 
     ```bash
-        # 在服务器中使用下面的命令解压.tar.gz文件
-        tar -zxvf frp_0.65.0_linux_amd64.tar.gz
+    # 在服务器中使用下面的命令解压.tar.gz文件
+    tar -zxvf frp_0.65.0_linux_amd64.tar.gz
     ```
 
     将解压后的文件夹移动到/root/目录下
 
     ```bash
-        # 移动到root目录下
-        sudo mv frp_0.48.0_linux_amd64/ /root/frp
-        
-        # 将文件夹以及其子文件权限设置为仅root可读可写
-        sudo chmod -R 700 frp
-        
-        # 将文件夹与其子文件的拥有者设置为root用户
-        sudo chown -R root:root frp
+    # 移动到root目录下
+    sudo mv frp_0.48.0_linux_amd64/ /root/frp
+    
+    # 将文件夹以及其子文件权限设置为仅root可读可写
+    sudo chmod -R 700 frp
+    
+    # 将文件夹与其子文件的拥有者设置为root用户
+    sudo chown -R root:root frp
     ```
 
 
@@ -87,8 +87,8 @@ pinned: false
 
    ```bash
     # 先打开服务文件
-   cd /etc/systemd/system/
-   nano frps.service
+    cd /etc/systemd/system/
+    nano frps.service
 
     # 将下面内容写入到frps.service
     [Unit]
@@ -172,9 +172,10 @@ pinned: false
     
     cd /etc/systemd/system/
     nano frpc.service
+    ```
 
-    # 将下面的内容写入到frpc.service
-
+    将下面的内容写入到frpc.service
+    ```shell
     [Unit]
     Description=Frp Client Service
     After=network.target
@@ -200,7 +201,7 @@ pinned: false
     # 注意最后检查是否与服务器实现通信
     systemctl status frpc.service
     ```
-    <img src="https://images.weserv.nl/?url=cdn.nlark.com/yuque/0/2025/png/40742019/1763219783004-bc1961bf-e64d-4e02-a62c-241b7cf1aa04.png" width="80%" alt="FinRpt Framework Diagram"/>
+    <img src="https://images.weserv.nl/?url=cdn.nlark.com/yuque/0/2025/png/40742019/1763219783004-bc1961bf-e64d-4e02-a62c-241b7cf1aa04.png" width="100%" alt="FinRpt Framework Diagram"/>
 
 
 至此完成所有步骤.
