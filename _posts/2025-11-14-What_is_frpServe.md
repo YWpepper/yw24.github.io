@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 'What_is_frpServe'
+title: 'How_to_make_frpServe'
 date: 2025-11-14
 author: pepper
 tags: [papperReading, AAAI2026]
