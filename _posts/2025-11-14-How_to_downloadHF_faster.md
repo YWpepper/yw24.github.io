@@ -8,7 +8,8 @@ comments: true
 toc: true
 pinned: false
 ---
-
+这篇博客介绍了使用专用多线程下载器快速下载huggingface上的模型。
+<!-- more -->
 
 ### 专用多线程下载器 hfd
 
