@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 'AutoGen_PapperReading'
+title: 'CoDiEmb_PapperReading'
 date: 2025-11-17
 author: pepper
 tags: [papperReading, Note]
@@ -112,9 +112,9 @@ CoDiEmb 框架通过“协作而又独特”的方式，从损失函数、数据
     - 针对 IR： 设计了支持每个锚点 (anchor) 具有多个正例和困难负例的对比损失 ，并通过跨设备负采样 (cross-device negative sampling) 增强，以扩大比较候选池，提高可分离性 。
     - 针对 STS： 引入了修改和适配的 KL 散度损失 (KL divergence Loss) $ \mathcal{L}_{RankKL} $ 和 PRO Loss，它们直接优化顺序一致性 (order consistency)，实质性地增强了模型的细粒度语义区分能力 。
 + 避免梯度干扰： 结合自定义动态采样器 (custom dynamic sampler)，该方法不仅平衡了每个任务的迭代次数，还通过严格确保各 GPU 仅处理来自同一数据集的非重叠子集，从而避免了混合任务批次 (mixed-task batches) 引起的梯度干扰，提供了纯粹的任务梯度 (pure task gradients) 。
-+ STS 损失组合： 最终的 $ \mathcal{L}_{STS} $ 是 $ \mathcal{L}_{Pearson} $、$ \mathcal{L}_{RankKL} $、$ \mathcal{L}_{PRO} $ 和辅助 InfoNCE Loss $ \mathcal{L}_{MidNCE} $ 的加权和，实现多层次优化 。
++ STS 损失组合： 最终的 $ L_{STS} $ 是 $ L_{Pearson} $、$ L_{RankKL} $、$ L_{PRO} $ 和辅助 InfoNCE Loss $ L_{MidNCE} $ 的加权和，实现多层次优化 。
 
-3. **分层模型融合策略 (Hierarchical Model Fusion Strategy)**
+1. **分层模型融合策略 (Hierarchical Model Fusion Strategy)**
 
 + 创新的融合策略： 通过分析微调参数与其预训练值之间的偏差 (deviation)，设计了一种创新的模型融合策略 
 + 参数级别融合： 该方法超越了传统的模型级别融合（如 Model Soups ），达到了更精细的粒度，直接作用于可学习参数 (learnable parameters) 。
