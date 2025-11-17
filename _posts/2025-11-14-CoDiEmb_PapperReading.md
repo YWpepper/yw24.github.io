@@ -28,8 +28,8 @@ CoDiEmb: A Collaborative yet Distinct Framework for Unified Representation Learn
 
 现代自然语言处理 (Natural Language Processing, NLP) 主要由生成 (generation) 和编码 (encoding) 两种范式驱动 [Muennighoff et al., 2024]。编码器模型 (encoder models) 的输出，即文本嵌入 (text embeddings)，构成了计算语言学的基石。在文本嵌入的无数应用和基准中，语义文本相似度 (Semantic Textual Similarity, **STS**) 和信息检索 (Information Retrieval, **IR**) 脱颖而出，成为两个最关键的任务 [Gao et al., 2021]。
 
-    - STS 旨在确定两个文本片段之间的语义邻近度 (semantic proximity)，形成了推荐系统、文本聚类和内容标准化等技术的基础 [Sheng et al., 2024]。
-    - 另一方面，IR 侧重于衡量查询 (query) 与大型文档集合 (large document collection) 之间的相关性 (relevance)，在搜索引擎、对话平台和 AI 智能体中发挥着关键作用 [Sun et al., 2025]。
+- STS 旨在确定两个文本片段之间的语义邻近度 (semantic proximity)，形成了推荐系统、文本聚类和内容标准化等技术的基础 [Sheng et al., 2024]。
+- 另一方面，IR 侧重于衡量查询 (query) 与大型文档集合 (large document collection) 之间的相关性 (relevance)，在搜索引擎、对话平台和 AI 智能体中发挥着关键作用 [Sun et al., 2025]。
 
 **<font style="background-color:#FBF5CB;">统一文本编码器的目标与挑战</font>**
 
