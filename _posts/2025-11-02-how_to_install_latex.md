@@ -16,24 +16,24 @@ tags:
 [安装和_配置_VSCode+_LaTeX_(含环境变量_配置_详细过程)](https://zhuanlan.zhihu.com/p/637046509)
 
 ## Windows
-###  下载LaXLive
-清华镜像:
 
-[镜像2](https://mirror-hk.koddos.net/CTAN/systems/texlive/Images/) [镜像3](https://mirrors.aliyun.com/CTAN/systems/texlive/Images/?userCode=okjhlpr5)
+### 1. 下载TeX Live
 
-| [https://mirrors.tuna.tsinghua.edu.cn/CTAN/systems/texlive/Images/](https://mirrors.tuna.tsinghua.edu.cn/CTAN/systems/texlive/Images/) |
-| --- |
+清华镜像：
 
+| 镜像源 | 链接 |
+|--------|------|
+| 清华大学 | [https://mirrors.tuna.tsinghua.edu.cn/CTAN/systems/texlive/Images/](https://mirrors.tuna.tsinghua.edu.cn/CTAN/systems/texlive/Images/) |
+| 镜像2 | [https://mirror-hk.koddos.net/CTAN/systems/texlive/Images/](https://mirror-hk.koddos.net/CTAN/systems/texlive/Images/) |
+| 镜像3 | [https://mirrors.aliyun.com/CTAN/systems/texlive/Images/?userCode=okjhlpr5](https://mirrors.aliyun.com/CTAN/systems/texlive/Images/?userCode=okjhlpr5) |
 
+推荐使用清华大学开源软件镜像站：[Index of /CTAN/systems/texlive/Images/](https://mirrors.tuna.tsinghua.edu.cn/CTAN/systems/texlive/Images/)
 
+![选择版本](https://pic3.zhimg.com/v2-ba9e4144613807cc8060928e3b797460_1440w.jpg)
 
- [Index of /CTAN/systems/texlive/Images/ | 清华大学开源软件镜像站 | Tsinghua Open Source Mirrormirrors.tuna.tsinghua.edu.cn/CTAN/systems/texlive/Images/](https://link.zhihu.com/?target=https%3A//mirrors.tuna.tsinghua.edu.cn/CTAN/systems/texlive/Images/)
+下载开始，过程有些慢。（可以把链接复制到迅雷里会快一些）
 
-![](https://pic3.zhimg.com/v2-ba9e4144613807cc8060928e3b797460_1440w.jpg)
-
-选择版本
-
-下载开始,过程有些慢.(可以把链接复制到迅雷里会快一些)
+---
 
 ---
 
@@ -86,7 +86,7 @@ tags:
 
 其实是要查看四个环境(但一个好,其他的都好了)
 
-```plain
+```bash
 tex -v
 latex -v
 xelatex -v
@@ -117,7 +117,7 @@ pdflatex -v
 
 再次输入其他命令查看环境变量:
 
-```plain
+```shell
 tex -v
 latex -v
 xelatex -v
@@ -141,7 +141,7 @@ pdflatex -v
 
 文件拓展名为`.tex`,随意写一些内容
 
-```plain
+```latex
 \documentclass{article} % 文档类别：文章
 \usepackage{amsmath}     % 引入 amsmath 宏包，用于更高级的数学排版
 \usepackage{ctex}
@@ -324,7 +324,7 @@ x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
 #### 1 安装linux版本 [7-zip](https://zhida.zhihu.com/search?content_id=722097146&content_type=Answer&match_order=1&q=7-zip&zhida_source=entity)
 1 . 需要提前在linux中安装镜像解压器pzzip，也就是7-zip的linux版本：
 
-```plain
+```bash
  apt install p7zip-full
 ```
 
@@ -332,19 +332,19 @@ x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
 
 1 . 首先使用wget 安装镜像：
 
-```plain
+```bash
 wget https://mirrors.tuna.tsinghua.edu.cn/CTAN/systems/texlive/Images/texlive.iso
 ```
 
 2 . 使用7-z进行镜像的解压
 
-```plain
+```bash
 7z x texlive.iso
 ```
 
 3 . 解压后进行安装
 
-```plain
+```bash
  chmod 777 install-tl && ./install-tl   
 安装过程需要注意，使用B可以选择二进制的版本，linux则要安装linux对应的版本
 使用D可以设置安装路径
@@ -356,7 +356,7 @@ I指令是执行安装（安装过程时间较长，大概50分钟左右，如�
 
 4 . 安装完成texlive之后，可以进行相关环境变量的配置
 
-```plain
+```bash
 vim ~/.bashrc
 export PATH=your/Path/bin:$PATH 
 export MANPATH=your/Path/doc/man:$MANPATH 
