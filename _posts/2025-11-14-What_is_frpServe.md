@@ -3,7 +3,7 @@ layout: post
 title: 'How_to_make_frpServe'
 date: 2025-11-14
 author: pepper
-tags: [papperReading, AAAI2026]
+tags: [server]
 comments: true
 toc: true
 pinned: false
