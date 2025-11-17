@@ -158,4 +158,61 @@ Xinference 默认会在本地启动服务,因为这里配置了–host 0.0.0.0�
 
 所以有两个解决办法：1）将`max_model_len`设置小于当前显存生成的最大值就可以了。2）修改`gpu_memory_utilization` 使其模型占用的显存变大,从而使可以生成的KV cache变多。
 
----
+
+  ### 3. 配置手动磁力下载模型
+经典多线程工具推荐两个：IDM、Aria2。 IDM 适用于 Windows、aria2 适用于 Linux/Mac OS。
+
+
+1. 方法1 ： 获取并提供 Hugging Face 令牌
+
+    步骤 1: 获取 Hugging Face 访问令牌 (Token)
+
+    - 访问令牌设置页面： 前往 `https://huggingface.co/settings/tokens`
+    - 创建新令牌： 点击 "New token" (新建令牌)。
+    - 为令牌命名（例如 xinference-download）。
+    - 选择 "Role"（角色）为 Read（读取），这是下载模型所需的最低权限。
+    - 点击 "Generate a token"（生成令牌）。
+    - 复制令牌： 令牌生成后只会显示一次，请务必将其复制并妥善保管。
+
+    步骤 2: 使用令牌运行下载命令
+
+    - 由于你的脚本提示需要传递 `--hf_username` 和 `--hf_token`，你可以修改你的下载命令，将用户名和令牌作为参数传入。  格式：
+
+    ```shell
+      ./hfd.sh 模型ID \--hf\_username 你的用户名 \--hf\_token 你的令牌 \--exclude ...
+    ```
+
+    示例（请替换为你自己的信息）：
+
+    ```bash
+     ./hfd.sh meta-llama/Llama-2-7b \--hf\_username 你的HuggingFace用户名 \--hf\_token 你复制的令牌 \--exc
+    ```
+
+2. 方法2 ：使用 `huggingface-cli login`
+
+    如果你的 `./hfd.sh` 脚本底层是调用 `huggingface_hub` 库，那么你可以先在终端中执行登录命令，让系统记住你的凭证：
+
+    登录： 在终端中运行以下命令：
+
+    ```bash
+    huggingface-cli login
+    ```
+
+    输入令牌： 系统会提示你输入在步骤 1 中获取的 Hugging Face 令牌。
+
+    ```bash
+    git config --global credential.helper store
+    # 存储地方
+    cat /home/peper/.cache/huggingface/token
+    ```
+
+    重新运行下载： 登录成功后，再次运行你的原始下载命令：
+
+    ```bash
+    # 可以手动限制下载的内容
+    ./hfd.sh meta-llama/Llama-2-7b --exclude \*.bin \*.msgpack onnx/
+    ```
+
+
+
+----
