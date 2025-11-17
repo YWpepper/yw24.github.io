@@ -1,12 +1,12 @@
 ---
-title: 'How_to_downloadHF_faster.'
-lang: zh-CN
+layout: post
+title: 'How_to_downloadHF.'
 date: 2025-11-14
 author: pepper
-pinned: false
+tags: [Dlenv,LLM]
+comments: true
 toc: true
-tags:
-  - LLM
+pinned: false
 ---
 
 

@@ -159,7 +159,8 @@ Xinference 默认会在本地启动服务,因为这里配置了–host 0.0.0.0�
 所以有两个解决办法：1）将`max_model_len`设置小于当前显存生成的最大值就可以了。2）修改`gpu_memory_utilization` 使其模型占用的显存变大,从而使可以生成的KV cache变多。
 
 
-  ### 3. 配置手动磁力下载模型
+### 3. 配置手动磁力下载模型
+
 经典多线程工具推荐两个：IDM、Aria2。 IDM 适用于 Windows、aria2 适用于 Linux/Mac OS。
 
 
