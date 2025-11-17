@@ -1,9 +1,9 @@
 ---
-title: 'how_to_make_Xinference'
+title: 'FinRpt_PapperReading.'
 lang: zh-CN
 date: 2025-11-11
 author: pepper
-permalink: /posts/2025/11/how_to_make_Xinference/
+permalink: /posts/2025/11/hFinRpt_PapperReading./
 pinned: false
 toc: true
 tags:
@@ -157,6 +157,31 @@ Xinference 默认会在本地启动服务,因为这里配置了–host 0.0.0.0�
 如果在部署过程中碰到"The model's max seq len (131000) is larger than the maximum number of tokens that can be stored in KV cache (66512). Try increasing `gpu_memory_utilization` or decreasing `max_model_len` when initializing the engine."这个报错,那么代表着自己设置的`max_model_len=131000`太大了,超过了当前显存可生成的KV cache（66512）。
 
 所以有两个解决办法：1）将`max_model_len`设置小于当前显存生成的最大值就可以了。2）修改`gpu_memory_utilization` 使其模型占用的显存变大,从而使可以生成的KV cache变多。
+
+
+
+## 报错记录
+
+
+
+1.
+
+```bash
+2025-11-17 13:05:58.280 Uncaught app exception
+Traceback (most recent call last):
+  File "/home/pepper/miniconda3/envs/chatchat/lib/python3.11/site-packages/streamlit/runtime/scriptrunner/script_runner.py", line 600, in _run_script
+    exec(code, module.__dict__)
+  File "/home/pepper/code/llm/Langchain-Chatchat/libs/chatchat-server/chatchat/webui.py", line 77, in <module>
+    dialogue_page(api=api, is_lite=is_lite)
+  File "/home/pepper/code/llm/Langchain-Chatchat/libs/chatchat-server/chatchat/webui_pages/dialogue/dialogue.py", line 418, in dialogue_page
+    upload_image=upload_image,
+                 ^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'use_mcp' where it is not associated with a value
+```
+
+
+
+
 
 
 ### 3. 配置手动磁力下载模型
