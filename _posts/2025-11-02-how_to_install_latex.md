@@ -278,7 +278,7 @@ x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
 
 
 ### 5 latex测试模板
-```cpp
+```latex
 \documentclass{article} % 文档类别：文章
 \usepackage{amsmath}     % 引入 amsmath 宏包，用于更高级的数学排版
 \usepackage{ctex}
