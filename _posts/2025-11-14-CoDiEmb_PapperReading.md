@@ -80,21 +80,21 @@ CoDiEmb: A Collaborative yet Distinct Framework for Unified Representation Learn
 <font style="color:rgb(27, 28, 29);">本节将介绍 CoDiEmb，我们用于跨 STS (Semantic Textual Similarity, 语义文本相似度) 和 IR (Information Retrieval, 信息检索) 任务进行统一表示学习 (unified representation learning) 的端到端框架 (end-to-end framework)。我们首先在第 2.1 节介绍我们的任务无关数据格式 (task-agnostic data format)，解释其与异构粒度 (heterogeneous granularity) 输入的兼容性及其对其他任务的可扩展性 (extensibility)。随后，在第 2.2 节中，我们详细阐述 CoDiEmb 的专业化损失函数 (specialized loss functions)，并将其设计与相应的评估指标联系起来。在此基础上，第 2.3 节描述了 CoDiEmb 的数据采样器 (data sampler) 和多设备训练配置 (multi-device training configuration)。最后，在第 2.4 节中，我们介绍我们提出的参数级别模型融合策略 (parameter-level model fusion strategy)。</font>
 
 ### 方法论
-#### <font style="color:rgb(27, 28, 29);">统一数据格式 (Unified Data Format)</font>
-IR（信息检索）和 STS（语义文本相似度）遵循由其各自评估协议驱动的不同数据组织方案 (distinct data organization schemes)。如图 1 所示，IR 任务将来自集合 $ \{q\}_{m} $ 的每个查询 $ q_i $ 与整个文档语料库 $ \{d\}_{n} $ 进行匹配，以_检索最相关的 top-k_ 结果。真实相关性 (Ground-truth relevance) 由映射表 $ \{(q_i, d_j)\}_{l} $ 定义，该表通常仅存储正例样本 (positive samples) 的标识符。任何未出现在此映射中的对 $ (q_i, d_j) $ 被隐式视为负例样本 (negative sample)。在这些负例文档中，有些更难以与正例区分被称为_困难负例 (hard negatives)_。社区早已认识到困难负例对于 IR 的至关重要性 [Zhan et al., 2021, Zhou et al., 2022]。因此，通常采用数据挖掘技术 (data mining techniques) 来识别给定查询 $ q $ 的一组困难负例 $ {d-} $，从而形成$ (q, d+, {d-}) $的数据结构。
+#### 统一数据格式 (Unified Data Format)
+IR（信息检索）和 STS（语义文本相似度）遵循由其各自评估协议驱动的不同数据组织方案 (distinct data organization schemes)。如图 1 所示，IR 任务将来自集合 $\{q\}_m$ 的每个查询 $q_i$ 与整个文档语料库 $\{d\}_n$ 进行匹配，以_检索最相关的 top-k_ 结果。真实相关性 (Ground-truth relevance) 由映射表 $\{(q_i, d_j)\}_l$ 定义，该表通常仅存储正例样本 (positive samples) 的标识符。任何未出现在此映射中的对 $(q_i, d_j)$ 被隐式视为负例样本 (negative sample)。在这些负例文档中，有些更难以与正例区分被称为_困难负例 (hard negatives)_。社区早已认识到困难负例对于 IR 的至关重要性 [Zhan et al., 2021, Zhou et al., 2022]。因此，通常采用数据挖掘技术 (data mining techniques) 来识别给定查询 $q$ 的一组困难负例 $\{d^-\}$，从而形成 $(q, d^+, \{d^-\})$ 的数据结构。
 
-<font style="color:rgb(27, 28, 29);">相比之下，STS 任务中的配对 </font>$ (x_1, x_2) $<font style="color:rgb(27, 28, 29);"> 被视为</font>独立的实例 (independent instances)<font style="color:rgb(27, 28, 29);">。模型通过</font>余弦相似度 (cosine similarity)<font style="color:rgb(27, 28, 29);"> 直接预测一个分数 </font>$ \hat{y} $<font style="color:rgb(27, 28, 29);">，然后将产生的预测列表 </font>$ \{\hat{y}\}_{n} $<font style="color:rgb(27, 28, 29);"> 与</font>真实分数 (ground-truth scores)<font style="color:rgb(27, 28, 29);"> </font>$ \{y\}_{n} $<font style="color:rgb(27, 28, 29);"> 进行比较，以评估</font>排名一致性 (rank consistency)<font style="color:rgb(27, 28, 29);">。因此，STS 数据通常被构造为</font>三元组 $ (x_1, x_2, y) $<font style="color:rgb(27, 28, 29);">。</font>
+相比之下，STS 任务中的配对 $(x_1, x_2)$ 被视为独立的实例 (independent instances)。模型通过余弦相似度 (cosine similarity) 直接预测一个分数 $\hat{y}$，然后将产生的预测列表 $\{\hat{y}\}_n$ 与真实分数 (ground-truth scores) $\{y\}_n$ 进行比较，以评估排名一致性 (rank consistency)。因此，STS 数据通常被构造为三元组 $(x_1, x_2, y)$。
 
-<font style="color:rgb(27, 28, 29);">为兼容这两种数据类型，CoDiEmb 采用了</font>统一格式<font style="color:rgb(27, 28, 29);">：</font>$ (t, q, \{d^+\}_{m}, \{d^-\}_{n}, \{y^+\}_{m}, \{y^-\}_{n}) $<font style="color:rgb(27, 28, 29);">，其中，</font>$ t $<font style="color:rgb(27, 28, 29);"> 是</font>任务标识符 (task identifier)<font style="color:rgb(27, 28, 29);">，可以在数据集级别指定。原始数据中</font>缺失的字段<font style="color:rgb(27, 28, 29);">将用</font>占位符 (placeholders)<font style="color:rgb(27, 28, 29);"> 填充，这些占位符在</font>前向传播 (forward pass)<font style="color:rgb(27, 28, 29);"> 期间被忽略，</font>不会产生额外的内存开销<font style="color:rgb(27, 28, 29);">。</font>
+为兼容这两种数据类型，CoDiEmb 采用了统一格式：$(t, q, \{d^+\}_m, \{d^-\}_n, \{y^+\}_m, \{y^-\}_n)$，其中，$t$ 是任务标识符 (task identifier)，可以在数据集级别指定。原始数据中缺失的字段将用占位符 (placeholders) 填充，这些占位符在前向传播 (forward pass) 期间被忽略，不会产生额外的内存开销。
 
-<font style="color:rgb(27, 28, 29);">这种</font>集成的数据结构<font style="color:rgb(27, 28, 29);">具有高度的</font>可扩展性 (extensibility)<font style="color:rgb(27, 28, 29);">。</font>
+这种集成的数据结构具有高度的可扩展性 (extensibility)。
 
-+ <font style="color:rgb(27, 28, 29);">当处理 STS 任务时，我们将三元组 </font>$ (x_1, x_2, y) $<font style="color:rgb(27, 28, 29);"> 分别映射到</font>查询 $ q $<font style="color:rgb(27, 28, 29);">、</font>第一个正例文档 $ d_1^+ $<font style="color:rgb(27, 28, 29);"> 和</font>第一个正例分数 $ y_1^+ $<font style="color:rgb(27, 28, 29);">。</font>
-+ <font style="color:rgb(27, 28, 29);">对于 IR 任务，我们填充</font>查询 $ q $<font style="color:rgb(27, 28, 29);">、</font>正例集合 $ \{d^+\}_{m} $<font style="color:rgb(27, 28, 29);"> 和</font>负例集合 $ \{d^-\}_{n} $<font style="color:rgb(27, 28, 29);">。如果相关性分数可用，它们可以存储在相应的 </font>$ \{y\} $<font style="color:rgb(27, 28, 29);"> 字段中。</font>
++ 当处理 STS 任务时，我们将三元组 $(x_1, x_2, y)$ 分别映射到查询 $q$、第一个正例文档 $d_1^+$ 和第一个正例分数 $y_1^+$。
++ 对于 IR 任务，我们填充查询 $q$、正例集合 $\{d^+\}_m$ 和负例集合 $\{d^-\}_n$。如果相关性分数可用，它们可以存储在相应的 $\{y\}$ 字段中。
 
-<font style="color:rgb(27, 28, 29);">这种可扩展格式还</font>自然地支持<font style="color:rgb(27, 28, 29);">分类和聚类等其他任务。对于这些任务，数据可以按标签分区，允许进行</font>簇内 (intra-cluster, 正例)<font style="color:rgb(27, 28, 29);"> 和</font>簇间 (inter-cluster, 负例)<font style="color:rgb(27, 28, 29);"> 采样，以构建用于</font>对比学习<font style="color:rgb(27, 28, 29);">的输入。通过将输入文本分配给 </font>$ q $<font style="color:rgb(27, 28, 29);"> 并将其标签分配给 </font>$ y^+ $<font style="color:rgb(27, 28, 29);">，该格式也与</font>分类头架构 (classifier-head architectures)<font style="color:rgb(27, 28, 29);"> 兼容 [Reimers and Gurevych, 2019, Zhang and Li, 2024]。</font>
+这种可扩展格式还自然地支持分类和聚类等其他任务。对于这些任务，数据可以按标签分区，允许进行簇内 (intra-cluster, 正例) 和簇间 (inter-cluster, 负例) 采样，以构建用于对比学习的输入。通过将输入文本分配给 $q$ 并将其标签分配给 $y^+$，该格式也与分类头架构 (classifier-head architectures) 兼容 [Reimers and Gurevych, 2019, Zhang and Li, 2024]。
 
-<font style="color:rgb(27, 28, 29);">利用这种</font>统一数据结构<font style="color:rgb(27, 28, 29);">，CoDiEmb 不仅</font>标准化了多样化语料库的加载<font style="color:rgb(27, 28, 29);">，还能够配置</font>根据任务特征量身定制的差异化损失函数 (differentiated loss functions)<font style="color:rgb(27, 28, 29);">，从而促进</font>多粒度训练 (multi-granularity training)<font style="color:rgb(27, 28, 29);">。尽管本文重点关注 IR 和 STS 的联合优化，但 CoDiEmb 的潜力</font>超越了这一范围<font style="color:rgb(27, 28, 29);">，我们计划在未来的工作中进行探索。</font>
+利用这种统一数据结构，CoDiEmb 不仅标准化了多样化语料库的加载，还能够配置根据任务特征量身定制的差异化损失函数 (differentiated loss functions)，从而促进多粒度训练 (multi-granularity training)。尽管本文重点关注 IR 和 STS 的联合优化，但 CoDiEmb 的潜力超越了这一范围，我们计划在未来的工作中进行探索。
 
 ### 3 总结
 ##### CoDiEmb 框架的主要创新点 
