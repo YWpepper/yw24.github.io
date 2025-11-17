@@ -1,7 +1,7 @@
 ---
 title: 'How_to_downloadHF_faster.'
 lang: zh-CN
-date: 2025-11-11
+date: 2025-11-14
 author: pepper
 pinned: false
 toc: true
