@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 'How_to_downloadHF.'
+title: 'How_to_downloadHF'
 date: 2025-11-14
 author: pepper
 tags: [Dlenv,LLM]
@@ -27,8 +27,8 @@ pinned: false
 
 **基本命令：**
   ```bash
-    ./hfd.sh gpt2
-   ```
+  ./hfd.sh gpt2
+  ```
 
 如果没有安装 aria2，则可以改用 wget：
 
@@ -89,8 +89,9 @@ hfd 在使用 aria2c 作为下载工具时，支持两种并行配置：
 并发文件数 (-j)：控制同时下载的文件数，用法：hfd gpt2 -j 3，建议值：3-8，默认：5 个文件。限制最大为10，同上别开太大。
 组合使用：
 
+```bash
 hfd gpt2 -x 8 -j 3  # 每个文件 8 个线程，同时下载 3 个文件
-
+```
 
 ### 操作案例
 
