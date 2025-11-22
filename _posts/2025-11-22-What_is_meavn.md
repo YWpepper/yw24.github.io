@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 'What_is_Meavn'
-date: 2025-11-19
+date: 2025-11-22
 author: pepper
 tags: [error]
 comments: true
@@ -176,11 +176,10 @@ mvn clean package
 ```
 
 <font style="color:rgb(25, 27, 31);">以上配置表示使用阿里云的中央仓库作为Maven中心库的镜像源。 </font>
+PS: 如何找到配置文件 `settings.xml` 呢？
 
-> <font style="color:rgb(25, 27, 31);">PS: 如何找到配置文件</font>`<font style="color:rgb(25, 27, 31);">settings.xml</font>`<font style="color:rgb(25, 27, 31);">呢？</font>
->
 
-    1. 使用`mvn -v`命令
+1. 使用`mvn -v`命令
 
 ```bash
 (base) root@DESKTOP:gulimall# mvn -v
@@ -191,7 +190,7 @@ Default locale: en, platform encoding: UTF-8
 OS name: "linux", version: "5.15.167.4-microsoft-standard-wsl2", arch: "amd64", family: "unix"
 ```
 
-    2. 则目录为 `**/usr/share/maven/conf/settings.xml  **`
+2. 则目录为 `**/usr/share/maven/conf/settings.xml**`
 
 #### <font style="color:rgb(25, 27, 31);">代理设置</font>
 <font style="color:rgb(25, 27, 31);">在某些情况下，我们需要通过代理服务器来进行网络请求。例如，在公司内部开发环境中，网络访问需要经过代理服务器才能访问外部网站。 在settings.xml文件中，我们可以通过proxies节点来配置Maven的代理设置，例如：</font>
