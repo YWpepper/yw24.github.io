@@ -12,7 +12,7 @@ pinned: false
 <!-- more -->
 
 
-### Meavn管理
+## Meavn管理
 [参考知乎](https://zhuanlan.zhihu.com/p/623082998)
 
 #### 多模块项目的创建
@@ -231,8 +231,8 @@ OS name: "linux", version: "5.15.167.4-microsoft-standard-wsl2", arch: "amd64", 
 
 <font style="color:rgb(25, 27, 31);">以上配置表示认证一个名为myserver的远程仓库，并指定该仓库的用户名和密码。</font>
 
-### 报错整理
-📌 1. 当我的gulimail-common编译不过之后
+## 报错整理
+#### 📌 1. gulimail-common编译不过
 
 首先处理**模块是否正确构建并安装到本地仓库**。首先，检查 gulimail-common 模块是否构建为 JAR 包,确保 gulimail-common 模块已经构建并安装到本地仓库。如果 gulimail-common 模块还没有被编译或安装到 Maven 本地仓库（~/.m2/repository），product 模块是无法找到它的。
 
@@ -277,7 +277,7 @@ mvn dependency:tree
 
 
 
-📌 2. 文件命名问题，需要注意
+#### 📌 2. 文件命名问题
 
 对应`test`和`main`
 
@@ -286,7 +286,7 @@ mvn dependency:tree
 
 
 
-📌 3. generator自生成的代码中有数据格式错误
+#### 📌 3. generator自生成的代码中有数据格式错误
 
   ```java
   private byte[] rollbackInfo;
@@ -300,7 +300,7 @@ mvn dependency:tree
 
 
 
-📌4. 常见问题 DAO 与包结构不一致
+#### 📌4. DAO 与包结构不一致
 
 4.1 先检查 sprintboot版本
 
@@ -340,15 +340,100 @@ mvn dependency:tree
 
 
 ```
-
+<!-- https://images.weserv.nl/?url=cdn.nlark.com/ -->
 4.1 修改了mapper的路径，注意批量修改其自动生成mapper
 比如我从`@MapperScan("com.atpepper.gulimail.coupon.dao")`，修改为`@MapperScan("com.atpepper.coupon.dao")`
 
-<img src="https://cdn.nlark.com/yuque/0/2025/png/40742019/1763804191445-de97eba3-4f13-4910-8018-993408b4df78.png?x-oss-process=image%2Fformat%2Cwebp" width="70%" alt="FinRpt Framework Diagram"/>
+<img src="https://images.weserv.nl/?url=cdn.nlark.com/yuque/0/2025/png/40742019/1763804191445-de97eba3-4f13-4910-8018-993408b4df78.png?x-oss-process=image%2Fformat%2Cwebp" width="70%" alt="FinRpt Framework Diagram"/>
 
-<img src="https://cdn.nlark.com/yuque/0/2025/png/40742019/1763804084081-f6305656-b78c-4248-93aa-24fb8a1bd3ea.png?x-oss-process=image%2Fformat%2Cwebp" width="70%" alt="FinRpt Framework Diagram"/>
+<img src="https://images.weserv.nl/?url=cdn.nlark.com/yuque/0/2025/png/40742019/1763804084081-f6305656-b78c-4248-93aa-24fb8a1bd3ea.png?x-oss-process=image%2Fformat%2Cwebp" width="70%" alt="FinRpt Framework Diagram"/>
+
+#### 💥5. Mapper 映射冲突问题
+
+错误日志摘录：
+```text
+Ambiguous mapping. Cannot map 'pmsAttrController' method ... to { [/update]}:
+There is already 'pmsAttrAttrgroupRelationController' bean method ... mapped.
+```
+
+问题说明：
+- 两个控制器方法均映射到同一路径 /update
+- Spring 无法决定请求 /update 时调用哪个方法
+
+原因：
+- 类未使用区分性的类级别 @RequestMapping 前缀
+- 方法级别路径重复
+
+解决方案（推荐方案一）：
+
+方案一：添加类级别前缀（推荐）
+```java
+@RestController
+@RequestMapping("/pms/attr")
+public class PmsAttrController {
+  @RequestMapping("/update")
+  public R update(@RequestBody PmsAttrEntity pmsAttr) { ... }
+}
+
+@RestController
+@RequestMapping("/pms/attrgrouprelation")
+public class PmsAttrAttrgroupRelationController {
+  @RequestMapping("/update")
+  public R update(@RequestBody PmsAttrAttrgroupRelationEntity rel) { ... }
+}
+```
+最终路径：
+- `/pms/attr/update`
+- `/pms/attrgrouprelation/update`
+
+方案二：仅修改方法级别路径
+```java
+// ...
+@RequestMapping("/attr/update") // 区分路径
+public R update(@RequestBody PmsAttrEntity pmsAttr) { ... }
+
+// ...
+@RequestMapping("/attrgrouprelation/update") // 区分路径
+public R update(@RequestBody PmsAttrAttrgroupRelationEntity pmsAttrAttrgroupRelation) { ... }
+```
+
+结论：已添加所有类级别 @RequestMapping，原先的 /update 重复不再出现。使用类级别语义化前缀更清晰、符合 REST 设计。
 
 
+
+#### 💥6. Redis 连接异常
+```bahs
+当前错误：Unable to connect to Redis server: localhost:6379 
+和 NOAUTH Authentication required，说明本地未启动 Redis 或需要密码。
+```
+解决选项：
+- 启动本地 Redis 并确保端口 6379 及密码配置正确（若有密码在 application.yml 添加 spring.redis.password）。
+- 如果暂时不需要缓存/分布式锁，移除或注释掉 redisson-spring-boot-starter 相关依赖以避免自动配置。
+- 或在配置文件中禁用 Redisson 自动配置（排除配置类或使用条件属性）但最简单是移除依赖。
+
+采用方案2：
+```xml
+<!-- 移除 Redisson 依赖 --> 
+<dependency>
+  <groupId>org.redisson</groupId>
+  <artifactId>redisson-spring-boot-starter</artifactId>
+  <version>${redisson.version}</version>
+</dependency>
+```
+
+
+
+
+
+
+
+#### 💥7. Mapper 映射冲突问题
+
+
+
+
+
+#### 💥8. Mapper 映射冲突问题
 
 
 ---
