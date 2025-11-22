@@ -8,7 +8,8 @@ comments: true
 toc: true
 pinned: false
 ---
-
+这篇博客介绍了JAVA下的代码生成器。
+<!-- more -->
 
 ### JAVA 代码生成器
 

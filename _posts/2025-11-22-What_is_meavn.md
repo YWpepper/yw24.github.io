@@ -8,6 +8,8 @@ comments: true
 toc: true
 pinned: false
 ---
+这篇博客介绍了JAVA下如何使用Meavn以及对应的报错处理。
+<!-- more -->
 
 
 ### Meavn管理
@@ -300,7 +302,51 @@ mvn dependency:tree
 
 📌4. 常见问题 DAO 与包结构不一致
 
+4.1 先检查 sprintboot版本
 
+```xml
+<!-- 方案1 -->
+<properties>
+    <java.version>17</java.version>
+    <mybatis-plus.version>3.5.6</mybatis-plus.version>
+    <lombok.version>1.18.34</lombok.version>
+    <redisson.version>3.27.2</redisson.version>
+    <spring-cloud.version>2024.0.2</spring-cloud.version>
+</properties>
+
+<!-- 方案2 -->
+<dependencies>
+    <dependency>
+        <groupId>com.baomidou</groupId>
+        <artifactId>mybatis-plus-boot-starter</artifactId>
+        <version>3.5.6</version>
+    </dependency>
+
+    <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>1.18.34</version>
+        <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+        <groupId>org.redisson</groupId>
+        <artifactId>redisson-spring-boot-starter</artifactId>
+        <version>3.27.2</version>
+    </dependency>
+    
+    </dependencies>
+</properties>
+
+
+```
+
+4.1 修改了mapper的路径，注意批量修改其自动生成mapper
+比如我从`@MapperScan("com.atpepper.gulimail.coupon.dao")`，修改为`@MapperScan("com.atpepper.coupon.dao")`
+
+<img src="https://cdn.nlark.com/yuque/0/2025/png/40742019/1763804191445-de97eba3-4f13-4910-8018-993408b4df78.png?x-oss-process=image%2Fformat%2Cwebp" width="70%" alt="FinRpt Framework Diagram"/>
+
+<img src="https://cdn.nlark.com/yuque/0/2025/png/40742019/1763804084081-f6305656-b78c-4248-93aa-24fb8a1bd3ea.png?x-oss-process=image%2Fformat%2Cwebp" width="70%" alt="FinRpt Framework Diagram"/>
 
 
 

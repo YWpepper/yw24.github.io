@@ -8,7 +8,8 @@ comments: true
 toc: true
 pinned: false
 ---
-
+这篇博客介绍了乱七八糟的代码报错。
+<!-- more -->
 
 这个报错信息显示的是 **`IllegalStateException`**，提示你在测试中没有找到合适的 **`@SpringBootConfiguration`**。具体错误的描述是：`Unable to find a @SpringBootConfiguration`，意味着 Spring Boot 测试无法正确识别应用的配置类。解决方法是确保你的测试类能够正确地加载 Spring Boot 配置。
 
