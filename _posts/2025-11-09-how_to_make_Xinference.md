@@ -15,6 +15,7 @@ tags:
 
 ## Xinference部署
 
+[langchain](https://pqyiz16he9g.feishu.cn/docx/WbcMdyvcjob4vLxbLNgcdv8cnDb)
 [参考教程](https://inference.readthedocs.io/zh-cn/latest/index.html)
 
 在本地使用RAGFlow搭建知识库时，为了数据不泄露至互联网,需要先安装模型推理框架从而便捷的部署LLM、Embeding Model和Reranke Model等模型。由于Ollama对模型只支持LLM和Embeding Model部署。而Xinferce支持不仅各种模型,还支持各种模型格式。所以选用Xinference作为RAGFlow的模型推理框架。
