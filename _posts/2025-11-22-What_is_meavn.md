@@ -397,7 +397,26 @@ public R update(@RequestBody PmsAttrEntity pmsAttr) { ... }
 public R update(@RequestBody PmsAttrAttrgroupRelationEntity pmsAttrAttrgroupRelation) { ... }
 ```
 
+处理：
+为以下仍无类级前缀的控制器统一添加唯一类级路径：
+- `CouponController -> /coupon/coupon`
+- `CouponHistoryController -> /coupon/coupon/history`
+- `CouponSpuCategoryRelationController -> /coupon/coupon/spu/category`
+- `CouponSpuRelationController -> /coupon/coupon/spu/relation`
+- `HomeAdvController -> /coupon/home/adv`
+- `HomeSubjectController -> /coupon/home/subject`
+- `HomeSubjectSpuController -> /coupon/home/subject/spu`
+- `MemberPriceController -> /coupon/member/price`
+- `SeckillPromotionController -> /coupon/seckill/promotion`
+- `SeckillSessionController -> /coupon/seckill/session`
+- `SeckillSkuNoticeController -> /coupon/seckill/sku/notice`
+- `SeckillSkuRelationController -> /coupon/seckill/sku/relation`
+- `SkuFullReductionController -> /coupon/sku/full/reduction`
+- `SkuLadderController -> /coupon/sku/ladder`
+- `SpuBoundsController -> /coupon/spu/bounds`
+
 结论：已添加所有类级别 @RequestMapping，原先的 /update 重复不再出现。使用类级别语义化前缀更清晰、符合 REST 设计。
+
 
 
 
@@ -420,10 +439,6 @@ public R update(@RequestBody PmsAttrAttrgroupRelationEntity pmsAttrAttrgroupRela
   <version>${redisson.version}</version>
 </dependency>
 ```
-
-
-
-
 
 
 
