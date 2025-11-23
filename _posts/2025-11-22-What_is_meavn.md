@@ -293,10 +293,26 @@ mvn dependency:tree
   // 修改原来的	private Longblob rollbackInfo;
   ```
 
-错误原因分析：
--  Longblob 是数据库类型，不是 Java 类型。 LONGBLOB 是 MySQL 等数据库中用于存储大块二进制数据（Binary Large Object）的字段类型，例如大文件、图片等。
+#### Longblob 类型生成错误处理
 
-- Java 编译器不认识它。 您的 Java 代码 (UndoLogEntity.java) 正在尝试将一个字段声明为 Longblob 类型，但 Java 语言本身、或您引入的任何库中，都没有名为 Longblob 的类或接口。
+错误原因
+- Longblob 是数据库字段类型 (MySQL LONGBLOB)，并非 Java 类型
+- 代码生成时未正确映射，回退输出原始类型名 Longblob，导致编译失败
+
+处理方案
+- 在 generator.properties 中统一将 blob / tinyblob / mediumblob / longblob 映射为 byte[]
+- 模板使用 $column.attrType 后直接生成: private byte[] rollbackInfo;
+- 无需额外 import
+
+为什么使用 byte[]
+- 与 BLOB 语义一致，表示原始二进制数据
+- 避免错误类型名与大小写不一致问题
+- 比使用 String 更准确，可按需做序列化/传输
+
+总结
+- 确保所有 BLOB 相关类型都已配置映射
+- 重新生成后不再出现 Longblob 非法类型
+- 后续处理（如存取、转换）在 Service 层完成
 
 
 
