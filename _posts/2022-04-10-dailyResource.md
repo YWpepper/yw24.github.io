@@ -11,7 +11,17 @@ tags:
 ---
 这篇博客介绍了一些日常收集整理资料。
 <!-- more -->
----
+
+1. [Ubuntu学习笔记](https://ywpepper.github.io/HomePage/How_to_useUbuntu)
+<!-- 2. [LaTeX使用笔记](https://zxl19.github.io/latex-note)
+1. [Eigen库使用笔记](https://zxl19.github.io/eigen-note)
+2. [C++标准模板库学习笔记](https://zxl19.github.io/stl-note)
+3. [PCL库学习笔记](https://zxl19.github.io/pcl-note) -->
+
+
+
+
+<!-- 
 
 ## 1 常见的日常积累小技巧
 
@@ -190,6 +200,6 @@ https://github.com/waydabber/BetterDisplay/releases?page=6
   http://38.147.170.240:5959/c1/baidupan/222222/其它/EPUB
 
   注意: 使用http协议,不要加https
-  ```
+  ``` -->
   
 ---
