@@ -13,13 +13,11 @@ tags:
 <!-- more -->
 
 1. [Ubuntu学习笔记](https://ywpepper.github.io/HomePage/posts/2024/02/how_to_use_ubuntu/)
-<!-- 2. [LaTeX使用笔记](https://zxl19.github.io/latex-note)
-1. [Eigen库使用笔记](https://zxl19.github.io/eigen-note)
-2. [C++标准模板库学习笔记](https://zxl19.github.io/stl-note)
-3. [PCL库学习笔记](https://zxl19.github.io/pcl-note) -->
-
-
-
+2. 
+<!-- <!-- 2. [LaTeX使用笔记](https://zxl19.github.io/latex-note) -->
+<!-- 1. [Eigen库使用笔记](https://zxl19.github.io/eigen-note) -->
+<!-- 2. [C++标准模板库学习笔记](https://zxl19.github.io/stl-note) -->
+<!-- 3. [PCL库学习笔记](https://zxl19.github.io/pcl-note) --> -->
 
 <!-- 
 
